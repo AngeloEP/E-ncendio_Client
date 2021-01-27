@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+#localhost
+.bash_profile
+
 # production
 /build
 
