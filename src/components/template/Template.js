@@ -11,6 +11,7 @@ import FooterPage from './footer/FooterPage';
 import TagImage from '../games/tagImages/TagImage';
 import AssociateWord from '../games/associateWords/AssociateWord';
 import FourImagesOneWord from '../games/fourImagesOneWord/FourImagesOneWord';
+import RutaPrivada from '../rutas/RutaPrivada';
 
 
 const Template = ({ props }) => {
@@ -22,15 +23,15 @@ const Template = ({ props }) => {
             <Menu/>
 
                 <Switch >
-                    <Route exact strict path='/home' component={Home} titulo="home" />
-                    <Route exact strict path="/profile" component={Profile} />
-                    <Route exact strict path="/rank" component={Rank} />
-                    <Route exact strict path="/about" component={About} />
-                    <Route exact strict path="/games" component={Games} />
-                    <Route exact strict path="/help" component={Help} />
-                    <Route exact strict path="/games/images" component={TagImage} />
-                    <Route exact strict path="/games/words" component={AssociateWord} />
-                    <Route exact strict path="/games/four-images-one-word" component={FourImagesOneWord} />                    
+                    <RutaPrivada exact strict path='/home' component={Home} titulo="home" />
+                    <RutaPrivada exact strict path="/profile" component={Profile} />
+                    <RutaPrivada exact strict path="/rank" component={Rank} />
+                    <RutaPrivada exact strict path="/about" component={About} />
+                    <RutaPrivada exact strict path="/games" component={Games} />
+                    <RutaPrivada exact strict path="/help" component={Help} />
+                    <RutaPrivada exact strict path="/games/images" component={TagImage} />
+                    <RutaPrivada exact strict path="/games/words" component={AssociateWord} />
+                    <RutaPrivada exact strict path="/games/four-images-one-word" component={FourImagesOneWord} />                    
                 </Switch>
 
             <FooterPage

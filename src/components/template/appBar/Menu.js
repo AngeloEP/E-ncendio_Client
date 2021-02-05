@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const Menu =  ({ location })  => {
+const Menu =  ({ location, history })  => {
 
     // Extraer la información de autentificación
     const authContext = useContext(AuthContext)
@@ -48,7 +48,8 @@ const Menu =  ({ location })  => {
         setTimeout((e) => {
             console.log("Saliendo")
             cerrarSesión()
-        }, 3000);
+            history.push('/login')
+        }, 1000);
         console.log("Allá te voy San Pedro....")
     }
 
