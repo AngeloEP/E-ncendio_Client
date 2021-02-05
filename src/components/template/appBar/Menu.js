@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,6 +8,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Link from '@material-ui/core/Link';
 import { Nav, NavLink } from 'react-bootstrap';
 import { withRouter } from "react-router";
+import AuthContext from '../../../context/autentificacion/authContext';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +32,14 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const Menu =  ({ location })  => {
+
+    // Extraer la información de autentificación
+    const authContext = useContext(AuthContext)
+    const { usuario, usuarioAutenticado, cerrarSesión } = authContext
+
+    useEffect(() => {
+        usuarioAutenticado()
+    }, [])
     
     const classes = useStyles();
 
@@ -38,6 +47,7 @@ const Menu =  ({ location })  => {
     const logout = () => {
         setTimeout((e) => {
             console.log("Saliendo")
+            cerrarSesión()
         }, 3000);
         console.log("Allá te voy San Pedro....")
     }
@@ -91,7 +101,8 @@ const Menu =  ({ location })  => {
                         </Nav.Item>
                     </Nav>
                 </div>
-                <Link color="inherit" href="/login" >
+                { usuario ? <p className="nombre-usuario" > Hola <span> {usuario.firstname} </span> </p> : null }
+                <Link color="inherit" >
                     <ExitToAppIcon fontSize='large' onClick={logout} />
                 </Link>
             </Toolbar>

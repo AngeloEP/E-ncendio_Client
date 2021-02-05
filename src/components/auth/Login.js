@@ -1,4 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import AlertaContext from '../../context/alertas/alertaContext';
+import AuthContext from '../../context/autentificacion/authContext';
+import loginContext from '../../context/login/loginContext';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,14 +17,32 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './makestyles/login';
 import { Alert } from '@material-ui/lab';
 
-import loginContext from '../../context/login/loginContext';
 
-const Login = ({ history }) => {
+const Login = ( props ) => {
   const classes = useStyles()
+
+  // Extraer los valores del context
+  const alertaContext = useContext(AlertaContext)
+  const { alerta, mostrarAlerta } = alertaContext
+
+  const authContext = useContext(AuthContext)
+  const { mensaje, autenticado, iniciarSesion } = authContext
 
   // Obtener el state del formulario
   const loginsContext = useContext(loginContext)
   const { emailerror, passworderror, validarEmail, validarPassword, emailCorrecto, passwordCorrecto } = loginsContext
+
+  // En caso de que el password o usuario no exista
+  useEffect(() => {
+    if (autenticado) {
+        props.history.push('/home')
+    }
+
+    if (mensaje) {
+        mostrarAlerta(mensaje.msg, mensaje.categoria)
+    }
+
+  }, [mensaje, autenticado, props.history ] )
 
   // State para iniciar sesión
   const [ usuario, guardarUsuario ] = useState({
@@ -47,27 +69,36 @@ const Login = ({ history }) => {
   const onSubmit = e => {
       e.preventDefault()
 
-      // Validar condiciones de los campos
-      if ( email != userStatic.email ) {
-        // alert("Correo incorrecto")
-        validarEmail()
+      if ( email.trim() === '' | password.trim() === '' ) {
+        mostrarAlerta('Todos los campos son obligatorios', 'alerta-error')
         return
       }
-      emailCorrecto()
 
-      if ( password != userStatic.password ) {
-        validarPassword()
-        return
-      }
-      passwordCorrecto()
+      // Pasarlo al action
+      iniciarSesion({ email, password })
+
+      // TODO: MODIFICAR LOGIN CONTEXT
+      // Validar condiciones de los campos
+      // if ( email != userStatic.email ) {
+      //   // alert("Correo incorrecto")
+      //   validarEmail()
+      //   return
+      // }
+      // emailCorrecto()
+
+      // if ( password != userStatic.password ) {
+      //   validarPassword()
+      //   return
+      // }
+      // passwordCorrecto()
 
       // Reiniciar formulario
-      guardarUsuario({
-        email: '',
-        password: ''
-      })
+      // guardarUsuario({
+      //   email: '',
+      //   password: ''
+      // })
       
-      history.push('/home');
+      // history.push('/home');
       
   }
 
@@ -85,11 +116,11 @@ const Login = ({ history }) => {
           <Typography component="h1" variant="h4">
             Login
           </Typography>
+          { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
           <form className={classes.form} onSubmit={onSubmit} >
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Ingresa E-mail"
@@ -102,7 +133,6 @@ const Login = ({ history }) => {
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               name="password"
               value={password}

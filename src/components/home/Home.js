@@ -1,15 +1,26 @@
-import React, { Fragment } from 'react';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import React, { Fragment, useContext, useEffect } from 'react';
 import FormContact from './formContact/FormContact';
-import { Label, Typography } from '@material-ui/core';
-import { Image } from 'react-bootstrap';
+import AuthContext from '../../context/autentificacion/authContext';
 import incendio from '../../assets/img/incendio.png';
 import {useStyles} from './homeStyles';
+
+import { Image } from 'react-bootstrap';
 import { Bar, Doughnut, Line } from '@reactchartjs/react-chart.js';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { Label, Typography } from '@material-ui/core';
 
 
 const Home = () => {
+
+    // Extraer la información de autentificación
+    const authContext = useContext(AuthContext)
+    const { usuarioAutenticado } = authContext
+
+    useEffect(() => {
+        usuarioAutenticado()
+    }, [])
+
     const classes = useStyles()
 
     // Gráfico de barras

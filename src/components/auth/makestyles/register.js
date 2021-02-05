@@ -20,5 +20,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     divlogin: {
       height : '100vh' ,
-    }
+    },
+    formControl: {
+      minWidth: '100%',
+    },
   }));
