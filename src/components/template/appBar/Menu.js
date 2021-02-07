@@ -1,5 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { withRouter } from "react-router";
+import AuthContext from '../../../context/autentificacion/authContext';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -7,8 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Link from '@material-ui/core/Link';
 import { Nav, NavLink } from 'react-bootstrap';
-import { withRouter } from "react-router";
-import AuthContext from '../../../context/autentificacion/authContext';
 
 
 const useStyles = makeStyles((theme) => ({

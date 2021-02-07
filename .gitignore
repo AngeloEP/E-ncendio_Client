@@ -11,6 +11,9 @@
 #localhost
 .bash_profile
 
+# cache
+.eslintcache
+
 # production
 /build
 

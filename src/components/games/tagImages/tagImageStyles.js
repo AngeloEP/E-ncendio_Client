@@ -25,7 +25,6 @@ export const useStyles = makeStyles((theme) => ({
 
     imagen: {
         
-        left: '50%'
     },
 
     categorias: {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Col, Container, Image, Row, Button } from 'react-bootstrap';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './tagImageStyles';
@@ -6,8 +6,21 @@ import Checkbox from '@material-ui/core/Checkbox';
 import incendios from '../../../assets/img/incendios.jpg';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+import ImageContext from '../../../context/images/imageContext';
+
 
 const TagImage = ({ history }) => {
+
+    // Extraer la información de el context de imagenes
+    const imageContext = useContext(ImageContext)
+    const { imagenes, obtenerImagenes  } = imageContext
+
+    useEffect(() => {
+        obtenerImagenes()
+    }, [])
+
+    console.log("IMAGENES: ", imagenes)
+
     const classes = useStyles()
     const [ checked, setChecked ] = useState({
         prevencion: false,
@@ -68,6 +81,7 @@ const TagImage = ({ history }) => {
         </Row>,
     ]
 
+
     return (
         <Container fluid >
             <div className={classes.topCenter} >
@@ -82,8 +96,10 @@ const TagImage = ({ history }) => {
 
             <div className={classes.center} >
                 <Row >
-                    <Col className={classes.image} > 
-                        <Image  src={incendios} rounded/>
+                    <Col className={classes.imagen} > 
+                        <Image
+                        style={{width:300,height:300}}
+                        src={imagenes[2].imageUrl} rounded/>
                     </Col>
                     <Col  className={classes.categorias} >
                         <Typography variant="h6" className="mr-3" >

@@ -13,3 +13,7 @@ export const LOGIN_EXITOSO = 'LOGIN_EXITOSO';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const CERRAR_SESION = 'CERRAR_SESION';
 
+// Imágenes
+export const OBTENER_IMAGENES = 'OBTENER_IMAGENES'; 
+export const OBTENER_IMAGENES_ERROR = 'OBTENER_IMAGENES_ERROR'; 
+
