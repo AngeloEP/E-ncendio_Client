@@ -1,25 +1,26 @@
 import React, { useReducer } from 'react';
-import ImageContext from './imageContext';
-import ImageReducer from './iamgeReducer';
-import clienteAxios from '../../config/axios';
+import imageContext from './imageContext';
+import imageReducer from './imageReducer';
 
 import {
     OBTENER_IMAGENES,
-    OBTENER_IMAGENES_ERROR
-} from '../../types/';
+    OBTENER_IMAGENES_ERROR,
+    SIGUIENTE_IMAGEN
+} from '../../types';
+import clienteAxios from '../../config/axios';
 
 const ImageState = props => {
     const initialState = {
         imagenes: [],
+        largoImagenes: 0,
         errores: [],
     }
 
-    const [ state, dispatch ] = useReducer(ImageReducer, initialState)
+    const [ state, dispatch ] = useReducer(imageReducer, initialState)
 
     const obtenerImagenes = async () => {
         try {
             const respuesta = await clienteAxios.get('/api/images')
-            console.log(respuesta.data.imagenes)
             dispatch({
                 type: OBTENER_IMAGENES,
                 payload: respuesta.data.imagenes
@@ -33,15 +34,18 @@ const ImageState = props => {
         }
     }
 
+
     return (
-        <ImageContext.Provider
+        <imageContext.Provider
             value={{
                 imagenes: state.imagenes,
-                obtenerImagenes
+                largoImagenes: state.largoImagenes,
+                imagenActual: state.imagenActual,
+                obtenerImagenes,
             }}
         >
             {props.children}
-        </ImageContext.Provider>
+        </imageContext.Provider>
     )
 }
 

@@ -1,25 +1,54 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import AuthContext from '../../../context/autentificacion/authContext';
+import imageContext from '../../../context/images/imageContext';
+import profileContext from '../../../context/profile/profileContext';
+import { withRouter, Switch, Route, Link } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+
 import { Col, Container, Image, Row, Button } from 'react-bootstrap';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './tagImageStyles';
 import Checkbox from '@material-ui/core/Checkbox';
-import incendios from '../../../assets/img/incendios.jpg';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import ImageContext from '../../../context/images/imageContext';
 
 
-const TagImage = ({ history }) => {
+const TagImage = ( props ) => {
+
+    // Extraer la información de autentificación del usuario
+    const authContext = useContext(AuthContext)
+    const { usuario, usuarioAutenticado} = authContext
 
     // Extraer la información de el context de imagenes
-    const imageContext = useContext(ImageContext)
-    const { imagenes, obtenerImagenes  } = imageContext
+    const imagesContext = useContext(imageContext)
+    const { imagenes, largoImagenes, obtenerImagenes  } = imagesContext
 
+    // Extraer la información del context de perfiles
+    const profilesContext = useContext(profileContext)
+    const { perfil, loading, obtenerPerfil } = profilesContext
+
+    let imagenActual = JSON.parse(localStorage.getItem("imagenActual"))
+
+    
     useEffect(() => {
-        obtenerImagenes()
-    }, [])
+        // Traer el perfil del usuario score, etc. /api/user/{id}/profile
+        usuarioAutenticado()
+        // Para mostrar su nivel y con progress bar indicarle lo que le 
+        // falta para subir al otro nivel del jugador
 
-    console.log("IMAGENES: ", imagenes)
+        if (usuario) {
+            obtenerPerfil(usuario._id)
+            console.log("perfil: ", perfil)
+        }
+        // Traer el Nivel de imágenes en el que esta el usuario /api/user/{id}/league 
+
+
+        // Traer las categorías posibles /api/categories
+        
+
+        // Traer las imágenes del nivel correspondiente /api/league/{id}/images 
+        obtenerImagenes();
+    }, [loading])
 
     const classes = useStyles()
     const [ checked, setChecked ] = useState({
@@ -81,6 +110,28 @@ const TagImage = ({ history }) => {
         </Row>,
     ]
 
+    const onRender = () => {
+        // Crear asociación, Etiquetar imagen /api/image/{id}/category/{category}
+
+        // Calcular y sumar puntos ganados al perfil /api/user/{id}/profile
+        // Revisar si sube de nivel de perfil, misma función de API
+        
+        // console.log("imagenActual: ",imagenActual, "  limite: ", largoImagenes - 1)
+        // Avanzar a la siguiente imagen
+        if ( imagenActual < largoImagenes - 1 ) {
+            console.log("aun quedan imágenes")
+            localStorage.setItem( 'imagenActual', imagenActual + 1 );
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        } else {
+            // Revisar si sube de nivel de imágenes? /api/user/{id}/level-image
+
+            console.log("Ya se acabaron las imágenes")
+        }
+    }
+
+    
 
     return (
         <Container fluid >
@@ -97,9 +148,14 @@ const TagImage = ({ history }) => {
             <div className={classes.center} >
                 <Row >
                     <Col className={classes.imagen} > 
+                        { imagenes.length == 0
+                        ? null
+                        : 
                         <Image
-                        style={{width:300,height:300}}
-                        src={imagenes[2].imageUrl} rounded/>
+                            style={{width:300,height:300}}
+                            src={imagenes[imagenActual].imageUrl} rounded
+                        />
+                        }
                     </Col>
                     <Col  className={classes.categorias} >
                         <Typography variant="h6" className="mr-3" >
@@ -123,7 +179,7 @@ const TagImage = ({ history }) => {
                     </Col>
 
                     <Col>
-                        <Button variant="success"> Siguiente </Button>{' '}
+                        <Button variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
                     </Col>
                 </Row>
             </div>
@@ -131,4 +187,4 @@ const TagImage = ({ history }) => {
     );
 }
  
-export default TagImage;
+export default withRouter(TagImage);

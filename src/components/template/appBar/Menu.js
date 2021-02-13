@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Menu =  ({ location, history })  => {
 
-    // Extraer la información de autentificación
+    // Extraer la información de autentificación del usuario
     const authContext = useContext(AuthContext)
     const { usuario, usuarioAutenticado, cerrarSesión } = authContext
 

@@ -16,6 +16,10 @@ import RutaPrivada from '../rutas/RutaPrivada';
 
 const Template = ({ props }) => {
 
+    const showConfirm = () => {
+        console.log("saliendo....")
+    }
+
     return (
        
         <Router>
@@ -29,7 +33,7 @@ const Template = ({ props }) => {
                     <RutaPrivada exact strict path="/about" component={About} />
                     <RutaPrivada exact strict path="/games" component={Games} />
                     <RutaPrivada exact strict path="/help" component={Help} />
-                    <RutaPrivada exact strict path="/games/images" component={TagImage} />
+                    <RutaPrivada exact strict path="/games/images" component={TagImage} onLeave={ showConfirm } />
                     <RutaPrivada exact strict path="/games/words" component={AssociateWord} />
                     <RutaPrivada exact strict path="/games/four-images-one-word" component={FourImagesOneWord} />                    
                 </Switch>

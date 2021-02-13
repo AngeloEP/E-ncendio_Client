@@ -34,7 +34,7 @@ const Games = ({ history }) => {
     const classes = useStyles()
 
     const OnClick = (route) => {
-
+        localStorage.setItem( 'imagenActual', 0 );
         history.push(route)
     }
 
