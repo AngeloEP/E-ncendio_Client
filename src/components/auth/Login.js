@@ -103,7 +103,7 @@ const Login = ( props ) => {
   }
 
   return (
-    <div className={classes.divlogin} style={{  backgroundImage: 'linear-gradient(lightGreen, lightBlue)', }} >
+    <div className={classes.divlogin}  >
       
         <CssBaseline />
         <div className="container">
@@ -114,7 +114,7 @@ const Login = ( props ) => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h4">
-            Login
+            Iniciar Sesión
           </Typography>
           { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
           <form className={classes.form} onSubmit={onSubmit} >
@@ -157,9 +157,7 @@ const Login = ( props ) => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  ¿Olvidaste tu contraseña?
-                </Link>
+                
               </Grid>
               <Grid item>
                 <Link href="/register" variant="body2">
@@ -167,17 +165,17 @@ const Login = ( props ) => {
                 </Link>
               </Grid>
             </Grid>
+          <Box mt={8}>
+            <Typography variant="body1" color="#fff" align="center">
+              {'Copyright © '}
+              {'E-ncendio '}
+              {new Date().getFullYear()}
+              {'.'}
+            </Typography>
+          </Box>
           </form>
         </div>
-        <Box mt={8}>
-          <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            {'E-ncendio '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-        </Box>
-        </div>
+      </div>
     </div>
   );
 }

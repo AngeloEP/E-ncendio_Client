@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -115,12 +116,12 @@ const Register = (props) => {
     }
 
     return (
-        <div className={classes.divlogin} style={{  backgroundImage: 'linear-gradient(lightGreen, lightBlue)', }} >
-            
+        <Grid container component="main" className={classes.divlogin}>
             <CssBaseline />
-            <div className="container" >
-                
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
             
+                
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
@@ -274,8 +275,8 @@ const Register = (props) => {
                     {'.'}
                 </Typography>
             </Box>
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     );
 }
  

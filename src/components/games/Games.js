@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Grid  from '@material-ui/core/Grid';
 import {useStyles} from './gamesStyles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
+import AuthContext from '../../context/autentificacion/authContext';
 
 import minions from '../../assets/img/minions.jpg';
 import encendio from '../../assets/img/incendio.png';
@@ -31,6 +32,14 @@ const images = [
   ];
 
 const Games = ({ history }) => {
+    // Extraer la información de autentificación
+    const authContext = useContext(AuthContext)
+    const { usuarioAutenticado } = authContext
+
+    useEffect(() => {
+        usuarioAutenticado()
+    }, [])
+
     const classes = useStyles()
 
     const OnClick = (route) => {

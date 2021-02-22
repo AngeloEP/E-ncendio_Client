@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import background from '../../../assets/img/register-background.jpg';
 
 export const useStyles = makeStyles((theme) => ({
     paper: {
@@ -12,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
     },
     form: {
-      width: '50%', // Fix IE 11 issue.
+      width: '70%', // Fix IE 11 issue.
       marginTop: theme.spacing(6),
     },
     submit: {
@@ -23,5 +24,13 @@ export const useStyles = makeStyles((theme) => ({
     },
     formControl: {
       minWidth: '100%',
+    },
+    image: {
+      backgroundImage: `url(${background})` ,
+      backgroundRepeat: 'no-repeat',
+      backgroundColor:
+        theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
     },
   }));

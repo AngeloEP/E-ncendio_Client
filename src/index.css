@@ -1,8 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
+
+* {
+  font-family: 'Sora', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .alerta {
     position: fixed;
     top: 0;
-    left: 0;
-    padding: 1rem 3rem;
+    right: 0;
+    padding: 1rem 2rem;
     border-radius: 1rem;
     font-family: var(--headingFont);
     font-weight: 600;
@@ -15,26 +24,36 @@
     .alerta {
         width: auto;
         top: 30px;
-        right: 10px;
-        left: auto;
+        right: auto;
+        left: 10px;
     }
   }
   
-  .alerta-ok {
+.alerta-ok {
     background-color: rgb(109, 211, 109);
     color: rgb(2, 103, 2);
   }
-  .alerta-error {
+.alerta-error {
     background-color: rgb(230, 78, 78);
     color: var(--blanco);
   }
 
-  .nombre-usuario {
-    color: var(--blanco);
-    font-size: 1.0rem;
-    margin: 0;
-    margin-right: 1rem;
-  }
-  .nombre-usuario span {
-    font-weight: 900;
-  }
+.fade-appear,
+.fade-enter {
+    opacity: 0;
+    z-index: 1;
+}
+.fade-appear-active,
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 200ms;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+    opacity: 0;
+    transition: opacity 250ms;
+}
