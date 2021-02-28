@@ -18,25 +18,27 @@ export const useStyles = makeStyles((theme) => ({
         borderRadius: "15px",
     },
     imagen: {
+        marginLeft: "-10%",
     },
 
     center: {
         margin: 0,
+        flexGrow: 1,
         position: 'absolute',
-        top: '45%',
-        left: '20%',
+        top: '53%',
+        left: '30%',
         msTransform: 'translateY(-50%)',
         transform: 'translateY(-50%)',
     },
     bottomCenter: {
         margin: 0,
         position: 'absolute',
-        bottom: '15%',
-        left: '43%',
+        bottom: '12%',
+        left: '45%',
     },
 
     backgroundGif: {
-        backgroundImage: `url(${backgroundGif})`,
+        // backgroundImage: `url(${backgroundGif})`,
         height: "85vh",
         backgroundPosition: 'center',
         backgroundSize: 'cover',
@@ -72,6 +74,16 @@ export const useStyles = makeStyles((theme) => ({
         left: "65%",
     },
 
+    botonCategoría: { // es de WhatshotIcon
+        color: 'blue',
+        fontSize: 70,
+    },
+
+    titleFire:{
+        position: "absolute",
+        marginBottom: "-130px",
+    },
+
     botonSiguiente: {
         display: "inline-block",
         padding: "15px 25px",
@@ -98,6 +110,10 @@ export const useStyles = makeStyles((theme) => ({
         },
         
         
+    },
+    
+    topRow: {
+        marginBottom: "7%",
     },
 
 }))
