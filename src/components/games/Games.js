@@ -44,6 +44,7 @@ const Games = ({ history }) => {
 
     const OnClick = (route) => {
         localStorage.setItem( 'imagenActual', 0 );
+        localStorage.setItem( 'palabraActual', 0 );
         history.push(route)
     }
 

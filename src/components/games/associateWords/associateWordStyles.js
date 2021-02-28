@@ -17,8 +17,26 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: "#e6e8ed",
         borderRadius: "15px",
     },
-    imagen: {
+    palabra: {
         marginLeft: "-10%",
+    },
+
+    paper: {
+        padding: theme.spacing(7.5),
+        textAlign: "center",
+        margin: 'auto',
+        width: "350px",
+        height: "200px",
+        border: "2px solid",
+        borderRadius: 25,
+        fontSize: "50px",
+        fontFamily: "Times New Roman",
+        borderColor: "red",
+        color: theme.palette.text.secondary,
+        '&:hover': {
+            transition: "0.5s ",
+            borderColor: "blue",
+        }
     },
 
     center: {
@@ -34,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
         margin: 0,
         position: 'absolute',
         bottom: '12%',
-        left: '45%',
+        left: '47%',
     },
 
     backgroundGif: {

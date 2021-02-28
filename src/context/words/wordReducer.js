@@ -1,20 +1,18 @@
 import {
-    ETIQUETAR_IMAGEN,
-    ETIQUETAR_IMAGEN_ERROR,
-    ETIQUETAR_PALABRA,
-    ETIQUETAR_PALABRA_ERROR
+    OBTENER_PALABRAS,
+    OBTENER_PALABRAS_ERROR,
 } from '../../types';
 
 export default (state, action) => {
     switch (action.type) {
-        case ETIQUETAR_PALABRA:
-        case ETIQUETAR_IMAGEN:
+        case OBTENER_PALABRAS:
             return {
                 ...state,
+                palabras: action.payload,
+                largoPalabras: action.payload.length
             }
 
-        case ETIQUETAR_PALABRA_ERROR:
-        case ETIQUETAR_IMAGEN_ERROR:
+        case OBTENER_PALABRAS_ERROR:
             return {
                 ...state,
                 errores: action.payload
