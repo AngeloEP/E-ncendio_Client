@@ -133,10 +133,10 @@ const AssociateWords = () => {
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
-        perfil.score_word = perfil.score_word + palabras[palabraActual].points
-        if ( perfil.score_word >= perfil.league_word_id.pointsNextLeague ) {
+        perfil.score = perfil.score + palabras[palabraActual].points
+        if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             console.log("Subir de nivel")
-            perfil.league_word_id = perfil.league_word_id.league
+            perfil.league_id = perfil.league_id.league
         }
         actualizarPerfil(perfil)
         setTimeout(() => {
@@ -164,10 +164,10 @@ const AssociateWords = () => {
     let labelProgress = 0
     let userLeague = ''
     if (perfil) {
-        nowProgress = perfil.score_word
-        maxProgress = perfil.league_word_id.pointsNextLeague
+        nowProgress = perfil.score
+        maxProgress = perfil.league_id.pointsNextLeague
         labelProgress = ((nowProgress / maxProgress) * 100).toPrecision(3)
-        userLeague = perfil.league_word_id.league
+        userLeague = perfil.league_id.league
     }
     let colorProgress = labelProgress < 50 ? "success" : labelProgress < 80 ? "warning" : "danger"
 

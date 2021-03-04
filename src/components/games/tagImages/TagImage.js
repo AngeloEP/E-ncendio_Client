@@ -169,10 +169,10 @@ const TagImage = ( props ) => {
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
-        perfil.score_image = perfil.score_image + 300
-        if ( perfil.score_image >= perfil.league_image_id.pointsNextLeague ) {
+        perfil.score = perfil.score + 300
+        if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             console.log("Subir de nivel")
-            perfil.league_image_id = perfil.league_image_id.league
+            perfil.league_id = perfil.league_id.league
         }
         actualizarPerfil(perfil)
         setTimeout(() => {
@@ -200,10 +200,10 @@ const TagImage = ( props ) => {
     let labelProgress = 0
     let userLeague = ''
     if (perfil) {
-        nowProgress = perfil.score_image
-        maxProgress = perfil.league_image_id.pointsNextLeague
+        nowProgress = perfil.score
+        maxProgress = perfil.league_id.pointsNextLeague
         labelProgress = ((nowProgress / maxProgress) * 100).toPrecision(3)
-        userLeague = perfil.league_image_id.league
+        userLeague = perfil.league_id.league
     }
     let colorProgress = labelProgress < 50 ? "success" : labelProgress < 80 ? "warning" : "danger"
 

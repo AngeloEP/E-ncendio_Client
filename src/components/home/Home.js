@@ -1,6 +1,9 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import FormContact from './formContact/FormContact';
+
 import AuthContext from '../../context/autentificacion/authContext';
+import LeagueContext from '../../context/leagues/leagueContext';
+
 import incendio from '../../assets/img/incendio.png';
 import {useStyles} from './homeStyles';
 
@@ -17,8 +20,14 @@ const Home = () => {
     const authContext = useContext(AuthContext)
     const { usuarioAutenticado } = authContext
 
+    // Extraer la información de las ligas
+    const leagueContext = useContext(LeagueContext)
+    const { ligas, obtenerDistribucionDeLigas } = leagueContext
+
     useEffect(() => {
         usuarioAutenticado()
+
+        obtenerDistribucionDeLigas();
     }, [])
 
     const classes = useStyles()
@@ -41,33 +50,40 @@ const Home = () => {
     }
 
     // Gráfico de dona(doughnut)
-    const dataDoughnut = {
-        labels: [ 'Red', "Blue", "Yellow", "Green", "Purple", "Orange", "" ],
-        datasets: [
-            {
-                label: "# of Votes",
-                data: [ 12, 19, 3, 5, 2, 3 ],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
-                borderWidth: 1,
-                hoverBorderColor: '#231A18'
-            }
-        ]
+    let labelsLigas = []
+    let dataLigas = []
+    let dataDoughnut = {}
+    if (ligas) {
+        labelsLigas = ligas.map((liga) => liga._id)
+        dataLigas = ligas.map((liga) => liga.Total)
+        dataDoughnut = {
+            labels: labelsLigas,
+            datasets: [
+                {
+                    label: "sadads# of Votes",
+                    data: dataLigas,
+                    backgroundColor: [
+                        '#d7d7d7',
+                        '#ffbf00',
+                    ],
+                    borderColor: [
+                        '#b4b6b9',
+                        '#cc9900',
+                    ],
+                    borderWidth: 1,
+                    hoverBorderColor: '#231A18'
+                }
+            ]
+        }
     }
+
+    const optionsDoughnut = {
+            title: {
+                display: true,
+                text: 'Descripción de Ligas'
+            }
+    }
+
 
     const dataLine = {
         labels: [ "1", "2", "3", "4", "5", "6" ],
@@ -144,7 +160,7 @@ const Home = () => {
                 </Grid>
 
                 <Grid item xs={5} className="mt-5" style={{ width: '100%', height: '100%' }} >
-                    <Doughnut data={dataDoughnut} />
+                    <Doughnut data={dataDoughnut} options={optionsDoughnut} />
                 </Grid>
 
                 <Grid item xs={5} className="mt-5 mr-5" style={{ width: '100%', height: '100%' }} >
