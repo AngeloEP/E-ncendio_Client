@@ -18,7 +18,7 @@ const LeagueState = props => {
     
     const obtenerDistribucionDeLigas = async () => {
         try {
-            const respuesta = await clienteAxios.get('/api/leagues/count')
+            const respuesta = await clienteAxios.get('/api/leagues/distribution-leagues')
             dispatch({
                 type: OBTENER_DISTRIBUCION_LIGAS,
                 payload: respuesta.data

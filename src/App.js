@@ -25,6 +25,7 @@ import LeagueState from './context/leagues/leagueState';
 import LevelState from './context/levels/levelState';
 import CategoryState from './context/categories/categoryState';
 import TagState from './context/tag/tagState';
+import UsuariosState from './context/usuarios/usuariosState';
 
 import {
   CSSTransition,
@@ -54,38 +55,40 @@ function App() {
                   <LevelState>
                     <CategoryState>
                       <TagState>
-                        <Router>
+                        <UsuariosState>
+                          <Router>
 
-                          <Navigation />
-                          <Route path="/" render={({location}) => (
-                            <TransitionGroup>
-                              <CSSTransition
-                                key={location.key}
-                                timeout={200}
-                                classNames="fade"
-                              >
-                            <Switch location={location} >
-                            
-                              <Route exact path='/login' component={Login} /> 
-                              <Route exact path="/register" component={Register} />
-                                <RutaPrivada exact path="/home" component={Home} />
-                                <RutaPrivada exact path="/profile" component={Profile} />
-                                <RutaPrivada exact path="/rank" component={Rank} />
-                                <RutaPrivada exact path="/about" component={About} />
-                                <RutaPrivada exact path="/games" component={Games} />
-                                <RutaPrivada exact path="/games/images" component={TagImage} />
-                                <RutaPrivada exact path="/help" component={Help} />
-                                <RutaPrivada exact path="/games/words" component={AssociateWord} />
-                                <RutaPrivada exact path="/games/four-images-one-word" component={FourImagesOneWord} />  
-                              <Redirect from="/" to="/login"/>
+                            <Navigation />
+                            <Route path="/" render={({location}) => (
+                              <TransitionGroup>
+                                <CSSTransition
+                                  key={location.key}
+                                  timeout={200}
+                                  classNames="fade"
+                                >
+                              <Switch location={location} >
+                              
+                                <Route exact path='/login' component={Login} /> 
+                                <Route exact path="/register" component={Register} />
+                                  <RutaPrivada exact path="/home" component={Home} />
+                                  <RutaPrivada exact path="/profile" component={Profile} />
+                                  <RutaPrivada exact path="/rank" component={Rank} />
+                                  <RutaPrivada exact path="/about" component={About} />
+                                  <RutaPrivada exact path="/games" component={Games} />
+                                  <RutaPrivada exact path="/games/images" component={TagImage} />
+                                  <RutaPrivada exact path="/help" component={Help} />
+                                  <RutaPrivada exact path="/games/words" component={AssociateWord} />
+                                  <RutaPrivada exact path="/games/four-images-one-word" component={FourImagesOneWord} />  
+                                <Redirect from="/" to="/login"/>
 
-                            </Switch>
-                            </CSSTransition>
-                            </TransitionGroup>
-                          )}/>
-                          <FooterPage/>
-                        </Router>
+                              </Switch>
+                              </CSSTransition>
+                              </TransitionGroup>
+                            )}/>
+                            <FooterPage/>
+                          </Router>
 
+                        </UsuariosState>
                       </TagState>
                     </CategoryState>
                   </LevelState>

@@ -7,6 +7,17 @@ export const useStyles = makeStyles((theme) => ({
         marginBottom: '100px'
     },
 
+    loading: {
+        display: "flex",
+        textAlign: "center",
+        backgroundColor: "#fff",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "80vh",
+        marginBottom: '100px'
+    },
+
     formContact: {
         marginTop: theme.spacing(10),
     },

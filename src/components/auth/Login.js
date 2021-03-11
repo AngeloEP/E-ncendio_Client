@@ -17,6 +17,8 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './makestyles/login';
 import { Alert } from '@material-ui/lab';
 
+import ClipLoader from "react-spinners/ClipLoader";
+import HashLoader from "react-spinners/HashLoader";
 
 const Login = ( props ) => {
   const classes = useStyles()
@@ -32,15 +34,25 @@ const Login = ( props ) => {
   const loginsContext = useContext(loginContext)
   const { emailerror, passworderror, validarEmail, validarPassword, emailCorrecto, passwordCorrecto } = loginsContext
 
+  const [ loadingPage, setLoadingPage ] = useState(false)
+  const [ loadingLogin, setLoadingLogin] = useState(false)
+
   // En caso de que el password o usuario no exista
   useEffect(() => {
+    setLoadingPage(true);
     if (autenticado) {
+        setLoadingLogin(false)
         props.history.push('/home')
     }
 
     if (mensaje) {
+        setLoadingLogin(false)
         mostrarAlerta(mensaje.msg, mensaje.categoria)
     }
+
+    setTimeout(() => {
+      setLoadingPage(false);
+    }, 1500);
 
   }, [mensaje, autenticado, props.history ] )
 
@@ -49,6 +61,8 @@ const Login = ( props ) => {
     email: '',
     password: ''
   })
+
+  
 
   const userStatic = {
     email: 'angelocristobalep@gmail.com',
@@ -68,12 +82,16 @@ const Login = ( props ) => {
   // Cuando el usuario quiere iniciar sesión
   const onSubmit = e => {
       e.preventDefault()
-
+      
+      setLoadingLogin(true);
       if ( email.trim() === '' | password.trim() === '' ) {
         mostrarAlerta('Todos los campos son obligatorios', 'alerta-error')
+        setTimeout(() => {
+          setLoadingLogin(false);
+        }, 250);
         return
       }
-
+      
       // Pasarlo al action
       iniciarSesion({ email, password })
 
@@ -103,8 +121,19 @@ const Login = ( props ) => {
   }
 
   return (
-    <div className={classes.divlogin}  >
-      
+    <div >
+      {
+        loadingPage
+        ?
+            <div className={classes.loadingPage} >
+                <HashLoader
+                    color={"#7ED321"}
+                    loading={loadingPage}
+                    size={150}
+                />
+            </div>
+        :
+        <div className={classes.divlogin}  >
         <CssBaseline />
         <div className="container">
           
@@ -153,7 +182,30 @@ const Login = ( props ) => {
               color="primary"
               className={classes.submit}
             >
-              Iniciar Sesión
+              {
+                loadingLogin
+                ?
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    spacing={1}
+                  >
+                    <Grid item xs={3}  >
+                      Cargando...
+                    </Grid>
+                    <Grid item xs={3} >
+                      <ClipLoader
+                        color={"#fff"}
+                        loading={true}
+                        size={20}
+                      />
+                    </Grid>
+                  </Grid>
+                    
+                :
+                  "Iniciar Sesión"
+              }
             </Button>
             <Grid container>
               <Grid item xs>
@@ -176,6 +228,8 @@ const Login = ( props ) => {
           </form>
         </div>
       </div>
+      </div>
+      }
     </div>
   );
 }

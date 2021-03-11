@@ -29,6 +29,23 @@ export const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+
+    loadingLogin: {
+      width: "5px",
+      height: "5px",
+    },
+
+    loadingPage: {
+      display: "flex",
+      textAlign: "center",
+      backgroundColor: "#fff",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      height: "80vh",
+      marginBottom: '100px'
+  },
+
     divlogin: {
       backgroundImage: `url(${background})` ,
       backgroundRepeat: 'no-repeat',

@@ -4,7 +4,8 @@ import { withRouter } from "react-router";
 import logo from '../../assets/img/logo.png';
 import AuthContext from '../../context/autentificacion/authContext';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { MenuItems } from "./MenuItems"
+import { MenuItems } from "./MenuItems";
+import "./exitButton.css";
 import {
     Nav,
     NavLinkLogo,
@@ -67,13 +68,18 @@ const Navigation =  ({ location, history })  => {
 
     // Cerrar Sesión
     const logout = () => {
+        if (isLoading) return;
+        console.log("Allá te voy San Pedro....")
+        setIsLoading(true);
         setTimeout((e) => {
             console.log("Saliendo")
             cerrarSesión()
+            setIsLoading(false)
             history.push('/login')
-        }, 1000);
-        console.log("Allá te voy San Pedro....")
+        }, 2000);
     }
+
+    const [isLoading, setIsLoading] = useState(false);
 
     function MouseOver(event) {
         event.target.style.background = 'white';
@@ -124,11 +130,28 @@ const Navigation =  ({ location, history })  => {
                     
                     <NavBtn>
                         { usuario ? <PNav > Hola <span style={{ fontWeight: 900 }} > {usuario.firstname} </span> </PNav> : null }
-                        <ExitBtn >
+                        <ExitBtn
+                            onClick={logout}
+                            id="botonSalir"
+                            className={isLoading ? "loading" : undefined}
+                        >
+                            
                             <span>
-                                <ExitToAppIcon fontSize='large' onClick={logout} />
+                                <ExitToAppIcon fontSize='large' />
+                                <div className="spinner" />
+                                <span className="text"> Salir </span>
                             </span>
                         </ExitBtn>
+                        {/* <div className="salir" >
+                            <button
+                                id="botonSalir"
+                                className={isLoading ? "loading" : undefined}
+                                onClick={handleOnClick}
+                            >
+                                <div className="spinner" />
+                                <p className="text"> Salir </p>
+                            </button>
+                        </div> */}
                     </NavBtn>
                 </Nav>
             : null }

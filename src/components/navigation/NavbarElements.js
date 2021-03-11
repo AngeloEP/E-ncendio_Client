@@ -126,11 +126,6 @@ export const ExitBtn = styled.button`
     box-shadow: 20px 22px 20px 0 rgba(0,0,0,0.24),20px 17px 50px 0 rgba(0,0,0,0.19);
     transition: all 0.5s ease;
     transition: 600ms;
-    &:after{
-      content: 'Salir';
-      opacity: 1;
-      right: 0;
-    }
   }
   
   @media screen and (max-width: 875px) {
@@ -142,7 +137,7 @@ export const PNav = styled.p`
   color: #fff;
   font-size: 1.0rem;
   margin: 0;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   margin-left: 2rem;
   margin-right: .5rem;
 `; 
