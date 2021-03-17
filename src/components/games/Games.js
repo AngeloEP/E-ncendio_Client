@@ -48,39 +48,48 @@ const Games = ({ history }) => {
         history.push(route)
     }
 
-    return (  
-        <Grid container direction='row' alignItems='center' justify="center" className={classes.root} >
-            {images.map((image) => (
-                <ButtonBase
-                    focusRipple
-                    key={image.title}
-                    className={classes.image}
-                    focusVisibleClassName={classes.focusVisible}
-                    style={{
-                        width: image.width,
-                    }}
-                    onClick={() => OnClick(image.page)}
-                >
-                <span
-                    className={classes.imageSrc}
-                    style={{
-                    backgroundImage: `url(${image.url})`,
-                    }}
-                />
-                <span className={classes.imageBackdrop} />
-                <span className={classes.imageButton}>
-                    <Typography
-                        component="span"
-                        variant="subtitle1"
-                        color="inherit"
-                        className={classes.imageTitle}
+    return (
+        <Grid container direction='column' alignItems='center' justify="center"
+            style={{
+                display: 'flex',
+                justifyContent: "center",
+                height: "91.5vh"
+            }}
+        >
+            
+            <Grid direction='row'  className={classes.root} >
+                {images.map((image) => (
+                    <ButtonBase
+                        focusRipple
+                        key={image.title}
+                        className={classes.image}
+                        focusVisibleClassName={classes.focusVisible}
+                        style={{
+                            width: image.width,
+                        }}
+                        onClick={() => OnClick(image.page)}
                     >
-                    {image.title}
-                    <span className={classes.imageMarked} />
-                    </Typography>
-                </span>
-                </ButtonBase>
-            ))}
+                    <span
+                        className={classes.imageSrc}
+                        style={{
+                        backgroundImage: `url(${image.url})`,
+                        }}
+                    />
+                    <span className={classes.imageBackdrop} />
+                    <span className={classes.imageButton}>
+                        <Typography
+                            component="span"
+                            variant="subtitle1"
+                            color="inherit"
+                            className={classes.imageTitle}
+                        >
+                        {image.title}
+                        <span className={classes.imageMarked} />
+                        </Typography>
+                    </span>
+                    </ButtonBase>
+                ))}
+            </Grid>
         </Grid>
     );
 }

@@ -20,7 +20,6 @@ const UsuariosState = props => {
     const obtenerDistribucionEdadesUsuarios = async () => {
         try {
             const respuesta = await clienteAxios.get('/api/usuarios/rangeAge')
-            console.log("respuesta:", respuesta.data)
             dispatch({
                 type: OBTENER_DISTRIBUCION_EDADES_USUARIOS,
                 payload: respuesta.data

@@ -4,7 +4,11 @@ import AuthReducer from './authReducer';
 import clienteAxios from '../../config/axios';
 import tokenAuth from '../../config/tokenAuth';
 
+
+import Swal from 'sweetalert2';
+
 import {
+    REGISTRO_EXITOSO_CARGANDO,
     REGISTRO_EXITOSO,
     REGISTRO_ERROR,
     OBTENER_USUARIO,
@@ -20,7 +24,8 @@ const AuthState = props => {
         autenticado: null,
         usuario: null,
         mensaje: null,
-        cargando: true
+        cargando: true,
+        cargandoRegistroUsuario: false
     }
 
     const [ state, dispatch ] = useReducer(AuthReducer, initialState)
@@ -28,16 +33,26 @@ const AuthState = props => {
     // Las funciones
     const registrarUsuario = async datos => {
         try {
-            const respuesta = await clienteAxios.post('/api/usuarios', datos)
-            console.log(respuesta.data)
-
             dispatch({
-                type: REGISTRO_EXITOSO,
-                payload: respuesta.data
+                type: REGISTRO_EXITOSO_CARGANDO,
+                payload: true
             })
+            const respuesta = await clienteAxios.post('/api/usuarios', datos)
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro exitoso',
+                text: 'Su perfil de usuario ha sido creado!',
+            })
+            setTimeout(() => {
+                dispatch({
+                    type: REGISTRO_EXITOSO,
+                    payload: respuesta.data
+                })
+            }, 1000);
 
             // Obtener el usuario
-            usuarioAutenticado()
+            // usuarioAutenticado()
         } catch (error) {
             console.log(error.response.data)
             const alerta = {
@@ -47,6 +62,11 @@ const AuthState = props => {
             dispatch({
                 type: REGISTRO_ERROR,
                 payload: alerta
+            })
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo registar su usuario, inténtelo nuevamente!',
             })
         }
     }
@@ -68,7 +88,6 @@ const AuthState = props => {
             })
 
         } catch (error) {
-            console.log(error.response)
             dispatch({
                 type: LOGIN_ERROR
             })
@@ -115,6 +134,7 @@ const AuthState = props => {
                 usuario: state.usuario,
                 mensaje: state.mensaje,
                 cargando: state.cargando,
+                cargandoRegistroUsuario: state.cargandoRegistroUsuario,
                 registrarUsuario,
                 iniciarSesion,
                 usuarioAutenticado,

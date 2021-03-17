@@ -22,6 +22,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
+import ClipLoader from "react-spinners/ClipLoader";
+import logo from '../../assets/img/logo.png';
 
 const Register = (props) => {
     const classes = useStyles();
@@ -31,7 +33,7 @@ const Register = (props) => {
     const { alerta, mostrarAlerta } = alertaContext
 
     const authContext = useContext(AuthContext)
-    const { mensaje, autenticado, registrarUsuario } = authContext
+    const { mensaje, autenticado, cargandoRegistroUsuario, registrarUsuario } = authContext
 
     // En caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
     useEffect(() => {
@@ -43,7 +45,7 @@ const Register = (props) => {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
 
-    }, [mensaje, autenticado, props.history ] )
+    }, [mensaje, autenticado, cargandoRegistroUsuario, props.history ] )
 
     // State para logearse
     const [ usuario, guardarUsuario ] = useState({
@@ -66,7 +68,6 @@ const Register = (props) => {
         })
     }
 
-   
 
     // Cuando el usuario da clic en Registrarse
     const onSubmit = e => {
@@ -123,11 +124,25 @@ const Register = (props) => {
                 
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
             <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
-                </Avatar>
+                <img src={logo} alt='logo' style={{ width:"270px", height: "180px" }} />
+
                 <Typography component="h1" variant="h4">
-                    Registrarse
+                    <Grid container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
+                        spacing={3}
+                    >
+                        <Grid item xs={3}  >
+                            <Avatar className={classes.avatar}>
+                                <LockOutlinedIcon />
+                            </Avatar>
+                        </Grid>
+                        <Grid item xs={9} >
+                            Registrarse
+                        </Grid>
+                    </Grid>
+                    
                 </Typography>
                 { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                 <form className={classes.form} onSubmit={onSubmit}  >
@@ -249,6 +264,7 @@ const Register = (props) => {
                         </div>
                     </Grid>
                 </Grid>
+
                 <Button
                     type="submit"
                     fullWidth
@@ -256,11 +272,34 @@ const Register = (props) => {
                     color="primary"
                     className={classes.submit}
                 >
-                    Registrarse
+                    {
+                            cargandoRegistroUsuario
+                            ?
+                            <Grid container
+                                direction="row"
+                                justify="center"
+                                alignItems="center"
+                            >
+                                <Grid item xs={2}  >
+                                    Cargando...
+                                </Grid>
+                                <Grid item xs={3} >
+                                <ClipLoader
+                                    color={"#fff"}
+                                    loading={true}
+                                    size={20}
+                                />
+                                </Grid>
+                            </Grid>
+                                
+                            :
+                            "Registrarse"
+                    }
                 </Button>
+
                 <Grid container justify="center">
                     <Grid item>
-                    <Link href="/" variant="body2">
+                    <Link href="/login" variant="body2">
                         ¿Ya tienes una cuenta?, Inicia Sesión
                     </Link>
                     </Grid>

@@ -3,6 +3,8 @@ import AlertaContext from '../../context/alertas/alertaContext';
 import AuthContext from '../../context/autentificacion/authContext';
 import loginContext from '../../context/login/loginContext';
 
+import logo from '../../assets/img/logo.png';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -139,6 +141,7 @@ const Login = ( props ) => {
           
         
         <div className={classes.paper}>
+          <img src={logo} alt='logo' style={{ width:"250px", height: "180px" }} />
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -152,7 +155,7 @@ const Login = ( props ) => {
               margin="normal"
               fullWidth
               id="email"
-              label="Ingresa E-mail"
+              label="Ingresa tu E-mail"
               name="email"
               value={email}
               autoFocus
@@ -165,7 +168,7 @@ const Login = ( props ) => {
               fullWidth
               name="password"
               value={password}
-              label="Contraseña"
+              label="Ingresa tu Contraseña"
               type="password"
               id="password"
               onChange={onChange}

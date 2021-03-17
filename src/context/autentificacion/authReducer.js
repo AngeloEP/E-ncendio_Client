@@ -1,4 +1,5 @@
 import {
+    REGISTRO_EXITOSO_CARGANDO,
     REGISTRO_EXITOSO,
     REGISTRO_ERROR,
     OBTENER_USUARIO,
@@ -9,6 +10,12 @@ import {
 
 export default (state, action) => {
     switch (action.type) {
+        case REGISTRO_EXITOSO_CARGANDO:
+            return {
+                ...state,
+                cargandoRegistroUsuario: true
+            }
+
         case REGISTRO_EXITOSO:
         case LOGIN_EXITOSO:
             localStorage.setItem('token', action.payload.token)

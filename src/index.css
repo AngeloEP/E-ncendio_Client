@@ -7,6 +7,16 @@
   padding: 0;
 }
 
+.page-container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrap{
+  flex: 1;
+}
+
 .alerta {
     position: fixed;
     top: 0;
@@ -31,11 +41,11 @@
   
 .alerta-ok {
     background-color: rgb(109, 211, 109);
-    color: rgb(2, 103, 2);
+    color: rgb(255, 255, 255);
   }
 .alerta-error {
     background-color: rgb(230, 78, 78);
-    color: var(--blanco);
+    color: rgb(255, 255, 255);
   }
 
 .fade-appear,

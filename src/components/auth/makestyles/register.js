@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
     },
     avatar: {
-      margin: theme.spacing(4),
+      margin: theme.spacing(2),
       backgroundColor: theme.palette.secondary.main,
     },
     form: {

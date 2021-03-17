@@ -3,16 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     
     root: {
-        position: 'absolute',
-        
-        flexWrap: 'wrap',
+        display: "flex",
+        alignItems: "center",
         width: '100%',
-        top: '30%',
-        
       },
       image: {
         position: 'relative',
-        height: 350,
+        height: 400,
         [theme.breakpoints.down('xs')]: {
           width: '100% !important', // Overrides inline-style
           height: 100,
