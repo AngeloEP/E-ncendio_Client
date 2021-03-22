@@ -33,4 +33,5 @@ export const useStyles = makeStyles((theme) => ({
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     },
+    
   }));

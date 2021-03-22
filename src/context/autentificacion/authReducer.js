@@ -23,7 +23,8 @@ export default (state, action) => {
                 ...state,
                 autenticado: true,
                 mensaje: null,
-                cargando: false
+                cargando: false,
+                cargandoRegistroUsuario: false
             }
         
         case CERRAR_SESION:
@@ -36,7 +37,8 @@ export default (state, action) => {
                 usuario: null,
                 autenticado: false,
                 mensaje: action.payload,
-                cargando: false
+                cargando: false,
+                cargandoRegistroUsuario: false
             }
 
         case OBTENER_USUARIO:

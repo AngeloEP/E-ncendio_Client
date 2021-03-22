@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
 
       width: '70vh',
       margin: 'auto',
-      background: 'rgb(234, 238, 234)',
+      background: 'rgba(234, 238, 234, 0.95)',
       boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)',
       padding: '40px 55px 45px 55px',
       borderRadius: '15px',
@@ -65,6 +65,10 @@ export const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(2),
       backgroundColor: 'rgb(170, 0, 0)',
       color: 'white',
-    }
+    },
+
+    inputs: {
+      backgroundColor: "#fff",
+    },
    
   }));

@@ -151,6 +151,7 @@ const Login = ( props ) => {
           { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
           <form className={classes.form} onSubmit={onSubmit} >
             <TextField
+              className={classes.inputs}
               variant="outlined"
               margin="normal"
               fullWidth
@@ -163,6 +164,7 @@ const Login = ( props ) => {
             />
             { emailerror ? <Alert severity="error" className={classes.errorMessage} > Correo No encontrado! </Alert> : null }
             <TextField
+              className={classes.inputs}
               variant="outlined"
               margin="normal"
               fullWidth

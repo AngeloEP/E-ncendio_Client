@@ -31,7 +31,7 @@ const AuthState = props => {
     const [ state, dispatch ] = useReducer(AuthReducer, initialState)
 
     // Las funciones
-    const registrarUsuario = async datos => {
+    const registrarUsuario = async (datos) => {
         try {
             dispatch({
                 type: REGISTRO_EXITOSO_CARGANDO,

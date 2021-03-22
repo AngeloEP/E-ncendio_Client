@@ -24,6 +24,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 
 import ClipLoader from "react-spinners/ClipLoader";
 import logo from '../../assets/img/logo.png';
+import uploadImage from '../../assets/img/upload_image.jpg';
 
 const Register = (props) => {
     const classes = useStyles();
@@ -53,13 +54,16 @@ const Register = (props) => {
         lastname: '',
         gender: '',  // string: Masculino, Femenino, Otro
         age: null,  // int
+        phone: '',
         email: '',
         password: '',
         confirmar: '',
         esExperto: null, // bool
     })
 
-    const { firstname, lastname, gender, age, email, password, confirmar, esExperto } = usuario
+    const { firstname, lastname, gender, age, phone, email, password, confirmar, esExperto } = usuario
+    const [ image, setImage ] = useState(null)
+    const [ pathImage, setPathImage ] = useState(uploadImage)
 
     const onChange = e => {
         guardarUsuario({
@@ -68,22 +72,48 @@ const Register = (props) => {
         })
     }
 
+    const onFileChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0]
+            if (file.type.includes("image")) {
+                const reader = new FileReader()
+                reader.readAsDataURL(file)
+
+                reader.onload = function load() {
+                    setPathImage(reader.result)
+                }
+                // console.log(file)
+                // console.log(usuario)
+                setImage(file)
+                // console.log(usuario)
+            } else {
+                mostrarAlerta("Debe seleccionar un archivo de tipo imagen, se admiten extensiones: jpeg, jpg, png y gif", "alerta-error")
+            }
+        }
+    }
+
 
     // Cuando el usuario da clic en Registrarse
     const onSubmit = e => {
         e.preventDefault()
-
+        // return
         // Validar que no hayan campos vacíos
         if (firstname.trim() === '' ||
             lastname.trim() === '' ||
             gender.trim() === '' ||
             age === null ||
+            phone.trim() === '' ||
+            image === null ||
             email.trim() === '' ||
             password.trim() === '' ||
             confirmar.trim() === '' ||
             esExperto === null ) {
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
                 return
+        }
+        if ( phone.length != 9 ) {
+            mostrarAlerta("Su Teléfono debe tener 9 dígitos", 'alerta-error')
+            return
         }
         let isExpert
         if ( esExperto === "si" ) {
@@ -103,17 +133,19 @@ const Register = (props) => {
             mostrarAlerta('Los password no son iguales', 'alerta-error')
             return
         }
-
         // pasarlo al action
-        registrarUsuario({
-            firstname,
-            lastname,
-            gender,
-            age,
-            email,
-            password,
-            isExpert
-        })
+        const formData = new FormData();
+        formData.append('firstname', firstname);
+        formData.append('lastname', lastname);
+        formData.append('gender', gender);
+        formData.append('age', age);
+        formData.append('phone', phone);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('isExpert', isExpert);
+        formData.append('image', image);
+        console.log(formData)
+        registrarUsuario(formData)
     }
 
     return (
@@ -201,6 +233,38 @@ const Register = (props) => {
                             fullWidth
                             onChange={onChange}
                         />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <input
+                            accept="image/*"
+                            className={classes.input}
+                            id="contained-button-file"
+                            multiple
+                            type="file"
+                            onChange={onFileChange}
+                            style={{ display: "none" }}
+                        />
+                        <img className="img-fluid img-thumbnail image_user" src={pathImage} alt="Image" />
+                        <label htmlFor="contained-button-file">
+                            <Button variant="contained" color="primary" component="span">
+                                Subir imagen
+                            </Button>
+                        </label>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField
+                            variant="outlined"
+                            fullWidth
+                            id="phone"
+                            type="number"
+                            label="Teléfono, ej: 123456789"
+                            value={phone}
+                            name='phone'
+                            onChange={onChange}
+                        />
+                        <br/>
+                        <br/>
+                        <p> {image ? image.name : "No ha seleccionado imagen"} </p>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField

@@ -67,3 +67,9 @@
     opacity: 0;
     transition: opacity 250ms;
 }
+
+.image_user {
+  width: 230px;
+  min-height: 120px;
+  max-height: 120px;
+}

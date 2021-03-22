@@ -1,4 +1,6 @@
 import {
+    OBTENER_TODOS_LOS_PERFILES,
+    OBTENER_TODOS_LOS_PERFILES_ERROR,
     OBTENER_PERFIL_USUARIO,
     OBTENER_PERFIL_USUARIO_ERROR,
     ACTUALIZAR_PERFIL,
@@ -15,6 +17,7 @@ export default (state, action) => {
                 loading: false
             }
 
+        case OBTENER_TODOS_LOS_PERFILES_ERROR:
         case ACTUALIZAR_PERFIL_ERROR:
         case OBTENER_PERFIL_USUARIO_ERROR:
             return {
@@ -23,6 +26,13 @@ export default (state, action) => {
                 loading: false
             }
     
+        case OBTENER_TODOS_LOS_PERFILES:
+            return {
+                ...state,
+                perfiles: action.payload,
+                loading: false
+            }
+
         default:
             return state;
     }
