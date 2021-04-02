@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
     },
 
     backgroundGif: {
-        backgroundImage: `url(${backgroundGif})`,
+        // backgroundImage: `url(${backgroundGif})`,
         height: "85vh",
         backgroundPosition: 'center',
         backgroundSize: 'cover',

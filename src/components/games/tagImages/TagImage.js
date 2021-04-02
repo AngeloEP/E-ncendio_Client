@@ -169,7 +169,7 @@ const TagImage = ( props ) => {
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
-        perfil.score = perfil.score + 300
+        perfil.score = perfil.score + 25
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             console.log("Subir de nivel")
             perfil.league_id = perfil.league_id.league
@@ -178,14 +178,14 @@ const TagImage = ( props ) => {
         setTimeout(() => {
             console.log(perfil)
         }, 1000);
-        return
+        // return
         
         // console.log("imagenActual: ",imagenActual, "  limite: ", largoImagenes - 1)
         // Avanzar a la siguiente imagen
         if ( imagenActual < largoImagenes - 1 ) {
             console.log("aun quedan imágenes")
-            localStorage.setItem( 'imagenActual', imagenActual + 1 );
             setTimeout(() => {
+                localStorage.setItem( 'imagenActual', imagenActual + 1 );
                 window.location.reload();
             }, 1000);
         } else {

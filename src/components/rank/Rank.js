@@ -40,12 +40,39 @@ const Rank = () => {
     useEffect(() => {
         usuarioAutenticado()
 
+        
         // obteniendo los perfiles para la tabla
         obtenerTodosLosPerfiles();
+
     }, [])
-    if ( perfiles.length != 0 ) {
-        datos = perfiles
+
+    const setColorTable = ( league ) => {
+        // #ffbf00
+        // #d7d7d7
+        // #cd7f32
+        switch (league) {
+            case "Bronce":
+                return "#cd7f32"
+
+            case "Plata":
+                return "#d7d7d7"
+        
+            case "Oro":
+                return "#ffbf00"
+            
+            default:
+                return "#000"
+        }
     }
+    
+    let user_league = ""
+    if ( perfiles.length != 0 ) {
+        datos = [...perfiles]
+
+        // Setear el color de la tabla
+        user_league = datos.find(element => element.user_id === usuario._id).Liga;
+        user_league = setColorTable(user_league)
+    }    
 
     const search = (rows) =>{
         // const columns = rows[0] && Object.keys(rows[0])
@@ -113,6 +140,17 @@ const Rank = () => {
                                 value={filterLeague}
                                 onChange={(e) => setFilterLeague(e.target.value)}
                                 label="Liga"
+                                MenuProps={{
+                                    anchorOrigin: {
+                                      vertical: "bottom",
+                                      horizontal: "left"
+                                    },
+                                    transformOrigin: {
+                                      vertical: "top",
+                                      horizontal: "left"
+                                    },
+                                    getContentAnchorEl: null
+                                }}
                             >
                             <MenuItem value="">
                                 <em>Ninguno</em>
@@ -157,11 +195,14 @@ const Rank = () => {
                 </Grid>
             </div>
 
-            <div className="table-rank " >
+            <div className="table-rank" style={{ border: `3px solid 
+                ${user_league} ` 
+            }} >
                 { perfiles.length != 0
                 ?
                     <Datatable
                         data={search(datos)}
+                        user_id={usuario._id}
                     />
                 :
                     null

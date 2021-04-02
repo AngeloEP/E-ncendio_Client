@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './components/navigation/Navigation';
 import Home from './components/home/Home';
 import Profile from './components/profile/Profile';
+import EditProfile from './components/profile/editProfile/EditProfile';
 import Rank from './components/rank/Rank';
 import About from './components/about/About';
 import Games from './components/games/Games';
@@ -76,6 +77,7 @@ function App() {
                                       <Route exact path="/register" component={Register} />
                                         <RutaPrivada exact path="/home" component={Home} />
                                         <RutaPrivada exact path="/profile" component={Profile} />
+                                        <RutaPrivada exact path="/profile/edit" component={EditProfile} />
                                         <RutaPrivada exact path="/rank" component={Rank} />
                                         <RutaPrivada exact path="/about" component={About} />
                                         <RutaPrivada exact path="/games" component={Games} />

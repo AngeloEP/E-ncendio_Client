@@ -5,7 +5,11 @@ import {
     OBTENER_USUARIO,
     LOGIN_EXITOSO,
     LOGIN_ERROR,
-    CERRAR_SESION
+    CERRAR_SESION,
+    MODIFICAR_USUARIO_CARGANDO,
+    MODIFICAR_USUARIO,
+    MODIFICAR_USUARIO_ERROR,
+    MODIFICAR_USUARIO_SALIR,
 } from '../../types/';
 
 export default (state, action) => {
@@ -47,6 +51,35 @@ export default (state, action) => {
                 autenticado: true,
                 usuario: action.payload,
                 cargando: false
+            }
+
+        case MODIFICAR_USUARIO_CARGANDO:
+            return {
+                ...state,
+                cargandoModificacionUsuario: true
+            }
+
+        case MODIFICAR_USUARIO:
+            return {
+                ...state,
+                cargandoModificacionUsuario: false,
+                mensaje: null,
+                usuario: action.payload,
+                modificacionUsuarioExitosa: true
+            }
+
+        case MODIFICAR_USUARIO_ERROR:
+            return {
+                ...state,
+                cargandoModificacionUsuario: false,
+                mensaje: action.payload,
+                modificacionUsuarioExitosa: false
+            }
+
+        case MODIFICAR_USUARIO_SALIR:
+            return {
+                ...state,
+                modificacionUsuarioExitosa: false
             }
 
         default:

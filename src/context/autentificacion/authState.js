@@ -14,7 +14,11 @@ import {
     OBTENER_USUARIO,
     LOGIN_EXITOSO,
     LOGIN_ERROR,
-    CERRAR_SESION
+    CERRAR_SESION,
+    MODIFICAR_USUARIO_CARGANDO,
+    MODIFICAR_USUARIO,
+    MODIFICAR_USUARIO_ERROR,
+    MODIFICAR_USUARIO_SALIR,
 } from '../../types/';
 
 const AuthState = props => {
@@ -25,7 +29,9 @@ const AuthState = props => {
         usuario: null,
         mensaje: null,
         cargando: true,
-        cargandoRegistroUsuario: false
+        cargandoRegistroUsuario: false,
+        cargandoModificacionUsuario: false,
+        modificacionUsuarioExitosa: false,
     }
 
     const [ state, dispatch ] = useReducer(AuthReducer, initialState)
@@ -126,6 +132,54 @@ const AuthState = props => {
         })
     }
 
+    const modificarUsuario = async (usuario, usuario_id) => {
+        try {
+            dispatch({
+                type: MODIFICAR_USUARIO_CARGANDO,
+                payload: true
+            })
+            // console.log(usuario, usuario_id)
+            // return
+            const resultado = await clienteAxios.put(`/api/usuarios/profile/edit/${usuario_id}`, usuario )
+            console.log("authState: ", resultado.data)
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Modificación exitosa',
+                text: 'Su perfil de usuario ha sido modificado!',
+            });
+            setTimeout(() => {
+                dispatch({
+                    type: MODIFICAR_USUARIO,
+                    payload: resultado.data.usuarioAntiguo
+                })
+            }, 1500);
+
+        } catch (error) {
+            console.log(error)
+            const alerta = {
+                msg: error.response.data.msg,
+                categoria: 'alerta-error'
+            }
+            dispatch({
+                type: MODIFICAR_USUARIO_ERROR,
+                payload: error
+            })
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo modificar su usuario, inténtelo nuevamente!',
+            })
+        }
+    }
+
+    const cambiarStateModificacionUsuario = async () => {
+        console.log("APAGANDO")
+        dispatch({
+            type: MODIFICAR_USUARIO_SALIR,
+        })
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -135,10 +189,14 @@ const AuthState = props => {
                 mensaje: state.mensaje,
                 cargando: state.cargando,
                 cargandoRegistroUsuario: state.cargandoRegistroUsuario,
+                cargandoModificacionUsuario: state.cargandoModificacionUsuario,
+                modificacionUsuarioExitosa: state.modificacionUsuarioExitosa,
                 registrarUsuario,
                 iniciarSesion,
                 usuarioAutenticado,
-                cerrarSesión
+                cerrarSesión,
+                modificarUsuario,
+                cambiarStateModificacionUsuario,
             }}
         >
             {props.children}

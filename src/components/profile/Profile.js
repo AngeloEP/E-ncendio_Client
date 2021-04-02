@@ -14,10 +14,10 @@ import {
     FaEdit,
 } from 'react-icons/fa';
 
-const Profile = () => {
+const Profile = ( props ) => {
     // Extraer la información de autentificación
     const authContext = useContext(AuthContext)
-    const { usuario, usuarioAutenticado } = authContext
+    const { usuario, modificacionUsuarioExitosa, usuarioAutenticado, cambiarStateModificacionUsuario } = authContext
 
     // Extraer la información de los perfiles
     const profilecontext = useContext(ProfileContext)
@@ -26,13 +26,22 @@ const Profile = () => {
     useEffect(() => {
         usuarioAutenticado()
 
+        if ( modificacionUsuarioExitosa ) {
+            cambiarStateModificacionUsuario()
+        }
+
         // obteniendo el perfil del usuario
         obtenerPerfil();
-    }, [])
+    }, [ modificacionUsuarioExitosa ])
 
-    if (perfil) {
-        console.log(perfil)
-        console.log(usuario)
+    const updateButtonAction = () => {
+        localStorage.setItem('firstname', usuario.firstname );
+        localStorage.setItem('lastname', usuario.lastname );
+        localStorage.setItem('gender', usuario.gender );
+        localStorage.setItem('age', usuario.age );
+        localStorage.setItem('phone', usuario.phone );
+
+        props.history.push('/profile/edit')
     }
 
     return (
@@ -46,8 +55,9 @@ const Profile = () => {
                                 <div class="row m-l-0 m-r-0">
                                     <div class="col-sm-4 bg-c-lite-green user-profile">
                                         <div class="card-block text-center text-white">
-                                            <div class="m-b-25"> <img src={usuario.urlFile} class="img-radius" alt="User-Profile-Image" /> </div>
+                                            <div class="m-b-25"> <img src={ usuario.urlFile ? usuario.urlFile : ProfileDefault } class="img-radius" alt="User-Profile-Image" /> </div>
                                             <h4 class="f-w-600"> {usuario.firstname} </h4>
+                                            <h5 class="f-w-400"> {usuario.lastname} </h5>
                                             <p class="f-w-200" > <i>
                                                 { usuario.isExpert
                                                 ?
@@ -65,7 +75,7 @@ const Profile = () => {
                                                     <h6 class="m-b-20 p-b-5 b-b-default f-w-600"> Mi información de perfil de usuario </h6>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <button className="profile-edit-btn" >
+                                                    <button className="profile-edit-btn" onClick={() => updateButtonAction() } >
                                                         Editar Perfil
                                                         <FaEdit className="iconoEditar"/>
                                                     </button>
@@ -81,6 +91,18 @@ const Profile = () => {
                                                     <h6 class="text-muted f-w-400"> {usuario.phone} </h6>
                                                 </div>
                                             </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="m-b-10 f-w-600"> Edad </p>
+                                                    <h6 class="text-muted f-w-400"> {usuario.age} </h6>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <p class="m-b-10 f-w-600"> Género </p>
+                                                    <h6 class="text-muted f-w-400"> {usuario.gender} </h6>
+                                                </div>
+                                            </div>
+
                                             <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"> Perfil de juego en E-ncendio </h6>
                                             <div class="row">
                                                 <div class="col-sm-6">
@@ -92,6 +114,22 @@ const Profile = () => {
                                                     <h6 class="text-muted f-w-400"> {perfil.score} </h6>
                                                 </div>
                                             </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <p class="m-b-10 f-w-600"> Nivel etiquetando Imágenes </p>
+                                                    <h6 class="text-muted f-w-400"> {perfil.level_image_id.level} </h6>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <p class="m-b-10 f-w-600"> Nivel etiquetando Palabras </p>
+                                                    <h6 class="text-muted f-w-400"> {perfil.level_word_id.level} </h6>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <p class="m-b-10 f-w-600"> Nivel asignando 1 palabra a imágenes </p>
+                                                    <h6 class="text-muted f-w-400"> {perfil.level_four_image_id.level} </h6>
+                                                </div>
+                                            </div>
+
                                             <ul class="social-link list-unstyled m-t-40 m-b-10">
                                                 <li> <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"> <FaFacebook/> </a> </li>
                                                 <li> <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"> <FaTwitter/> </a> </li>

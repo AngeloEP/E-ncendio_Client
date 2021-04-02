@@ -103,7 +103,7 @@ const Register = (props) => {
             gender.trim() === '' ||
             age === null ||
             phone.trim() === '' ||
-            image === null ||
+            // image === null ||
             email.trim() === '' ||
             password.trim() === '' ||
             confirmar.trim() === '' ||
@@ -215,7 +215,7 @@ const Register = (props) => {
                                 label="Género"
                             >
                             <MenuItem value="">
-                                <em>None</em>
+                                <em>Ninguno</em>
                             </MenuItem>
                             <MenuItem value={'Femenino'}> Femenino </MenuItem>
                             <MenuItem value={'Masculino'}> Masculino </MenuItem>

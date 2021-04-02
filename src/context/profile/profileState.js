@@ -45,13 +45,12 @@ const ProfileState = props => {
             let newProfiles = respuesta.data.perfiles
             for (const [ index, perfil] of Object.entries(respuesta.data.perfiles) ) {
                 newProfiles[index] = {
+                    user_id: newProfiles[index].user_id._id,
                     Nombre: newProfiles[index].user_id.firstname,
                     Liga: newProfiles[index].league_id.league,
                     Edad: newProfiles[index].user_id.age,
                     Puntuación: newProfiles[index].score
                 }
-                // console.log(index,perfil)
-                // console.log(newProfiles[index])
             }
             dispatch({
                 type: OBTENER_TODOS_LOS_PERFILES,
