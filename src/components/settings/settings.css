@@ -1,0 +1,32 @@
+.title-div {
+    text-align: center;
+    width: 80%;
+    height: 10em;
+    margin-top: 3em;
+    margin-bottom: 4em;
+    margin-left: 10%;
+    background-color: #546356;
+    border: 1px solid #202221;
+    border-radius: 16px;
+    box-shadow: 1.5px 1.5px 3px #222222;
+
+}
+
+.title-settings {
+    color: rgb(255, 255, 255);
+    position: relative;
+    line-height: 165px;
+    font-size: 2.7em;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    white-space: nowrap;
+    z-index: 99999;
+}
+
+.nav-settings {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 40%;
+    align-items: center;
+    width: 20%;
+}

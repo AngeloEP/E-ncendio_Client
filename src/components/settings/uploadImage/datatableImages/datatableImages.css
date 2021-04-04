@@ -1,0 +1,68 @@
+.div-uploadImage-update {
+    text-align: center;
+    width: 90%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 5%;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.div-image-update {
+    width: 10%;
+}
+
+.image-upload-update {
+    min-width: 400px;
+    max-width: 200px;
+    min-height: 220px;
+    max-height: 280px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.label-upload-image-update {
+    width: 11em;
+    height: 2em;
+    margin-left: 270%;
+    margin-bottom: 1em;
+}
+
+
+.div-filename-update {
+    margin-top: 1em;
+    margin-left: 2em;
+}
+
+.div-difficulty-update {
+    margin-top: 2em;
+    margin-left: -7.7em;
+}
+
+.div-points-update {
+    margin-top: 2em;
+    margin-left: 2em;
+}
+
+.submit-image-update {
+    width: 20%;
+}
+
+.div-datatable-images-update {
+    text-align: center;
+    width: 80%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 10%;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.image-user-update {
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 150px;
+    max-height: 280px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

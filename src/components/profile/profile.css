@@ -62,7 +62,7 @@ background-image: linear-gradient(315deg, #378b29 0%, #74d680 74%); */
 .img-radius {
     width: 230px;
     height: 160px;
-    border-radius: 5px
+    border-radius: 5px;
 }
 
 h6 {

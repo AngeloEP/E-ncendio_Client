@@ -15,6 +15,7 @@ import TagImage from './components/games/tagImages/TagImage';
 import AssociateWord from './components/games/associateWords/AssociateWord';
 import FourImagesOneWord from './components/games/fourImagesOneWord/FourImagesOneWord';
 import FooterPage from './components/footer/FooterPage';
+import Settings from './components/settings/Settings';
 
 import LoginState from './context/login/loginState';
 import AlertaState from './context/alertas/alertaState';
@@ -85,6 +86,7 @@ function App() {
                                         <RutaPrivada exact path="/help" component={Help} />
                                         <RutaPrivada exact path="/games/words" component={AssociateWord} />
                                         <RutaPrivada exact path="/games/four-images-one-word" component={FourImagesOneWord} />  
+                                        <RutaPrivada exact path="/settings" component={Settings} />  
                                       <Redirect from="/" to="/login"/>
 
                                     </Switch>

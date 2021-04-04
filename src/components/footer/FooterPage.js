@@ -25,11 +25,11 @@ const FooterPage = ({ location }) => {
                 location.pathname !== "/games/words" &&
                 location.pathname !== "/games/four-images-one-word"
             ? 
-                <div class="footer-clean">
+                <div className="footer-clean">
                     <footer>
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-sm-4 col-md-3 item">
+                        <div className="container">
+                            <div className="row justify-content-center">
+                                <div className="col-sm-4 col-md-3 item">
                                     <h3> FireSES </h3>
                                     <ul>
                                         <li><a href="#">Web design</a></li>
@@ -37,7 +37,7 @@ const FooterPage = ({ location }) => {
                                         <li><a href="#">Hosting</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-4 col-md-3 item">
+                                <div className="col-sm-4 col-md-3 item">
                                     <h3> About </h3>
                                     <ul>
                                         <li><a href="#">Company</a></li>
@@ -45,7 +45,7 @@ const FooterPage = ({ location }) => {
                                         <li><a href="#">Legacy</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-4 col-md-3 item">
+                                <div className="col-sm-4 col-md-3 item">
                                     <h3>Careers</h3>
                                     <ul>
                                         <li><a href="#">Job openings</a></li>
@@ -53,12 +53,12 @@ const FooterPage = ({ location }) => {
                                         <li><a href="#">Benefits</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-lg-3 item social">
+                                <div className="col-lg-3 item social">
                                     <a href="#"> <FaFacebook/> </a>
                                     <a href="#"> <FaTwitter/> </a>
                                     <a href="#"> <FaSnapchat/> </a>
                                     <a href="#"> <FaInstagram/> </a>
-                                    <p class="copyright">E-ncendio © {new Date().getFullYear()} | Todos los derechos reservados </p>
+                                    <p className="copyright">E-ncendio © {new Date().getFullYear()} | Todos los derechos reservados </p>
                                 </div>
                             </div>
                         </div>

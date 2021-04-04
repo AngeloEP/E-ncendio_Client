@@ -9,7 +9,6 @@ import './profile.css';
 import {
     FaFacebook,
     FaTwitter,
-    FaSnapchat,
     FaInstagram,
     FaEdit,
 } from 'react-icons/fa';

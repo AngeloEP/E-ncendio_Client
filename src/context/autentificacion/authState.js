@@ -163,7 +163,7 @@ const AuthState = props => {
             }
             dispatch({
                 type: MODIFICAR_USUARIO_ERROR,
-                payload: error
+                payload: alerta
             })
             Swal.fire({
                 icon: 'error',

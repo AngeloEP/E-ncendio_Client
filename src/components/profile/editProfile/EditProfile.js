@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ProfileDefault from '../../../assets/img/profile_default.png';
 
 import AlertaContext from '../../../context/alertas/alertaContext';
@@ -38,11 +38,9 @@ const EditProfile = ( props ) => {
     const profilecontext = useContext(ProfileContext)
     const { perfil, obtenerPerfil } = profilecontext
 
-    const prevCountRef = useRef();
 
     useEffect(() => {
         usuarioAutenticado()
-        prevCountRef.current = usuario
 
         if (mensaje) {
             // setLoadingLogin(false)
@@ -57,7 +55,6 @@ const EditProfile = ( props ) => {
         obtenerPerfil();
     }, [ mensaje, cargando, modificacionUsuarioExitosa ])
 
-    const prevCount = prevCountRef.current;
     const [ perfilUsuario, guardarPerfilUsuario ] = useState({
         firstname: localStorage.getItem('firstname'),
         lastname: localStorage.getItem('lastname'),
