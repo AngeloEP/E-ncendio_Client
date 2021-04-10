@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 .div-divsito {
     position: relative;
     align-items: center;
@@ -24,7 +20,30 @@
 
 }
 
+.loadingLogin {
+    width: 5px;
+    height: 5px;
+}
 
+.divlogin {
+    background-image: url(../../assets/img/login-background.jpg) ;
+    background-repeat: no-repeat;
+    background-color: grey;
+      /* theme.palette.type === light ? theme.palette.grey[50] : theme.palette.grey[900], */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    text-align: right;
+    height: 100vh;
+    /* [theme.breakpoints.up('lg')]: {
+      height: "100vh",
+    },
+    [theme.breakpoints.up('xs')]: {
+      height: "100vh",
+    }, */
+}
 
 .img-login {
     width: 30%;
@@ -33,6 +52,10 @@
 
 /* 1376x768 */
 @media only screen and (min-width: 1377px){
+    .divlogin {
+        height: 100vh;
+    }
+
     .img-login {
         width: 40%;
         height: 30%;

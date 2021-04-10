@@ -15,8 +15,6 @@ export const useStyles = makeStyles((theme) => ({
       padding: '40px 55px 45px 55px',
       borderRadius: '15px',
       transition: 'all .3s',
-      
-      //background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     },
     avatar: {
       marginTop: theme.spacing(1),
@@ -38,10 +36,10 @@ export const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3, 0, 2),
     },
 
-    loadingLogin: {
-      width: "5px",
-      height: "5px",
-    },
+    // loadingLogin: {
+    //   width: "5px",
+    //   height: "5px",
+    // },
 
     loadingPage: {
       display: "flex",
@@ -54,24 +52,24 @@ export const useStyles = makeStyles((theme) => ({
       marginBottom: '100px'
   },
 
-    divlogin: {
-      backgroundImage: `url(${background})` ,
-      backgroundRepeat: 'no-repeat',
-      backgroundColor:
-        theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      display: 'flex',
-      justifyContent: 'flex-start',
-      flexDirection: 'column',
-      textAlign: 'right',
-      [theme.breakpoints.up('lg')]: {
-        height: "100vh",
-      },
-      [theme.breakpoints.up('xs')]: {
-        height: "100vh",
-      },
-    },
+    // divlogin: {
+    //   backgroundImage: `url(${background})` ,
+    //   backgroundRepeat: 'no-repeat',
+    //   backgroundColor:
+    //     theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    //   backgroundSize: 'cover',
+    //   backgroundPosition: 'center',
+    //   display: 'flex',
+    //   justifyContent: 'flex-start',
+    //   flexDirection: 'column',
+    //   textAlign: 'right',
+    //   [theme.breakpoints.up('lg')]: {
+    //     height: "100vh",
+    //   },
+    //   [theme.breakpoints.up('xs')]: {
+    //     height: "100vh",
+    //   },
+    // },
     errorMessage: {
       maxWidth: '600px',
       marginTop: theme.spacing(0),
