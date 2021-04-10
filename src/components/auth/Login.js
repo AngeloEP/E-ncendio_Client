@@ -139,7 +139,7 @@ const Login = ( props ) => {
         :
         <div className="divlogin"  >
         <CssBaseline />
-        <div className="container" style={{ }} >
+        <div className="container div-contenedor" style={{ }} >
           
         
         <div className="div-divsito">
