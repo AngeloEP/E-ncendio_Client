@@ -238,40 +238,34 @@ const Home = () => {
                                     className="slides-carousel"
                                     src="https://cdn.pixabay.com/photo/2018/08/21/23/29/fog-3622519__340.jpg"
                                     alt="First slide"
-                                    // width="100%"
-                                    // height="600px"
                                     />
                                     <Carousel.Caption>
-                                    <h2> ¡Bienvenid@ a E-ncendio! </h2>
-                                    <subtitle1> Navega y ayúdanos a recaudar información de la comunidad. </subtitle1>
+                                    <h2 className="carousel-title" > ¡Bienvenid@ a E-ncendio! </h2>
+                                    <subtitle1 className="carousel-subtitle" > Navega y ayúdanos a recaudar información de la comunidad. </subtitle1>
                                     </Carousel.Caption>
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <img
-                                    className="d-block w-1000"
+                                    className="slides-carousel"
                                     src="https://cdn.pixabay.com/photo/2015/06/19/21/24/avenue-815297__340.jpg"
                                     alt="Second slide"
-                                    width="100%"
-                                    height="600px"
                                     />
 
                                     <Carousel.Caption>
-                                    <h2> Apóyanos Jugando </h2>
-                                    <subtitle1> Tu participación es vital para dimensionar el estado actual de la ciudadanía para enfrentar los incendios. </subtitle1>
+                                    <h2 className="carousel-title" > Apóyanos Jugando </h2>
+                                    <subtitle1 className="carousel-subtitle" > Tu participación es vital para dimensionar el estado actual de la ciudadanía para enfrentar los incendios. </subtitle1>
                                     </Carousel.Caption>
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <img
-                                    className="d-block w-1000"
+                                    className="slides-carousel"
                                     src="https://cdn.pixabay.com/photo/2015/12/01/20/28/forest-1072828__340.jpg"
                                     alt="Third slide"
-                                    width="100%"
-                                    height="600px"
                                     />
 
                                     <Carousel.Caption>
-                                    <h2> ¡Recompensas a los mejores participantes! </h2>
-                                    <subtitle1> Al final de este proyecto, se premiarán a los participantes más destacados. </subtitle1>
+                                    <h2 className="carousel-title" > ¡Recompensas a los mejores participantes! </h2>
+                                    <subtitle1 className="carousel-subtitle" > Al final de este proyecto, se premiarán a los participantes más destacados. </subtitle1>
                                     </Carousel.Caption>
                                 </Carousel.Item>
                             </Carousel>
@@ -284,14 +278,13 @@ const Home = () => {
                                 bg="light"
                                 key="1"
                                 text="dark"
-                                style={{ width: '18rem', textAlign: "center", marginLeft: "100px"  }}
-                                className="mt-5"
+                                className="card-first"
                             >
                                 <FaGamepad className="card-icons" />
-                                <Card.Header> Diversión </Card.Header>
+                                <Card.Header className="card-header" > Diversión </Card.Header>
                                 <Card.Body>
-                                <Card.Title> Interactúa en los juegos </Card.Title>
-                                <Card.Text>
+                                <Card.Title className="card-title" > Interactúa en los juegos </Card.Title>
+                                <Card.Text className="card-text" >
                                     Puedes colaborar jugando en uno de los 3 tipos de juegos disponibles.
                                 </Card.Text>
                                 </Card.Body>
@@ -301,14 +294,13 @@ const Home = () => {
                                 bg="light"
                                 key="1"
                                 text="dark"
-                                style={{ width: '18rem', textAlign: "center" }}
-                                className="mt-5 ml-5"
+                                className="card-other"
                             >
                                 <FaFire className="card-icons" />
-                                <Card.Header> Competitividad </Card.Header>
+                                <Card.Header className="card-header" > Competitividad </Card.Header>
                                 <Card.Body>
-                                <Card.Title> Rivaliza con los demás </Card.Title>
-                                <Card.Text>
+                                <Card.Title className="card-title" > Rivaliza con los demás </Card.Title>
+                                <Card.Text className="card-text" >
                                     Logra la mejor posición del ranking de jugadores.
                                 </Card.Text>
                                 </Card.Body>
@@ -318,14 +310,13 @@ const Home = () => {
                                 bg="light"
                                 key="1"
                                 text="dark"
-                                style={{ width: '18rem', textAlign: "center" }}
-                                className="mt-5 ml-5"
+                                className="card-other"
                             >
                                 <FaCog className="card-icons" />
-                                <Card.Header> Personalización </Card.Header>
+                                <Card.Header className="card-header" > Personalización </Card.Header>
                                 <Card.Body>
-                                <Card.Title> Edita tu perfil </Card.Title>
-                                <Card.Text>
+                                <Card.Title className="card-title" > Edita tu perfil </Card.Title>
+                                <Card.Text className="card-text" >
                                     Puedes ajustar tus configuraciones del perfil de la manera que gustes.
                                 </Card.Text>
                                 </Card.Body>
@@ -335,14 +326,13 @@ const Home = () => {
                                 bg="light"
                                 key="1"
                                 text="dark"
-                                style={{ width: '18rem', textAlign: "center" }}
-                                className="mt-5 ml-5"
+                                className="card-other"
                             >
                                 <FaUserFriends className="card-icons" />
-                                <Card.Header> Conócenos </Card.Header>
+                                <Card.Header className="card-header" > Conócenos </Card.Header>
                                 <Card.Body>
-                                <Card.Title> Averigua quienes somos </Card.Title>
-                                <Card.Text>
+                                <Card.Title className="card-title" > Averigua quienes somos </Card.Title>
+                                <Card.Text className="card-text" >
                                     Podrás saber quienes están detrás del proyecto E-ncendio y del porqué de este.
                                 </Card.Text>
                                 </Card.Body>
@@ -352,14 +342,13 @@ const Home = () => {
                                 bg="light"
                                 key="1"
                                 text="dark"
-                                style={{ width: '18rem', textAlign: "center" }}
-                                className="mt-5 ml-5"
+                                className="card-other"
                             >
                                 <FaQuestionCircle className="card-icons" />
-                                <Card.Header> Ayuda </Card.Header>
+                                <Card.Header className="card-header" > Ayuda </Card.Header>
                                 <Card.Body>
-                                <Card.Title> Conoce el funcionamiento básico de la Aplicación </Card.Title>
-                                <Card.Text>
+                                <Card.Title className="card-title" > Conoce el funcionamiento básico de la Aplicación </Card.Title>
+                                <Card.Text className="card-text" >
                                     Si tienes dudas de como jugar, cómo ganar puntos y de qué manera poder editar tu Perfil puedes ir a "Ayuda".
                                 </Card.Text>
                                 </Card.Body>

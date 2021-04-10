@@ -60,9 +60,13 @@ background-image: linear-gradient(315deg, #378b29 0%, #74d680 74%); */
 }
 
 .img-radius {
-    width: 230px;
-    height: 160px;
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 180px;
+    max-height: 180px;
     border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h6 {
@@ -147,19 +151,53 @@ h6 {
 }
 
 .iconoEditar {
-    margin-left: 1em;
+    margin-left: 0em;
     padding-bottom: 0.5em;
     width: 30px;
     height: 30px;
-    color: #000!important;
+    color: #fff !important;
 }
 
 .profile-edit-btn{
-    border: none;
-    border-radius: 1rem;
+    border: 0;
+    border-radius: 0.7rem;
     width: 40%;
-    padding: 1%;
-    font-weight: 300;
-    color: #6c757d;
+    padding: 1.5%;
+    font-weight: 400;
+    background-color: #378b29;
+    color: #fff;
     cursor: pointer;
+    outline: none !important;
+}
+
+@media only screen and (max-width: 1376px){
+    .user-card-full .user-profile {
+        height: 83vh;
+    }
+
+    .img-radius {
+        min-width: 230px;
+        max-width: 230px;
+        min-height: 150px;
+        max-height: 150px;
+    }
+
+    .iconoEditar {
+        margin-left: 0.5em;
+        width: 25px;
+        height: 25px;
+    }
+
+    .profile-edit-btn{
+        width: 60%;
+        padding: 2%;
+        font-weight: 500;
+    }
+
+    h6 {
+        font-size: 12px
+    }
+    p {
+            font-size: 12px
+    }
 }

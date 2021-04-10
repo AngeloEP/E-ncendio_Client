@@ -21,10 +21,10 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { useStyles } from './tagImageStyles';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Label } from '@material-ui/icons';
+import "./tagImage.css";
 
 
 
@@ -71,7 +71,6 @@ const TagImage = ( props ) => {
         obtenerImagenes()
     }, [])
 
-    const classes = useStyles()
     const [ checked, setChecked ] = useState({
         prevencion: false,
         mitigacion: false,
@@ -208,11 +207,11 @@ const TagImage = ( props ) => {
     let colorProgress = labelProgress < 50 ? "success" : labelProgress < 80 ? "warning" : "danger"
 
     return (
-        <Container fluid className={classes.backgroundGif} >
-            <div className={classes.topCenter} >
-                <Row className={classes.rowTitle} >
+        <Container fluid className="backgroundGif" >
+            <div className="topCenter" >
+                <Row className="rowTitle" >
                     <Col >
-                        <Typography variant="h4" className={classes.levelTitle} >
+                        <Typography variant="h4" className="levelTitle" >
                             { perfil ? `Nivel ${perfil.level_image_id.level}` : null}
                         </Typography>
                     </Col>
@@ -220,12 +219,12 @@ const TagImage = ( props ) => {
                     {perfil
                     ?
                         <Fragment>
-                            <p className={classes.progressTitle} > {userLeague} </p>
+                            <p className="progressTitle" > {userLeague} </p>
                             <OverlayTrigger
                                 placement="bottom"
                                 overlay={<Tooltip className="mt-3" id="button-tooltip-1" > Puntos: {nowProgress} </Tooltip>}
                             >
-                                <ProgressBar max={maxProgress} className={classes.userProgress} variant={colorProgress} animated striped  now={nowProgress}  
+                                <ProgressBar max={maxProgress} className="userProgress" variant={colorProgress} animated striped  now={nowProgress}  
                                             label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
                                 />
                             </OverlayTrigger>
@@ -236,97 +235,57 @@ const TagImage = ( props ) => {
                 </Row>
                 { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
             </div>
-
-            <div className={classes.center} >
-                {/* <Row  >
-                    <Col className={classes.imagen} > 
+            <div class="center">
+                <div class="row">
+                    <div class="col categoritas" style={{ marginRight: "10%" }}>
+                        <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
+                    </div>
+                    <div class="col categoritas" style={{ marginRight: "10%" }} >
+                        <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
+                    </div>
+                    <div class="col categoritas" >
+                        <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col categoritas" style={{ marginRight: "10%" }}>
+                        <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
+                    </div>
+                    <div class="col div-imagen" style={{ marginRight: "10%" }}>
                         { imagenes.length == 0
-                        ? null
-                        : 
-                        <Image
-                            style={{width:300,height:300}}
-                            src={imagenes[imagenActual].imageUrl} rounded
-                        />
+                            ? null
+                            : 
+                            <Image
+                                style={{minWidth:"350px",minHeight:"300px"}}
+                                className="imagen"
+                                src={imagenes[imagenActual].imageUrl} rounded
+                            />
                         }
-                    </Col>
-                    <Col  className={classes.categorias} >
-                        <Typography variant="h6" className="mr-3" >
-                            Seleccionar Categoría
-                        </Typography>
-                        <div className=""  >
+                    </div>
+                    <div class="col categoritas">
+                        <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col categoritas" style={{ marginRight: "20%" }}>
+                        <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
+                    </div>
+                    <div class="col categoritas">
+                    </div>
+                    <div class="col categoritas" style={{ marginLeft: "10%" }}>
+                        <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
+                    </div>
+                </div>
+            </div>
 
-                            {categories}
-                            
-                        </div>
-                    </Col>
-
-                </Row> */}
-                <Grid container spacing={7}>
-                    <Grid item xs={6} sm={4}>
-                        <Col>
-                            <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    <Grid item xs={6} sm={4}>
-                        <Col>
-                            <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    <Grid item xs={6} sm={4}>
-                        <Col>
-                            <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    
-                    <Grid container xs={6} sm={4} alignItems="center" >
-                        <Col>
-                            <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    <Grid container xs={6} sm={4}
-                        alignItems="center"
-                        className={classes.imagen}
-                    >
-                        { imagenes.length == 0
-                        ? null
-                        : 
-                        <Image
-                            style={{width:350,height:300}}
-                            src={imagenes[imagenActual].imageUrl} rounded
-                        />
-                        }
-                    </Grid>
-                    <Grid container item xs={6} sm={4}
-                        alignItems="center"
-                        style={{ marginLeft: "10%" }}
-                    >
-                        <Col>
-                            <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    <Grid item xs={6} sm={4}>
-                        <Col>
-                            <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    <Grid item xs={6} sm={4}
-                        style={{ marginLeft: "33.3%" }}
-                    >
-                        <Col>
-                            <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                </Grid>
-            </div  >
-
-            <div className={classes.bottomCenter} >
-                <Row>
+            <div className="bottomCenter" >
+                <Row style={{ marginLeft: "0px", marginRight: "0px" }} >
                     {/* <Col >
                         <Button variant="secondary"> Anterior </Button>{' '}
                     </Col> */}
 
                     <Col>
-                        <Button className={classes.botonSiguiente} variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
+                        <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
                     </Col>
                 </Row>
             </div>

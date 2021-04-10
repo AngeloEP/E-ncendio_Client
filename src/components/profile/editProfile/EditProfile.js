@@ -255,8 +255,14 @@ const EditProfile = ( props ) => {
                                                                         
                                                                     :
                                                                     <div>
-                                                                        Modificar Perfil
-                                                                        <FaEdit className="update-icon"/>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-6 col-log-12 col-xl-9">
+                                                                                Modificar Perfil
+                                                                            </div>
+                                                                            <div class="col-sm-6 col-log-12 col-xl-3">
+                                                                                <FaEdit className="update-icon"/>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 }
                                                             </button>

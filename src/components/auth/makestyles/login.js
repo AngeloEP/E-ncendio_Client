@@ -19,12 +19,20 @@ export const useStyles = makeStyles((theme) => ({
       //background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     },
     avatar: {
-      marginTop: theme.spacing(3),
+      marginTop: theme.spacing(1),
       backgroundColor: theme.palette.secondary.main,
+      [theme.breakpoints.up('lg')]: {
+        display: "inline-flex"
+      },
     },
     form: {
-      width: '40vh', // Fix IE 11 issue.
       marginTop: theme.spacing(5),
+      [theme.breakpoints.up('lg')]: {
+        width: "100%",
+      },
+      [theme.breakpoints.up('md')]: {
+        width: "40",
+      },
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
@@ -42,7 +50,7 @@ export const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
       alignItems: "center",
       width: "100%",
-      height: "80vh",
+      height: "100vh",
       marginBottom: '100px'
   },
 
@@ -53,11 +61,16 @@ export const useStyles = makeStyles((theme) => ({
         theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      height : '100vh' ,
       display: 'flex',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       flexDirection: 'column',
       textAlign: 'right',
+      [theme.breakpoints.up('lg')]: {
+        height: "100vh",
+      },
+      [theme.breakpoints.up('xs')]: {
+        height: "100vh",
+      },
     },
     errorMessage: {
       maxWidth: '600px',
@@ -69,6 +82,12 @@ export const useStyles = makeStyles((theme) => ({
 
     inputs: {
       backgroundColor: "#fff",
+      alignItems: "center"
     },
    
   }));
+
+//   @media(max-width: @screen-xs-max){}
+// @media(min-width: @screen-sm-min){}  /* deprecated: @screen-tablet, or @screen-sm */
+// @media(min-width: @screen-md-min){}  /* deprecated: @screen-desktop, or @screen-md */
+// @media(min-width: @screen-lg-min){}

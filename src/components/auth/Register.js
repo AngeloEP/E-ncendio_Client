@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import AlertaContext from '../../context/alertas/alertaContext';
 import AuthContext from '../../context/autentificacion/authContext';
 
+import './register.css';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -303,7 +305,7 @@ const Register = (props) => {
                         />
                     </Grid>
                     <Grid item xs={10}>
-                        <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >
+                        <div className="isExpert" >
                             <Typography variant="subtitle1" color="textPrimary" align="center" className="mt-1" >
                                 Es integrante de FireSES
                             </Typography>
@@ -335,6 +337,7 @@ const Register = (props) => {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
+                    disabled={cargandoRegistroUsuario}
                 >
                     {
                             cargandoRegistroUsuario
@@ -344,12 +347,12 @@ const Register = (props) => {
                                 justify="center"
                                 alignItems="center"
                             >
-                                <Grid item xs={2}  >
+                                <Grid item xs={2} style={{ color: "#000" }}  >
                                     Cargando...
                                 </Grid>
                                 <Grid item xs={3} >
                                 <ClipLoader
-                                    color={"#fff"}
+                                    color={"#000"}
                                     loading={true}
                                     size={20}
                                 />

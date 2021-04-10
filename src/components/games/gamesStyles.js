@@ -14,6 +14,9 @@ export const useStyles = makeStyles((theme) => ({
           width: '100% !important', // Overrides inline-style
           height: 100,
         },
+        [theme.breakpoints.down('lg')]: {
+          height: 280,
+        },
         '&:hover, &$focusVisible': {
           zIndex: 1,
           '& $imageBackdrop': {

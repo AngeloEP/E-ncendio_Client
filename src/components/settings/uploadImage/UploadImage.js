@@ -134,7 +134,7 @@ const UploadImage = () => {
                                         />
                                     <img className="img-fluid img-thumbnail image-upload" src={pathImage} alt="Image" />
                                     <label htmlFor="contained-button-file" className="label-upload-image" >
-                                        <Button  variant="contained" style={{ backgroundColor: "greenyellow" }}  component="span">
+                                        <Button  variant="contained" style={{ backgroundColor: "greenyellow", height: "85%" }}  component="span">
                                             Agregar imagen
                                         </Button>
                                     </label>
@@ -144,7 +144,7 @@ const UploadImage = () => {
                             <Grid item xs={8} >
                                 <div className="div-filename" >                        
                                     <TextField
-                                        style={{ width: "60%" }}
+                                        className="textfield-filename"
                                         value={ image ? image.name.split(".")[0] : "" }
                                         disabled
                                         name="filename"
@@ -161,7 +161,7 @@ const UploadImage = () => {
                                         <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
                                         <Select
                                             labelId="demo-simple-select-outlined-label"
-                                            style={{ width: "15em" }}
+                                            className="select-difficulty"
                                             id="difficulty"
                                             name="difficulty"
                                             value={difficulty}
@@ -180,7 +180,7 @@ const UploadImage = () => {
 
                                 <div className="div-points" >
                                     <TextField
-                                        style={{ width: "60%" }}
+                                        className="textfield-points"
                                         variant="outlined"
                                         id="points"
                                         label="Ingrese una cantidad de puntos asociada a esta imagen"
@@ -198,6 +198,7 @@ const UploadImage = () => {
                                     variant="contained"
                                     color="primary"
                                     className="submit-image"
+                                    disabled={cargandoSubirImagen}
                                 >
                                     {
                                             cargandoSubirImagen
@@ -207,12 +208,12 @@ const UploadImage = () => {
                                                 justify="center"
                                                 alignItems="center"
                                             >
-                                                <Grid item xs={6}  >
+                                                <Grid item xs={6} style={{ color: "#000" }} >
                                                     Cargando...
                                                 </Grid>
                                                 <Grid item xs={3} >
                                                 <ClipLoader
-                                                    color={"#fff"}
+                                                    color={"#000"}
                                                     loading={true}
                                                     size={20}
                                                 />

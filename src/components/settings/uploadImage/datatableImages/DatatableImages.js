@@ -176,6 +176,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                                                 style={{ width: "90%" }}
                                                 startIcon={<DeleteIcon />}
                                                 onClick={() => deleteFunction(row["_id"])}
+                                                disabled={loadingDelete}
                                             >
                                                 {
                                                     loadingDelete
@@ -185,12 +186,12 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                                                         justify="center"
                                                         alignItems="center"
                                                     >
-                                                        <Grid item xs={11}  >
+                                                        <Grid item xs={11} style={{color:"#000"}} >
                                                             Cargando...
                                                         </Grid>
                                                         <Grid item xs={1} >
                                                         <ClipLoader
-                                                            color={"#fff"}
+                                                            color={"#000"}
                                                             loading={true}
                                                             size={20}
                                                         />
@@ -337,7 +338,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                             variant="contained"
                             style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
                             startIcon={<EditIcon />}
-                            // onClick={() => handleClose()}
+                            disabled={cargandoModificarImagen}
                         >
                             {
                                 cargandoModificarImagen
@@ -347,7 +348,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                                     justify="center"
                                     alignItems="center"
                                 >
-                                    <Grid item xs={10}  >
+                                    <Grid item xs={10} style={{color:"#000"}}  >
                                         Cargando...
                                     </Grid>
                                     <Grid item xs={1} >

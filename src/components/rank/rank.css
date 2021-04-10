@@ -60,3 +60,27 @@
     background-color: rgb(194, 79, 71);
     color:white;
 }
+
+@media only screen and (max-width: 1376px){
+    .title-div {
+        width: 70%;
+        height: 15vh;
+        margin-top: 2em;
+        margin-bottom: 3em;
+        margin-left: 15%;
+        border: 1px solid #202221;
+        border-radius: 16px;
+        box-shadow: 1.5px 1.5px 3px #222222;
+    
+    }
+
+    .title-rank {
+        line-height: 0px;
+        font-size: 2.0em;
+        
+        height: 100%;
+        width: 100%;
+        display: grid;
+        align-items: center;
+    }
+}

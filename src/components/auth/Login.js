@@ -5,6 +5,8 @@ import loginContext from '../../context/login/loginContext';
 
 import logo from '../../assets/img/logo.png';
 
+import './login.css';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -137,19 +139,25 @@ const Login = ( props ) => {
         :
         <div className={classes.divlogin}  >
         <CssBaseline />
-        <div className="container">
+        <div className="container" style={{ }} >
           
         
-        <div className={classes.paper}>
-          <img src={logo} alt='logo' style={{ width:"250px", height: "180px" }} />
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h4">
-            Iniciar Sesión
-          </Typography>
+        <div className="div-divsito">
+          <div className="img-login" >
+            <img src={logo} alt='logo' class="center" />
+          </div>
+          <div className="row avatar-title" >
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+           
+            
+              <p className="titulo-login" >
+                Iniciar Sesión
+              </p>
+          </div>
           { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-          <form className={classes.form} onSubmit={onSubmit} >
+          <form className="form" onSubmit={onSubmit} >
             <TextField
               className={classes.inputs}
               variant="outlined"
@@ -185,7 +193,9 @@ const Login = ( props ) => {
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              disabled={loadingLogin}
+              // className={classes.submit}
+              className="btn-blue"
             >
               {
                 loadingLogin
@@ -196,12 +206,12 @@ const Login = ( props ) => {
                     alignItems="center"
                     spacing={1}
                   >
-                    <Grid item xs={3}  >
+                    <Grid item xs={3} style={{ color: "#000" }} >
                       Cargando...
                     </Grid>
                     <Grid item xs={3} >
                       <ClipLoader
-                        color={"#fff"}
+                        color={"#000"}
                         loading={true}
                         size={20}
                       />
@@ -222,14 +232,14 @@ const Login = ( props ) => {
                 </Link>
               </Grid>
             </Grid>
-          <Box mt={8}>
+          <div  >
             <Typography variant="body1" color="#fff" align="center">
               {'Copyright © '}
               {'E-ncendio '}
               {new Date().getFullYear()}
               {'.'}
             </Typography>
-          </Box>
+          </div>
           </form>
         </div>
       </div>

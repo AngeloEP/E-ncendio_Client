@@ -73,11 +73,17 @@ const Profile = ( props ) => {
                                                 <div class="col-sm-6">
                                                     <h6 class="m-b-20 p-b-5 b-b-default f-w-600"> Mi información de perfil de usuario </h6>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <button className="profile-edit-btn" onClick={() => updateButtonAction() } >
-                                                        Editar Perfil
-                                                        <FaEdit className="iconoEditar"/>
-                                                    </button>
+                                                <div class="col-sm-6 col-log-12 col-xl-6">
+                                                            <button className="profile-edit-btn" onClick={() => updateButtonAction() } >
+                                                                <div class="row">
+                                                                    <div class="col-sm-6 col-log-12 col-xl-8">
+                                                                            Editar Perfil
+                                                                    </div>
+                                                                    <div class="col-sm-6 col-log-12 col-xl-4">
+                                                                        <FaEdit className="iconoEditar"/>
+                                                                    </div>
+                                                                </div>
+                                                            </button>
                                                 </div>
                                             </div>
                                             <div class="row">

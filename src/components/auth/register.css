@@ -1,0 +1,17 @@
+.isExpert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1376px){
+    .image_user {
+        width: 150px;
+        min-height: 80px;
+        max-height: 80px;
+    }
+
+    .isExpert {
+        flex-direction: column;
+    }
+}

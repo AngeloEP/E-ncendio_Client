@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react';
-import { useStyles } from './associateWordStyles.js';
 
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
@@ -26,6 +25,8 @@ import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Label } from '@material-ui/icons';
+
+import "./associateWord.css";
 
 
 const AssociateWords = () => {
@@ -70,7 +71,6 @@ const AssociateWords = () => {
         obtenerPalabras()
     }, [])
 
-    const classes = useStyles()
     const [ checked, setChecked ] = useState({
         prevencion: false,
         mitigacion: false,
@@ -172,11 +172,11 @@ const AssociateWords = () => {
     let colorProgress = labelProgress < 50 ? "success" : labelProgress < 80 ? "warning" : "danger"
 
     return (
-        <Container fluid className={classes.backgroundGif} >
-            <div className={classes.topCenter} >
-                <Row className={classes.rowTitle} >
+        <Container fluid className="backgroundGif" >
+            <div className="topCenter" >
+                <Row className="rowTitle" >
                     <Col >
-                        <Typography variant="h4" className={classes.levelTitle} >
+                        <Typography variant="h4" className="levelTitle" >
                             { perfil ? `Nivel ${perfil.level_word_id.level}` : null}
                         </Typography>
                     </Col>
@@ -184,12 +184,12 @@ const AssociateWords = () => {
                     {perfil
                     ?
                         <Fragment>
-                            <p className={classes.progressTitle} > {userLeague} </p>
+                            <p className="progressTitle" > {userLeague} </p>
                             <OverlayTrigger
                                 placement="bottom"
                                 overlay={<Tooltip className="mt-3" id="button-tooltip-1" > Puntos: {nowProgress} </Tooltip>}
                             >
-                                <ProgressBar max={maxProgress} className={classes.userProgress} variant={colorProgress} animated striped  now={nowProgress}  
+                                <ProgressBar max={maxProgress} className="userProgress" variant={colorProgress} animated striped  now={nowProgress}  
                                             label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
                                 />
                             </OverlayTrigger>
@@ -201,7 +201,7 @@ const AssociateWords = () => {
                 { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
             </div>
 
-            <div className={classes.center} >
+            {/* <div className="center" >
                 <Grid container spacing={8}>
                     <Grid item xs={6} sm={4}>
                         <Col>
@@ -226,17 +226,9 @@ const AssociateWords = () => {
                     </Grid>
                     <Grid container xs={6} sm={4}
                         alignItems="center"
-                        className={classes.palabra}
+                        className="palabra"
                     >
-                        { palabras.length == 0
-                        ? null
-                        :
-                            <Col>
-                                <Paper className={classes.paper} elevation={10} variant="outlined"  >
-                                    {palabras[palabraActual].name}
-                                </Paper>
-                            </Col>
-                        }
+                        
                     </Grid>
                     <Grid container item xs={6} sm={4}
                         alignItems="center"
@@ -259,12 +251,55 @@ const AssociateWords = () => {
                         </Col>
                     </Grid>
                 </Grid>
-            </div  >
+            </div  > */}
 
-            <div className={classes.bottomCenter} >
-                <Row>
+            <div class="center">
+                <div class="row">
+                    <div class="col categoritas" style={{ marginRight: "-10%" }} >
+                        <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
+                    </div>
+                    <div class="col categoritas" style={{ marginRight: "-10%" }} >
+                        <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
+                    </div>
+                    <div class="col categoritas" >
+                        <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col categoritas" style={{ marginRight: "-4%" }} >
+                        <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
+                    </div>
+                    <div class="col palabra" >
+                        { palabras.length == 0
+                        ? null
+                        :
+                            <Col>
+                                <Paper className="paper" elevation={10} variant="outlined"  >
+                                    {palabras[palabraActual].name}
+                                </Paper>
+                            </Col>
+                        }
+                    </div>
+                    <div class="col categoritas" style={{ marginLeft: "-1%" }} >
+                        <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col categoritas" style={{ marginRight: "-10%" }} >
+                        <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
+                    </div>
+                    <div class="col categoritas">
+                    </div>
+                    <div class="col categoritas" style={{ marginLeft: "-10%" }} >
+                        <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
+                    </div>
+                </div>
+            </div>
+
+            <div className="bottomCenter" >
+                <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
                     <Col>
-                        <Button className={classes.botonSiguiente} variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
+                        <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
                     </Col>
                 </Row>
             </div>
