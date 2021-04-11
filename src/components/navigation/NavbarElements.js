@@ -113,7 +113,7 @@ export const NavBtn = styled.nav`
 
 export const ExitBtn = styled.button`
   border-radius: 4px;
-  background: #256ce1;
+  background: #000;
   padding: 10px 22px;
   color: #fff;
   outline: none;

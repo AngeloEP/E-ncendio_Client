@@ -1,0 +1,89 @@
+.div-uploadWord-update {
+    text-align: center;
+    width: 90%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 5%;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.div-word-update {
+    width: 10%;
+}
+
+.paper-update {
+    position: relative !important;
+    text-align: center !important;
+    min-width: 120px;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid !important;
+    border-radius: 25 !important;
+    font-size: 30px !important;
+    font-family: 'Times New Roman', Times, serif;
+    border-color: red !important;
+    color: rgb(75, 70, 70) !important;
+}
+
+.paper-update:hover {
+    transition: 0.5s;
+    border-color: blue !important;
+}
+
+.word-upload-update {
+    min-width: 400px;
+    max-width: 200px;
+    min-height: 220px;
+    max-height: 280px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.label-upload-word-update {
+    width: 11em;
+    height: 2em;
+    margin-left: 270%;
+    margin-bottom: 1em;
+}
+
+
+.div-name-update {
+    margin-top: 1em;
+    margin-left: 2em;
+}
+
+.div-difficulty-update {
+    margin-top: 2em;
+    margin-left: -7.7em;
+}
+
+.div-points-update {
+    margin-top: 2em;
+    margin-left: 2em;
+}
+
+.submit-word-update {
+    width: 20%;
+}
+
+.div-datatable-words-update {
+    text-align: center;
+    width: 80%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 10%;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.word-user-update {
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 150px;
+    max-height: 280px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

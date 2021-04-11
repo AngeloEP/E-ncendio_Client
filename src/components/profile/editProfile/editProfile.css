@@ -1,12 +1,24 @@
 .update-btn{
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     width: 40%;
-    padding: 1%;
-    font-weight: 300;
+    padding: 1.2%;
+    font-weight: 400;
     color: #fff;
     background-color: green;
     cursor: pointer;
+    outline: none !important;
+}
+
+.update-btn:hover {
+    transition: all 0.1s;
+    background-color: #599b4d;
+}
+
+.update-btn:active {
+    transform: scale(0.9);
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+    transform: translateX(4px); 
 }
 
 .update-icon {

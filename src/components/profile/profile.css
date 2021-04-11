@@ -170,6 +170,17 @@ h6 {
     outline: none !important;
 }
 
+.profile-edit-btn:hover {
+    transition: all 0.1s;
+    background-color: #599b4d;
+}
+
+.profile-edit-btn:active {
+    transform: scale(0.9);
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+    transform: translateX(4px); 
+}
+
 @media only screen and (max-width: 1376px){
     .user-card-full .user-profile {
         height: 83vh;

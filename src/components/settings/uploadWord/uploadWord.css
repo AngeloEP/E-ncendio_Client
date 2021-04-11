@@ -1,0 +1,199 @@
+.div-uploadWord {
+    position: relative;
+    text-align: center;
+    width: 90%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 5%;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.div-word {
+    position: relative;
+    width: 10%;
+}
+
+.palabra {
+    position: relative;
+    margin-left: -5%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+.paper {
+    position: relative !important;
+    text-align: center !important;
+    min-width: 400px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid !important;
+    border-radius: 25 !important;
+    font-size: 50px !important;
+    font-family: 'Times New Roman', Times, serif;
+    border-color: red !important;
+    color: rgb(75, 70, 70) !important;
+}
+
+.paper:hover {
+    transition: 0.5s;
+    border-color: blue !important;
+}
+
+.word-upload {
+    position: relative;
+    min-width: 200px;
+    max-width: 400px;
+    min-height: 220px;
+    max-height: 280px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.label-upload-word {
+    width: 11em;
+    height: 2em;
+    margin-left: 270%;
+    margin-bottom: 1em;
+}
+
+
+.div-filename {
+    margin-top: 1em;
+    margin-left: -6em;
+}
+
+.textfield-filename {
+    width: 60%;
+}
+
+.div-difficulty {
+    margin-top: 2em;
+    margin-left: -25em;
+}
+
+.select-difficulty {
+    width: 15em;
+}
+
+.div-points {
+    margin-top: 2em;
+    margin-left: -6em;
+}
+
+.textfield-points {
+    width: 60%;
+}
+
+
+.submit-word {
+    width: 20%;
+}
+
+.div-datatable-words {
+    text-align: center;
+    width: 80%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 10%;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.word-user {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 150px;
+    max-height: 280px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+@media only screen and (max-width: 1376px){
+    .div-uploadWord {
+        width: 85% !important;
+        margin-left: 7.5% !important ;
+        margin-top: 3em;
+        margin-bottom: 2em;
+    }
+
+    .div-word {
+        width: 15%;
+        height: 100%;
+        margin-left: 25%;
+    }
+
+    .palabra {
+        position: relative;
+        margin-left: 15%;
+        margin-top: 10%;
+        margin-bottom: 5% !important;
+    }
+    
+    .paper {
+        min-width: 300px;
+        min-height: 150px;
+        border-radius: 25 !important;
+        font-size: 35px !important;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .word-upload {
+        min-width: 200px;
+        max-width: 300px;
+        min-height: 150px;
+        max-height: 250px;
+    }
+
+    .label-upload-word { /* Agregar palabra */
+        margin-left: 100%;
+    }
+
+    .div-filename {
+        margin-top: 1em;
+        margin-left: 5%;
+
+    }
+    
+    .div-difficulty {
+        position: relative;
+        margin-top: 1em;
+        margin-left: -5vw;
+        /* margin-left: calc(100% / -20vh); */
+        zoom: calc(100% / 1);
+    }
+    
+    .div-points {
+        margin-top: 1.5em;
+        margin-left: 5%;
+    }
+    
+    .submit-word {
+        width: 15%;
+    }
+
+    .textfield-filename {
+        width: 50%;
+    }
+    .select-difficulty {
+        min-width: 70%;
+        max-width: 70%;
+    }
+    .textfield-points {
+        width: 50%;
+    }
+
+    .word-user {
+        min-width: 180px;
+        max-width: 180px;
+        min-height: 140px;
+        max-height: 140px;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+}

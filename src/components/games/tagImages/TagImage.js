@@ -237,10 +237,10 @@ const TagImage = ( props ) => {
             </div>
             <div class="center">
                 <div class="row">
-                    <div class="col categoritas" style={{ marginRight: "10%" }}>
+                    <div class="col categoritas" style={{ marginRight: "-10%" }}>
                         <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
                     </div>
-                    <div class="col categoritas" style={{ marginRight: "10%" }} >
+                    <div class="col categoritas" style={{ marginRight: "-10%" }} >
                         <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
                     </div>
                     <div class="col categoritas" >
@@ -248,31 +248,32 @@ const TagImage = ( props ) => {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col categoritas" style={{ marginRight: "10%" }}>
+                    <div class="col categoritas" style={{ marginTop: "-4%" }} >
                         <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
                     </div>
-                    <div class="col div-imagen" style={{ marginRight: "10%" }}>
+                    <div class="col div-imagen" >
                         { imagenes.length == 0
                             ? null
-                            : 
-                            <Image
-                                style={{minWidth:"350px",minHeight:"300px"}}
-                                className="imagen"
-                                src={imagenes[imagenActual].imageUrl} rounded
-                            />
+                            :
+                            <Col>
+                                <Image
+                                    className="imagen"
+                                    src={imagenes[imagenActual].imageUrl} rounded
+                                />
+                            </Col>
                         }
                     </div>
-                    <div class="col categoritas">
+                    <div class="col categoritas" style={{ marginTop: "-4%" }} >
                         <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col categoritas" style={{ marginRight: "20%" }}>
+                    <div class="col categoritas" style={{ marginRight: "-10%", marginTop: "-4%" }}>
                         <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
                     </div>
                     <div class="col categoritas">
                     </div>
-                    <div class="col categoritas" style={{ marginLeft: "10%" }}>
+                    <div class="col categoritas" style={{ marginLeft: "-8%", marginTop: "-4%" }}>
                         <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
                     </div>
                 </div>
