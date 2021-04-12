@@ -135,3 +135,13 @@
         max-width: 1140px !important;
     }
 }
+
+@media only screen and (max-height: 770px){
+    .div-divsito{
+        width: 39%;
+    }
+
+    .divlogin {
+        height: 110vh !important;
+    }
+}
