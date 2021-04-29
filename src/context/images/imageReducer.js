@@ -12,6 +12,12 @@ import {
     MODIFICAR_IMAGEN,
     MODIFICAR_IMAGEN_CARGANDO,
     MODIFICAR_IMAGEN_ERROR,
+    HABILITAR_INHABILITAR_IMAGEN,
+    HABILITAR_INHABILITAR_IMAGEN_CARGANDO,
+    HABILITAR_INHABILITAR_IMAGEN_ERROR,
+    ELIMINAR_IMAGEN_DESDE_ADMIN,
+    ELIMINAR_IMAGEN_DESDE_ADMIN_CARGANDO,
+    ELIMINAR_IMAGEN_DESDE_ADMIN_ERROR,
 } from '../../types';
 
 export default (state, action) => {
@@ -23,6 +29,8 @@ export default (state, action) => {
                 largoImagenes: action.payload.length
             }
 
+        case HABILITAR_INHABILITAR_IMAGEN_ERROR:
+        case ELIMINAR_IMAGEN_DESDE_ADMIN_ERROR:
         case MODIFICAR_IMAGEN_ERROR:
         case ELIMINAR_IMAGEN_ERROR:
         case GUARDAR_IMAGEN_ERROR:
@@ -34,6 +42,8 @@ export default (state, action) => {
                 cargandoSubirImagen: false,
                 cargandoEliminarImagen: false,
                 cargandoModificarImagen: false,
+                cargandoHabilitarInhabilitar: false,
+                cargandoEliminarImagenPorAdmin: false,
             }
 
         case GUARDAR_IMAGEN_CARGANDO:
@@ -80,6 +90,32 @@ export default (state, action) => {
                 imagenes: state.imagenes.map(imagen => imagen._id ===
                     action.payload._id ? imagen : action.payload ),
                 cargandoModificarImagen: false
+            }
+
+        case HABILITAR_INHABILITAR_IMAGEN_CARGANDO:
+            return {
+                ...state,
+                cargandoHabilitarInhabilitar: true
+            }
+
+        case HABILITAR_INHABILITAR_IMAGEN:
+            return {
+                ...state,
+                imagenes: state.imagenes.map(imagen => imagen._id ===
+                    action.payload._id ? imagen : action.payload ),
+                cargandoHabilitarInhabilitar: false
+            }
+
+        case ELIMINAR_IMAGEN_DESDE_ADMIN_CARGANDO:
+            return {
+                ...state,
+                cargandoEliminarImagenPorAdmin: true
+            }
+
+        case ELIMINAR_IMAGEN_DESDE_ADMIN:
+            return {
+                ...state,
+                cargandoEliminarImagenPorAdmin: false
             }
     
         default:

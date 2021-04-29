@@ -1,0 +1,70 @@
+.cards-tag-words {
+    margin-top: 2%;
+}
+
+.div-reset-tag-words {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.tarjeta-tag-words {
+    background-color: rgb(228, 226, 226);
+    border-radius: 15px;
+}
+
+.titulo-nombre-card-tag-word {
+    color: white;
+    background-color: black;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nombre-card-tag-word {
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(206, 237, 255);
+    color: rgb(21, 62, 117);
+}
+
+.titulo-fecha-card-tag-word {
+    color: white;
+    background-color: black;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fecha-card-tag-word {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(206, 237, 255);
+    color: rgb(21, 62, 117);
+}
+
+.palabra-tarjeta-etiqueta {
+    position: relative;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    min-height: 7rem !important;
+    max-height: 7rem !important;
+
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid !important;
+    border-radius: 25 !important;
+    font-size: 30px !important;
+    font-family: 'Times New Roman', Times, serif;
+    border-color: red !important;
+    color: rgb(75, 70, 70) !important;
+}
+
+.palabra-tarjeta-etiqueta:hover {
+    transition: 0.5s;
+    border-color: blue !important;
+}

@@ -20,7 +20,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
-import ButtonBootstrap from 'react-bootstrap/Button'
+import ButtonBootstrap from 'react-bootstrap/Button';
 
 
 import './datatableWords.css';
@@ -48,12 +48,16 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
     }, [ mensaje, cargandoModificarPalabra ] )
     
     const columns = words[0] && Object.keys(words[0])
+    if (words) {
+        // console.log(words)
+    }
     
     const [show, setShow] = useState(false);
     
     const handleClose = () => {
         setShow(false)
     };
+    
     const handleShow = (word_id) => {
         const wordSelected = words.find(word => word._id === word_id);
         setFieldsWordUpdate({
@@ -136,8 +140,8 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
 
                                                     { column === "Palabra"
                                                         ?
-                                                            <td key={colIndex+1} style={{ width: "7%" }} >
-                                                                <div class="col palabra-update" >
+                                                            <td style={{ width: "7%" }} >
+                                                                <div className="col palabra-update" >
                                                                     <Col>
                                                                         <Paper className="paper-update" elevation={10} variant="outlined"  >
                                                                             {row[column]}
@@ -146,11 +150,27 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                                                                 </div>
                                                             </td>
                                                         :
-                                                            column === "_id"
+                                                            column === "Estado"
                                                             ?
-                                                                <td key={colIndex+1} style={{ width: "5%" }} > {index+1} </td> 
+                                                                row[column] === true
+                                                                ?
+                                                                    <td style={{ width: "2%" }} >
+                                                                        <div className="alert alert-success" role="alert" >
+                                                                            <strong> Habilitada </strong>
+                                                                        </div>
+                                                                    </td> 
+                                                                :
+                                                                    <td style={{ width: "2%" }} >
+                                                                        <div className="alert alert-warning" role="alert" >
+                                                                            <strong> Inhabilitada </strong>
+                                                                        </div>
+                                                                    </td> 
                                                             :
-                                                                <td key={colIndex+1} style={{ width: "5%" }} > {row[column]} </td> 
+                                                                column === "_id"
+                                                                ?
+                                                                    <td style={{ width: "5%" }} > {index+1} </td> 
+                                                                :
+                                                                    <td style={{ width: "5%" }} > {row[column]} </td> 
                                                     }
                                                 </Fragment>
                                             )
@@ -242,7 +262,7 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                                     <Grid container spacing={5} >
 
                                         <Grid item xs={4} >
-                                            <div class="col palabra" >
+                                            <div className="col palabra" >
                                                 <Col>
                                                     <Paper className="paper" elevation={10} variant="outlined"  >
                                                         {nameUpdate}

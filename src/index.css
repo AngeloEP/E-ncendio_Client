@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
 
 * {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Times New Roman', Times, serif !important;
   box-sizing: border-box;
   margin: 0px;
   padding: 0;
@@ -27,6 +27,7 @@
 
 .alerta {
     position: fixed;
+    z-index: 9999;
     top: 0;
     right: 0;
     padding: 1rem 2rem;

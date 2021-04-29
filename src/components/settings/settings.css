@@ -21,7 +21,7 @@
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
     white-space: nowrap;
-    z-index: 99999;
+    z-index: 1;
 }
 
 .nav-settings {

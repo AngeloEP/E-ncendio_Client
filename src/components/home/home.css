@@ -27,6 +27,65 @@
     margin-bottom: 5px;
 }
 
+.párrafo-ligas{
+    text-align: center;
+    height: 100%;
+}
+
+.section-title{
+    position: relative;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    top: 2% !important;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+h2.section-title::after {
+    position: absolute;
+    content: "";
+    width: 20%;
+    height: 5%;
+    bottom: 0;
+    left: 40%;
+    background: linear-gradient(to left, #4F84C4, #00539C, #4F84C4);
+    border-radius: 0 100% 100% 0; 
+}
+
+.parrafo-home {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/* li {
+    font-size: 1em;
+    display: list-item;
+} */
+
+.ul-home {
+    padding-left: 1em;
+    list-style-type: none;
+}
+.li-home {
+    padding-left: 6em;
+    display: grid;
+    grid-template-columns: 20px auto;
+    justify-content: start;
+    align-items: center;
+}
+
+.li-home::before {
+    content: '▶';
+}
+
+.li-home span {
+    display:block;
+    margin-left:0.5em;
+    color:#000; /* black text */
+}
+
+
 @media only screen and (max-width: 1376px){
     .slides-carousel {
         width: 100%;

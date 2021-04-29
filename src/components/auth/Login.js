@@ -144,7 +144,7 @@ const Login = ( props ) => {
         
         <div className="div-divsito">
           <div className="img-login" >
-            <img src={logo} alt='logo' class="center" />
+            <img src={logo} alt='logo' className="center" />
           </div>
           <div className="row avatar-title" >
               <Avatar className={classes.avatar}>

@@ -272,8 +272,30 @@ const Home = () => {
 
                         </Grid>
 
+                        <Grid container xs={12} style={{ marginTop: "3%" }} >
+                            <Grid item xs={7} >
+                                <div className="párrafo-ligas" >
+                                    <h2 className="section-title"> ¡Sigue subiendo y apoyando! </h2>
+                                    <p className="parrafo-home" >
+                                        No te conformes con tu nivel actual, sigue escalando en la tabla de clasificaciones,  
+                                        si llegas a la liga de Plata ya podrás subir palabras para que los administradores 
+                                        consideren si puedan ser etiquetadas por los demás, en la liga de Oro ya podrás hacerlo con las imágenes, 
+                                        para obtener más puntaje y subir de ligas tienes las siguientes opciones:
+                                    </p>
+                                    <ul className="ul-home" style={{ marginLeft: "10%" }} >
+                                        <li className="li-home" > <span > Desempeñándote en los juegos de la plataforma </span> </li>
+                                        <li className="li-home" > <span > Modificando el contenido de tu perfil </span> </li>
+                                        <li className="li-home" > <span > Subiendo en el ranking de los participantes de E-ncendio </span> </li>
+                                    </ul>
+                                </div>
+                            </Grid>
+                            <Grid item xs={5} >
+                                <Doughnut data={dataDoughnut} options={optionsDoughnut} />
+                            </Grid>
+                        </Grid>
+
                         {/* tarjetas */}
-                        <Grid container xs={12} >
+                        <Grid container xs={12} style={{ justifyContent: "center", marginTop: "3%", marginBottom: "3%" }} >
                             <Card
                                 bg="light"
                                 key="1"
@@ -281,7 +303,7 @@ const Home = () => {
                                 className="card-first"
                             >
                                 <FaGamepad className="card-icons" />
-                                <Card.Header className="card-header" > Diversión </Card.Header>
+                                <Card.Header className="card-header" > <a className="nav-link" href="/games"> Juegos </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Interactúa en los juegos </Card.Title>
                                 <Card.Text className="card-text" >
@@ -297,7 +319,7 @@ const Home = () => {
                                 className="card-other"
                             >
                                 <FaFire className="card-icons" />
-                                <Card.Header className="card-header" > Competitividad </Card.Header>
+                                <Card.Header className="card-header" > <a className="nav-link" href="/rank"> Ranking </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Rivaliza con los demás </Card.Title>
                                 <Card.Text className="card-text" >
@@ -313,7 +335,7 @@ const Home = () => {
                                 className="card-other"
                             >
                                 <FaCog className="card-icons" />
-                                <Card.Header className="card-header" > Personalización </Card.Header>
+                                <Card.Header className="card-header" > <a className="nav-link" href="/profile"> Perfil </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Edita tu perfil </Card.Title>
                                 <Card.Text className="card-text" >
@@ -321,7 +343,45 @@ const Home = () => {
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
+                
+                          
+                        </Grid>
+                        {/* Gráficas */}
+                        {/* Barras */}
+                        <Grid item xs={7} className="mt-5 mr-5" style={{ height: "30vh" }} >
+                                <Bar data={dataBar} options={opcionesBar} height={140} />
+                        </Grid>
 
+                        <Grid item xs={5} className="mt-5 mr-5" style={{ width: '100%', height: '100%' }} >
+                            <Line data={dataLine} options={optionsLine} />
+                        </Grid>
+                        
+                        <Grid item xs={5} className="mt-5" >
+                            <Paper >xs=12</Paper>
+                        </Grid>
+                        {/*          */}
+
+                        <Grid container direction="row" justify="center" alignItems="center" xs={12} className="mt-5" >
+                            <h2> Contáctanos </h2>
+                        </Grid>
+                        <Grid container item xs={12} direction="row" justify="center" alignItems="center" className="mt-2" >
+                            <Typography variant="subtitle1" gutterBottom>
+                                Si tienes alguna observación sobre algún problema que se te presentó en la Aplicación, no dudes
+                                en decirnos, ¡recibirás recompensas!, contáctanos aquí:
+                            </Typography>
+                        </Grid>
+                        <Grid container item xs={12}  className="mt-4  " >
+                            <Grid item xs={6} >
+                                <Image src={incendio} />
+                            </Grid>
+
+                            <Grid item xs={6} className={classes.formContact} >    
+                                <FormContact />
+                            </Grid>
+                            
+                        </Grid>
+
+                        <Grid container xs={12} style={{ justifyContent: "center" }} >
                             <Card
                                 bg="light"
                                 key="1"
@@ -329,7 +389,7 @@ const Home = () => {
                                 className="card-other"
                             >
                                 <FaUserFriends className="card-icons" />
-                                <Card.Header className="card-header" > Conócenos </Card.Header>
+                                <Card.Header className="card-header" > <a className="nav-link" href="/about"> Conócenos </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Averigua quienes somos </Card.Title>
                                 <Card.Text className="card-text" >
@@ -345,7 +405,7 @@ const Home = () => {
                                 className="card-other"
                             >
                                 <FaQuestionCircle className="card-icons" />
-                                <Card.Header className="card-header" > Ayuda </Card.Header>
+                                <Card.Header className="card-header" > <a className="nav-link" href="/help"> Ayuda </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Conoce el funcionamiento básico de la Aplicación </Card.Title>
                                 <Card.Text className="card-text" >
@@ -353,43 +413,7 @@ const Home = () => {
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
-                        </Grid>
-                        {/* Gráficas */}
-                        {/* Barras */}
-                        <Grid item xs={5} className="mt-5 mr-5" style={{ height: "30vh" }} >
-                                <Bar data={dataBar} options={opcionesBar} height={140} />
-                        </Grid>
 
-                        <Grid item xs={5} className="mt-5" style={{ width: '100%', height: '100%' }} >
-                            <Doughnut data={dataDoughnut} options={optionsDoughnut} />
-                        </Grid>
-
-                        <Grid item xs={5} className="mt-5 mr-5" style={{ width: '100%', height: '100%' }} >
-                            <Line data={dataLine} options={optionsLine} />
-                        </Grid>
-                        
-                        <Grid item xs={5} className="mt-5" >
-                            <Paper >xs=12</Paper>
-                        </Grid>
-                        {/*          */}
-
-                        <Grid container direction="row" justify="center" alignItems="center" xs={8} className="mt-5" >
-                            <h2> Contáctanos </h2>
-
-                            <Typography variant="subtitle1" gutterBottom>
-                                Si tienes alguna observación sobre algún problema que se te presentó en la Aplicación, no dudes
-                                en decirnos, ¡recibirás recompensas!, contáctanos aquí:
-                            </Typography>
-                        </Grid>
-                        <Grid container item xs={12}  className="mt-4  " >
-                            <Grid item xs={6} >
-                                <Image src={incendio} />
-                            </Grid>
-
-                            <Grid item xs={6} className={classes.formContact} >    
-                                <FormContact />
-                            </Grid>
-                            
                         </Grid>
                         
                     </Grid>

@@ -1,0 +1,48 @@
+.cards-images {
+    margin-top: 2%;
+}
+
+.tarjeta {
+    background-color: rgb(228, 226, 226);
+    border-radius: 15px;
+}
+
+.titulo-nombre-card-image {
+    color: white;
+    background-color: black;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nombre-card-image {
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(206, 237, 255);
+    color: rgb(21, 62, 117);
+}
+
+.titulo-fecha-card-image {
+    color: white;
+    background-color: black;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fecha-card-image {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(206, 237, 255);
+    color: rgb(21, 62, 117);
+}
+
+.imagen-tarjeta {
+    position: relative;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    min-height: 15rem !important;
+    max-height: 15rem !important;
+}

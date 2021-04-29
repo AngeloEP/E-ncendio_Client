@@ -58,8 +58,10 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
     };
     const handleShow = (image_id) => {
         const imageSelected = images.find(image => image._id === image_id);
+        console.log(imageSelected)
         setFieldsImageUpdate({
             id_image_selected: image_id,
+            nameUpdate: imageSelected.Nombre,
             difficultyUpdate: imageSelected.Dificultad,
             pointsUpdate: imageSelected.Puntos,
         })
@@ -69,11 +71,12 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
 
     const [ fieldsImageUpdate, setFieldsImageUpdate ] = useState({
         id_image_selected: "",
+        nameUpdate: "",
         difficultyUpdate: "",
         pointsUpdate: 0,
     })
 
-    const { id_image_selected, difficultyUpdate, pointsUpdate } = fieldsImageUpdate;
+    const { id_image_selected, nameUpdate, difficultyUpdate, pointsUpdate } = fieldsImageUpdate;
     const [ imageUpdate, setImageUpdate ] = useState(null)
     const [ pathImageUpdate, setPathImageUpdate ] = useState(null)
 
@@ -104,7 +107,8 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
     const onSubmitUpdate = e => {
         e.preventDefault()
         // Validar que no hayan campos vacíos
-        if (difficultyUpdate.trim() === '' ||
+        if (nameUpdate.trim === '' ||
+            difficultyUpdate.trim() === '' ||
             pointsUpdate === 0 ) {
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
                 return
@@ -135,9 +139,9 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                                         <Fragment key={headingIndex} >
                                             { heading === "_id"
                                                 ?
-                                                    <th key={headingIndex+1} > # </th> 
+                                                    <th > # </th> 
                                                 :
-                                                    <th key={headingIndex+1} > {heading} </th> 
+                                                    <th > {heading} </th> 
                                             }
                                         </Fragment>
 
@@ -157,13 +161,29 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
 
                                                     { column === "Imagen"
                                                         ?
-                                                            <td key={colIndex+1} style={{ width: "7%" }} > <img className="img-fluid img-thumbnail image-user" src={row[column]} alt="Image" /> </td>
+                                                            <td style={{ width: "7%" }} > <img className="img-fluid img-thumbnail image-user" src={row[column]} alt="Image" /> </td>
                                                         :
-                                                            column === "_id"
+                                                            column === "Estado"
                                                             ?
-                                                                <td key={colIndex+1} style={{ width: "5%" }} > {index+1} </td> 
+                                                                row[column] === true
+                                                                ?
+                                                                    <td style={{ width: "2%" }} >
+                                                                        <div className="alert alert-success" role="alert" >
+                                                                            <strong> Habilitada </strong>
+                                                                        </div>
+                                                                    </td> 
+                                                                :
+                                                                    <td style={{ width: "2%" }} >
+                                                                        <div className="alert alert-warning" role="alert" >
+                                                                            <strong> Inhabilitada </strong>
+                                                                        </div>
+                                                                    </td> 
                                                             :
-                                                                <td key={colIndex+1} style={{ width: "5%" }} > {row[column]} </td> 
+                                                                column === "_id"
+                                                                ?
+                                                                    <td style={{ width: "5%" }} > {index+1} </td> 
+                                                                :
+                                                                    <td style={{ width: "5%" }} > {row[column]} </td> 
                                                     }
                                                 </Fragment>
                                             )
@@ -275,7 +295,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                                             <div className="div-filename-update" >                        
                                                 <TextField
                                                     style={{ width: "60%" }}
-                                                    value={ imageUpdate ? imageUpdate.name.split(".")[0] : "" }
+                                                    value={ imageUpdate ? imageUpdate.name.split(".")[0] : nameUpdate }
                                                     disabled
                                                     name="filename"
                                                     variant="filled"

@@ -6,21 +6,21 @@ const Fire = (props) => {
     const { name, value, selected, onCheck } = props
 
     return (
-        <div class="fire" onClick={() => onCheck(name, value)} >
-            <div class="fire-left">
-                <div class="main-fire"></div>
-                <div class="particle-fire"></div>
+        <div className="fire" onClick={() => onCheck(name, value)} >
+            <div className="fire-left">
+                <div className="main-fire"></div>
+                <div className="particle-fire"></div>
             </div>
-            <div class="fire-main">
-                <div class="main-fire"></div>
-                <div class="particle-fire"></div>
+            <div className="fire-main">
+                <div className="main-fire"></div>
+                <div className="particle-fire"></div>
             </div>
-            <div class="fire-right">
-                <div class="main-fire"></div>
-                <div class="particle-fire"></div>
+            <div className="fire-right">
+                <div className="main-fire"></div>
+                <div className="particle-fire"></div>
             </div>
-            <div class="fire-bottom">
-                <div class="main-fire"></div>
+            <div className="fire-bottom">
+                <div className="main-fire"></div>
             </div>
             <button className={ selected ? "title-pressed" : "title" }  >
                 <h5 >

@@ -2,10 +2,20 @@ import React, { useState, useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router";
 import logo from '../../assets/img/logo.png';
+
 import AuthContext from '../../context/autentificacion/authContext';
+import ProfileContext from '../../context/profile/profileContext';
+
+import OroBadge from '../../assets/badges/gold-badge.png';
+import BronceBadge from '../../assets/badges/bronze-badge.png';
+import PlataBadge from '../../assets/badges/medal.png';
+
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { MenuItems } from "./MenuItems";
+
 import "./exitButton.css";
+import "./navigation.css";
+
 import {
     Nav,
     NavLinkLogo,
@@ -55,8 +65,14 @@ const Navigation =  ({ location, history })  => {
     const authContext = useContext(AuthContext)
     const { usuario, usuarioAutenticado, cerrarSesión } = authContext
 
+    // Extraer la información de los perfiles
+    const profilecontext = useContext(ProfileContext)
+    const { perfil, obtenerPerfil } = profilecontext
+
     useEffect(() => {
         usuarioAutenticado()
+
+        obtenerPerfil()
     }, [])
     
     const classes = useStyles();
@@ -66,6 +82,7 @@ const Navigation =  ({ location, history })  => {
         setClicked(!clicked)
     }
 
+    console.log(usuario)
     // Cerrar Sesión
     const logout = () => {
         if (isLoading) return;
@@ -126,16 +143,28 @@ const Navigation =  ({ location, history })  => {
                         <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/help"  activeStyle={{  }} >
                             Ayuda
                         </NavLink>
-                        { usuario && usuario.isExpert ?
-                            <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/settings" activeStyle={{  }} >
-                                Contenido
-                            </NavLink>
-                            : null
-                        }
+                        <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/settings" activeStyle={{  }} >
+                            Contenido
+                        </NavLink>
                     </NavMenu>
                     
                     <NavBtn>
                         { usuario ? <PNav > Hola <span style={{ fontWeight: 900 }} > {usuario.firstname} </span> </PNav> : null }
+                        {perfil != null
+                        ?
+                            <span class="badge badge-pill badge-light align-middle">
+                                <img src={
+                                        perfil.league_id.league === "Bronce" ? BronceBadge
+                                        : perfil.league_id.league === "Plata" ? PlataBadge
+                                        : perfil.league_id.league === "Oro" ? OroBadge : null
+                                    }
+                                    alt="image"
+                                    className="user-badge-nav"
+                                />
+                            </span>
+                        :
+                            null
+                        }
                         <ExitBtn
                             onClick={logout}
                             id="botonSalir"

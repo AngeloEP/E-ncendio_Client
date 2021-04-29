@@ -15,6 +15,10 @@
     transition: all .3s;
 
 }
+.avatar-title {
+    display: inline-flex !important;
+    justify-content: center;
+}
 
 .form {
 

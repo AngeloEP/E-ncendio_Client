@@ -1,0 +1,70 @@
+.firstname-user {
+    
+}
+
+.formControl {
+    min-width: 100%;
+}
+
+.div-isAdmin {
+}
+
+.select-isAdmin {
+    width: 15em;
+}
+
+.div-isBlocked {
+}
+
+.select-isBlocked {
+    width: 15em;
+}
+
+.div-button-edit {
+    margin-left: 40%;
+    width: 100%;
+    margin-right: auto;
+}
+
+.show-details-user {
+    width: 80%;
+    height: 8em !important;
+    margin-left: 10%;
+    border: 1px solid #202221;
+    border-radius: 16px;
+}
+
+.details {
+    display: flex;
+    /* font-size: large; */
+    margin-top: 5%;
+    justify-content: space-evenly;
+}
+
+.tag-images {
+    text-align: center;
+}
+
+.num-tag-images {
+}
+
+.tag-words {
+    text-align: center;
+}
+
+.num-tag-words {
+}
+
+.images-upload {   
+    text-align: center;
+}
+
+.num-images-upload {
+}
+
+.words-upload {   
+    text-align: center;
+}
+
+.num-words-upload {
+}

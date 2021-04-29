@@ -95,7 +95,7 @@ const UploadWord = () => {
                         <Grid container spacing={5} >
 
                             <Grid item xs={4} >
-                                <div class="col palabra" >
+                                <div className="col palabra" >
                                     <Col>
                                         <Paper className="paper" elevation={10} variant="outlined"  >
                                             {name}

@@ -77,7 +77,7 @@ const FormContact = () => {
     return (
         <form id="contact-form" onSubmit={handleSubmit}>
             { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-            <div class="col-lg-10">
+            <div className="col-lg-10">
                 <div className="form-group">
                     <TextField
                         id="email"
@@ -92,7 +92,7 @@ const FormContact = () => {
                 </div>
             </div>
 
-            <div class="col-lg-10">
+            <div className="col-lg-10">
                 <div className="form-group">
                     <TextField
                         id="subject"

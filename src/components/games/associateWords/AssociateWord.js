@@ -200,109 +200,67 @@ const AssociateWords = () => {
                 </Row>
                 { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
             </div>
-
-            {/* <div className="center" >
-                <Grid container spacing={8}>
-                    <Grid item xs={6} sm={4}>
-                        <Col>
+            { palabras.length != 0
+                ?
+                <>
+                <div className="center">
+                    <div className="row">
+                        <div className="col categoritas" style={{ marginRight: "-10%" }} >
                             <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    <Grid item xs={6} sm={4}>
-                        <Col>
+                        </div>
+                        <div className="col categoritas" style={{ marginRight: "-10%" }} >
                             <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    <Grid item xs={6} sm={4}>
-                        <Col>
+                        </div>
+                        <div className="col categoritas" >
                             <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    
-                    <Grid container xs={6} sm={4} alignItems="center" >
-                        <Col>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col categoritas" style={{ marginRight: "-4%" }} >
                             <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    <Grid container xs={6} sm={4}
-                        alignItems="center"
-                        className="palabra"
-                    >
-                        
-                    </Grid>
-                    <Grid container item xs={6} sm={4}
-                        alignItems="center"
-                        style={{ marginLeft: "10%" }}
-                    >
-                        <Col>
+                        </div>
+                        <div className="col palabra" >
+                            { palabras.length == 0
+                            ? null
+                            :
+                                <Col>
+                                    <Paper className="paper" elevation={10} variant="outlined"  >
+                                        {palabras[palabraActual].name}
+                                    </Paper>
+                                </Col>
+                            }
+                        </div>
+                        <div className="col categoritas" style={{ marginLeft: "-1%" }} >
                             <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    <Grid item xs={6} sm={4}>
-                        <Col>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col categoritas" style={{ marginRight: "-10%" }} >
                             <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
-                        </Col>
-                    </Grid>
-                    <Grid item xs={6} sm={4}
-                        style={{ marginLeft: "33.3%" }}
-                    >
-                        <Col>
+                        </div>
+                        <div className="col categoritas">
+                        </div>
+                        <div className="col categoritas" style={{ marginLeft: "-10%" }} >
                             <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="bottomCenter" >
+                    <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
+                        <Col>
+                            <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
                         </Col>
-                    </Grid>
-                </Grid>
-            </div  > */}
-
-            <div class="center">
-                <div class="row">
-                    <div class="col categoritas" style={{ marginRight: "-10%" }} >
-                        <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
-                    </div>
-                    <div class="col categoritas" style={{ marginRight: "-10%" }} >
-                        <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
-                    </div>
-                    <div class="col categoritas" >
-                        <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
+                    </Row>
+                </div>
+                </>
+            :
+                <div className="container" >
+                    <div className="no-words" >
+                        <span className="spansito-no-words" > Aún no existen palabras habilitadas </span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col categoritas" style={{ marginRight: "-4%" }} >
-                        <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
-                    </div>
-                    <div class="col palabra" >
-                        { palabras.length == 0
-                        ? null
-                        :
-                            <Col>
-                                <Paper className="paper" elevation={10} variant="outlined"  >
-                                    {palabras[palabraActual].name}
-                                </Paper>
-                            </Col>
-                        }
-                    </div>
-                    <div class="col categoritas" style={{ marginLeft: "-1%" }} >
-                        <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col categoritas" style={{ marginRight: "-10%" }} >
-                        <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
-                    </div>
-                    <div class="col categoritas">
-                    </div>
-                    <div class="col categoritas" style={{ marginLeft: "-10%" }} >
-                        <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
-                    </div>
-                </div>
-            </div>
-
-            <div className="bottomCenter" >
-                <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
-                    <Col>
-                        <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
-                    </Col>
-                </Row>
-            </div>
+            }
         </Container>
     );
 }

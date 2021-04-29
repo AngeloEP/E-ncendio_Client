@@ -235,61 +235,72 @@ const TagImage = ( props ) => {
                 </Row>
                 { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
             </div>
-            <div class="center">
-                <div class="row">
-                    <div class="col categoritas" style={{ marginRight: "-10%" }}>
-                        <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
+            { imagenes.length != 0
+                ?
+                <>
+                    <div className="center">
+                        <div className="row">
+                            <div className="col categoritas" style={{ marginRight: "-10%" }}>
+                                <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
+                            </div>
+                            <div className="col categoritas" style={{ marginRight: "-10%" }} >
+                                <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
+                            </div>
+                            <div className="col categoritas" >
+                                <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col categoritas" style={{ marginTop: "-4%" }} >
+                                <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
+                            </div>
+                            <div className="col div-imagen" >
+                                { imagenes.length == 0
+                                    ? null
+                                    :
+                                    <Col>
+                                        <Image
+                                            className="imagen"
+                                            src={imagenes[imagenActual].imageUrl} rounded
+                                        />
+                                    </Col>
+                                }
+                            </div>
+                            <div className="col categoritas" style={{ marginTop: "-4%" }} >
+                                <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col categoritas" style={{ marginRight: "-10%", marginTop: "-4%" }}>
+                                <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
+                            </div>
+                            <div className="col categoritas">
+                            </div>
+                            <div className="col categoritas" style={{ marginLeft: "-8%", marginTop: "-4%" }}>
+                                <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
+                            </div>
+                        </div>
                     </div>
-                    <div class="col categoritas" style={{ marginRight: "-10%" }} >
-                        <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
-                    </div>
-                    <div class="col categoritas" >
-                        <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col categoritas" style={{ marginTop: "-4%" }} >
-                        <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
-                    </div>
-                    <div class="col div-imagen" >
-                        { imagenes.length == 0
-                            ? null
-                            :
+
+                    <div className="bottomCenter-images" >
+                        <Row style={{ marginLeft: "0px", marginRight: "0px" }} >
+                            {/* <Col >
+                                <Button variant="secondary"> Anterior </Button>{' '}
+                            </Col> */}
+
                             <Col>
-                                <Image
-                                    className="imagen"
-                                    src={imagenes[imagenActual].imageUrl} rounded
-                                />
+                                <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
                             </Col>
-                        }
+                        </Row>
                     </div>
-                    <div class="col categoritas" style={{ marginTop: "-4%" }} >
-                        <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col categoritas" style={{ marginRight: "-10%", marginTop: "-4%" }}>
-                        <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
-                    </div>
-                    <div class="col categoritas">
-                    </div>
-                    <div class="col categoritas" style={{ marginLeft: "-8%", marginTop: "-4%" }}>
-                        <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
+                    </>
+                :
+                <div className="container" >
+                    <div className="no-images" >
+                        <span className="spansito-no-images" > Aún no existen imágenes habilitadas </span>
                     </div>
                 </div>
-            </div>
-
-            <div className="bottomCenter" >
-                <Row style={{ marginLeft: "0px", marginRight: "0px" }} >
-                    {/* <Col >
-                        <Button variant="secondary"> Anterior </Button>{' '}
-                    </Col> */}
-
-                    <Col>
-                        <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
-                    </Col>
-                </Row>
-            </div>
+            }
         </Container>
     );
 }

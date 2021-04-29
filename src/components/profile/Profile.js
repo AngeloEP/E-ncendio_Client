@@ -5,6 +5,11 @@ import AuthContext from '../../context/autentificacion/authContext';
 import ProfileContext from '../../context/profile/profileContext';
 
 import './profile.css';
+import OroBadge from '../../assets/badges/gold-badge.png';
+import BronceBadge from '../../assets/badges/bronze-badge.png';
+import PlataBadge from '../../assets/badges/medal.png';
+
+import { FaMedal } from 'react-icons/fa';
 
 import {
     FaFacebook,
@@ -21,6 +26,11 @@ const Profile = ( props ) => {
     // Extraer la información de los perfiles
     const profilecontext = useContext(ProfileContext)
     const { perfil, obtenerPerfil } = profilecontext
+
+    // const ligaUsuario = perfil != null ?
+    //                         perfil.league_id.league === "Bronce"
+    //                         ?
+
 
     useEffect(() => {
         usuarioAutenticado()
@@ -42,6 +52,23 @@ const Profile = ( props ) => {
 
         props.history.push('/profile/edit')
     }
+
+    // const retornarMedalla = (liga) => {
+    //     switch (liga) {
+    //         case "Bronce":
+    //             BronceBadge
+    //             break;
+    //         case "Plata":
+    //             PlataBadge
+    //             break;
+    //         case "Oro":
+    //             OroBadge
+    //             break;
+        
+    //         default:
+    //             break;
+    //     }
+    // }
 
     return (
         <div class="page-content page-container" id="page-content" >
@@ -112,7 +139,19 @@ const Profile = ( props ) => {
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <p class="m-b-10 f-w-600"> Liga </p>
-                                                    <h6 class="text-muted f-w-400"> {perfil.league_id.league} </h6>
+                                                    <h6 class="text-muted f-w-400">
+                                                        {perfil.league_id.league} 
+                                                        <span class="badge badge-pill badge-light align-middle">
+                                                            <img src={
+                                                                    perfil.league_id.league === "Bronce" ? BronceBadge
+                                                                    : perfil.league_id.league === "Plata" ? PlataBadge
+                                                                    : perfil.league_id.league === "Oro" ? OroBadge : null
+                                                                }
+                                                                alt="image"
+                                                                className="user-badge"
+                                                            />
+                                                        </span>
+                                                    </h6>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <p class="m-b-10 f-w-600"> Puntuación </p>
@@ -135,11 +174,11 @@ const Profile = ( props ) => {
                                                 </div>
                                             </div>
 
-                                            <ul class="social-link list-unstyled m-t-40 m-b-10">
+                                            {/* <ul class="social-link list-unstyled m-t-40 m-b-10">
                                                 <li> <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"> <FaFacebook/> </a> </li>
                                                 <li> <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"> <FaTwitter/> </a> </li>
                                                 <li> <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"> <FaInstagram/> </a> </li>
-                                            </ul>
+                                            </ul> */}
                                         </div>
                                     </div>
                                 </div>

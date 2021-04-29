@@ -1,0 +1,15 @@
+.user-badge-nav {
+    min-height: 50px;
+    max-height: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    background-color: #000 !important;
+    padding: 0em !important;
+    padding-left: 0em !important;
+    padding-right: 0em !important;
+    border-radius: 0em !important;
+}
+
+.badge {
+    padding: 0px 0px !important;
+}
