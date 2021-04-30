@@ -4,8 +4,10 @@ import {
     ETIQUETAR_PALABRA,
     ETIQUETAR_PALABRA_ERROR,
     OBTENER_IMAGENES_ETIQUETADAS,
+    OBTENER_IMAGENES_ETIQUETADAS_CARGANDO,
     OBTENER_IMAGENES_ETIQUETADAS_ERROR,
     OBTENER_PALABRAS_ETIQUETADAS,
+    OBTENER_PALABRAS_ETIQUETADAS_CARGANDO,
     OBTENER_PALABRAS_ETIQUETADAS_ERROR,
     ELIMINAR_ETIQUETAS_PALABRAS,
     ELIMINAR_ETIQUETAS_PALABRAS_CARGANDO,
@@ -23,6 +25,8 @@ export default (state, action) => {
                 ...state,
             }
 
+        case OBTENER_IMAGENES_ETIQUETADAS_CARGANDO:
+        case OBTENER_PALABRAS_ETIQUETADAS_CARGANDO:
         case ELIMINAR_ETIQUETAS_IMAGENES_ERROR:
         case ELIMINAR_ETIQUETAS_PALABRAS_ERROR:
         case OBTENER_PALABRAS_ETIQUETADAS_ERROR:
@@ -32,6 +36,8 @@ export default (state, action) => {
             return {
                 ...state,
                 errores: action.payload,
+                cargandoImagenesEtiquetadasUsuarioDesdeAdmin: false,
+                cargandoPalabrasEtiquetadasUsuarioDesdeAdmin: false,
                 cargandoResetearEtiquetasImagenes: false,
                 cargandoResetearEtiquetasPalabras: false,
             }
@@ -39,18 +45,21 @@ export default (state, action) => {
         case OBTENER_IMAGENES_ETIQUETADAS:
             return {
                 ...state,
-                imagenesEtiquetadas: action.payload
+                imagenesEtiquetadas: action.payload,
+                cargandoImagenesEtiquetadasUsuarioDesdeAdmin: false,
             }
 
         case OBTENER_PALABRAS_ETIQUETADAS:
             return {
                 ...state,
-                palabrasEtiquetadas: action.payload
+                palabrasEtiquetadas: action.payload,
+                cargandoPalabrasEtiquetadasUsuarioDesdeAdmin: false,
             }
 
         case ELIMINAR_ETIQUETAS_PALABRAS:
             return {
                 ...state,
+                palabrasEtiquetadas: [],
                 cargandoResetearEtiquetasPalabras: false,
             }
 
@@ -63,6 +72,7 @@ export default (state, action) => {
         case ELIMINAR_ETIQUETAS_IMAGENES:
             return {
                 ...state,
+                imagenesEtiquetadas: [],
                 cargandoResetearEtiquetasImagenes: false,
             }
 

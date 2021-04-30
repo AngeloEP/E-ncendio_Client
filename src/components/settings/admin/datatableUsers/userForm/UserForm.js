@@ -83,23 +83,25 @@ const UserForm = ({ usuario, handleClose }) => {
         obtenerImagenesUsuarioAdmin,
         palabrasPorUsuario,
         cargandoPalabrasUsuarioDesdeAdmin,
-        obtenerPalabrasUsuarioAdmin
+        obtenerPalabrasUsuarioAdmin,
+        cargandoHabilitarInhabilitarImagen,
+        habilitarInhabilitarImagenPorUsuario,
+        cargandoEliminarImagenPorAdmin,
+        eliminarImagenPorUsuarioDesdeAdmin,
+        cargandoHabilitarInhabilitarPalabra,
+        cargandoEliminarPalabraPorAdmin,
+        habilitarInhabilitarPalabraPorUsuario,
+        eliminarPalabraPorUsuarioDesdeAdmin,
     } = usuariosContext
 
     // Extraer informacion del context imágenes
     const wordContext = useContext(WordContext)
-    const { cargandoHabilitarInhabilitarPalabra,
-            cargandoEliminarPalabraPorAdmin,
-            habilitarInhabilitarPalabraPorUsuario,
-            eliminarPalabraPorUsuarioDesdeAdmin,
+    const {
         } = wordContext
 
     // Extraer informacion del context imágenes
     const imageContext = useContext(ImageContext)
-    const { cargandoHabilitarInhabilitar,
-            cargandoEliminarImagenPorAdmin,
-            habilitarInhabilitarImagenPorUsuario,
-            eliminarImagenPorUsuarioDesdeAdmin,
+    const {
         } = imageContext
 
     // Extraer informacion del context etiquetas
@@ -107,6 +109,8 @@ const UserForm = ({ usuario, handleClose }) => {
     const {
         imagenesEtiquetadas,
         palabrasEtiquetadas,
+        cargandoImagenesEtiquetadasUsuarioDesdeAdmin,
+        cargandoPalabrasEtiquetadasUsuarioDesdeAdmin,
         cargandoResetearEtiquetasPalabras,
         cargandoResetearEtiquetasImagenes,
         obtenerImagenesEtiquetadasPorUsuario,
@@ -126,7 +130,6 @@ const UserForm = ({ usuario, handleClose }) => {
     const { firstname, email, isAdmin, isBlocked } = user;
     const [value, setValue] = useState(0);
 
-
     useEffect(() => {
         usuarioAutenticado()
 
@@ -140,13 +143,6 @@ const UserForm = ({ usuario, handleClose }) => {
         }
 
     }, [ mensaje,
-        cargandoAdminYBloqueo,
-        cargandoResetearEtiquetasPalabras,
-        cargandoResetearEtiquetasImagenes,
-        cargandoHabilitarInhabilitar,
-        cargandoEliminarImagenPorAdmin,
-        cargandoHabilitarInhabilitarPalabra,
-        cargandoEliminarPalabraPorAdmin,
     ] )
     
     const onChange = e => {
@@ -360,7 +356,7 @@ const UserForm = ({ usuario, handleClose }) => {
                                             usuario={usuario}
                                             imagenes={imagenesPorUsuario}
                                             funcionHabilitarInhabilitar={modificarPropiedadHabilitarImagen}
-                                            cargandoHabilitarInhabilitar={cargandoHabilitarInhabilitar}
+                                            cargandoHabilitarInhabilitarImagen={cargandoHabilitarInhabilitarImagen}
                                             funcionEliminar={eliminarImagenDesdeAdmin}
                                             cargandoEliminarImagenPorAdmin={cargandoEliminarImagenPorAdmin}
                                             cargandoImagenesUsuarioDesdeAdmin={cargandoImagenesUsuarioDesdeAdmin}
@@ -378,10 +374,22 @@ const UserForm = ({ usuario, handleClose }) => {
                                         />
                                     </TabPanel>
                                     <TabPanel value={value} index={2} dir={theme.direction}>
-                                        <TaggedImagesUser usuario={usuario} imagenesEtiquetadas={imagenesEtiquetadas} funcionResetear={resetearEtiquetasImagenes} cargandoResetearEtiquetasImagenes={cargandoResetearEtiquetasImagenes} />
+                                        <TaggedImagesUser
+                                            usuario={usuario}
+                                            imagenesEtiquetadas={imagenesEtiquetadas}
+                                            funcionResetear={resetearEtiquetasImagenes}
+                                            cargandoResetearEtiquetasImagenes={cargandoResetearEtiquetasImagenes}
+                                            cargandoImagenesEtiquetadasUsuarioDesdeAdmin={cargandoImagenesEtiquetadasUsuarioDesdeAdmin}
+                                        />
                                     </TabPanel>
                                     <TabPanel value={value} index={3} dir={theme.direction}>
-                                        <TaggedWordsUser usuario={usuario} palabrasEtiquetadas={palabrasEtiquetadas} funcionResetear={resetearEtiquetasPalabras} cargandoResetearEtiquetasPalabras={cargandoResetearEtiquetasPalabras} />
+                                        <TaggedWordsUser
+                                            usuario={usuario}
+                                            palabrasEtiquetadas={palabrasEtiquetadas}
+                                            funcionResetear={resetearEtiquetasPalabras}
+                                            cargandoResetearEtiquetasPalabras={cargandoResetearEtiquetasPalabras}
+                                            cargandoPalabrasEtiquetadasUsuarioDesdeAdmin={cargandoPalabrasEtiquetadasUsuarioDesdeAdmin}
+                                        />
                                     </TabPanel>
                                 </SwipeableViews>
                             </Grid>

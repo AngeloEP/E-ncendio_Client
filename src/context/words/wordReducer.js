@@ -12,12 +12,6 @@ import {
     ELIMINAR_PALABRA,
     ELIMINAR_PALABRA_CARGANDO,
     ELIMINAR_PALABRA_ERROR,
-    HABILITAR_INHABILITAR_PALABRA,
-    HABILITAR_INHABILITAR_PALABRA_CARGANDO,
-    HABILITAR_INHABILITAR_PALABRA_ERROR,
-    ELIMINAR_PALABRA_DESDE_ADMIN,
-    ELIMINAR_PALABRA_DESDE_ADMIN_CARGANDO,
-    ELIMINAR_PALABRA_DESDE_ADMIN_ERROR,
 } from '../../types';
 
 export default (state, action) => {
@@ -29,8 +23,6 @@ export default (state, action) => {
                 largoPalabras: action.payload.length
             }
 
-        case HABILITAR_INHABILITAR_PALABRA_ERROR:
-        case ELIMINAR_PALABRA_DESDE_ADMIN_ERROR:
         case MODIFICAR_PALABRA_ERROR:
         case ELIMINAR_PALABRA_ERROR:
         case GUARDAR_PALABRA_ERROR:
@@ -88,30 +80,6 @@ export default (state, action) => {
                 palabras: state.palabras.map(palabra => palabra._id ===
                     action.payload._id ? palabra : action.payload ),
                 cargandoModificarPalabra: false
-            }
-
-        case HABILITAR_INHABILITAR_PALABRA_CARGANDO:
-            return {
-                ...state,
-                cargandoHabilitarInhabilitarPalabra: true
-            }
-
-        case HABILITAR_INHABILITAR_PALABRA:
-            return {
-                ...state,
-                cargandoHabilitarInhabilitarPalabra: false
-            }
-
-        case ELIMINAR_PALABRA_DESDE_ADMIN_CARGANDO:
-            return {
-                ...state,
-                cargandoEliminarPalabraPorAdmin: true
-            }
-
-        case ELIMINAR_PALABRA_DESDE_ADMIN:
-            return {
-                ...state,
-                cargandoEliminarPalabraPorAdmin: false
             }
 
         default:

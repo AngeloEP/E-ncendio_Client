@@ -9,13 +9,12 @@ import ClipLoader from "react-spinners/ClipLoader";
 const UploadImagesUser = ({ usuario,
     imagenes,
     funcionHabilitarInhabilitar,
-    cargandoHabilitarInhabilitar,
+    cargandoHabilitarInhabilitarImagen,
     funcionEliminar,
     cargandoEliminarImagenPorAdmin,
     cargandoImagenesUsuarioDesdeAdmin,
 }) => {
 
-    console.log(cargandoImagenesUsuarioDesdeAdmin)
 
     return (
         <div className="cards-images" >
@@ -82,11 +81,11 @@ const UploadImagesUser = ({ usuario,
                                                         { color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745",
                                                             height: "1%", width: "45%", marginLeft: "2%" }
                                                     }
-                                                disabled={cargandoHabilitarInhabilitar}
+                                                disabled={cargandoHabilitarInhabilitarImagen}
                                                 onClick={() => funcionHabilitarInhabilitar(imagen._id, !imagen.Habilitada)}
                                             >
                                                 {
-                                                    cargandoHabilitarInhabilitar
+                                                    cargandoHabilitarInhabilitarImagen
                                                     ?
                                                     <Grid container
                                                         direction="row"

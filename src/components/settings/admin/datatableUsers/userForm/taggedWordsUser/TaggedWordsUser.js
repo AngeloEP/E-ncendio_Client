@@ -8,7 +8,12 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 import Paper from '@material-ui/core/Paper';
 
-const TaggedWordsUser = ({ usuario, palabrasEtiquetadas, funcionResetear, cargandoResetearEtiquetasPalabras }) => {
+const TaggedWordsUser = ({ usuario,
+    palabrasEtiquetadas,
+    funcionResetear,
+    cargandoResetearEtiquetasPalabras,
+    cargandoPalabrasEtiquetadasUsuarioDesdeAdmin,
+}) => {
 
     return (
         <div className="cards-tag-words" >
@@ -47,30 +52,40 @@ const TaggedWordsUser = ({ usuario, palabrasEtiquetadas, funcionResetear, cargan
                 </Button>
             </div>
             <div className="row">
-                { palabrasEtiquetadas.length != 0
-                    ?
-                        <>
-                            {palabrasEtiquetadas.map((palabraEtiquetada, index) =>
+                { cargandoPalabrasEtiquetadasUsuarioDesdeAdmin === false
+                    ? 
+                        palabrasEtiquetadas.length != 0
+                        ?
+                            <>
+                                {palabrasEtiquetadas.map((palabraEtiquetada, index) =>
 
-                                <div key={index} className="col-sm-3 col-md-4" >
-                                    
-                                    <div className="card text-white tarjeta-tag-words" >
-                                        <Paper className="card-img-top palabra-tarjeta-etiqueta" elevation={10} variant="outlined"  >
-                                            {palabraEtiquetada.palabra}
-                                        </Paper>
-                                        <div className="card-body text-center">
-                                            <h5 className="card-title titulo-nombre-card-tag-word"> Eligió etiqueta </h5>
-                                            <p className="card-text nombre-card-tag-word"> {palabraEtiquetada.categoria} </p>
-                                            {/* <h5 className="card-title titulo-fecha-card-tag-word"> Subido el </h5>
-                                            <p className="card-text fecha-card-tag-word"> {palabraEtiquetada.Creadoel} </p> */}
+                                    <div key={index} className="col-sm-3 col-md-4" >
+                                        
+                                        <div className="card text-white tarjeta-tag-words" >
+                                            <Paper className="card-img-top palabra-tarjeta-etiqueta" elevation={10} variant="outlined"  >
+                                                {palabraEtiquetada.palabra}
+                                            </Paper>
+                                            <div className="card-body text-center">
+                                                <h5 className="card-title titulo-nombre-card-tag-word"> Eligió etiqueta </h5>
+                                                <p className="card-text nombre-card-tag-word"> {palabraEtiquetada.categoria} </p>
+                                                {/* <h5 className="card-title titulo-fecha-card-tag-word"> Subido el </h5>
+                                                <p className="card-text fecha-card-tag-word"> {palabraEtiquetada.Creadoel} </p> */}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
-                        </>
-                    :
+                                )}
+                            </>
+                        :
+                        <div className="text-center ml-auto mr-auto" >
+                            Aún no ha etiquetado palabras
+                        </div>
+                        :
                     <div className="text-center ml-auto mr-auto" >
-                        Aún no ha etiquetado palabras
+                        <ClipLoader
+                            color={"#000"}
+                            loading={true}
+                            size={30}
+                        />
                     </div>
                 }
             </div>             

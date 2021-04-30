@@ -82,7 +82,6 @@ const Navigation =  ({ location, history })  => {
         setClicked(!clicked)
     }
 
-    console.log(usuario)
     // Cerrar Sesión
     const logout = () => {
         if (isLoading) return;

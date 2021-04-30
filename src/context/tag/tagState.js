@@ -10,8 +10,10 @@ import {
     ETIQUETAR_PALABRA,
     ETIQUETAR_PALABRA_ERROR,
     OBTENER_IMAGENES_ETIQUETADAS,
+    OBTENER_PALABRAS_ETIQUETADAS_CARGANDO,
     OBTENER_IMAGENES_ETIQUETADAS_ERROR,
     OBTENER_PALABRAS_ETIQUETADAS,
+    OBTENER_IMAGENES_ETIQUETADAS_CARGANDO,
     OBTENER_PALABRAS_ETIQUETADAS_ERROR,
     ELIMINAR_ETIQUETAS_PALABRAS,
     ELIMINAR_ETIQUETAS_PALABRAS_CARGANDO,
@@ -27,6 +29,8 @@ const TagState = props => {
         imagenesEtiquetadas: [],
         palabrasEtiquetadas: [],
         errores: [],
+        cargandoImagenesEtiquetadasUsuarioDesdeAdmin: false,
+        cargandoPalabrasEtiquetadasUsuarioDesdeAdmin: false,
         cargandoResetearEtiquetasPalabras: false,
         cargandoResetearEtiquetasImagenes: false,
     }
@@ -67,6 +71,9 @@ const TagState = props => {
 
     const obtenerImagenesEtiquetadasPorUsuario = async ( user_id ) => {
         try {
+            dispatch({
+                type: OBTENER_IMAGENES_ETIQUETADAS_CARGANDO,
+            })
             const respuesta = await clienteAxios.get(`/api/tag-images/user/${user_id}`)
             dispatch({
                 type: OBTENER_IMAGENES_ETIQUETADAS,
@@ -83,6 +90,9 @@ const TagState = props => {
 
     const obtenerPalabrasEtiquetadasPorUsuario = async ( user_id ) => {
         try {
+            dispatch({
+                type: OBTENER_PALABRAS_ETIQUETADAS_CARGANDO,
+            })
             const respuesta = await clienteAxios.get(`/api/tag-words/user/${user_id}`)
             dispatch({
                 type: OBTENER_PALABRAS_ETIQUETADAS,
@@ -128,7 +138,7 @@ const TagState = props => {
                 else if (result.isDenied) {
                     Swal.fire('No se eliminaron las etiquetas', '', 'info')
                     dispatch({
-                        type: ELIMINAR_ETIQUETAS_PALABRAS,
+                        type: ELIMINAR_ETIQUETAS_PALABRAS_ERROR,
                     })
                 }
             })
@@ -179,7 +189,7 @@ const TagState = props => {
                 else if (result.isDenied) {
                     Swal.fire('No se eliminaron las etiquetas', '', 'info')
                     dispatch({
-                        type: ELIMINAR_ETIQUETAS_IMAGENES,
+                        type: ELIMINAR_ETIQUETAS_IMAGENES_ERROR,
                     })
                 }
             })
@@ -203,6 +213,8 @@ const TagState = props => {
             value={{
                 imagenesEtiquetadas: state.imagenesEtiquetadas,
                 palabrasEtiquetadas: state.palabrasEtiquetadas,
+                cargandoImagenesEtiquetadasUsuarioDesdeAdmin: state.cargandoImagenesEtiquetadasUsuarioDesdeAdmin,
+                cargandoPalabrasEtiquetadasUsuarioDesdeAdmin: state.cargandoPalabrasEtiquetadasUsuarioDesdeAdmin,
                 cargandoResetearEtiquetasPalabras: state.cargandoResetearEtiquetasPalabras,
                 cargandoResetearEtiquetasImagenes: state.cargandoResetearEtiquetasImagenes,
                 etiquetarImagen,

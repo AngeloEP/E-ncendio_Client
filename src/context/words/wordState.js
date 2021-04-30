@@ -18,12 +18,6 @@ import {
     ELIMINAR_PALABRA,
     ELIMINAR_PALABRA_CARGANDO,
     ELIMINAR_PALABRA_ERROR,
-    HABILITAR_INHABILITAR_PALABRA,
-    HABILITAR_INHABILITAR_PALABRA_CARGANDO,
-    HABILITAR_INHABILITAR_PALABRA_ERROR,
-    ELIMINAR_PALABRA_DESDE_ADMIN,
-    ELIMINAR_PALABRA_DESDE_ADMIN_CARGANDO,
-    ELIMINAR_PALABRA_DESDE_ADMIN_ERROR,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -36,8 +30,6 @@ const WordState = props => {
         cargandoSubirPalabra: false,
         cargandoEliminarPalabra: false,
         cargandoModificarPalabra: false,
-        cargandoHabilitarInhabilitarPalabra: false,
-        cargandoEliminarPalabraPorAdmin: false,
     }
 
     const [ state, dispatch ] = useReducer(wordReducer, initialState)
@@ -191,122 +183,6 @@ const WordState = props => {
         }
     }
 
-    const habilitarInhabilitarPalabraPorUsuario = async ( word_id, datos ) => {
-        try {
-            dispatch({
-                type: HABILITAR_INHABILITAR_PALABRA_CARGANDO,
-                payload: true
-            })
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                  confirmButton: 'btn btn-success',
-                  cancelButton: 'btn btn-danger ml-4'
-                },
-                buttonsStyling: false
-            })
-
-            swalWithBootstrapButtons.fire({
-                title: 'Confirme su decisión',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: `Modificar`,
-                cancelButtonText: 'Cancelar',
-                allowOutsideClick: false,
-            }).then(async (result) =>  {
-                if (result.isConfirmed) {
-                    const respuesta = await clienteAxios.put(`/api/words/user/word/isEnabled/${word_id}`, datos)
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Modificación exitosa',
-                        text: "La propiedad se cambió exitosamente",
-                    })
-                    
-                    setTimeout(() => {
-                        dispatch({
-                            type: HABILITAR_INHABILITAR_PALABRA,
-                        })
-                    }, 1000);
-                }
-                else if (result.dismiss === Swal.DismissReason.cancel) {
-                    Swal.fire('No se modificó la palabra', '', 'info')
-                    dispatch({
-                        type: HABILITAR_INHABILITAR_PALABRA,
-                    })
-                }
-            })
-
-        } catch (error) {
-            console.log(error)
-            dispatch({
-                type: HABILITAR_INHABILITAR_PALABRA_ERROR,
-                payload: error
-            })
-            Swal.fire({
-                icon: 'error',
-                title: 'Lo sentimos',
-                text: 'No se pudo modificar la propiedad, inténtelo nuevamente!',
-            })
-        }
-    }
-
-    const eliminarPalabraPorUsuarioDesdeAdmin = async ( word_id ) => {
-        try {
-            dispatch({
-                type: ELIMINAR_PALABRA_DESDE_ADMIN_CARGANDO,
-                payload: true
-            })
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                  confirmButton: 'btn btn-success',
-                  cancelButton: 'btn btn-danger ml-4'
-                },
-                buttonsStyling: false
-            })
-
-            swalWithBootstrapButtons.fire({
-                title: 'Al eliminarla, también eliminará sus asociaciones a esa palabra',
-                icon: 'warning',
-                showCancelButton: true,
-                cancelButtonText: 'Cancelar',
-                confirmButtonText: `Eliminar`,
-                allowOutsideClick: false,
-            }).then(async (result) =>  {
-                if (result.isConfirmed) {
-                    const respuesta = await clienteAxios.delete(`/api/words/user/word/${word_id}`)
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Proceso exitoso',
-                        text: "La palabra se eliminó exitosamente",
-                    })
-                    
-                    setTimeout(() => {
-                        dispatch({
-                            type: ELIMINAR_PALABRA_DESDE_ADMIN,
-                        })
-                    }, 1000);
-                }
-                else if (result.dismiss === Swal.DismissReason.cancel) {
-                    Swal.fire('No se eliminó la palabra', '', 'info')
-                    dispatch({
-                        type: ELIMINAR_PALABRA_DESDE_ADMIN,
-                    })
-                }
-            })
-
-        } catch (error) {
-            console.log(error)
-            dispatch({
-                type: ELIMINAR_PALABRA_DESDE_ADMIN_ERROR,
-                payload: error
-            })
-            Swal.fire({
-                icon: 'error',
-                title: 'Lo sentimos',
-                text: 'No se pudo eliminar la palabra, inténtelo nuevamente!',
-            })
-        }
-    }
-
     return (
         <wordContext.Provider
             value={{
@@ -323,8 +199,6 @@ const WordState = props => {
                 traerPalabrasPorUsuario,
                 eliminarPalabra,
                 modificarPalabra,
-                habilitarInhabilitarPalabraPorUsuario,
-                eliminarPalabraPorUsuarioDesdeAdmin,
             }}
         >
             {props.children}
