@@ -82,8 +82,8 @@ function App() {
                                         <RutaPrivada exact path="/rank" component={Rank} />
                                         <RutaPrivada exact path="/about" component={About} />
                                         <RutaPrivada exact path="/games" component={Games} />
-                                        <RutaPrivada exact path="/games/images" component={TagImage} />
                                         <RutaPrivada exact path="/help" component={Help} />
+                                        <RutaPrivada exact path="/games/images" component={TagImage} />
                                         <RutaPrivada exact path="/games/words" component={AssociateWord} />
                                         <RutaPrivada exact path="/games/four-images-one-word" component={FourImagesOneWord} />  
                                         <RutaPrivada exact path="/settings" component={Settings} />  

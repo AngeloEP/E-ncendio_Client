@@ -81,6 +81,7 @@ const UserForm = ({ usuario, handleClose }) => {
         imagenesPorUsuario,
         cargandoImagenesUsuarioDesdeAdmin,
         obtenerImagenesUsuarioAdmin,
+        mensajeUsuarios,
         palabrasPorUsuario,
         cargandoPalabrasUsuarioDesdeAdmin,
         obtenerPalabrasUsuarioAdmin,
@@ -156,7 +157,7 @@ const UserForm = ({ usuario, handleClose }) => {
         setValue(newValue);
     };
     
-      const handleChangeIndex = (index) => {
+    const handleChangeIndex = (index) => {
         setValue(index);
     };
 
@@ -205,101 +206,107 @@ const UserForm = ({ usuario, handleClose }) => {
                 { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                 <Grid item xs={12} sm={8} md={12} elevation={6} >
                     {/* { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null } */}
-                    <form  onSubmit={onSubmitUpdate}  >
                         <Grid container spacing={5} >
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    value={firstname}
-                                    name="firstname"
-                                    variant="filled"
-                                    fullWidth
-                                    disabled
-                                    id="firstname"
-                                    label="Nombre"
-                                    autoFocus
-                                    onChange={onChange}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <div className="div-isAdmin" > 
-                                    <FormControl variant="outlined" className="formControl">
-                                        <InputLabel id="demo-simple-select-outlined-label"> Administrador </InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-outlined-label"
-                                            className="select-isAdmin"
-                                            id="isAdmin"
-                                            name="isAdmin"
-                                            value={isAdmin}
+                            <form  onSubmit={onSubmitUpdate}  >
+                                <Grid className="ml-2 mt-3" container spacing={7}>
+                                    
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            value={firstname}
+                                            name="firstname"
+                                            variant="filled"
+                                            fullWidth
+                                            disabled
+                                            id="firstname"
+                                            label="Nombre"
+                                            autoFocus
                                             onChange={onChange}
-                                            label="Administrador"
-                                        >
-                                        <MenuItem value="">
-                                            <em>Ninguno</em>
-                                        </MenuItem>
-                                        <MenuItem value={true}> Habilitar </MenuItem>
-                                        <MenuItem value={false}> Inhabilitar </MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </div>
-                            </Grid>
-
-                            <Grid item xs={12} sm={6}>
-                                <div className="div-isBlocked" > 
-                                    <FormControl variant="outlined" className="formControl">
-                                        <InputLabel id="demo-simple-select-outlined-label"> Bloqueado </InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-outlined-label"
-                                            className="select-isBlocked"
-                                            id="isBlocked"
-                                            name="isBlocked"
-                                            value={isBlocked}
-                                            onChange={onChange}
-                                            label="Bloqueado"
-                                        >
-                                        <MenuItem value="">
-                                            <em>Ninguno</em>
-                                        </MenuItem>
-                                        <MenuItem value={true}> Bloquear </MenuItem>
-                                        <MenuItem value={false}> No Bloquear </MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </div>
-                            </Grid>
-                            <Grid item xs={12} sm={12}>
-                                <div className="div-button-edit" >
-                                    <Button
-                                            type="submit"
-                                            variant="contained"
-                                            style={{ backgroundColor: "yellow", height: "50%", width: "20%", marginLeft: "2%", marginBottom: "2%" }}
-                                            startIcon={<EditIcon />}
-                                            disabled={cargandoAdminYBloqueo}
-                                        >
-                                            {
-                                                cargandoAdminYBloqueo
-                                                ?
-                                                <Grid container
-                                                    direction="row"
-                                                    justify="center"
-                                                    alignItems="center"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <div className="div-isAdmin" > 
+                                            <FormControl variant="outlined" className="formControl">
+                                                <InputLabel id="demo-simple-select-outlined-label"> Administrador </InputLabel>
+                                                <Select
+                                                    labelId="demo-simple-select-outlined-label"
+                                                    className="select-isAdmin"
+                                                    id="isAdmin"
+                                                    name="isAdmin"
+                                                    value={isAdmin}
+                                                    onChange={onChange}
+                                                    label="Administrador"
                                                 >
-                                                    <Grid item xs={10} style={{color:"#000"}}  >
-                                                        Cargando...
-                                                    </Grid>
-                                                    <Grid item xs={1} >
-                                                    <ClipLoader
-                                                        color={"#000"}
-                                                        loading={true}
-                                                        size={20}
-                                                    />
-                                                    </Grid>
-                                                </Grid>
-                                                    
-                                                :
-                                                "Modificar usuario"
-                                            }
-                                    </Button>
-                                </div>
-                            </Grid>
+                                                <MenuItem value="">
+                                                    <em>Ninguno</em>
+                                                </MenuItem>
+                                                <MenuItem value={true}> Habilitar </MenuItem>
+                                                <MenuItem value={false}> Inhabilitar </MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                        </div>
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={6}>
+                                        <div className="div-isBlocked" > 
+                                            <FormControl variant="outlined" className="formControl">
+                                                <InputLabel id="demo-simple-select-outlined-label"> Bloqueado </InputLabel>
+                                                <Select
+                                                    labelId="demo-simple-select-outlined-label"
+                                                    className="select-isBlocked"
+                                                    id="isBlocked"
+                                                    name="isBlocked"
+                                                    value={isBlocked}
+                                                    onChange={onChange}
+                                                    label="Bloqueado"
+                                                >
+                                                <MenuItem value="">
+                                                    <em>Ninguno</em>
+                                                </MenuItem>
+                                                <MenuItem value={true}> Bloquear </MenuItem>
+                                                <MenuItem value={false}> No Bloquear </MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                        </div>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12}>
+                                        <div className="div-button-edit" >
+                                            <Button
+                                                    type="submit"
+                                                    variant="contained"
+                                                    style={{ backgroundColor: "yellow", height: "50%", width: "20%", marginLeft: "2%", marginBottom: "2%" }}
+                                                    startIcon={<EditIcon />}
+                                                    disabled={cargandoAdminYBloqueo}
+                                                >
+                                                    {
+                                                        cargandoAdminYBloqueo
+                                                        ?
+                                                        <Grid container
+                                                            direction="row"
+                                                            justify="center"
+                                                            alignItems="center"
+                                                        >
+                                                            <Grid item xs={10} style={{color:"#000"}}  >
+                                                                Cargando...
+                                                            </Grid>
+                                                            <Grid item xs={1} >
+                                                            <ClipLoader
+                                                                color={"#000"}
+                                                                loading={true}
+                                                                size={20}
+                                                            />
+                                                            </Grid>
+                                                        </Grid>
+                                                            
+                                                        :
+                                                        "Modificar usuario"
+                                                    }
+                                            </Button>
+                                        </div>
+                                    </Grid>
+                                </Grid>
+                            </form>
+
+
                             <Grid item xs={12} sm={12}>
                                 <div className="show-details-user" >
                                     <div className="details" >
@@ -397,7 +404,6 @@ const UserForm = ({ usuario, handleClose }) => {
 
                             </Grid>
                         </Grid>
-                    </form>
                 </Grid>
             </Grid>
         </div>

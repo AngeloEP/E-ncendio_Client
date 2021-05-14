@@ -107,10 +107,14 @@ export default (state, action) => {
             }
 
         case HABILITAR_INHABILITAR_IMAGEN:
+            // const index = state.imagenesPorUsuario.findIndex(imagen => imagen._id === action.payload[0]._id);
+            // const newArray = [...state.imagenesPorUsuario];
+            // newArray[index] = action.payload[0]
             return {
                 ...state,
+                // imagenesPorUsuario: newArray,
                 imagenesPorUsuario: state.imagenesPorUsuario.map(imagen => imagen._id ===
-                    action.payload._id ? imagen : action.payload[0] ),
+                    action.payload[0]._id ? action.payload[0] : imagen ),
                 cargandoHabilitarInhabilitarImagen: false
             }
 
@@ -139,7 +143,7 @@ export default (state, action) => {
             return {
                 ...state,
                 palabrasPorUsuario: state.palabrasPorUsuario.map(palabra => palabra._id ===
-                    action.payload._id ? palabra : action.payload[0] ),
+                    action.payload[0]._id ? action.payload[0] : palabra ),
                 cargandoHabilitarInhabilitarPalabra: false
             }
 

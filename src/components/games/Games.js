@@ -1,14 +1,20 @@
 import React, { useContext, useEffect } from 'react';
-import Grid  from '@material-ui/core/Grid';
+
 import {useStyles} from './gamesStyles';
+import './games.css';
+
+import Grid  from '@material-ui/core/Grid';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
+
+import ProfileContext from '../../context/profile/profileContext';
 import AuthContext from '../../context/autentificacion/authContext';
 
 import minions from '../../assets/img/minions.jpg';
 import encendio from '../../assets/img/incendio.png';
 import incendios from '../../assets/img/incendios.jpg';
 
+import ClipLoader from "react-spinners/ClipLoader";
 
 const images = [
     {
@@ -36,8 +42,14 @@ const Games = ({ history }) => {
     const authContext = useContext(AuthContext)
     const { usuarioAutenticado } = authContext
 
+    // Extraer la información de los perfiles
+    const profilecontext = useContext(ProfileContext)
+    const { perfil, obtenerPerfil } = profilecontext
+
     useEffect(() => {
         usuarioAutenticado()
+
+        obtenerPerfil()
     }, [])
 
     const classes = useStyles()
@@ -48,6 +60,7 @@ const Games = ({ history }) => {
         history.push(route)
     }
 
+
     return (
         <Grid container direction='column' alignItems='center' justify="center"
             style={{
@@ -56,40 +69,91 @@ const Games = ({ history }) => {
                 height: "91.5vh"
             }}
         >
-            
-            <Grid direction='row'  className={classes.root} >
-                {images.map((image) => (
-                    <ButtonBase
-                        focusRipple
-                        key={image.title}
-                        className={classes.image}
-                        focusVisibleClassName={classes.focusVisible}
-                        style={{
-                            width: image.width,
-                        }}
-                        onClick={() => OnClick(image.page)}
-                    >
-                    <span
-                        className={classes.imageSrc}
-                        style={{
-                        backgroundImage: `url(${image.url})`,
-                        }}
-                    />
-                    <span className={classes.imageBackdrop} />
-                    <span className={classes.imageButton}>
-                        <Typography
-                            component="span"
-                            variant="subtitle1"
-                            color="inherit"
-                            className={classes.imageTitle}
-                        >
-                        {image.title}
-                        <span className={classes.imageMarked} />
-                        </Typography>
-                    </span>
-                    </ButtonBase>
-                ))}
-            </Grid>
+            {
+                perfil != null
+                ?
+                    <Grid direction='row'  className={classes.root} >
+                        {images.map((image) => (
+                            <ButtonBase
+                                focusRipple
+                                key={image.title}
+                                className={classes.image}
+                                disabled={
+                                    image.title === "Asociar Palabras"
+                                    ?
+                                        perfil.league_id.league === "Bronce"
+                                        ?
+                                            true
+                                        :
+                                            false
+                                    :
+                                        image.title === "4 Imágenes y 1 Palabra"
+                                        ?
+                                            perfil.league_id.league === "Bronce" | perfil.league_id.league === "Plata"
+                                            ?
+                                                true
+                                            :
+                                                false
+                                        :
+                                            false
+                                }
+                                focusVisibleClassName={classes.focusVisible}
+                                style={{
+                                    width: image.width,
+                                }}
+                                onClick={() => OnClick(image.page)}
+                            >
+                            <span
+                                className={classes.imageSrc}
+                                style={{
+                                backgroundImage: `url(${image.url})`,
+                                }}
+                            />
+                            {/* <span className={classes.imageBackdrop} /> */}
+                            <span className={
+                                    image.title === "Asociar Palabras"
+                                    ?
+                                        perfil.league_id.league === "Bronce"
+                                        ?
+                                            "image-backdrop-disable"
+                                        :
+                                            "image-backdrop"
+                                    :
+                                        image.title === "4 Imágenes y 1 Palabra"
+                                        ?
+                                            perfil.league_id.league === "Bronce" | perfil.league_id.league === "Plata"
+                                            ?
+                                                "image-backdrop-disable"
+                                            :
+                                                "image-backdrop"
+                                        :
+                                            "image-backdrop"
+                                }
+                            >
+                                <span className={classes.imageButton}>
+                                    <Typography
+                                        component="span"
+                                        variant="subtitle1"
+                                        color="inherit"
+                                        className={classes.imageTitle}
+                                    >
+                                    {image.title}
+                                    <span className={classes.imageMarked} />
+                                    </Typography>
+                                </span>
+                            </span>
+                            </ButtonBase>
+                        ))}
+                    </Grid>
+                :
+                    <div className="text-center ml-auto mr-auto" >
+                        <ClipLoader
+                            color={"#000"}
+                            loading={true}
+                            size={30}
+                        />
+                    </div>
+            }
         </Grid>
     );
 }

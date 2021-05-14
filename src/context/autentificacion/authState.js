@@ -134,6 +134,7 @@ const AuthState = props => {
 
     const modificarUsuario = async (usuario, usuario_id) => {
         try {
+            console.log("ahahahahahaha")
             dispatch({
                 type: MODIFICAR_USUARIO_CARGANDO,
                 payload: true

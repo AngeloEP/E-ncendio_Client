@@ -104,6 +104,7 @@ const UsuariosState = props => {
                     payload: respuesta.data.msg
                 })
             }, 1000);
+            obtenerImagenesUsuarioAdmin(user_id)
 
         } catch (error) {
             console.log(error.response.data)
@@ -306,7 +307,6 @@ const UsuariosState = props => {
             }).then(async (result) =>  {
                 if (result.isConfirmed) {
                     const respuesta = await clienteAxios.put(`/api/words/user/word/isEnabled/${word_id}`, datos)
-                    console.log(respuesta.data.palabraAntigua)
                     Swal.fire({
                         icon: 'success',
                         title: 'Modificación exitosa',

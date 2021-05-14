@@ -4,6 +4,7 @@ import UploadWord from './uploadWord/UploadWord';
 import Admin from './admin/Admin';
 
 import AuthContext from '../../context/autentificacion/authContext';
+import ProfileContext from '../../context/profile/profileContext';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -13,7 +14,9 @@ import PeopleIcon from '@material-ui/icons/People';
 
 import './settings.css';
 
+
 const Settings = () => {
+
 
     const [navigation, setNavigation] = useState(0);
 
@@ -21,39 +24,103 @@ const Settings = () => {
     const authContext = useContext(AuthContext)
     const { usuario, usuarioAutenticado, cerrarSesión } = authContext
 
+    // Extraer la información de los perfiles
+    const profilecontext = useContext(ProfileContext)
+    const { perfil, obtenerPerfil } = profilecontext
+
     useEffect(() => {
         usuarioAutenticado()
+
+        // obteniendo el perfil del usuario
+        obtenerPerfil();
     }, [])
     return (
         <div>
-            <div className="title-div" >
-                <h3 className="title-settings" > Gestionar contenido del Sitio </h3>
-            </div>
-            <BottomNavigation
-                value={navigation}
-                onChange={(event, newValue) => {
-                    setNavigation(newValue);
-                }}
-                showLabels
-                className="nav-settings"
-            >
-                <BottomNavigationAction label="Administrador" icon={<PeopleIcon />} />
-                <BottomNavigationAction label="Subir imagen" icon={<ImageIcon />} />
-                <BottomNavigationAction label="Subir palabra" icon={<SpellcheckIcon />} />
-            </BottomNavigation>
+            { perfil != null
+                ?
+                    <>
+                        <div className="title-div" >
+                            <h3 className="title-settings" > Gestionar contenido del Sitio </h3>
+                        </div>
+                        <div className="text-center ml-auto mr-auto" >
+                            { perfil.league_id.league === "Bronce"
+                                ?
+                                    "No puede subir contenido aún"
+                                :
+                                    perfil.league_id.league === "Plata"
+                                    ?
+                                        "Ya puede subir imágenes, para subir palabras debe aumentar sus puntos!"
+                                    :
+                                        "Puede subir imágenes y palabras al sitio"
+                            }
+                        </div>
+                        <BottomNavigation
+                            value={navigation}
+                            onChange={(event, newValue) => {
+                                setNavigation(newValue);
+                            }}
+                            showLabels
+                            className="nav-settings"
+                        >
+                            { usuario.isAdmin
+                                ?
+                                    <BottomNavigationAction
+                                        label="Administrador"
+                                        icon={<PeopleIcon/>}
+                                    />
+                                :
+                                    null
+                            }
+                            <BottomNavigationAction
+                                label="Subir imagen"
+                                icon={<ImageIcon/>}
+                                disabled={
+                                    perfil.league_id.league === "Bronce"
+                                    ?
+                                        true
+                                    :
+                                        false
+                                }
+                            />
+                            <BottomNavigationAction
+                                label="Subir palabra"
+                                icon={<SpellcheckIcon/>}
+                                disabled={
+                                    perfil.league_id.league === "Bronce"
+                                    ?
+                                        true
+                                    :
+                                        perfil.league_id.league === "Plata"
+                                        ?
+                                            true
+                                        :
+                                            false
+                                }
+                            />
+                        </BottomNavigation>
 
-            <div>
-                { usuario && usuario.isExpert && navigation === 0
-                    ?
-                        <Admin />
-                    :
-                        navigation === 1
-                        ?
-                            <UploadImage />
-                        :
-                            <UploadWord />
-                }
-            </div>
+                        <div>
+                            { usuario && usuario.isAdmin && navigation === 0
+                                ?
+                                    <Admin />
+                                :
+                                    navigation === 1
+                                    ?
+                                        <UploadImage />
+                                    :
+                                        navigation === 2 
+                                        ?
+                                            <UploadWord />
+                                        :
+                                            null
+                            }
+                        </div>
+                    </>
+                :
+                    <div className="text-center ml-auto mr-auto" >
+                        No puede editar el contenido
+                    </div>
+            }
         </div>
     );
 }

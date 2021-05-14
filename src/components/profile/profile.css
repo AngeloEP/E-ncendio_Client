@@ -171,6 +171,19 @@ h6 {
     outline: none !important;
 }
 
+.disableBtn {
+    border: 0;
+    border-radius: 0.7rem;
+    width: 40%;
+    padding: 1.5%;
+    font-weight: 400;
+    background-color: grey;
+    color: #fff;
+    cursor: auto;
+    text-decoration: line-through;
+    outline: none !important;
+}
+
 .profile-edit-btn:hover {
     transition: all 0.1s;
     background-color: #599b4d;

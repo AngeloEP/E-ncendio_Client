@@ -32,6 +32,17 @@
     width: 20%;
 }
 
+.nav-settings > button:disabled {
+    background-color: black !important;
+    border-radius: 5px;
+    color: white !important;
+}
+
+.bottomDisabled {
+    background-color: green;
+    color: blue;
+}
+
 @media only screen and (max-width: 1376px){
     .title-div {
         width: 70%;

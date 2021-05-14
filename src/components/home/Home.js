@@ -20,7 +20,7 @@ import Card from 'react-bootstrap/Card'
 
 import './home.css';
 
-import { FaGamepad, FaFire, FaCog, FaUserFriends, FaQuestionCircle } from 'react-icons/fa';
+import { FaGamepad, FaFire, FaCog, FaUserFriends, FaQuestionCircle, FaUpload } from 'react-icons/fa';
 
 
 const Home = () => {
@@ -300,14 +300,14 @@ const Home = () => {
                                 bg="light"
                                 key="1"
                                 text="dark"
-                                className="card-first"
+                                className="card-other"
                             >
-                                <FaGamepad className="card-icons" />
-                                <Card.Header className="card-header" > <a className="nav-link" href="/games"> Juegos </a> </Card.Header>
+                                <FaCog className="card-icons" />
+                                <Card.Header className="card-header" > <a className="nav-link" href="/profile"> Perfil </a> </Card.Header>
                                 <Card.Body>
-                                <Card.Title className="card-title" > Interactúa en los juegos </Card.Title>
+                                <Card.Title className="card-title" > Edita tu perfil </Card.Title>
                                 <Card.Text className="card-text" >
-                                    Puedes colaborar jugando en uno de los 3 tipos de juegos disponibles.
+                                    Puedes ajustar tus configuraciones del perfil de la manera que gustes desde que te encuentres en la liga de <span style={{ color: "gray" }} > Plata </span>.
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -332,18 +332,37 @@ const Home = () => {
                                 bg="light"
                                 key="1"
                                 text="dark"
-                                className="card-other"
+                                className="card-first"
                             >
-                                <FaCog className="card-icons" />
-                                <Card.Header className="card-header" > <a className="nav-link" href="/profile"> Perfil </a> </Card.Header>
+                                <FaGamepad className="card-icons" />
+                                <Card.Header className="card-header" > <a className="nav-link" href="/games"> Juegos </a> </Card.Header>
                                 <Card.Body>
-                                <Card.Title className="card-title" > Edita tu perfil </Card.Title>
+                                <Card.Title className="card-title" > Interactúa en los juegos </Card.Title>
                                 <Card.Text className="card-text" >
-                                    Puedes ajustar tus configuraciones del perfil de la manera que gustes.
+                                    Puedes colaborar jugando en uno de los 3 tipos de juegos, <a href="/games/images"> etiquetando imágenes </a>, 
+                                    <a href="/games/words"> etiquetando palabras </a> desde la liga de <span style={{ color: "#8A9597" }} > Plata </span> o descubriendo la palabra incógnita en 
+                                    <a href="/games/four-images-one-word"> 4 imágenes y 1 palabra </a> a partir de la liga de <span style={{ color: "#FFBF00" }} > Oro </span>.
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
-                
+
+                            <Card
+                                bg="light"
+                                key="1"
+                                text="dark"
+                                className="card-other"
+                            >
+                                <FaUpload className="card-icons" />
+                                <Card.Header className="card-header" > <a className="nav-link" href="/settings"> Contenido </a> </Card.Header>
+                                <Card.Body>
+                                <Card.Title className="card-title" > Sube tu propio contenido </Card.Title>
+                                <Card.Text className="card-text" >
+                                    Puedes aportar tu granito de arena y colaborar con el objetivo de E-ncendio 
+                                    subiendo imágenes y palabras desde las ligas de <span style={{ color: "#8A9597" }} > Plata </span> y <span style={{ color: "#FFBF00" }} > Oro </span> respectivamente
+                                    que serán evaluadas por los administradores para ver si cumplen con los requisitos.
+                                </Card.Text>
+                                </Card.Body>
+                            </Card>
                           
                         </Grid>
                         {/* Gráficas */}

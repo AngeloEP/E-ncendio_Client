@@ -124,26 +124,26 @@ const Navigation =  ({ location, history })  => {
                     : <Bars onClick={ () => handleClick() } />
                     }
                     <NavMenu className={ clicked ? 'nav-menu active' : 'nav-menu' } >
-                        <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/home"  activeStyle={{  }} >
-                            Inicio 
-                        </NavLink>
-                        <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/games"  activeStyle={{  }} >
-                            Juegos
+                        <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/profile"  activeStyle={{  }} >
+                            Perfil
                         </NavLink>
                         <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/rank"  activeStyle={{  }} >
                             Ranking
                         </NavLink>
-                        <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/profile"  activeStyle={{  }} >
-                            Perfil
-                        </NavLink>
-                        <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/about"  activeStyle={{  }} >
-                            Conócenos
-                        </NavLink>
-                        <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/help"  activeStyle={{  }} >
-                            Ayuda
+                        <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/games"  activeStyle={{  }} >
+                            Juegos
                         </NavLink>
                         <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/settings" activeStyle={{  }} >
                             Contenido
+                        </NavLink>
+                        <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/home"  activeStyle={{  }} >
+                            Inicio 
+                        </NavLink>
+                        {/* <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/about"  activeStyle={{  }} >
+                            Conócenos
+                        </NavLink> */}
+                        <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/help"  activeStyle={{  }} >
+                            Ayuda
                         </NavLink>
                     </NavMenu>
                     

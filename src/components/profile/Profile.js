@@ -27,11 +27,6 @@ const Profile = ( props ) => {
     const profilecontext = useContext(ProfileContext)
     const { perfil, obtenerPerfil } = profilecontext
 
-    // const ligaUsuario = perfil != null ?
-    //                         perfil.league_id.league === "Bronce"
-    //                         ?
-
-
     useEffect(() => {
         usuarioAutenticado()
 
@@ -49,6 +44,7 @@ const Profile = ( props ) => {
         localStorage.setItem('gender', usuario.gender );
         localStorage.setItem('age', usuario.age );
         localStorage.setItem('phone', usuario.phone );
+        localStorage.setItem('urlFile', usuario.urlFile );
 
         props.history.push('/profile/edit')
     }
@@ -101,7 +97,23 @@ const Profile = ( props ) => {
                                                     <h6 class="m-b-20 p-b-5 b-b-default f-w-600"> Mi información de perfil de usuario </h6>
                                                 </div>
                                                 <div class="col-sm-6 col-log-12 col-xl-6">
-                                                            <button className="profile-edit-btn" onClick={() => updateButtonAction() } >
+                                                            <button
+                                                                className={
+                                                                    perfil.league_id.league === "Bronce"
+                                                                    ?
+                                                                        "disableBtn"
+                                                                    :
+                                                                        "profile-edit-btn"
+                                                                }
+                                                                onClick={() => updateButtonAction() }
+                                                                disabled={
+                                                                    perfil.league_id.league === "Bronce"
+                                                                    ?
+                                                                        true
+                                                                    :
+                                                                        false
+                                                                }
+                                                            >
                                                                 <div class="row">
                                                                     <div class="col-sm-6 col-log-12 col-xl-8">
                                                                             Editar Perfil

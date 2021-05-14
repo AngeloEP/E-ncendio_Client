@@ -15,7 +15,6 @@ const UploadImagesUser = ({ usuario,
     cargandoImagenesUsuarioDesdeAdmin,
 }) => {
 
-
     return (
         <div className="cards-images" >
             <div className="row">
@@ -38,7 +37,7 @@ const UploadImagesUser = ({ usuario,
                                                 type="submit"
                                                 variant="contained"
                                                 color="secondary"
-                                                style={{height: "1%", width: "45%", marginLeft: "2%" }}
+                                                style={{height: "15%", width: "45%", marginLeft: "2%" }}
                                                 disabled={cargandoEliminarImagenPorAdmin}
                                                 onClick={() => funcionEliminar(imagen._id)}
                                             >
@@ -76,10 +75,10 @@ const UploadImagesUser = ({ usuario,
                                                 variant="contained"
                                                 style={imagen.Habilitada ?
                                                         { backgroundColor: "#ffc107",
-                                                        borderColor: "#ffc107", height: "1%", width: "45%", marginLeft: "2%" }
+                                                        borderColor: "#ffc107", height: "15%", width: "45%", marginLeft: "2%" }
                                                         :
                                                         { color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745",
-                                                            height: "1%", width: "45%", marginLeft: "2%" }
+                                                            height: "15%", width: "45%", marginLeft: "2%" }
                                                     }
                                                 disabled={cargandoHabilitarInhabilitarImagen}
                                                 onClick={() => funcionHabilitarInhabilitar(imagen._id, !imagen.Habilitada)}
