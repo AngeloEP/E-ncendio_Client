@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import './uploadImagesUser.css';
+import './uploadHangmansUser.css';
 
 import AlertaContext from '../../../../../../context/alertas/alertaContext';
 
@@ -19,15 +19,15 @@ import Modal from 'react-bootstrap/Modal';
 import ButtonBootstrap from 'react-bootstrap/Button';
 
 
-const UploadImagesUser = ({ usuario,
-    imagenes,
+const UploadHangmansUser = ({ usuario,
+    ahorcados,
     funcionHabilitarInhabilitar,
-    cargandoHabilitarInhabilitarImagen,
     funcionEliminar,
-    cargandoEliminarImagenPorAdmin,
-    cargandoImagenesUsuarioDesdeAdmin,
     funcionModificarDificultadYPuntos,
-    cargandoModificarDificultadPuntosImagenPorAdmin,
+    cargandoHabilitarInhabilitarAhorcado,
+    cargandoEliminarAhorcadoPorAdmin,
+    cargandoAhorcadosUsuarioDesdeAdmin,
+    cargandoModificarDificultadPuntosAhorcadoPorAdmin,
 }) => {
     // Extraer los valores del context
     const alertaContext = useContext(AlertaContext)
@@ -39,30 +39,33 @@ const UploadImagesUser = ({ usuario,
             setShow(false)
     };
 
-    const handleShow = (image_id) => {
-        const imageSelected = imagenes.find(image => image._id === image_id);
-        setFieldsImageUpdate({
-            id_image_selected: image_id,
-            nameUpdate: imageSelected.Nombre,
-            difficulty: imageSelected.Dificultad,
-            points: imageSelected.Puntos,
+    const handleShow = (hangman_id) => {
+        const hangmanSelected = ahorcados.find(hangman => hangman._id === hangman_id);
+        setFieldsHangmanUpdate({
+            id_hangman_selected: hangman_id,
+            associatedWord: hangmanSelected.Palabra,
+            difficulty: hangmanSelected.Dificultad,
+            points: hangmanSelected.Puntos,
         })
-        setPathImageUpdate(imageSelected.Imagen)
+        setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen1]);
+        setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen2]);
+        setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen3]);
+        setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen4]);
         setShow(true)
     };
 
-    const [ fieldsImageUpdate, setFieldsImageUpdate ] = useState({
-        id_image_selected: "",
-        nameUpdate: "",
+    const [ fieldsHangmanUpdate, setFieldsHangmanUpdate ] = useState({
+        id_hangman_selected: "",
+        associatedWord: "",
         difficulty: "",
         points: 0,
     })
-    const { id_image_selected, nameUpdate, difficulty, points } = fieldsImageUpdate;
-    const [ pathImageUpdate, setPathImageUpdate ] = useState(null)
+    const { id_hangman_selected, associatedWord, difficulty, points } = fieldsHangmanUpdate;
+    const [ pathImagesUpdate, setPathImagesUpdate ] = useState([])
 
     const onChangeUpdate = e => {
-        setFieldsImageUpdate({
-            ...fieldsImageUpdate,
+        setFieldsHangmanUpdate({
+            ...fieldsHangmanUpdate,
             [e.target.name]: e.target.value
         })
     }
@@ -70,44 +73,61 @@ const UploadImagesUser = ({ usuario,
     const onSubmitUpdate = e => {
         e.preventDefault()
         // Validar que no hayan campos vacíos
-        if (difficulty.trim() === '' ||
+        if (associatedWord.trim() === '' ||
+            difficulty.trim() === '' ||
             points === 0 ||
             points === "" ) {
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
                 return
         }
         
-        funcionModificarDificultadYPuntos( id_image_selected, {difficulty, points} )
+        funcionModificarDificultadYPuntos( id_hangman_selected, { associatedWord, difficulty, points } )
     }
 
     return (
-        <div className="cards-images" >
+        <div className="cards-hangmans" >
             <div className="row">
-                { cargandoImagenesUsuarioDesdeAdmin === false
+                { cargandoAhorcadosUsuarioDesdeAdmin === false
                     ?
-                        imagenes.length != 0
+                        ahorcados.length != 0
                         ?
-                            imagenes.map((imagen, index) =>
+                            ahorcados.map((ahorcado, index) =>
 
-                                <div key={index} className="col-sm-3 col-md-4" >
+                                <div key={index} className="col-sm-6 col-md-6" >
                                     
-                                    <div className="card text-white tarjeta" >
-                                        <img className="card-img-top imagen-tarjeta" src={imagen.Imagen} alt="Card image cap" />
+                                    <div className="card text-white tarjeta-hangman" >
+                                        {/* <img className="card-img-top imagenes-tarjeta" src={ahorcado.Imagen1} alt="Card image cap" /> */}
+                                        <div className="fila">
+                                            <div className="columna">
+                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen1} />
+                                            </div>
+                                            <div className="columna">
+                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen2} />
+                                            </div>
+                                        </div>
+                                        <div className="fila">
+                                            <div className="columna">
+                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen3} />
+                                            </div>
+                                            <div className="columna">
+                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen4} />
+                                            </div>
+                                        </div>
                                         <div className="card-body text-center">
-                                            <h5 className="card-title titulo-nombre-card-image"> Nombre </h5>
-                                            <p className="card-text nombre-card-image"> {imagen.Nombre} </p>
-                                            <h5 className="card-title titulo-fecha-card-image"> Subido el </h5>
-                                            <p className="card-text fecha-card-image"> {imagen.Creadoel} </p>
+                                            <h5 className="card-title titulo-nombre-card-hangman"> Palabra </h5>
+                                            <p className="card-text nombre-card-hangman"> {ahorcado.Palabra} </p>
+                                            <h5 className="card-title titulo-fecha-card-hangman"> Subido el </h5>
+                                            <p className="card-text fecha-card-hangman"> {ahorcado.Creadoel} </p>
                                             <Button
                                                 type="submit"
                                                 variant="contained"
                                                 color="secondary"
                                                 style={{height: "15%", width: "45%", marginLeft: "2%" }}
-                                                disabled={cargandoEliminarImagenPorAdmin}
-                                                onClick={() => funcionEliminar(imagen._id)}
+                                                disabled={cargandoEliminarAhorcadoPorAdmin}
+                                                onClick={() => funcionEliminar(ahorcado._id)}
                                             >
                                                 {
-                                                    cargandoEliminarImagenPorAdmin
+                                                    cargandoEliminarAhorcadoPorAdmin
                                                     ?
                                                     <Grid container
                                                         direction="row"
@@ -130,26 +150,21 @@ const UploadImagesUser = ({ usuario,
                                                         "Eliminar"
                                                 }
                                             </Button>
-                                            {/* <a  className={imagen.Habilitada ?
-                                                        "btn ml-2 btn-success"
-                                                        : "btn ml-2 btn-success" }
-                                                        onClick={() => funcionHabilitarInhabilitar(imagen._id)}
-                                                        > {imagen.Habilitada ? "Inhabilitar" : "Habilitar"} </a> */}
                                             <Button
                                                 type="submit"
                                                 variant="contained"
-                                                style={imagen.Habilitada ?
+                                                style={ahorcado.Habilitada ?
                                                         { backgroundColor: "#ffc107",
                                                         borderColor: "#ffc107", height: "15%", width: "45%", marginLeft: "2%" }
                                                         :
                                                         { color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745",
                                                             height: "15%", width: "45%", marginLeft: "2%" }
                                                     }
-                                                disabled={cargandoHabilitarInhabilitarImagen}
-                                                onClick={() => funcionHabilitarInhabilitar(imagen._id, !imagen.Habilitada)}
+                                                disabled={cargandoHabilitarInhabilitarAhorcado}
+                                                onClick={() => funcionHabilitarInhabilitar(ahorcado._id, !ahorcado.Habilitada)}
                                             >
                                                 {
-                                                    cargandoHabilitarInhabilitarImagen
+                                                    cargandoHabilitarInhabilitarAhorcado
                                                     ?
                                                     <Grid container
                                                         direction="row"
@@ -169,7 +184,7 @@ const UploadImagesUser = ({ usuario,
                                                     </Grid>
                                                         
                                                     :
-                                                        imagen.Habilitada ? "Inhabilitar" : "Habilitar"
+                                                        ahorcado.Habilitada ? "Inhabilitar" : "Habilitar"
                                                 }
                                             </Button>
                                             <Button
@@ -178,7 +193,7 @@ const UploadImagesUser = ({ usuario,
                                                 variant="contained"
                                                 color="primary"
                                                 style={{ backgroundColor: "#1976d2", color: "#fff", height: "15%", width: "100%" }}
-                                                onClick={() => handleShow(imagen._id)}
+                                                onClick={() => handleShow(ahorcado._id)}
                                             >
                                                 {
                                                     "Modificar dificultad y puntos"
@@ -190,7 +205,7 @@ const UploadImagesUser = ({ usuario,
                             )
                         :
                         <div className="text-center ml-auto mr-auto" >
-                            No hay imágenes
+                            No hay ahorcados
                         </div>
                     :
                         <div className="text-center ml-auto mr-auto" >
@@ -214,68 +229,84 @@ const UploadImagesUser = ({ usuario,
                     style={{ backgroundColor: "black" }}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Imagen  </Modal.Title>
+                        <Modal.Title> Modificar Ahorcado  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
-                        <Container className="div-uploadImage-update" >
+                        <Container className="div-uploadHangman-update" >
                             <Grid container component="main" >
                                 <Grid item xs={12} sm={8} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                                     <Grid container spacing={5} >
-                                        <Grid item xs={4} >
-                                            <div className="div-image-update" >
-                                                <img className="img-fluid img-thumbnail image-upload-update" src={pathImageUpdate} alt="Image" />
+                                        <Grid item xs={6} >
+                                            <div className="fila-update">
+                                                <div className="columna-update">
+                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[0]} />
+                                                </div>
+                                                <div className="columna-update">
+                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[1]} />
+                                                </div>
+                                            </div>
+                                            <div className="fila-update">
+                                                <div className="columna-update">
+                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[2]} />
+                                                </div>
+                                                <div className="columna-update">
+                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[3]} />
+                                                </div>
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} >
-                                            <div className="div-filename-update" >                        
-                                                <TextField
-                                                    style={{ width: "60%" }}
-                                                    value={nameUpdate}
-                                                    disabled
-                                                    name="filename"
-                                                    variant="filled"
-                                                    id="filename"
-                                                    label="Nombre de la imagen"
-                                                    autoFocus
-                                                />
-                                            </div>
+                                        <Grid item xs={6} >
+                                            <div>
+                                                
+                                                <div className="div-filename-update" >                        
+                                                    <TextField
+                                                        style={{ width: "60%" }}
+                                                        value={associatedWord}
+                                                        name="filename"
+                                                        variant="outlined"
+                                                        id="filename"
+                                                        label="Palabra de asociación"
+                                                        autoFocus
+                                                    />
+                                                </div>
 
-                                            <div className="div-difficulty-update" >                        
-                                                <FormControl variant="outlined" >
-                                                    <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-outlined-label"
-                                                        style={{ width: "15em" }}
-                                                        id="difficulty"
-                                                        name="difficulty"
-                                                        value={difficulty}
+                                                <div className="div-difficulty-hangman" >                        
+                                                    <FormControl variant="outlined" >
+                                                        <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
+                                                        <Select
+                                                            labelId="demo-simple-select-outlined-label"
+                                                            style={{ width: "15em" }}
+                                                            id="difficulty"
+                                                            name="difficulty"
+                                                            value={difficulty}
+                                                            onChange={onChangeUpdate}
+                                                            label="Dificultad"
+                                                        >
+                                                        <MenuItem value="">
+                                                            <em>Ninguna</em>
+                                                        </MenuItem>
+                                                        <MenuItem value={'Easy'}> Fácil </MenuItem>
+                                                        <MenuItem value={'Medium'}> Medio </MenuItem>
+                                                        <MenuItem value={'High'}> Alta </MenuItem>
+                                                        </Select>
+                                                    </FormControl>
+                                                </div>
+
+                                                <div className="div-points-update" >
+                                                    <TextField
+                                                        style={{ width: "60%" }}
+                                                        variant="outlined"
+                                                        id="points"
+                                                        label="Ingrese una cantidad de puntos asociada a este ahorcado"
+                                                        name='points'
+                                                        type='number'
+                                                        value={points}
                                                         onChange={onChangeUpdate}
-                                                        label="Dificultad"
-                                                    >
-                                                    <MenuItem value="">
-                                                        <em> Ninguna </em>
-                                                    </MenuItem>
-                                                    <MenuItem value={'Easy'}> Fácil </MenuItem>
-                                                    <MenuItem value={'Medium'}> Medio </MenuItem>
-                                                    <MenuItem value={'High'}> Alta </MenuItem>
-                                                    </Select>
-                                                </FormControl>
-                                            </div>
+                                                    />
+                                                </div>
 
-                                            <div className="div-points-update" >
-                                                <TextField
-                                                    style={{ width: "60%" }}
-                                                    variant="outlined"
-                                                    id="points"
-                                                    label="Ingrese una cantidad de puntos asociada a esta imagen"
-                                                    name='points'
-                                                    type='number'
-                                                    value={points}
-                                                    onChange={onChangeUpdate}
-                                                />
                                             </div>
 
                                         </Grid>
@@ -295,10 +326,10 @@ const UploadImagesUser = ({ usuario,
                             variant="contained"
                             style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
                             startIcon={<EditIcon />}
-                            disabled={cargandoModificarDificultadPuntosImagenPorAdmin}
+                            disabled={cargandoModificarDificultadPuntosAhorcadoPorAdmin}
                         >
                             {
-                                cargandoModificarDificultadPuntosImagenPorAdmin
+                                cargandoModificarDificultadPuntosAhorcadoPorAdmin
                                 ?
                                 <Grid container
                                     direction="row"
@@ -329,4 +360,4 @@ const UploadImagesUser = ({ usuario,
     );
 }
  
-export default UploadImagesUser;
+export default UploadHangmansUser;

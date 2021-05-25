@@ -168,7 +168,24 @@ const TagImage = ( props ) => {
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
-        perfil.score = perfil.score + 25
+        let addPoints = 0;
+        switch (perfil.level_image_id.level) {
+            case "Bronce":
+                addPoints = 35;
+                break;
+
+            case "Plata":
+                addPoints = 20;
+                break;
+
+            case "Oro":
+                addPoints = 10;
+                break;
+        
+            default:
+                break;
+        }
+        perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             console.log("Subir de nivel")
             perfil.league_id = perfil.league_id.league

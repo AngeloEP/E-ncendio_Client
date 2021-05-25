@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
+
 import UploadImage from './uploadImage/UploadImage';
+import UploadFourImagesOneWord from './uploadFourImagesOneWord/UploadFourImagesOneWord';
 import UploadWord from './uploadWord/UploadWord';
 import Admin from './admin/Admin';
 
@@ -10,6 +12,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import ImageIcon from '@material-ui/icons/Image';
 import SpellcheckIcon from '@material-ui/icons/Spellcheck';
+import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import PeopleIcon from '@material-ui/icons/People';
 
 import './settings.css';
@@ -54,50 +57,63 @@ const Settings = () => {
                                         "Puede subir imágenes y palabras al sitio"
                             }
                         </div>
-                        <BottomNavigation
-                            value={navigation}
-                            onChange={(event, newValue) => {
-                                setNavigation(newValue);
-                            }}
-                            showLabels
-                            className="nav-settings"
-                        >
-                            { usuario.isAdmin
-                                ?
-                                    <BottomNavigationAction
-                                        label="Administrador"
-                                        icon={<PeopleIcon/>}
-                                    />
-                                :
-                                    null
-                            }
-                            <BottomNavigationAction
-                                label="Subir imagen"
-                                icon={<ImageIcon/>}
-                                disabled={
-                                    perfil.league_id.league === "Bronce"
+                        <div className="row buttonsNavigation" >
+                            <BottomNavigation
+                                value={navigation}
+                                onChange={(event, newValue) => {
+                                    setNavigation(newValue);
+                                }}
+                                showLabels
+                                className="nav-settings"
+                            >
+                                { usuario.isAdmin
                                     ?
-                                        true
+                                        <BottomNavigationAction
+                                            label="Administrador"
+                                            icon={<PeopleIcon/>}
+                                        />
                                     :
-                                        false
+                                        null
                                 }
-                            />
-                            <BottomNavigationAction
-                                label="Subir palabra"
-                                icon={<SpellcheckIcon/>}
-                                disabled={
-                                    perfil.league_id.league === "Bronce"
-                                    ?
-                                        true
-                                    :
-                                        perfil.league_id.league === "Plata"
+                                <BottomNavigationAction
+                                    label="Subir imagen"
+                                    icon={<ImageIcon/>}
+                                    disabled={
+                                        perfil.league_id.league != "Bronce"
                                         ?
                                             true
                                         :
                                             false
-                                }
-                            />
-                        </BottomNavigation>
+                                    }
+                                />
+                                <BottomNavigationAction
+                                    label="Subir palabra"
+                                    icon={<SpellcheckIcon/>}
+                                    disabled={
+                                        perfil.league_id.league === "Bronce"
+                                        ?
+                                            true
+                                        :
+                                            perfil.league_id.league === "Plata"
+                                            ?
+                                                true
+                                            :
+                                                false
+                                    }
+                                />
+                                <BottomNavigationAction
+                                    label="Subir ahorcado"
+                                    icon={<ImageSearchIcon/>}
+                                    disabled={
+                                        perfil.league_id.league != "Oro"
+                                        ?
+                                            false
+                                        :
+                                            true
+                                    }
+                                />
+                            </BottomNavigation>
+                        </div>
 
                         <div>
                             { usuario && usuario.isAdmin && navigation === 0
@@ -112,7 +128,11 @@ const Settings = () => {
                                         ?
                                             <UploadWord />
                                         :
-                                            null
+                                            navigation === 3
+                                            ?
+                                                <UploadFourImagesOneWord />
+                                            :
+                                                null 
                             }
                         </div>
                     </>

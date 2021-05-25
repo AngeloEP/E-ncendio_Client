@@ -29,13 +29,15 @@ import ImageIcon from '@material-ui/icons/Image';
 import EditIcon from '@material-ui/icons/Edit';
 import SpellcheckIcon from '@material-ui/icons/Spellcheck';
 import PublishIcon from '@material-ui/icons/Publish';
-
+import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 
 import './userForm.css';
 import UploadImagesUser from './uploadImagesUser/UploadImagesUser';
 import UploadWordsUser from './uploadWordsUser/UploadWordsUser';
 import TaggedImagesUser from './taggedImagesUser/TaggedImagesUser';
 import TaggedWordsUser from './taggedWordsUser/TaggedWordsUser';
+import TaggedHangmansUser from './taggedHangmansUser/TaggedHangmansUser';
+import UploadHangmansUser from './uploadHangmansUser/UploadHangmansUser';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -78,21 +80,37 @@ const UserForm = ({ usuario, handleClose }) => {
     const usuariosContext = useContext(UsuariosContext)
     const { modificarAdminYBloqueo,
         cargandoAdminYBloqueo,
-        imagenesPorUsuario,
-        cargandoImagenesUsuarioDesdeAdmin,
-        obtenerImagenesUsuarioAdmin,
         mensajeUsuarios,
-        palabrasPorUsuario,
-        cargandoPalabrasUsuarioDesdeAdmin,
-        obtenerPalabrasUsuarioAdmin,
-        cargandoHabilitarInhabilitarImagen,
+
+        imagenesPorUsuario,
+        obtenerImagenesUsuarioAdmin,
         habilitarInhabilitarImagenPorUsuario,
-        cargandoEliminarImagenPorAdmin,
         eliminarImagenPorUsuarioDesdeAdmin,
-        cargandoHabilitarInhabilitarPalabra,
-        cargandoEliminarPalabraPorAdmin,
+        modificarDificultadYPuntosImagen,
+        cargandoImagenesUsuarioDesdeAdmin,
+        cargandoHabilitarInhabilitarImagen,
+        cargandoEliminarImagenPorAdmin,
+        cargandoModificarDificultadPuntosImagenPorAdmin,
+
+        palabrasPorUsuario,
+        obtenerPalabrasUsuarioAdmin,
         habilitarInhabilitarPalabraPorUsuario,
         eliminarPalabraPorUsuarioDesdeAdmin,
+        modificarDificultadYPuntosPalabra,
+        cargandoPalabrasUsuarioDesdeAdmin,
+        cargandoHabilitarInhabilitarPalabra,
+        cargandoEliminarPalabraPorAdmin,
+        cargandoModificarDificultadPuntosPalabraPorAdmin,
+
+        ahorcadosPorUsuario,
+        obtenerAhorcadosUsuarioAdmin,
+        habilitarInhabilitarAhorcadoPorUsuario,
+        eliminarAhorcadoPorUsuarioDesdeAdmin,
+        modificarDificultadYPuntosAhorcado,
+        cargandoAhorcadosUsuarioDesdeAdmin,
+        cargandoHabilitarInhabilitarAhorcado,
+        cargandoEliminarAhorcadoPorAdmin,
+        cargandoModificarDificultadPuntosAhorcadoPorAdmin,
     } = usuariosContext
 
     // Extraer informacion del context imágenes
@@ -109,15 +127,22 @@ const UserForm = ({ usuario, handleClose }) => {
     const tagContext = useContext(TagContext)
     const {
         imagenesEtiquetadas,
-        palabrasEtiquetadas,
         cargandoImagenesEtiquetadasUsuarioDesdeAdmin,
-        cargandoPalabrasEtiquetadasUsuarioDesdeAdmin,
-        cargandoResetearEtiquetasPalabras,
         cargandoResetearEtiquetasImagenes,
         obtenerImagenesEtiquetadasPorUsuario,
+        eliminarImagenesEtiquetadasPorUsuario,
+        
+        palabrasEtiquetadas,
+        cargandoResetearEtiquetasPalabras,
+        cargandoPalabrasEtiquetadasUsuarioDesdeAdmin,
         obtenerPalabrasEtiquetadasPorUsuario,
         eliminarPalabrasEtiquetadasPorUsuario,
-        eliminarImagenesEtiquetadasPorUsuario
+
+        ahorcadosEtiquetados,
+        cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin,
+        cargandoResetearEtiquetasAhorcados,
+        obtenerAhorcadosEtiquetadosPorUsuario,
+        eliminarAhorcadosEtiquetadosPorUsuario,
     } = tagContext
 
     const [ user, setUser ] = useState({
@@ -136,8 +161,10 @@ const UserForm = ({ usuario, handleClose }) => {
 
         obtenerImagenesUsuarioAdmin(usuario._id)
         obtenerPalabrasUsuarioAdmin(usuario._id)
+        obtenerAhorcadosUsuarioAdmin(usuario._id)
         obtenerImagenesEtiquetadasPorUsuario(usuario._id)
         obtenerPalabrasEtiquetadasPorUsuario(usuario._id)
+        obtenerAhorcadosEtiquetadosPorUsuario(usuario._id)
 
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
@@ -169,20 +196,32 @@ const UserForm = ({ usuario, handleClose }) => {
         eliminarImagenesEtiquetadasPorUsuario(user_id)
     }
 
-    const modificarPropiedadHabilitarImagen = (image_id, isEnabled) => {
-        habilitarInhabilitarImagenPorUsuario(image_id, {isEnabled})
+    const resetearEtiquetasAhorcados = (user_id) => {
+        eliminarAhorcadosEtiquetadosPorUsuario(user_id)
     }
 
-    const eliminarImagenDesdeAdmin = (image_id) => {
-        eliminarImagenPorUsuarioDesdeAdmin(image_id)
+    const modificarPropiedadHabilitarImagen = (image_id, isEnabled) => {
+        habilitarInhabilitarImagenPorUsuario(image_id, {isEnabled})
     }
 
     const modificarPropiedadHabilitarPalabra = (word_id, isEnabled) => {
         habilitarInhabilitarPalabraPorUsuario(word_id, {isEnabled})
     }
 
+    const modificarPropiedadHabilitarAhorcado = (hangman_id, isEnabled) => {
+        habilitarInhabilitarAhorcadoPorUsuario(hangman_id, {isEnabled})
+    }
+
+    const eliminarImagenDesdeAdmin = (image_id) => {
+        eliminarImagenPorUsuarioDesdeAdmin(image_id)
+    }
+
     const eliminarPalabraDesdeAdmin = (word_id) => {
         eliminarPalabraPorUsuarioDesdeAdmin(word_id)
+    }
+
+    const eliminarAhorcadoDesdeAdmin = (hangman_id) => {
+        eliminarAhorcadoPorUsuarioDesdeAdmin(hangman_id)
     }
 
     const onSubmitUpdate = e => {
@@ -205,7 +244,6 @@ const UserForm = ({ usuario, handleClose }) => {
             <Grid container component="main" className="">
                 { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                 <Grid item xs={12} sm={8} md={12} elevation={6} >
-                    {/* { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null } */}
                         <Grid container spacing={5} >
                             <form  onSubmit={onSubmitUpdate}  >
                                 <Grid className="ml-2 mt-3" container spacing={7}>
@@ -322,6 +360,12 @@ const UserForm = ({ usuario, handleClose }) => {
                                                 {palabrasPorUsuario.length}
                                             </div>
                                         </div>
+                                        <div className="hangmans-upload" >
+                                            Ahorcados Subidos
+                                            <div className="num-hangmans-upload" >
+                                                {ahorcadosPorUsuario.length}
+                                            </div>
+                                        </div>
                                         <div className="tag-images" >
                                             Imágenes Etiquetadas
                                             <div className="num-tag-images" >
@@ -332,6 +376,12 @@ const UserForm = ({ usuario, handleClose }) => {
                                             Palabras Etiquetadas
                                             <div className="num-tag-words" >
                                                 {palabrasEtiquetadas.length}
+                                            </div>
+                                        </div>
+                                        <div className="tag-hangmans" >
+                                            Ahorcados Completados
+                                            <div className="num-tag-hangmans" >
+                                                {ahorcadosEtiquetados.length}
                                             </div>
                                         </div>
                                     </div>
@@ -349,8 +399,10 @@ const UserForm = ({ usuario, handleClose }) => {
                                     >
                                         <Tab label="Imágenes Subidas" icon={<PublishIcon />} {...a11yProps(0)} />
                                         <Tab label="Palabras Subidas" icon={<PublishIcon />} {...a11yProps(1)} />
-                                        <Tab label="Imágenes Asociadas" icon={<ImageIcon />} {...a11yProps(2)} />
-                                        <Tab label="Palabras Asociadas" icon={<SpellcheckIcon />} {...a11yProps(3)} />
+                                        <Tab label="Ahorcados Subidos" icon={<PublishIcon />} {...a11yProps(2)} />
+                                        <Tab label="Imágenes Asociadas" icon={<ImageIcon />} {...a11yProps(3)} />
+                                        <Tab label="Palabras Asociadas" icon={<SpellcheckIcon />} {...a11yProps(4)} />
+                                        <Tab label="Ahorcados Completados" icon={<ImageSearchIcon />} {...a11yProps(5)} />
                                     </Tabs>
                                 </AppBar>
                                 <SwipeableViews
@@ -367,6 +419,8 @@ const UserForm = ({ usuario, handleClose }) => {
                                             funcionEliminar={eliminarImagenDesdeAdmin}
                                             cargandoEliminarImagenPorAdmin={cargandoEliminarImagenPorAdmin}
                                             cargandoImagenesUsuarioDesdeAdmin={cargandoImagenesUsuarioDesdeAdmin}
+                                            funcionModificarDificultadYPuntos={modificarDificultadYPuntosImagen}
+                                            cargandoModificarDificultadPuntosImagenPorAdmin={cargandoModificarDificultadPuntosImagenPorAdmin}
                                         />
                                     </TabPanel>
                                     <TabPanel value={value} index={1} dir={theme.direction}>
@@ -378,9 +432,24 @@ const UserForm = ({ usuario, handleClose }) => {
                                             funcionEliminar={eliminarPalabraDesdeAdmin}
                                             cargandoEliminarPalabraPorAdmin={cargandoEliminarPalabraPorAdmin}
                                             cargandoPalabrasUsuarioDesdeAdmin={cargandoPalabrasUsuarioDesdeAdmin}
+                                            funcionModificarDificultadYPuntos={modificarDificultadYPuntosPalabra}
+                                            cargandoModificarDificultadPuntosPalabraPorAdmin={cargandoModificarDificultadPuntosPalabraPorAdmin}
                                         />
                                     </TabPanel>
                                     <TabPanel value={value} index={2} dir={theme.direction}>
+                                        <UploadHangmansUser
+                                            usuario={usuario}
+                                            ahorcados={ahorcadosPorUsuario}
+                                            funcionHabilitarInhabilitar={modificarPropiedadHabilitarAhorcado}
+                                            cargandoHabilitarInhabilitarAhorcado={cargandoHabilitarInhabilitarAhorcado}
+                                            funcionEliminar={eliminarAhorcadoDesdeAdmin}
+                                            cargandoEliminarAhorcadoPorAdmin={cargandoEliminarAhorcadoPorAdmin}
+                                            cargandoAhorcadosUsuarioDesdeAdmin={cargandoAhorcadosUsuarioDesdeAdmin}
+                                            funcionModificarDificultadYPuntos={modificarDificultadYPuntosAhorcado}
+                                            cargandoModificarDificultadPuntosAhorcadoPorAdmin={cargandoModificarDificultadPuntosAhorcadoPorAdmin}
+                                        />
+                                    </TabPanel>
+                                    <TabPanel value={value} index={3} dir={theme.direction}>
                                         <TaggedImagesUser
                                             usuario={usuario}
                                             imagenesEtiquetadas={imagenesEtiquetadas}
@@ -389,13 +458,22 @@ const UserForm = ({ usuario, handleClose }) => {
                                             cargandoImagenesEtiquetadasUsuarioDesdeAdmin={cargandoImagenesEtiquetadasUsuarioDesdeAdmin}
                                         />
                                     </TabPanel>
-                                    <TabPanel value={value} index={3} dir={theme.direction}>
+                                    <TabPanel value={value} index={4} dir={theme.direction}>
                                         <TaggedWordsUser
                                             usuario={usuario}
                                             palabrasEtiquetadas={palabrasEtiquetadas}
                                             funcionResetear={resetearEtiquetasPalabras}
                                             cargandoResetearEtiquetasPalabras={cargandoResetearEtiquetasPalabras}
                                             cargandoPalabrasEtiquetadasUsuarioDesdeAdmin={cargandoPalabrasEtiquetadasUsuarioDesdeAdmin}
+                                        />
+                                    </TabPanel>
+                                    <TabPanel value={value} index={5} dir={theme.direction}>
+                                        <TaggedHangmansUser
+                                            usuario={usuario}
+                                            ahorcadosEtiquetados={ahorcadosEtiquetados}
+                                            funcionResetear={resetearEtiquetasAhorcados}
+                                            cargandoResetearEtiquetasAhorcados={cargandoResetearEtiquetasAhorcados}
+                                            cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin={cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin}
                                         />
                                     </TabPanel>
                                 </SwipeableViews>

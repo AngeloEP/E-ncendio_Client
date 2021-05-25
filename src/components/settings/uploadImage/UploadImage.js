@@ -9,11 +9,6 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import ClipLoader from "react-spinners/ClipLoader";
 import uploadImage from '../../../assets/img/upload_image.jpg';
@@ -28,10 +23,17 @@ const UploadImage = () => {
 
     // Extraer informacion del context auth
     const authContext = useContext(AuthContext)
-    const { mensaje, autenticado, cargandoRegistroUsuario, registrarUsuario } = authContext
+    const { mensaje, autenticado } = authContext
 
     const imageContext = useContext(ImageContext)
-    const { imagenes, cargandoSubirImagen, cargandoEliminarImagen, cargandoModificarImagen, guardarImagen, traerImagenesPorUsuario, eliminarImagen } = imageContext
+    const { imagenes,
+        cargandoSubirImagen,
+        cargandoEliminarImagen,
+        cargandoModificarImagen,
+        guardarImagen,
+        traerImagenesPorUsuario,
+        eliminarImagen
+    } = imageContext
 
     // En caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
     useEffect(() => {
@@ -44,21 +46,8 @@ const UploadImage = () => {
 
     }, [ mensaje, imagenes, cargandoSubirImagen, cargandoEliminarImagen, cargandoModificarImagen ] )
 
-    const [ fieldsImage, setFieldsImage ] = useState({
-        difficulty: "",
-        points: 0,
-    })
-
-    const { difficulty, points } = fieldsImage;
     const [ image, setImage ] = useState(null)
     const [ pathImage, setPathImage ] = useState(uploadImage)
-
-    const onChange = e => {
-        setFieldsImage({
-            ...fieldsImage,
-            [e.target.name]: e.target.value
-        })
-    }
 
     const onFileChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -66,7 +55,7 @@ const UploadImage = () => {
             if (file.type.includes("image")) {
                 const reader = new FileReader()
                 reader.readAsDataURL(file)
-
+                
                 reader.onload = function load() {
                     setPathImage(reader.result)
                 }
@@ -78,18 +67,11 @@ const UploadImage = () => {
     }
 
     const onDelete = (id_image) => {
-        // console.log(id_image)
         eliminarImagen(id_image)
     }
 
     const onSubmit = e => {
         e.preventDefault()
-        // Validar que no hayan campos vacíos
-        if (difficulty.trim() === '' ||
-            points === 0 ) {
-                mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
-                return
-        }
 
         if (image === null) {
             mostrarAlerta("Debe adjuntar una imagen", 'alerta-error')
@@ -98,18 +80,13 @@ const UploadImage = () => {
         
         console.log("formulario correcto")
         const formData = new FormData();
-        formData.append('difficulty', difficulty);
-        formData.append('points', points);
         formData.append('image', image);
         guardarImagen(formData)
 
         // Resetear campos
-        setFieldsImage({
-            difficulty: "",
-            points: 0,
-        })
         setImage(null);
         setPathImage(uploadImage);
+        document.getElementById("contained-button-file").value = "";
     }
 
     return (
@@ -138,11 +115,10 @@ const UploadImage = () => {
                                             Agregar imagen
                                         </Button>
                                     </label>
-                                    {/* <img className="image" src={uploadImage} /> */}
                                 </div>
                             </Grid>
                             <Grid item xs={8} >
-                                <div className="div-filename" >                        
+                                <div className="mt-5 div-filename" >                        
                                     <TextField
                                         className="textfield-filename"
                                         value={ image ? image.name.split(".")[0] : "" }
@@ -152,45 +128,8 @@ const UploadImage = () => {
                                         id="filename"
                                         label="Nombre de la imagen"
                                         autoFocus
-                                        onChange={onChange}
                                     />
                                 </div>
-
-                                <div className="div-difficulty" >                        
-                                    <FormControl variant="outlined" >
-                                        <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-outlined-label"
-                                            className="select-difficulty"
-                                            id="difficulty"
-                                            name="difficulty"
-                                            value={difficulty}
-                                            onChange={onChange}
-                                            label="Dificultad"
-                                        >
-                                        <MenuItem value="">
-                                            <em> Ninguna </em>
-                                        </MenuItem>
-                                        <MenuItem value={'Easy'}> Fácil </MenuItem>
-                                        <MenuItem value={'Medium'}> Medio </MenuItem>
-                                        <MenuItem value={'High'}> Alta </MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </div>
-
-                                <div className="div-points" >
-                                    <TextField
-                                        className="textfield-points"
-                                        variant="outlined"
-                                        id="points"
-                                        label="Ingrese una cantidad de puntos asociada a esta imagen"
-                                        name='points'
-                                        type='number'
-                                        value={points}
-                                        onChange={onChange}
-                                    />
-                                </div>
-
                             </Grid>
                             <Grid item xs={12} style={{ marginBottom: "2%" }} >
                                 <Button

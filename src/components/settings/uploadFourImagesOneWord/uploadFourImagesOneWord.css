@@ -1,0 +1,152 @@
+.div-uploadFourImagesOneWord {
+    position: relative;
+    text-align: center;
+    width: 90%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.div-images {
+    position: relative;
+    width: 10%;
+}
+
+.images-hangman {
+    position: relative;
+    min-width: 200px;
+    max-width: 400px;
+    min-height: 200px;
+    max-height: 200px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.label-upload-images {
+    width: 11em;
+    height: 2em;
+    margin-left: 270%;
+    margin-bottom: 1em;
+}
+
+.div-associateWord {
+    margin-top: 5% !important;
+}
+
+.textfield-associateWord {
+    width: 60%;
+}
+
+.div-submit-imageAndWord {
+    position: relative;
+    margin-top: 25% !important;
+}
+
+.submit-imageAndWord {
+    width: fit-content;
+}
+
+.div-datatable-fourImagesOneWord {
+    text-align: center;
+    width: 80%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 10%;
+    background-color: white;
+    border-radius: 12px;
+}
+
+#file[type="file"] {
+	display: none;
+}
+.label-holder {
+	width: 100%;
+	height: 50px;
+    margin-top: 3em;
+    display: grid;
+    place-items: center;
+  
+}
+.label{
+    height: 50px;
+    width: auto;
+    padding: 10px;
+    background-color:greenyellow;
+    color: black;
+    display: grid;
+    place-items: center;
+    font-size: 2.5rem ;
+    cursor: pointer;
+}
+
+.label:hover {
+    transition: 0.1s ;
+    border: 2px solid #4CAF50;
+}
+
+.buttonResetImages {
+    margin-left: 10px !important;
+    height: 50px;
+}
+
+.result{
+    min-height: 100%;
+    max-height: auto;
+    width: 100%;
+    background-color: #272c34;
+    margin-top:1rem ;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left; 
+}
+
+.imagesSelected {
+    width: 25%;
+    height: 200px;
+    object-fit: inherit;
+    padding: 0.75rem;
+}
+
+@media only screen and (max-width: 1376px){
+    .div-uploadImage {
+        width: 85% !important;
+        margin-left: 7.5% !important ;
+        margin-top: 3em;
+        margin-bottom: 2em;
+    }
+
+    .div-image {
+        width: 15%;
+        height: 100%;
+        margin-left: 25%;
+    }
+
+    .image-upload {
+        min-width: 200px;
+        max-width: 300px;
+        min-height: 150px;
+        max-height: 250px;
+    }
+
+    .label-upload-image { /* Agregar imagen */
+        margin-left: 100%;
+    }
+
+    .div-associateWord {
+        margin-top: 1em;
+        margin-left: 5%;
+
+    }
+    
+    .submit-imageAndWord {
+        width: fit-content;
+    }
+
+    .textfield-associateWord {
+        width: 50%;
+    }
+}

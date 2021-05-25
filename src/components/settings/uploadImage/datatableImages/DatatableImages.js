@@ -9,20 +9,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 
 import ClipLoader from "react-spinners/ClipLoader";
 
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
-import ModalHeader from 'react-bootstrap/ModalHeader';
-import ModalTitle from 'react-bootstrap/ModalTitle';
-import ModalBody from 'react-bootstrap/ModalBody';
-import ModalFooter from 'react-bootstrap/ModalFooter';
-import ButtonBootstrap from 'react-bootstrap/Button'
+import ButtonBootstrap from 'react-bootstrap/Button';
 
 
 import './datatableImages.css';
@@ -34,10 +26,10 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
 
     // Extraer informacion del context auth
     const authContext = useContext(AuthContext)
-    const { mensaje, autenticado, cargandoRegistroUsuario, registrarUsuario } = authContext
+    const { mensaje } = authContext
 
     const imageContext = useContext(ImageContext)
-    const { imagenes, cargandoModificarImagen, traerImagenesPorUsuario, modificarImagen } = imageContext
+    const { cargandoModificarImagen, traerImagenesPorUsuario, modificarImagen } = imageContext
 
     useEffect(() => {
         // Ir a buscar las imágenes subidas por el usuario
@@ -55,15 +47,14 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
     
     const handleClose = () => {
         setShow(false)
+        setImageUpdate(null)
     };
+
     const handleShow = (image_id) => {
         const imageSelected = images.find(image => image._id === image_id);
-        console.log(imageSelected)
         setFieldsImageUpdate({
             id_image_selected: image_id,
             nameUpdate: imageSelected.Nombre,
-            difficultyUpdate: imageSelected.Dificultad,
-            pointsUpdate: imageSelected.Puntos,
         })
         setPathImageUpdate(imageSelected.Imagen)
         setShow(true)
@@ -72,21 +63,11 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
     const [ fieldsImageUpdate, setFieldsImageUpdate ] = useState({
         id_image_selected: "",
         nameUpdate: "",
-        difficultyUpdate: "",
-        pointsUpdate: 0,
     })
-
-    const { id_image_selected, nameUpdate, difficultyUpdate, pointsUpdate } = fieldsImageUpdate;
+    const { id_image_selected, nameUpdate } = fieldsImageUpdate;
     const [ imageUpdate, setImageUpdate ] = useState(null)
     const [ pathImageUpdate, setPathImageUpdate ] = useState(null)
-
-    const onChangeUpdate = e => {
-        setFieldsImageUpdate({
-            ...fieldsImageUpdate,
-            [e.target.name]: e.target.value
-        })
-    }
-
+      
     const onFileChangeUpdate = (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const fileUpdate = e.target.files[0]
@@ -106,23 +87,20 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
 
     const onSubmitUpdate = e => {
         e.preventDefault()
-        // Validar que no hayan campos vacíos
-        if (nameUpdate.trim === '' ||
-            difficultyUpdate.trim() === '' ||
-            pointsUpdate === 0 ) {
-                mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
-                return
+        if (imageUpdate === null) {
+            mostrarAlerta("Debe adjuntar una imagen diferente", 'alerta-error')
+            return
         }
         
         const formData = new FormData();
-        formData.append('difficulty', difficultyUpdate);
-        formData.append('points', pointsUpdate);
         formData.append('image', imageUpdate);
         modificarImagen( id_image_selected, formData )
 
         setTimeout(() => {
             handleClose()
         }, 2000);
+        setImageUpdate(null)
+        document.getElementById("imageUpdate").value = "";
     }
 
     return (
@@ -188,7 +166,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                                                 </Fragment>
                                             )
                                         }
-                                        <td key="buttonDelete" style={{ width: "1%" }} >
+                                        <td key="buttonDelete" style={{ width: "10%" }} >
                                             <Button
                                                 key={index+1}
                                                 variant="contained"
@@ -229,7 +207,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                                                 startIcon={<EditIcon />}
                                                 onClick={() => handleShow(row["_id"])}
                                             >
-                                                ACTUALIZAR
+                                                ACTUALIZAR IMAGEN
                                             </Button>
                                         </td>
                                     </tr>
@@ -302,45 +280,8 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                                                     id="filename"
                                                     label="Nombre de la imagen"
                                                     autoFocus
-                                                    onChange={onChangeUpdate}
                                                 />
                                             </div>
-
-                                            <div className="div-difficulty-update" >                        
-                                                <FormControl variant="outlined" >
-                                                    <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-outlined-label"
-                                                        style={{ width: "15em" }}
-                                                        id="difficultyUpdate"
-                                                        name="difficultyUpdate"
-                                                        value={difficultyUpdate}
-                                                        onChange={onChangeUpdate}
-                                                        label="Dificultad"
-                                                    >
-                                                    <MenuItem value="">
-                                                        <em> Ninguna </em>
-                                                    </MenuItem>
-                                                    <MenuItem value={'Easy'}> Fácil </MenuItem>
-                                                    <MenuItem value={'Medium'}> Medio </MenuItem>
-                                                    <MenuItem value={'High'}> Alta </MenuItem>
-                                                    </Select>
-                                                </FormControl>
-                                            </div>
-
-                                            <div className="div-points-update" >
-                                                <TextField
-                                                    style={{ width: "60%" }}
-                                                    variant="outlined"
-                                                    id="pointsUpdate"
-                                                    label="Ingrese una cantidad de puntos asociada a esta imagen"
-                                                    name='pointsUpdate'
-                                                    type='number'
-                                                    value={pointsUpdate}
-                                                    onChange={onChangeUpdate}
-                                                />
-                                            </div>
-
                                         </Grid>
                                     </Grid>
                                 </Grid>

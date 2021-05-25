@@ -57,6 +57,7 @@ const Games = ({ history }) => {
     const OnClick = (route) => {
         localStorage.setItem( 'imagenActual', 0 );
         localStorage.setItem( 'palabraActual', 0 );
+        localStorage.setItem( 'ahorcadoActual', 0 );
         history.push(route)
     }
 
@@ -89,7 +90,7 @@ const Games = ({ history }) => {
                                     :
                                         image.title === "4 Imágenes y 1 Palabra"
                                         ?
-                                            perfil.league_id.league === "Bronce" | perfil.league_id.league === "Plata"
+                                            perfil.league_id.league != "Bronce" && perfil.league_id.league != "Plata"
                                             ?
                                                 true
                                             :
@@ -121,7 +122,7 @@ const Games = ({ history }) => {
                                     :
                                         image.title === "4 Imágenes y 1 Palabra"
                                         ?
-                                            perfil.league_id.league === "Bronce" | perfil.league_id.league === "Plata"
+                                            perfil.league_id.league != "Bronce" && perfil.league_id.league != "Plata"
                                             ?
                                                 "image-backdrop-disable"
                                             :

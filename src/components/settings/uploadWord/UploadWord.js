@@ -28,7 +28,7 @@ const UploadWord = () => {
 
     // Extraer informacion del context auth
     const authContext = useContext(AuthContext)
-    const { mensaje, autenticado, cargandoRegistroUsuario, registrarUsuario } = authContext
+    const { mensaje } = authContext
 
     const wordContext = useContext(WordContext)
     const { palabras, cargandoSubirPalabra, cargandoEliminarPalabra, cargandoModificarPalabra, guardarPalabra, traerPalabrasPorUsuario, eliminarPalabra } = wordContext
@@ -46,11 +46,9 @@ const UploadWord = () => {
 
     const [ fieldsWord, setFieldsWord ] = useState({
         name: "Ejemplo",
-        difficulty: "",
-        points: 0,
     })
 
-    const { name, difficulty, points } = fieldsWord;
+    const { name } = fieldsWord;
 
     const onChange = e => {
         setFieldsWord({
@@ -67,21 +65,16 @@ const UploadWord = () => {
     const onSubmit = e => {
         e.preventDefault()
         // Validar que no hayan campos vacíos
-        if (name.trim() === '' ||
-            difficulty.trim() === '' ||
-            points === 0 ) {
+        if (name.trim() === ''  ) {
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
                 return
         }
 
-        console.log("formulario correcto")
-        guardarPalabra({name, difficulty, points})
+        guardarPalabra({ name })
 
         // Resetear campos
         setFieldsWord({
-            name: "",
-            difficulty: "",
-            points: 0,
+            name: "Ejemplo",
         })
     }
 
@@ -116,42 +109,6 @@ const UploadWord = () => {
                                         onChange={onChange}
                                     />
                                 </div>
-
-                                <div className="div-difficulty" >                        
-                                    <FormControl variant="outlined" >
-                                        <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-outlined-label"
-                                            className="select-difficulty"
-                                            id="difficulty"
-                                            name="difficulty"
-                                            value={difficulty}
-                                            onChange={onChange}
-                                            label="Dificultad"
-                                        >
-                                        <MenuItem value="">
-                                            <em> Ninguna </em>
-                                        </MenuItem>
-                                        <MenuItem value={'Easy'}> Fácil </MenuItem>
-                                        <MenuItem value={'Medium'}> Medio </MenuItem>
-                                        <MenuItem value={'High'}> Alta </MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </div>
-
-                                <div className="div-points" >
-                                    <TextField
-                                        className="textfield-points"
-                                        variant="outlined"
-                                        id="points"
-                                        label="Ingrese una cantidad de puntos asociada a esta palabra"
-                                        name='points'
-                                        type='number'
-                                        value={points}
-                                        onChange={onChange}
-                                    />
-                                </div>
-
                             </Grid>
                             <Grid item xs={12} style={{ marginBottom: "2%" }} >
                                 <Button

@@ -1,7 +1,7 @@
-import React, { Fragment, useState, useEffect, useContext } from 'react';
+import React, { Fragment, useState, useEffect, useContext, useRef } from 'react';
 import AlertaContext from '../../../../context/alertas/alertaContext';
 import AuthContext from '../../../../context/autentificacion/authContext';
-import WordContext from '../../../../context/words/wordContext';
+import FourImagesOneWordContext from '../../../../context/fourImagesOneWord/fourImagesOneWordContext';
 
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -9,12 +9,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { Col} from 'react-bootstrap';
-import Paper from '@material-ui/core/Paper';
 
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -23,93 +17,152 @@ import Modal from 'react-bootstrap/Modal';
 import ButtonBootstrap from 'react-bootstrap/Button';
 
 
-import './datatableWords.css';
+import './datatableFourImagesOneWord.css';
 
-const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
+const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete }) => {
     // Extraer los valores del context
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta } = alertaContext
 
     // Extraer informacion del context auth
     const authContext = useContext(AuthContext)
-    const { mensaje, autenticado, cargandoRegistroUsuario, registrarUsuario } = authContext
+    const { mensaje } = authContext
 
-    const wordContext = useContext(WordContext)
-    const { palabras, cargandoModificarPalabra, traerPalabrasPorUsuario, modificarPalabra } = wordContext
+    const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
+    const { cargandoModificarAhorcado, traerAhorcadosPorUsuario, modificarAhorcado } = fourImagesOneWordContext
 
     useEffect(() => {
         // Ir a buscar las imágenes subidas por el usuario
-        traerPalabrasPorUsuario();
+        traerAhorcadosPorUsuario();
 
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
 
-    }, [ mensaje, cargandoModificarPalabra ] )
+    }, [ mensaje, cargandoModificarAhorcado ] )
     
-    const columns = words[0] && Object.keys(words[0])
+    const columns = hangmans[0] && Object.keys(hangmans[0])
     
     const [show, setShow] = useState(false);
     
     const handleClose = () => {
         setShow(false)
+        setPathImagesUpdate([])
+        setSelectedFilesUpdate([])
     };
-    
-    const handleShow = (word_id) => {
-        const wordSelected = words.find(word => word._id === word_id);
-        setFieldsWordUpdate({
-            id_word_selected: word_id,
-            nameUpdate: wordSelected.Palabra,
+
+    const handleShow = (hangman_id) => {
+        const hangmanSelected = hangmans.find(hangman => hangman._id === hangman_id);
+        setFieldsHangmanUpdate({
+            id_hangman_selected: hangman_id,
+            associatedWordUpdate: hangmanSelected.Palabra,
         })
+        // setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen1]);
+        // setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen2]);
+        // setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen3]);
+        // setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen4]);
         setShow(true)
     };
 
-    const [ fieldsWordUpdate, setFieldsWordUpdate ] = useState({
-        id_word_selected: "",
-        nameUpdate: "",
+    const [ fieldsHangmanUpdate, setFieldsHangmanUpdate ] = useState({
+        id_hangman_selected: "",
+        associatedWordUpdate: "",
     })
+    const { id_hangman_selected, associatedWordUpdate } = fieldsHangmanUpdate;
+    // const [ imageUpdate, setImageUpdate ] = useState(null)
+    // const [ pathImageUpdate, setPathImageUpdate ] = useState(null)
 
-    const { id_word_selected, nameUpdate } = fieldsWordUpdate;
+    // const [ associatedWordUpdate, setAssociateWordUpdate ] = useState("")
+    const [ pathImagesUpdate, setPathImagesUpdate ] = useState([])
+    const [ selectedFilesUpdate, setSelectedFilesUpdate ] = useState([]);
+      
+    const handleImageChange = (e) => {
+		if (e.target.files) {
+			setSelectedFilesUpdate((prevImages) => prevImages.concat(e.target.files));
+            Array.from(e.target.files).map((file) => {
+                if (file.type.includes("image")) {
+                    const reader = new FileReader()
+                    reader.readAsDataURL(file)
+                    
+                    reader.onload = function load() {
+                        setPathImagesUpdate((prevImages) => prevImages.concat(reader.result))
+                    }
+                } else {
+                    mostrarAlerta("Debe seleccionar archivos de tipo imagen, se admiten extensiones: jpeg, jpg, png y gif", "alerta-error")
+                }
+            });
+            
+		}
+	};
 
-    const onChangeUpdate = e => {
-        setFieldsWordUpdate({
-            ...fieldsWordUpdate,
-            [e.target.name]: e.target.value
-        })
+    const resetImagesSelected = () => {
+        setPathImagesUpdate([])
+        setSelectedFilesUpdate([])
+        document.getElementById("fileUpdate").value = "";
     }
+
+    const renderPhotos = (source) => {
+        return source.map((photo) => {
+			return <img className="imagesSelected" src={photo} alt="" key={photo} />;
+		});
+	};
 
     const onSubmitUpdate = e => {
         e.preventDefault()
-        // Validar que no hayan campos vacíos
-        if (nameUpdate.trim() === '' ) {
-                mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
-                return
+        if ( associatedWordUpdate === "" ) {
+            mostrarAlerta("Debe asignar una palabra a las 4 imágenes", 'alerta-error')
+            return
         }
-        let name = nameUpdate;
-        modificarPalabra( id_word_selected, { name } )
+        let formData = new FormData();
 
+        if (selectedFilesUpdate.length === 0) {
+            // console.log("No adjunto ninguna imagen")
+        } else{
+            if (selectedFilesUpdate[0].length != 4) {
+                mostrarAlerta("Debe adjuntar solo 4 imágenes", 'alerta-error')
+                return
+            } else {
+                for (let index = 0; index < selectedFilesUpdate[0].length; index++) {
+                    formData.append('images', selectedFilesUpdate[0][index]);
+                }
+            }
+
+        }
+
+        formData.append('associatedWord', associatedWordUpdate);
+        modificarAhorcado( id_hangman_selected, formData)
+        
         setTimeout(() => {
             handleClose()
         }, 2000);
+
+        // Resetear campos
+        setFieldsHangmanUpdate({
+            id_hangman_selected: "",
+            associatedWordUpdate: "",
+        });
+        setSelectedFilesUpdate([]);
+        setPathImagesUpdate([]);
+        document.getElementById("fileUpdate").value = "";
     }
 
     return (
         <Fragment>
             <Table responsive striped bordered hover  >
             {
-                words.length != 0
+                hangmans.length != 0
                 ?
                     <Fragment>
                         <thead>
                             <tr>
                                 <Fragment>
-                                    { words[0] && columns.map((heading, headingIndex) =>
+                                    { hangmans[0] && columns.map((heading, headingIndex) =>
                                         <Fragment key={headingIndex} >
                                             { heading === "_id"
                                                 ?
-                                                    <th key={headingIndex+1} > # </th> 
+                                                    <th > # </th> 
                                                 :
-                                                    <th key={headingIndex+1} > {heading} </th> 
+                                                    <th > {heading} </th> 
                                             }
                                         </Fragment>
 
@@ -120,24 +173,16 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                         </thead>
                         <tbody>
                             {
-                                words.map((row, index) =>
+                                hangmans.map((row, index) =>
                                     <tr key={index+1} >
                                         {
                                             columns.map((column, colIndex) =>
                                                 
                                                 <Fragment key={colIndex+1} >
 
-                                                    { column === "Palabra"
+                                                    { column === "Imagen1" | column === "Imagen2" | column === "Imagen3" | column === "Imagen4"
                                                         ?
-                                                            <td style={{ width: "7%" }} >
-                                                                <div className="col palabra-update" >
-                                                                    <Col>
-                                                                        <Paper className="paper-update" elevation={10} variant="outlined"  >
-                                                                            {row[column]}
-                                                                        </Paper>
-                                                                    </Col>
-                                                                </div>
-                                                            </td>
+                                                            <td style={{ width: "7%" }} > <img className="img-fluid img-thumbnail images-hangman" src={row[column]} alt="Image" /> </td>
                                                         :
                                                             column === "Estado"
                                                             ?
@@ -164,7 +209,7 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                                                 </Fragment>
                                             )
                                         }
-                                        <td key="buttonDelete" style={{ width: "10%" }} >
+                                        <td key="buttonDelete" style={{ width: "100% !important", fontSize: "13px" }} >
                                             <Button
                                                 key={index+1}
                                                 variant="contained"
@@ -182,7 +227,7 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                                                         justify="center"
                                                         alignItems="center"
                                                     >
-                                                        <Grid item xs={11} style={{color:"#000"}} >
+                                                        <Grid item xs={11} style={{color:"#000", fontSize: "13px"}} >
                                                             Cargando...
                                                         </Grid>
                                                         <Grid item xs={1} >
@@ -201,11 +246,11 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                                             <Button
                                                 key={index+2}
                                                 variant="contained"
-                                                style={{ backgroundColor: "yellow", marginTop: "5%", height: "10%", width: "90%" }}
+                                                style={{ backgroundColor: "yellow", marginTop: "5%", height: "10%", width: "90%", fontSize: "13px" }}
                                                 startIcon={<EditIcon />}
                                                 onClick={() => handleShow(row["_id"])}
                                             >
-                                                ACTUALIZAR PALABRA
+                                                ACTUALIZAR AHORCADO
                                             </Button>
                                         </td>
                                     </tr>
@@ -222,7 +267,7 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td> Aún no ha subido palabras </td>
+                                <td> Aún no ha subido contenido para este juego </td>
                             </tr>
                         </tbody>
                     </Fragment>
@@ -239,37 +284,47 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Palabra  </Modal.Title>
+                        <Modal.Title> Modificar Ahorcado  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
-                        <Container className="div-uploadWord-update" >
+                        <Container className="div-uploadHangman-update" >
                             <Grid container component="main" >
                                 <Grid item xs={12} sm={8} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                                     <Grid container spacing={5} >
 
-                                        <Grid item xs={4} >
-                                            <div className="col palabra" >
-                                                <Col>
-                                                    <Paper className="paper" elevation={10} variant="outlined"  >
-                                                        {nameUpdate}
-                                                    </Paper>
-                                                </Col>
+                                        <Grid item xs={12} >
+                                            <div>
+                                                <input type="file" id="fileUpdate" multiple onChange={handleImageChange} />
+                                                <div className="label-holder">
+                                                    <div className="row" >
+                                                        <label htmlFor="fileUpdate" className="label">
+                                                            <i className="material-icons" >Agregar 4 imágenes</i>
+                                                        </label>
+                                                        <Button
+                                                            className="buttonResetImages"
+                                                            variant="contained"
+                                                            color="secondary"
+                                                            onClick={() => resetImagesSelected()}
+                                                        > Reiniciar selección </Button>
+                                                    </div>
+                                                </div>
+                                                <div className="result">{renderPhotos(pathImagesUpdate)}</div>
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} >
-                                            <div className="div-name-update" >                        
+                                        <Grid item xs={8} style={{ marginBottom: "2%" }} >
+                                            <div className="div-associateWord" >                        
                                                 <TextField
-                                                    style={{ width: "60%" }}
-                                                    value={nameUpdate}
-                                                    name="nameUpdate"
+                                                    className="textfield-associateWord"
+                                                    value={associatedWordUpdate}
+                                                    name="associateWord"
                                                     variant="outlined"
-                                                    id="nameUpdate"
-                                                    label="Nombre de la palabra"
+                                                    id="associateWord"
+                                                    label="Palabra asociada"
+                                                    onChange={e => setFieldsHangmanUpdate({...fieldsHangmanUpdate, associatedWordUpdate: e.target.value})}
                                                     autoFocus
-                                                    onChange={onChangeUpdate}
                                                 />
                                             </div>
                                         </Grid>
@@ -289,10 +344,10 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                             variant="contained"
                             style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
                             startIcon={<EditIcon />}
-                            disabled={cargandoModificarPalabra}
+                            disabled={cargandoModificarAhorcado}
                         >
                             {
-                                cargandoModificarPalabra
+                                cargandoModificarAhorcado
                                 ?
                                 <Grid container
                                     direction="row"
@@ -312,7 +367,7 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                                 </Grid>
                                     
                                 :
-                                "Modificar la Palabra"
+                                "Modificar contenido"
                             }
                         </Button>
                     </Modal.Footer>
@@ -323,4 +378,4 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
     );
 }
  
-export default DatatableWords;
+export default DatatableFourImagesOneWord;

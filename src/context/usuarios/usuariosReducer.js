@@ -24,6 +24,24 @@ import {
     ELIMINAR_PALABRA_DESDE_ADMIN,
     ELIMINAR_PALABRA_DESDE_ADMIN_CARGANDO,
     ELIMINAR_PALABRA_DESDE_ADMIN_ERROR,
+    MODIFICAR_DIFICULTAD_PUNTOS_IMAGEN,
+    MODIFICAR_DIFICULTAD_PUNTOS_IMAGEN_CARGANDO,
+    MODIFICAR_DIFICULTAD_PUNTOS_IMAGEN_ERROR,
+    MODIFICAR_DIFICULTAD_PUNTOS_PALABRA,
+    MODIFICAR_DIFICULTAD_PUNTOS_PALABRA_CARGANDO,
+    MODIFICAR_DIFICULTAD_PUNTOS_PALABRA_ERROR,
+    OBTENER_AHORCADOS_POR_USUARIO_ADMIN,
+    OBTENER_AHORCADOS_POR_USUARIO_ADMIN_CARGANDO,
+    OBTENER_AHORCADOS_POR_USUARIO_ADMIN_ERROR,
+    HABILITAR_INHABILITAR_AHORCADO,
+    HABILITAR_INHABILITAR_AHORCADO_CARGANDO,
+    HABILITAR_INHABILITAR_AHORCADO_ERROR,
+    ELIMINAR_AHORCADO_DESDE_ADMIN,
+    ELIMINAR_AHORCADO_DESDE_ADMIN_CARGANDO,
+    ELIMINAR_AHORCADO_DESDE_ADMIN_ERROR,
+    MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO,
+    MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_CARGANDO,
+    MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_ERROR,
 } from '../../types';
 
 export default (state, action) => {
@@ -34,11 +52,17 @@ export default (state, action) => {
                 distribucion: action.payload,
             }
 
+        case MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_ERROR:
+        case HABILITAR_INHABILITAR_AHORCADO_ERROR:
+        case ELIMINAR_AHORCADO_DESDE_ADMIN_ERROR:
+        case OBTENER_AHORCADOS_POR_USUARIO_ADMIN_ERROR:
+        case MODIFICAR_DIFICULTAD_PUNTOS_PALABRA_ERROR:
         case HABILITAR_INHABILITAR_PALABRA_ERROR:
         case ELIMINAR_PALABRA_DESDE_ADMIN_ERROR:
+        case OBTENER_PALABRAS_POR_USUARIO_ADMIN_ERROR:
+        case MODIFICAR_DIFICULTAD_PUNTOS_IMAGEN_ERROR:
         case ELIMINAR_IMAGEN_DESDE_ADMIN_ERROR:
         case HABILITAR_INHABILITAR_IMAGEN_ERROR:
-        case OBTENER_PALABRAS_POR_USUARIO_ADMIN_ERROR:
         case OBTENER_IMAGENES_POR_USUARIO_ADMIN_ERROR:
         case MODIFICAR_USUARIO_ADMIN_BLOQUEO_ERROR:
         case OBTENER_USUARIOS_ERROR:
@@ -53,6 +77,12 @@ export default (state, action) => {
                 cargandoEliminarImagenPorAdmin: false,
                 cargandoHabilitarInhabilitarPalabra: false,
                 cargandoEliminarPalabraPorAdmin: false,
+                cargandoModificarDificultadPuntosImagenPorAdmin: false,
+                cargandoModificarDificultadPuntosPalabraPorAdmin: false,
+                cargandoAhorcadosUsuarioDesdeAdmin: false,
+                cargandoHabilitarInhabilitarAhorcado: false,
+                cargandoEliminarAhorcadoPorAdmin: false,
+                cargandoModificarDificultadPuntosAhorcadoPorAdmin: false,        
             }
     
         case OBTENER_USUARIOS:
@@ -87,6 +117,19 @@ export default (state, action) => {
                 cargandoImagenesUsuarioDesdeAdmin: false,
             }
 
+        case OBTENER_AHORCADOS_POR_USUARIO_ADMIN_CARGANDO:
+            return {
+                ...state,
+                cargandoAhorcadosUsuarioDesdeAdmin: true,
+            }
+
+        case OBTENER_AHORCADOS_POR_USUARIO_ADMIN:
+            return {
+                ...state,
+                ahorcadosPorUsuario: action.payload,
+                cargandoAhorcadosUsuarioDesdeAdmin: false,
+            }
+
         case OBTENER_PALABRAS_POR_USUARIO_ADMIN_CARGANDO:
             return {
                 ...state,
@@ -118,6 +161,20 @@ export default (state, action) => {
                 cargandoHabilitarInhabilitarImagen: false
             }
 
+        case HABILITAR_INHABILITAR_AHORCADO_CARGANDO:
+            return {
+                ...state,
+                cargandoHabilitarInhabilitarAhorcado: true
+            }
+
+        case HABILITAR_INHABILITAR_AHORCADO:
+            return {
+                ...state,
+                ahorcadosPorUsuario: state.ahorcadosPorUsuario.map(ahorcado => ahorcado._id ===
+                    action.payload[0]._id ? action.payload[0] : ahorcado ),
+                cargandoHabilitarInhabilitarAhorcado: false
+            }
+
         case ELIMINAR_IMAGEN_DESDE_ADMIN_CARGANDO:
             return {
                 ...state,
@@ -131,6 +188,21 @@ export default (state, action) => {
                     imagen => imagen._id !== action.payload
                     ),
                 cargandoEliminarImagenPorAdmin: false
+            }
+
+        case ELIMINAR_AHORCADO_DESDE_ADMIN_CARGANDO:
+            return {
+                ...state,
+                cargandoEliminarAhorcadoPorAdmin: true
+            }
+
+        case ELIMINAR_AHORCADO_DESDE_ADMIN:
+            return {
+                ...state,
+                ahorcadosPorUsuario: state.ahorcadosPorUsuario.filter(
+                    ahorcado => ahorcado._id !== action.payload
+                    ),
+                cargandoEliminarAhorcadoPorAdmin: false
             }
 
         case HABILITAR_INHABILITAR_PALABRA_CARGANDO:
@@ -160,6 +232,48 @@ export default (state, action) => {
                     palabra => palabra._id !== action.payload
                     ),
                 cargandoEliminarPalabraPorAdmin: false
+            }
+
+        case MODIFICAR_DIFICULTAD_PUNTOS_IMAGEN_CARGANDO:
+            return {
+                ...state,
+                cargandoModificarDificultadPuntosImagenPorAdmin: true
+            }
+
+        case MODIFICAR_DIFICULTAD_PUNTOS_IMAGEN:
+            return {
+                ...state,
+                imagenesPorUsuario: state.imagenesPorUsuario.map(imagen => imagen._id ===
+                    action.payload[0]._id ? action.payload[0] : imagen ),
+                cargandoModificarDificultadPuntosImagenPorAdmin: false
+            }
+
+        case MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_CARGANDO:
+            return {
+                ...state,
+                cargandoModificarDificultadPuntosAhorcadoPorAdmin: true
+            }
+
+        case MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO:
+            return {
+                ...state,
+                ahorcadosPorUsuario: state.ahorcadosPorUsuario.map(ahorcado => ahorcado._id ===
+                    action.payload[0]._id ? action.payload[0] : ahorcado ),
+                cargandoModificarDificultadPuntosAhorcadoPorAdmin: false
+            }
+
+        case MODIFICAR_DIFICULTAD_PUNTOS_PALABRA_CARGANDO:
+            return {
+                ...state,
+                cargandoModificarDificultadPuntosPalabraPorAdmin: true
+            }
+
+        case MODIFICAR_DIFICULTAD_PUNTOS_PALABRA:
+            return {
+                ...state,
+                palabrasPorUsuario: state.palabrasPorUsuario.map(palabra => palabra._id ===
+                    action.payload[0]._id ? action.payload[0] : palabra ),
+                cargandoModificarDificultadPuntosPalabraPorAdmin: false
             }
 
         default:

@@ -151,7 +151,7 @@ const Navigation =  ({ location, history })  => {
                         { usuario ? <PNav > Hola <span style={{ fontWeight: 900 }} > {usuario.firstname} </span> </PNav> : null }
                         {perfil != null
                         ?
-                            <span class="badge badge-pill badge-light align-middle">
+                            <span className="badge badge-pill badge-light align-middle">
                                 <img src={
                                         perfil.league_id.league === "Bronce" ? BronceBadge
                                         : perfil.league_id.league === "Plata" ? PlataBadge

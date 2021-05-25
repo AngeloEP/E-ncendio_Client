@@ -27,9 +27,9 @@
 }
 
 .show-details-user {
-    width: 80%;
+    width: 90%;
     height: 8em !important;
-    margin-left: 10%;
+    margin-left: 5%;
     border: 1px solid #202221;
     border-radius: 16px;
 }
@@ -55,6 +55,13 @@
 .num-tag-words {
 }
 
+.tag-hangmans {
+    text-align: center;
+}
+
+.num-tag-hangmans {
+}
+
 .images-upload {   
     text-align: center;
 }
@@ -67,4 +74,11 @@
 }
 
 .num-words-upload {
+}
+
+.hangmans-upload {   
+    text-align: center;
+}
+
+.num-hangmans-upload {
 }

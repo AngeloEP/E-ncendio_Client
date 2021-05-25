@@ -1,8 +1,19 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react';
 
+import './fourImagesOneWord.css';
+
+import step0 from "../../../assets/img/hangman/0.jpg";
+import step1 from "../../../assets/img/hangman/1.jpg";
+import step2 from "../../../assets/img/hangman/2.jpg";
+import step3 from "../../../assets/img/hangman/3.jpg";
+import step4 from "../../../assets/img/hangman/4.jpg";
+import step5 from "../../../assets/img/hangman/5.jpg";
+import step6 from "../../../assets/img/hangman/6.jpg";
+import testImage from "../../../assets/img/test4.jpg";
+
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
-import wordContext from '../../../context/words/wordContext';
+import FourImagesOneWordContext from '../../../context/fourImagesOneWord/fourImagesOneWordContext';
 import profileContext from '../../../context/profile/profileContext';
 import categoryContext from '../../../context/categories/categoryContext';
 import tagContext from '../../../context/tag/tagContext';
@@ -11,6 +22,8 @@ import { Col, Container, Image, Row, Button } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
+
+import Typography from '@material-ui/core/Typography';
 
 const FourImagesOneWord = () => {
     // Extraer los valores del context
@@ -22,20 +35,26 @@ const FourImagesOneWord = () => {
     const { usuario, cargando, usuarioAutenticado} = authContext
 
     // Extraer la información de el context de Palabras
-    const wordsContext = useContext(wordContext)
-    const { palabras, largoPalabras, obtenerPalabras  } = wordsContext
+    const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
+    const { ahorcados, largoAhorcados, obtenerAhorcados  } = fourImagesOneWordContext
 
     // Extraer la información del context de perfiles
     const profilesContext = useContext(profileContext)
     const { perfil, obtenerPerfil, actualizarPerfil } = profilesContext
 
     // Extraer la información del context de niveles
-    const categoriesContext = useContext(categoryContext)
-    const { categorias, obtenerCategorias } = categoriesContext
+    // const categoriesContext = useContext(categoryContext)
+    // const { categorias, obtenerCategorias } = categoriesContext
 
     // Extraer la información del context de etiquetar
     const tagsContext = useContext(tagContext)
-    const {  } = tagsContext
+    const { etiquetarAhorcado } = tagsContext
+
+    let ahorcadoActual = JSON.parse(localStorage.getItem("ahorcadoActual"))
+    const [answer, setAnswer] = useState( "" )
+    if (ahorcados.length > 0 && answer === "") {
+        setAnswer(ahorcados[ahorcadoActual].associatedWord)
+    }
 
     useEffect(() => {
         // Traer el perfil del usuario score, etc. /api/user/{id}/profile
@@ -44,18 +63,201 @@ const FourImagesOneWord = () => {
         // falta para subir al otro nivel del jugador
         obtenerPerfil()
 
-        // Traer las categorías posibles /api/categories
-        obtenerCategorias()
 
         // Traer las imágenes y palabra del nivel correspondiente /api/league/{id}/words 
+        obtenerAhorcados()
     }, [])
 
+    const [maxWrong, setMaxWrong] = useState(6)
+    const [mistake, setMistake] = useState(0)
+    const [num, setNum] = useState(0)
+    const [guessed, setGuessed] = useState("")
+    const [images, setImages] = useState([
+        step0, step1, step2, step3, step4, step5, step6
+    ])
+
+
+    const handleGuess = e => {
+        let letter = e.target.value;
+        let acierto = answer.search(letter) === -1 ? 1 : 0;
+        setGuessed(`${guessed}${letter}`)
+        setMistake(mistake + acierto)
+        setNum(num + acierto)
+    }
+
+    const guessedWord = () => {
+        return answer.toString().split("").map(letter => (guessed.toString().search(letter) != -1 ? letter : " _ "));
+    }
+
+    const generateButtons = () => {
+        return "abcdefghijklmnopqrstuvwxyz".split("").map(letter => (
+            <button
+                className='btn btn-lg btn-primary m-2'
+                key={letter}
+                value={letter}
+                onClick={(e) => handleGuess(e)}
+                disabled={guessed.toString().search(letter) === -1 ? false : true}
+            >
+                {letter}
+            </button>
+        ));
+    }
+
+    const resetButton = () => {
+        setMistake(0)
+        setGuessed("")
+        setAnswer(ahorcados[ahorcadoActual].associatedWord)
+    }
+
+    const gameOver = mistake >= maxWrong;
+    // console.log("errores: ", mistake, " maxErrores: ", maxWrong)
+    const isWinner = guessedWord().join("") === answer;
+    // console.log("ganador: ", isWinner, " Perdedor: ", gameOver)
+    let gameStat = generateButtons();
+
+    const winnerFunction = () => {
+        console.log("Ganó")
+        etiquetarAhorcado(ahorcados[ahorcadoActual]._id, ahorcados[ahorcadoActual].associatedWord)
+        // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
+        // Revisar si sube de nivel de perfil, misma función de API
+        // Agregar atributo a Level, señalando el puntaje al siguiente nivel
+        let addPoints = 15;
+        
+        perfil.score = perfil.score + addPoints;
+        if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+            console.log("Subir de nivel")
+            perfil.league_id = perfil.league_id.league
+        }
+        actualizarPerfil(perfil)
+
+        // Avanzar al siguiente ahorcado
+        if ( ahorcadoActual < largoAhorcados - 1 ) {
+            console.log("aun quedan ahorcados")
+            setTimeout(() => {
+                localStorage.setItem( 'ahorcadoActual', ahorcadoActual + 1 );
+                window.location.reload();
+            }, 1000);
+        } else {
+            // Revisar si sube de nivel de ahorcados? /api/user/{id}/level-image
+
+            console.log("Ya se acabaron las ahorcados")
+        }
+    }
+
+    const gameoverFunction = () => {
+        console.log("Perdió")
+        let addPoints = -15;
+        
+        perfil.score = perfil.score + addPoints;
+        if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+            console.log("Subir de nivel")
+            perfil.league_id = perfil.league_id.league
+        }
+        actualizarPerfil(perfil)
+    }
+
+    if ( ahorcados.length != 0 && answer != "" && isWinner) {
+        gameStat = "¡Felicidades, lo lograste!!!"
+        setTimeout(() => {
+            winnerFunction()
+            setGuessed("")
+            setMistake(0)
+        }, 2000);
+    }
+
+    if ( ahorcados.length != 0 && answer != "" && gameOver) {
+        gameStat = "¡Has perdido!!!"
+        setTimeout(() => {
+            gameoverFunction()
+            setGuessed("")
+            setMistake(0)
+        }, 2000);
+    }
+
+
+    let nowProgress = 0
+    let maxProgress = 0
+    let labelProgress = 0
+    let userLeague = ''
+    if (perfil) {
+        nowProgress = perfil.score
+        maxProgress = perfil.league_id.pointsNextLeague
+        labelProgress = ((nowProgress / maxProgress) * 100).toPrecision(3)
+        userLeague = perfil.league_id.league
+    }
+    let colorProgress = labelProgress < 50 ? "success" : labelProgress < 80 ? "warning" : "danger"
     return (
-        <Container fluid className="backgroundGif-4images1word" >
+        <Container fluid className="backgroundGif"  >
             {
-                perfil != null && perfil.league_id.league != "Bronce"
+                perfil != null && perfil.league_id.league === "Plata" // editar, es al revés
                 ?
-                    <h2> 4 imágenes y una Palabra </h2>
+                    <>
+                        <div className="topCenter4" >
+                            <Row className="rowTitle4" >
+                                <Col className="align-self-center" >
+                                    <Typography variant="h4" className="levelTitle4" >
+                                        { perfil ? `Nivel ${perfil.level_image_id.level}` : null}
+                                    </Typography>
+                                </Col>
+                                <Col >
+                                {perfil
+                                ?
+                                    <Fragment>
+                                        <p className="progressTitle4" > {userLeague} </p>
+                                        <OverlayTrigger
+                                            placement="bottom"
+                                            overlay={<Tooltip className="mt-3" id="button-tooltip-1" > Puntos: {nowProgress} </Tooltip>}
+                                        >
+                                            <ProgressBar max={maxProgress} className="userProgress4" variant={colorProgress} animated striped  now={nowProgress}  
+                                                        label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
+                                            />
+                                        </OverlayTrigger>
+                                    </Fragment>
+                                : null
+                                }
+                                </Col>
+                            </Row>
+                            { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
+                        </div>
+                        {
+                            ahorcados.length != 0 && answer != ""
+                            ?
+                                <div className="Hangman container">
+                                    {/* <h1 className='text-center'> El Ahorcado </h1> */}
+                                    <Row className="four-images" >
+                                        <img src={ ahorcados[ahorcadoActual].imageUrl_1 } alt="" className="imagesToTag" />
+                                        <img src={ ahorcados[ahorcadoActual].imageUrl_2 } alt="" className="imagesToTag" />
+                                        <img src={ ahorcados[ahorcadoActual].imageUrl_3 } alt="" className="imagesToTag" />
+                                        <img src={ ahorcados[ahorcadoActual].imageUrl_4 } alt="" className="imagesToTag" />
+                                    </Row>
+                                    <div className="text-center d-flex">
+                                        <Col>
+                                            <img src={images[mistake]} alt=""/>
+                                        </Col>
+                                        <Col className="align-self-center"  >
+                                            <div className="float-center wrongs"> <span className="font-weight-bold" >Errores</span> : {mistake} of {maxWrong} </div>
+                                            <p className="gameStat" > Adivina la palabra oculta: </p>
+                                            <p className="gameStat" >
+                                                {!gameOver 
+                                                    ? guessedWord()
+                                                    : answer
+                                                }
+                                            </p>
+                                        </Col>
+                                    </div>
+                                    <div className="text-center">
+                                        <p className="gameStat" >{gameStat}</p>
+                                        <button className='btn btn-info' onClick={() => resetButton()}> Reiniciar </button>
+                                    </div>
+                                </div>
+                            :
+                                <div className="container" >
+                                    <div className="no-images" >
+                                        <span className="spansito-no-images" > Aún no existen ahorcados habilitados </span>
+                                    </div>
+                                </div>
+                        }
+                    </>
                 :
                     <div className="container" >
                         <div className="no-words" >

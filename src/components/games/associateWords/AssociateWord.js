@@ -133,7 +133,9 @@ const AssociateWords = () => {
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
-        perfil.score = perfil.score + palabras[palabraActual].points
+        let addPoints = 0;
+        if (perfil.level_word_id.level === "Plata") addPoints = 15; else addPoints = 7;
+        perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             console.log("Subir de nivel")
             perfil.league_id = perfil.league_id.league
