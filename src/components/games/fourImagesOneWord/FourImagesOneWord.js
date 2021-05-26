@@ -111,7 +111,7 @@ const FourImagesOneWord = () => {
 
     const gameOver = mistake >= maxWrong;
     // console.log("errores: ", mistake, " maxErrores: ", maxWrong)
-    const isWinner = guessedWord().join("") === answer;
+    const isWinner = answer ? guessedWord().join("") === answer : false;
     // console.log("ganador: ", isWinner, " Perdedor: ", gameOver)
     let gameStat = generateButtons();
 
@@ -238,7 +238,7 @@ const FourImagesOneWord = () => {
                                             <div className="float-center wrongs"> <span className="font-weight-bold" >Errores</span> : {mistake} of {maxWrong} </div>
                                             <p className="gameStat" > Adivina la palabra oculta: </p>
                                             <p className="gameStat" >
-                                                {!gameOver 
+                                                {!gameOver && answer
                                                     ? guessedWord()
                                                     : answer
                                                 }

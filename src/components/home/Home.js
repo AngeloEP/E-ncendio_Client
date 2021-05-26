@@ -358,8 +358,9 @@ const Home = () => {
                                 <Card.Title className="card-title" > Sube tu propio contenido </Card.Title>
                                 <Card.Text className="card-text" >
                                     Puedes aportar tu granito de arena y colaborar con el objetivo de E-ncendio 
-                                    subiendo imágenes y palabras desde las ligas de <span style={{ color: "#8A9597" }} > Plata </span> y <span style={{ color: "#FFBF00" }} > Oro </span> respectivamente
-                                    que serán evaluadas por los administradores para ver si cumplen con los requisitos.
+                                    subiendo imágenes, agregar palabras desde la liga de <span style={{ color: "#8A9597" }} > Plata </span> y también subir contenido para el juego
+                                    de 4 palabras y 1 imagen desde la liga de <span style={{ color: "#FFBF00" }} > Oro </span>,
+                                    cada uno de estos serán evaluadas por los administradores para ver si cumplen con los requisitos.
                                 </Card.Text>
                                 </Card.Body>
                             </Card>

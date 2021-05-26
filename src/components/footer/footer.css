@@ -30,7 +30,7 @@
   }
   
   .footer-clean .item.social {
-    text-align:right;
+    text-align: center;
   }
   
   @media (max-width:767px) {
@@ -56,13 +56,18 @@
     border-radius:50%;
     border:1px solid #ccc;
     margin-left:10px;
-    margin-top:15px;
+    margin-top:0px;
     color:inherit;
     opacity:0.75;
   }
   
   .footer-clean .item.social > a:hover {
     opacity:0.9;
+  }
+
+  .footer-clean .item.social > a > svg {
+    display: inline-block;
+    margin-top: -15% !important;
   }
   
   @media (max-width:991px) {
@@ -73,7 +78,7 @@
   
   @media (max-width:767px) {
     .footer-clean .item.social > a {
-      margin-top:10px;
+      margin-top:0px;
     }
   }
   

@@ -8,7 +8,7 @@ import styled from 'styled-components';
   display: flex;
   justify-content: space-between;
   padding: 0.5rem calc((80vw - 1000px) / 2);
-  z-index: 1;
+  z-index: 9999;
 `;
 
 export const NavLinkLogo = styled(Link)`
@@ -97,7 +97,7 @@ export const NavMenu = styled.div`
       top: 80px;
       background: #000;
       opacity: 1;
-      z-index: 1;
+      z-index: 9999;
     }
   }
 `;

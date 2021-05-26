@@ -104,8 +104,6 @@
 }
 
 .modal-user{
-    overflow: scroll;
-    position: absolute;
+    overflow: auto;
     height: 100%;
-    display: block;
 }
