@@ -78,13 +78,7 @@ const Settings = () => {
                                 <BottomNavigationAction
                                     label="Subir imagen"
                                     icon={<ImageIcon/>}
-                                    disabled={
-                                        perfil.league_id.league != "Bronce"
-                                        ?
-                                            true
-                                        :
-                                            false
-                                    }
+                                    disabled={false}
                                 />
                                 <BottomNavigationAction
                                     label="Subir palabra"
@@ -94,18 +88,14 @@ const Settings = () => {
                                         ?
                                             true
                                         :
-                                            perfil.league_id.league === "Plata"
-                                            ?
-                                                true
-                                            :
-                                                false
+                                            false
                                     }
                                 />
                                 <BottomNavigationAction
                                     label="Subir ahorcado"
                                     icon={<ImageSearchIcon/>}
                                     disabled={
-                                        perfil.league_id.league != "Oro"
+                                        perfil.league_id.league === "Oro"
                                         ?
                                             false
                                         :

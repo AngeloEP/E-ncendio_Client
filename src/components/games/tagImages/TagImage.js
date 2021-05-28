@@ -71,6 +71,9 @@ const TagImage = ( props ) => {
         obtenerImagenes()
     }, [])
 
+    const [ isWinner, setIsWinner ] = useState(false)
+    const [ points, setPoints ] = useState(0)
+
     const [ checked, setChecked ] = useState({
         prevencion: false,
         mitigacion: false,
@@ -165,11 +168,12 @@ const TagImage = ( props ) => {
         let categoriaSeleccionada = transformSelected(checked.selected)
         categoriaSeleccionada = categorias.find(e => e.name === categoriaSeleccionada);
         etiquetarImagen(imagenes[imagenActual]._id, categoriaSeleccionada._id)
+        setIsWinner(true)
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
         let addPoints = 0;
-        switch (perfil.level_image_id.level) {
+        switch (perfil.league_id.league) {
             case "Bronce":
                 addPoints = 35;
                 break;
@@ -185,15 +189,17 @@ const TagImage = ( props ) => {
             default:
                 break;
         }
+        setPoints(addPoints)
         perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-            console.log("Subir de nivel")
+            // console.log("Subir de nivel")
             perfil.league_id = perfil.league_id.league
         }
         actualizarPerfil(perfil)
         setTimeout(() => {
-            console.log(perfil)
-        }, 1000);
+            // console.log(perfil)
+            setIsWinner(false)
+        }, 2000);
         // return
         
         // console.log("imagenActual: ",imagenActual, "  limite: ", largoImagenes - 1)
@@ -245,6 +251,7 @@ const TagImage = ( props ) => {
                                             label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
                                 />
                             </OverlayTrigger>
+                            <p className={isWinner ? "final-text winner" : "final-text"} > +{points} puntos </p>
                         </Fragment>
                     : null
                     }

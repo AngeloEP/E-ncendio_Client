@@ -71,6 +71,9 @@ const AssociateWords = () => {
         obtenerPalabras()
     }, [])
 
+    const [ isWinner, setIsWinner ] = useState(false)
+    const [ points, setPoints ] = useState(0)
+
     const [ checked, setChecked ] = useState({
         prevencion: false,
         mitigacion: false,
@@ -130,11 +133,13 @@ const AssociateWords = () => {
         let categoriaSeleccionada = transformSelected(checked.selected)
         categoriaSeleccionada = categorias.find(e => e.name === categoriaSeleccionada);
         etiquetarPalabra(palabras[palabraActual]._id, categoriaSeleccionada._id)
+        setIsWinner(true)
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
         let addPoints = 0;
-        if (perfil.level_word_id.level === "Plata") addPoints = 25; else addPoints = 15;
+        if (perfil.league_id.league === "Plata") addPoints = 25; else addPoints = 15;
+        setPoints(addPoints)
         perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             console.log("Subir de nivel")
@@ -142,8 +147,9 @@ const AssociateWords = () => {
         }
         actualizarPerfil(perfil)
         setTimeout(() => {
-            console.log(perfil)
-        }, 1000);
+            // console.log(perfil)
+            setIsWinner(false)
+        }, 2000);
         // return
         
         // console.log("palabraActual: ",palabraActual, "  limite: ", largoPalabras - 1)
@@ -199,6 +205,7 @@ const AssociateWords = () => {
                                                     label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
                                         />
                                     </OverlayTrigger>
+                                    <p className={isWinner ? "final-text winner" : "final-text"} > +{points} puntos </p>
                                 </Fragment>
                             : null
                             }

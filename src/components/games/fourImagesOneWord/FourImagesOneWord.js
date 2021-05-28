@@ -76,6 +76,11 @@ const FourImagesOneWord = () => {
         step0, step1, step2, step3, step4, step5, step6
     ])
 
+    const styles = {
+        transition: 'all 1s ease-out'
+    };
+    const [ opacity, setOpacity ] = useState(1)
+    const [ scale, setScale ] = useState(1)
 
     const handleGuess = e => {
         let letter = e.target.value;
@@ -109,6 +114,32 @@ const FourImagesOneWord = () => {
         setAnswer(ahorcados[ahorcadoActual].associatedWord)
     }
 
+    const winnerMessage = () => {
+        return (
+            <div className="row text-center justify-content-center" style={{...styles, opacity: opacity, transform: 'scale(' + scale + ')'}}>
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Lo lograste!</h4>
+                    <p>Has completado el ahorcado de manera exitosa con {mistake} errores.</p>
+                    <hr/>
+                    <p class="mb-0">Recuerda que tu participación es importante para los propósitos de E-ncendio.</p>
+                </div>
+            </div>
+        )
+    }
+
+    const gameoverMessage = () => {
+        return (
+            <div className="row text-center justify-content-center" style={{...styles, opacity: opacity, transform: 'scale(' + scale + ')'}}>
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Has perdido</h4>
+                    <p>Te has equivocado en el ahorcado {mistake} veces y perdiste esta vez, pero no te preocupes, puedes volver a intentarlo!.</p>
+                    <hr/>
+                    <p class="mb-0">Recuerda que tu participación es importante para los propósitos de E-ncendio.</p>
+                </div>
+            </div>
+        )
+    }
+
     const gameOver = mistake >= maxWrong;
     // console.log("errores: ", mistake, " maxErrores: ", maxWrong)
     const isWinner = answer ? guessedWord().join("") === answer : false;
@@ -125,14 +156,14 @@ const FourImagesOneWord = () => {
         
         perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-            console.log("Subir de nivel")
+            // console.log("Subir de nivel")
             perfil.league_id = perfil.league_id.league
         }
         actualizarPerfil(perfil)
 
         // Avanzar al siguiente ahorcado
         if ( ahorcadoActual < largoAhorcados - 1 ) {
-            console.log("aun quedan ahorcados")
+            // console.log("aun quedan ahorcados")
             setTimeout(() => {
                 localStorage.setItem( 'ahorcadoActual', ahorcadoActual + 1 );
                 window.location.reload();
@@ -140,7 +171,7 @@ const FourImagesOneWord = () => {
         } else {
             // Revisar si sube de nivel de ahorcados? /api/user/{id}/level-image
 
-            console.log("Ya se acabaron las ahorcados")
+            // console.log("Ya se acabaron las ahorcados")
         }
     }
 
@@ -157,23 +188,37 @@ const FourImagesOneWord = () => {
     }
 
     if ( ahorcados.length != 0 && answer != "" && isWinner) {
-        gameStat = "¡Felicidades, lo lograste!!!"
+        gameStat = winnerMessage();
         setTimeout(() => {
             winnerFunction()
             setGuessed("")
             setMistake(0)
-        }, 2000);
+        }, 6000);
     }
 
     if ( ahorcados.length != 0 && answer != "" && gameOver) {
-        gameStat = "¡Has perdido!!!"
+        gameStat = gameoverMessage();
         setTimeout(() => {
             gameoverFunction()
             setGuessed("")
             setMistake(0)
+        }, 6000);
+    }
+
+    
+    const onHide = () => {
+        setOpacity(0)
+        setTimeout(() => {
+            setOpacity(1)
         }, 2000);
     }
 
+    const onScale = () => {
+        // if (scale > 1) {
+            
+        // } else setScale
+        setScale(scale > 1 ? 1 : 1.1)
+    }
 
     let nowProgress = 0
     let maxProgress = 0
@@ -189,7 +234,7 @@ const FourImagesOneWord = () => {
     return (
         <Container fluid className="backgroundGif"  >
             {
-                perfil != null && perfil.league_id.league === "Plata" // editar, es al revés
+                perfil != null && perfil.league_id.league === "Oro" // editar, es Oro
                 ?
                     <>
                         <div className="topCenter4" >
@@ -212,10 +257,12 @@ const FourImagesOneWord = () => {
                                                         label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
                                             />
                                         </OverlayTrigger>
+                                        <p className={isWinner ? "final-text winner" : gameOver ? "final-text gameover" : "final-text"} > {isWinner ? "+" : gameOver ? "-" : ""}15 puntos </p>
                                     </Fragment>
                                 : null
                                 }
                                 </Col>
+                                
                             </Row>
                             { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         </div>
@@ -232,7 +279,7 @@ const FourImagesOneWord = () => {
                                     </Row>
                                     <div className="text-center d-flex">
                                         <Col>
-                                            <img src={images[mistake]} alt=""/>
+                                            <img className="mistake-images" src={images[mistake]} alt=""/>
                                         </Col>
                                         <Col className="align-self-center"  >
                                             <div className="float-center wrongs"> <span className="font-weight-bold" >Errores</span> : {mistake} of {maxWrong} </div>

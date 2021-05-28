@@ -90,7 +90,7 @@ const Games = ({ history }) => {
                                     :
                                         image.title === "4 Imágenes y 1 Palabra"
                                         ?
-                                            perfil.league_id.league != "Bronce" && perfil.league_id.league != "Plata"
+                                            perfil.league_id.league === "Bronce" | perfil.league_id.league === "Plata"
                                             ?
                                                 true
                                             :
@@ -122,7 +122,7 @@ const Games = ({ history }) => {
                                     :
                                         image.title === "4 Imágenes y 1 Palabra"
                                         ?
-                                            perfil.league_id.league != "Bronce" && perfil.league_id.league != "Plata"
+                                            perfil.league_id.league === "Bronce" | perfil.league_id.league === "Plata"
                                             ?
                                                 "image-backdrop-disable"
                                             :

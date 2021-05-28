@@ -72,6 +72,38 @@
     max-height: 200px;
 }
 
+.final-text {
+    position: relative;
+    transition: all 1s ease-out;
+    font-size: larger;
+    width: fit-content;
+    margin-left: auto !important;
+    opacity: 0;
+    /* background-color: aqua; */
+    /* margin-top: -8% !important; */
+    /* margin-left: 75% !important; */
+}
+
+.winner {
+    color: green;
+    /* display: block; */
+    /* top: 0; */
+    opacity: 1;
+    margin-right: 35% !important;
+    /* margin-top: -4% !important; */
+    /* margin-left: 60% !important; */
+}
+
+.gameover {
+    color: red;
+    /* display: block; */
+    /* top: 0; */
+    opacity: 1;
+    margin-right: 35% !important;
+    /* margin-top: -4% !important; */
+    /* margin-left: 60% !important; */
+}
+
 @media only screen and (max-width: 1376px) {
     .rowTitle {
         width: 100%;
@@ -108,5 +140,31 @@
         max-width: 160px;
         min-height: 160px;
         max-height: 160px;
+    }
+
+    .final-text {
+        opacity: 0;
+        width: fit-content;
+        margin-left: auto !important;
+    }
+
+    .winner {
+        opacity: 1;
+        margin-right: 35% !important;
+    }
+    
+    .gameover {
+        opacity: 1;
+        margin-right: 35% !important;
+    }
+
+    .four-images {
+        margin-top: 1.5%;
+    }
+    .mistake-images {
+        min-width: 180px;
+        max-width: 180px;
+        min-height: 200px;
+        max-height: 200px;
     }
 }
