@@ -184,10 +184,10 @@ const Login = ( props ) => {
               onChange={onChange}
             />
             { passworderror ? <Alert severity="error" className={classes.errorMessage} > Contraseña mal ingresada! </Alert> : null }
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Recordarme"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
@@ -195,7 +195,7 @@ const Login = ( props ) => {
               color="primary"
               disabled={loadingLogin}
               // className={classes.submit}
-              className="btn-blue"
+              className="btn-blue mt-2"
             >
               {
                 loadingLogin
