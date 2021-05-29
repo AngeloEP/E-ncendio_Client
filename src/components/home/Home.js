@@ -378,7 +378,7 @@ const Home = () => {
                         
                         <Grid item xs={5} className="mt-5" >
                             <Paper >xs=12</Paper>
-                        </Grid> */}
+                        </Grid> 
                         
 
                         <Grid container direction="row" justify="center" alignItems="center" xs={12} className="mt-5" >
