@@ -126,10 +126,20 @@ const AuthState = props => {
     }
 
     // Cierra la sesión del usuario
-    const cerrarSesión = () => {
-        dispatch({
-            type: CERRAR_SESION
-        })
+    const cerrarSesión = async () => {
+        try {
+            dispatch({
+                type: CERRAR_SESION
+            })
+            const resultado = await clienteAxios.get(`/api/auth/logout`)
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo cerrar su sesión, inténtelo nuevamente!',
+            })
+        }
     }
 
     const modificarUsuario = async (usuario, usuario_id) => {
