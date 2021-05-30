@@ -8,6 +8,8 @@ import tagContext from '../../../context/tag/tagContext';
 
 import Fire from '../../common/fire/Fire';
 
+import Swal from 'sweetalert2';
+
 import { withRouter, Switch, Route, Link } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
@@ -214,6 +216,33 @@ const TagImage = ( props ) => {
             // Revisar si sube de nivel de imágenes? /api/user/{id}/level-image
 
             console.log("Ya se acabaron las imágenes")
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: '¡Agradecemos enormemente su participación!',
+                icon: 'success',
+                confirmButtonText: `Salir`,
+                allowOutsideClick: false,
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Acaba de finalizar el juego',
+                        text: "No se encuentran más imágenes disponibles",
+                    })
+                    
+                    setTimeout(() => {
+                        props.history.push('/games')
+                    }, 3000);
+                }
+            })
+
         }
     }
 

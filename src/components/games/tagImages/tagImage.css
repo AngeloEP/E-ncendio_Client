@@ -46,13 +46,14 @@
     position: relative;
     margin-left: -12%;
     margin-bottom: 10%;
-    
+    min-width: 35% !important;
+    max-width: 35% !important;
 }
 
 .imagen {
     position: relative;
-    min-width: 400px !important;
-    max-width: 400px !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
     min-height: 300px !important;
     max-height: 300px !important;
     /* max-width: 300px; */
@@ -181,11 +182,13 @@
     
     .div-imagen {
         margin-left: -12%;
+        min-width: 37% !important;
+        max-width: 37% !important;
     }
 
     .imagen {
-        min-width: 300px !important;
-        /* max-width: 300px; */
+        min-width: 100% !important;
+        max-width: 100% !important;
         min-height: 180px !important;
         /* max-height: 150px; */
     }
