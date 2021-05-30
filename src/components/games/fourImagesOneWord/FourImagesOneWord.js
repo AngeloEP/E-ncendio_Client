@@ -11,6 +11,8 @@ import step5 from "../../../assets/img/hangman/5.jpg";
 import step6 from "../../../assets/img/hangman/6.jpg";
 import testImage from "../../../assets/img/test4.jpg";
 
+import Swal from 'sweetalert2';
+
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
 import FourImagesOneWordContext from '../../../context/fourImagesOneWord/fourImagesOneWordContext';
@@ -25,7 +27,7 @@ import Tooltip from 'react-bootstrap/Tooltip'
 
 import Typography from '@material-ui/core/Typography';
 
-const FourImagesOneWord = () => {
+const FourImagesOneWord = ( props ) => {
     // Extraer los valores del context
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta } = alertaContext
@@ -172,6 +174,31 @@ const FourImagesOneWord = () => {
             // Revisar si sube de nivel de ahorcados? /api/user/{id}/level-image
 
             // console.log("Ya se acabaron las ahorcados")
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: '¡Agradecemos enormemente su participación!',
+                icon: 'success',
+                confirmButtonText: `Salir`,
+                allowOutsideClick: false,
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Acaba de finalizar el juego',
+                        text: "No se encuentran más ahorcados disponibles",
+                    })
+                    
+                    setTimeout(() => {
+                        props.history.push('/games')
+                    }, 3000);
+                }
+            })
         }
     }
 

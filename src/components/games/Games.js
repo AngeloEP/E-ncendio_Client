@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography';
 
 import ProfileContext from '../../context/profile/profileContext';
 import AuthContext from '../../context/autentificacion/authContext';
+import imageContext from '../../context/images/imageContext';
+import wordContext from '../../context/words/wordContext';
+import FourImagesOneWordContext from '../../context/fourImagesOneWord/fourImagesOneWordContext';
 
 import minions from '../../assets/img/minions.jpg';
 import encendio from '../../assets/img/incendio.png';
@@ -46,10 +49,27 @@ const Games = ({ history }) => {
     const profilecontext = useContext(ProfileContext)
     const { perfil, obtenerPerfil } = profilecontext
 
+    // Extraer la información de el context de imagenes
+    const imagesContext = useContext(imageContext)
+    const { obtenerImagenes  } = imagesContext
+
+    // Extraer la información de el context de Palabras
+    const wordsContext = useContext(wordContext)
+    const { obtenerPalabras  } = wordsContext
+
+    // Extraer la información de el context de Palabras
+    const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
+    const { obtenerAhorcados  } = fourImagesOneWordContext
+
     useEffect(() => {
         usuarioAutenticado()
 
         obtenerPerfil()
+
+        // Traer contenido para los juegos previamente
+        obtenerImagenes()
+        obtenerPalabras()
+        obtenerAhorcados()
     }, [])
 
     const classes = useStyles()

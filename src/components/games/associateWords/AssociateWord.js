@@ -9,6 +9,8 @@ import tagContext from '../../../context/tag/tagContext';
 
 import Fire from '../../common/fire/Fire';
 
+import Swal from 'sweetalert2';
+
 import { withRouter, Switch, Route, Link } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
@@ -29,7 +31,7 @@ import { Label } from '@material-ui/icons';
 import "./associateWord.css";
 
 
-const AssociateWords = () => {
+const AssociateWords = ( props ) => {
 
     // Extraer los valores del context
     const alertaContext = useContext(AlertaContext)
@@ -164,6 +166,32 @@ const AssociateWords = () => {
             // Revisar si sube de nivel de Palabras? /api/user/{id}/level-word
 
             console.log("Ya se acabaron las Palabras")
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: '¡Agradecemos enormemente su participación!',
+                icon: 'success',
+                confirmButtonText: `Salir`,
+                allowOutsideClick: false,
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Acaba de finalizar el juego',
+                        text: "No se encuentran más palabras disponibles",
+                    })
+                    
+                    setTimeout(() => {
+                        props.history.push('/games')
+                    }, 3000);
+                }
+            })
         }
     }
 
