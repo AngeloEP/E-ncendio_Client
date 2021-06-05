@@ -110,34 +110,44 @@ const WordState = props => {
             dispatch({
                 type: ELIMINAR_PALABRA_CARGANDO,
             })
-            const respuesta = await clienteAxios.delete(`/api/words/user/${id_palabra}`)
-
             Swal.fire({
-                icon: 'success',
-                title: 'Proceso exitoso',
-                text: 'Su palabra se eliminó exitosamente!',
-            });
-            setTimeout(() => {
-                dispatch({
-                    type: ELIMINAR_PALABRA,
-                    payload: respuesta.data
-                })
-            }, 1500);
-            
+                title: 'Confirme su decisión',
+                showDenyButton: true,
+                confirmButtonText: `Eliminar`,
+                denyButtonText: `Cancelar`,
+                allowOutsideClick: false
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    const respuesta = await clienteAxios.delete(`/api/words/user/${id_palabra}`)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Su Palabra se eliminó exitosamente!',
+                    })
+                    
+                    setTimeout(() => {
+                        dispatch({
+                            type: ELIMINAR_PALABRA,
+                        })
+                    }, 1000);
+                }
+                else if (result.isDenied) {
+                    Swal.fire('No se eliminó su Palabra', '', 'info')
+                    dispatch({
+                        type: ELIMINAR_PALABRA_ERROR,
+                    })
+                }
+            })
+
         } catch (error) {
-            console.log(error)
-            const alerta = {
-                msg: error.response.data.msg,
-                categoria: 'alerta-error'
-            }
+            // console.log(error)
             dispatch({
                 type: ELIMINAR_PALABRA_ERROR,
-                payload: alerta
+                payload: error
             })
             Swal.fire({
                 icon: 'error',
-                title: 'Lo sentimos, hubo un error',
-                text: `${alerta.msg}`,
+                title: 'Lo sentimos',
+                text: 'Hubo un error, inténtelo nuevamente!',
             })
         }
     }

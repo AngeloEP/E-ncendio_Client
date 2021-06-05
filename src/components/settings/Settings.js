@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import UploadImage from './uploadImage/UploadImage';
 import UploadFourImagesOneWord from './uploadFourImagesOneWord/UploadFourImagesOneWord';
 import UploadWord from './uploadWord/UploadWord';
+import UploadTip from './uploadTip/UploadTip';
 import Admin from './admin/Admin';
 
 import AuthContext from '../../context/autentificacion/authContext';
@@ -14,6 +15,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import SpellcheckIcon from '@material-ui/icons/Spellcheck';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import PeopleIcon from '@material-ui/icons/People';
+import InfoIcon from '@material-ui/icons/Info';
 
 import './settings.css';
 
@@ -48,13 +50,13 @@ const Settings = () => {
                         <div className="text-center ml-auto mr-auto" >
                             { perfil.league_id.league === "Bronce"
                                 ?
-                                    "No puede subir contenido aún"
+                                    "Puede subir imágenes al sitio"
                                 :
                                     perfil.league_id.league === "Plata"
                                     ?
-                                        "Ya puede subir imágenes, para subir palabras debe aumentar sus puntos!"
+                                        "Ya puede subir imágenes y palabras!"
                                     :
-                                        "Puede subir imágenes y palabras al sitio"
+                                        "¡Ahora ya puede subir el contenido que desee al sitio para ser evaluado!"
                             }
                         </div>
                         <div className="row buttonsNavigation" >
@@ -102,6 +104,17 @@ const Settings = () => {
                                             true
                                     }
                                 />
+                                <BottomNavigationAction
+                                    label="Subir tip"
+                                    icon={<InfoIcon/>}
+                                    disabled={
+                                        perfil.league_id.league === "Oro"
+                                        ?
+                                            false
+                                        :
+                                            true
+                                    }
+                                />
                             </BottomNavigation>
                         </div>
 
@@ -122,7 +135,11 @@ const Settings = () => {
                                             ?
                                                 <UploadFourImagesOneWord />
                                             :
-                                                null 
+                                                navigation === 4
+                                                ?
+                                                    <UploadTip />
+                                                :
+                                                    null 
                             }
                         </div>
                     </>

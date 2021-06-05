@@ -6,29 +6,28 @@ import wordContext from '../../../context/words/wordContext';
 import profileContext from '../../../context/profile/profileContext';
 import categoryContext from '../../../context/categories/categoryContext';
 import tagContext from '../../../context/tag/tagContext';
+import TipContext from '../../../context/tips/tipContext';
 
 import Fire from '../../common/fire/Fire';
 
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { withRouter, Switch, Route, Link } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
 
 import { Col, Container, Image, Row, Button } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Tooltip from 'react-bootstrap/Tooltip'
+import Tooltip from 'react-bootstrap/Tooltip';
+import ClipLoader from "react-spinners/ClipLoader";
 
-import Grid from '@material-ui/core/Grid';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
-import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { Label } from '@material-ui/icons';
 
 import "./associateWord.css";
+
+import infoIcon from '../../../assets/info.svg';
 
 
 const AssociateWords = ( props ) => {
@@ -49,15 +48,53 @@ const AssociateWords = ( props ) => {
     const profilesContext = useContext(profileContext)
     const { perfil, obtenerPerfil, actualizarPerfil } = profilesContext
 
+    // Extraer la información de el context de los tips
+    const tipContext = useContext(TipContext)
+    const { tips, largoTips, obtenerTips  } = tipContext
+
     // Extraer la información del context de niveles
     const categoriesContext = useContext(categoryContext)
     const { categorias, obtenerCategorias } = categoriesContext
 
     // Extraer la información del context de etiquetar
     const tagsContext = useContext(tagContext)
-    const { etiquetarPalabra } = tagsContext
+    const { etiquetarPalabra, verTip } = tagsContext
 
     let palabraActual = JSON.parse(localStorage.getItem("palabraActual"))
+    let tipActual = 0 
+    if (tips.length > 0) {
+        tipActual = Math.floor(Math.random() * (largoTips));
+    }
+
+    const [ newContent, setNewContent ] = useState(false)
+    const [ tipReceive, setTipReceive ] = useState(false)
+
+    const CustomToast = ({closedToast}) => {
+        return (
+            <div className={`notification-container`}>
+                <div className="notification-image">
+                    <img src={infoIcon} alt="" />
+                </div>
+                <div>
+                    <p className="notification-title"> Aprendiendo con E-ncendio </p>
+                    <p className="notification-message">
+                        {tips[tipActual].text}
+                    </p>
+                </div>
+            </div>
+        )
+    }
+
+    toast.configure()
+    const notify = () => {
+        toast.info(<CustomToast />,
+            {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 8000,
+                closeOnClick: false,
+            }
+        )
+    }
 
     useEffect(() => {
         // Traer el perfil del usuario score, etc. /api/user/{id}/profile
@@ -71,6 +108,38 @@ const AssociateWords = ( props ) => {
 
         // Traer las Palabras del nivel correspondiente /api/league/{id}/words 
         obtenerPalabras()
+
+        // Traer los tips disponibles
+        obtenerTips()
+
+        const interval = setInterval(() => {
+            notify()
+            verTip(tips[tipActual]._id)
+            setTipReceive(true)
+            let addPoints = 0;
+            switch (perfil.league_id.league) {
+                case "Plata":
+                    addPoints = 7;
+                    break;
+
+                case "Oro":
+                    addPoints = 5;
+                    break;
+            
+                default:
+                    break;
+            }
+            setPoints(addPoints)
+            perfil.score = perfil.score + addPoints;
+            if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+                perfil.league_id = perfil.league_id.league
+            }
+            actualizarPerfil(perfil)
+            setTimeout(() => {
+                setTipReceive(false)
+            }, 2000);
+        }, 60000); // 60 seconds
+        return () => clearInterval(interval);
     }, [])
 
     const [ isWinner, setIsWinner ] = useState(false)
@@ -152,20 +221,33 @@ const AssociateWords = ( props ) => {
             // console.log(perfil)
             setIsWinner(false)
         }, 2000);
-        // return
         
-        // console.log("palabraActual: ",palabraActual, "  limite: ", largoPalabras - 1)
+        setNewContent(true);
+        setChecked({
+            prevencion: false,
+            mitigacion: false,
+            riesgo: false,
+            combate: false,
+            impacto: false,
+            recuperacion: false,
+            amenaza: false,
+    
+            selected: null
+        })
+        
         // Avanzar a la siguiente Palabra
         if ( palabraActual < largoPalabras - 1 ) {
-            console.log("aun quedan Palabras")
-            localStorage.setItem( 'palabraActual', palabraActual + 1 );
+            // console.log("aun quedan Palabras")
             setTimeout(() => {
-                window.location.reload();
+                localStorage.setItem( 'palabraActual', palabraActual + 1 );
+                setTimeout(() => {
+                    setNewContent(false)
+                }, 1000);
             }, 1000);
         } else {
             // Revisar si sube de nivel de Palabras? /api/user/{id}/level-word
 
-            console.log("Ya se acabaron las Palabras")
+            // console.log("Ya se acabaron las Palabras")
 
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -233,7 +315,7 @@ const AssociateWords = ( props ) => {
                                                     label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
                                         />
                                     </OverlayTrigger>
-                                    <p className={isWinner ? "final-text winner" : "final-text"} > +{points} puntos </p>
+                                    <p className={isWinner == true | tipReceive == true ? "final-text winner" : "final-text"} > +{points} puntos </p>
                                 </Fragment>
                             : null
                             }
@@ -243,58 +325,68 @@ const AssociateWords = ( props ) => {
                     </div>
                     { palabras.length != 0
                         ?
-                        <div>
-                        <div className="center">
-                            <div className="row">
-                                <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                    <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
+                            newContent === false
+                            ?
+                                <div>
+                                    <div className="center">
+                                        <div className="row">
+                                            <div className="col categoritas" style={{ marginRight: "-10%" }} >
+                                                <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
+                                            </div>
+                                            <div className="col categoritas" style={{ marginRight: "-10%" }} >
+                                                <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
+                                            </div>
+                                            <div className="col categoritas" >
+                                                <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col categoritas" style={{ marginRight: "-4%" }} >
+                                                <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
+                                            </div>
+                                            <div className="col palabra" >
+                                                { palabras.length == 0
+                                                ? null
+                                                :
+                                                    <Col>
+                                                        <Paper className="paper" elevation={10} variant="outlined"  >
+                                                            {palabras[palabraActual].name}
+                                                        </Paper>
+                                                    </Col>
+                                                }
+                                            </div>
+                                            <div className="col categoritas" style={{ marginLeft: "-1%" }} >
+                                                <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col categoritas" style={{ marginRight: "-10%" }} >
+                                                <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
+                                            </div>
+                                            <div className="col categoritas">
+                                            </div>
+                                            <div className="col categoritas" style={{ marginLeft: "-10%" }} >
+                                                <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div className="bottomCenter" >
+                                        <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
+                                            <Col>
+                                                <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
+                                            </Col>
+                                        </Row>
+                                    </div>
                                 </div>
-                                <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                    <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
+                            :
+                                <div className="text-center position-relative" style={{ top: "50%" }} >
+                                    <ClipLoader
+                                        color={"#000"}
+                                        loading={true}
+                                        size={70}
+                                    />
                                 </div>
-                                <div className="col categoritas" >
-                                    <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col categoritas" style={{ marginRight: "-4%" }} >
-                                    <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
-                                </div>
-                                <div className="col palabra" >
-                                    { palabras.length == 0
-                                    ? null
-                                    :
-                                        <Col>
-                                            <Paper className="paper" elevation={10} variant="outlined"  >
-                                                {palabras[palabraActual].name}
-                                            </Paper>
-                                        </Col>
-                                    }
-                                </div>
-                                <div className="col categoritas" style={{ marginLeft: "-1%" }} >
-                                    <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                    <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
-                                </div>
-                                <div className="col categoritas">
-                                </div>
-                                <div className="col categoritas" style={{ marginLeft: "-10%" }} >
-                                    <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div className="bottomCenter" >
-                            <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
-                                <Col>
-                                    <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
-                                </Col>
-                            </Row>
-                        </div>
-                        </div>
                     :
                         <div className="container" >
                             <div className="no-words" >

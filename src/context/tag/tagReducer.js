@@ -23,6 +23,14 @@ import {
     ELIMINAR_ETIQUETAS_AHORCADOS,
     ELIMINAR_ETIQUETAS_AHORCADOS_CARGANDO,
     ELIMINAR_ETIQUETAS_AHORCADOS_ERROR,
+    VER_TIP,
+    VER_TIP_ERROR,
+    OBTENER_TIPS_VISTOS,
+    OBTENER_TIPS_VISTOS_CARGANDO,
+    OBTENER_TIPS_VISTOS_ERROR,
+    ELIMINAR_TIPS_VISTOS,
+    ELIMINAR_TIPS_VISTOS_CARGANDO,
+    ELIMINAR_TIPS_VISTOS_ERROR,
 } from '../../types';
 
 export default (state, action) => {
@@ -30,6 +38,7 @@ export default (state, action) => {
         case ETIQUETAR_PALABRA:
         case ETIQUETAR_IMAGEN:
         case ETIQUETAR_AHORCADO:
+        case VER_TIP:
             return {
                 ...state,
             }
@@ -37,21 +46,26 @@ export default (state, action) => {
         case ELIMINAR_ETIQUETAS_AHORCADOS_ERROR:
         case ELIMINAR_ETIQUETAS_IMAGENES_ERROR:
         case ELIMINAR_ETIQUETAS_PALABRAS_ERROR:
+        case ELIMINAR_TIPS_VISTOS_ERROR:
         case OBTENER_PALABRAS_ETIQUETADAS_ERROR:
         case OBTENER_IMAGENES_ETIQUETADAS_ERROR:
         case OBTENER_AHORCADOS_ETIQUETADOS_ERROR:
+        case OBTENER_TIPS_VISTOS_ERROR:
         case ETIQUETAR_PALABRA_ERROR:
         case ETIQUETAR_IMAGEN_ERROR:
         case ETIQUETAR_AHORCADO_ERROR:
+        case VER_TIP_ERROR:
             return {
                 ...state,
                 errores: action.payload,
                 cargandoImagenesEtiquetadasUsuarioDesdeAdmin: false,
                 cargandoPalabrasEtiquetadasUsuarioDesdeAdmin: false,
+                cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin: false,
+                cargandoTipsVistosUsuarioDesdeAdmin: false,
                 cargandoResetearEtiquetasImagenes: false,
                 cargandoResetearEtiquetasPalabras: false,
-                cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin: false,
                 cargandoResetearEtiquetasAhorcados: false,
+                cargandoResetearTipsVistos: false,
             }
     
         case OBTENER_IMAGENES_ETIQUETADAS:
@@ -93,6 +107,19 @@ export default (state, action) => {
                 cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin: true,
             }
 
+        case OBTENER_TIPS_VISTOS:
+            return {
+                ...state,
+                tipsVistos: action.payload,
+                cargandoTipsVistosUsuarioDesdeAdmin: false,
+            }
+
+        case OBTENER_TIPS_VISTOS_CARGANDO:
+            return {
+                ...state,
+                cargandoTipsVistosUsuarioDesdeAdmin: true,
+            }
+
         case ELIMINAR_ETIQUETAS_PALABRAS:
             return {
                 ...state,
@@ -130,6 +157,19 @@ export default (state, action) => {
             return {
                 ...state,
                 cargandoResetearEtiquetasAhorcados: action.payload
+            }
+
+        case ELIMINAR_TIPS_VISTOS:
+            return {
+                ...state,
+                tipsVistos: [],
+                cargandoResetearTipsVistos: false,
+            }
+
+        case ELIMINAR_TIPS_VISTOS_CARGANDO:
+            return {
+                ...state,
+                cargandoResetearTipsVistos: action.payload
             }
 
         default:

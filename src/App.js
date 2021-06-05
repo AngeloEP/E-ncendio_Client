@@ -23,6 +23,7 @@ import AuthState from './context/autentificacion/authState';
 import ImageState from './context/images/imageState';
 import FourImagesOneWordState from './context/fourImagesOneWord/fourImagesOneWordState';
 import WordState from './context/words/wordState';
+import TipState from './context/tips/tipState';
 import ProfileState from './context/profile/profileState';
 import LeagueState from './context/leagues/leagueState';
 import LevelState from './context/levels/levelState';
@@ -56,55 +57,57 @@ function App() {
             <AuthState>
               <ImageState>
                 <WordState>
-                  <ProfileState>
-                    <LeagueState>
-                      <LevelState>
-                        <CategoryState>
-                          <TagState>
-                            <UsuariosState>
-                              <ContactFormState>
-                                <FourImagesOneWordState>
-                                  <Router>
+                  <TipState>
+                    <ProfileState>
+                      <LeagueState>
+                        <LevelState>
+                          <CategoryState>
+                            <TagState>
+                              <UsuariosState>
+                                <ContactFormState>
+                                  <FourImagesOneWordState>
+                                    <Router>
 
-                                    <Navigation />
-                                    <Route path="/" render={({location}) => (
-                                      <TransitionGroup>
-                                        <CSSTransition
-                                          key={location.key}
-                                          timeout={200}
-                                          classNames="fade"
-                                        >
-                                      <Switch location={location} >
-                                      
-                                        <Route exact path='/login' component={Login} /> 
-                                        <Route exact path="/register" component={Register} />
-                                          <RutaPrivada exact path="/home" component={Home} />
-                                          <RutaPrivada exact path="/profile" component={Profile} />
-                                          <RutaPrivada exact path="/profile/edit" component={EditProfile} />
-                                          <RutaPrivada exact path="/rank" component={Rank} />
-                                          <RutaPrivada exact path="/about" component={About} />
-                                          <RutaPrivada exact path="/games" component={Games} />
-                                          <RutaPrivada exact path="/help" component={Help} />
-                                          <RutaPrivada exact path="/games/images" component={TagImage} />
-                                          <RutaPrivada exact path="/games/words" component={AssociateWord} />
-                                          <RutaPrivada exact path="/games/four-images-one-word" component={FourImagesOneWord} />  
-                                          <RutaPrivada exact path="/settings" component={Settings} />  
-                                        <Redirect from="/" to="/login"/>
+                                      <Navigation />
+                                      <Route path="/" render={({location}) => (
+                                        <TransitionGroup>
+                                          <CSSTransition
+                                            key={location.key}
+                                            timeout={200}
+                                            classNames="fade"
+                                          >
+                                        <Switch location={location} >
+                                        
+                                          <Route exact path='/login' component={Login} /> 
+                                          <Route exact path="/register" component={Register} />
+                                            <RutaPrivada exact path="/home" component={Home} />
+                                            <RutaPrivada exact path="/profile" component={Profile} />
+                                            <RutaPrivada exact path="/profile/edit" component={EditProfile} />
+                                            <RutaPrivada exact path="/rank" component={Rank} />
+                                            <RutaPrivada exact path="/about" component={About} />
+                                            <RutaPrivada exact path="/games" component={Games} />
+                                            <RutaPrivada exact path="/help" component={Help} />
+                                            <RutaPrivada exact path="/games/images" component={TagImage} />
+                                            <RutaPrivada exact path="/games/words" component={AssociateWord} />
+                                            <RutaPrivada exact path="/games/four-images-one-word" component={FourImagesOneWord} />  
+                                            <RutaPrivada exact path="/settings" component={Settings} />  
+                                          <Redirect from="/" to="/login"/>
 
-                                      </Switch>
-                                      </CSSTransition>
-                                      </TransitionGroup>
-                                    )}/>
-                                    <FooterPage/>
-                                  </Router>
-                                </FourImagesOneWordState>
-                              </ContactFormState>
-                            </UsuariosState>
-                          </TagState>
-                        </CategoryState>
-                      </LevelState>
-                    </LeagueState>
-                  </ProfileState>
+                                        </Switch>
+                                        </CSSTransition>
+                                        </TransitionGroup>
+                                      )}/>
+                                      <FooterPage/>
+                                    </Router>
+                                  </FourImagesOneWordState>
+                                </ContactFormState>
+                              </UsuariosState>
+                            </TagState>
+                          </CategoryState>
+                        </LevelState>
+                      </LeagueState>
+                    </ProfileState>
+                  </TipState>
                 </WordState>
               </ImageState>
             </AuthState>

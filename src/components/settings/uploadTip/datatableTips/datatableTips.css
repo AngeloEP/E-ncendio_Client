@@ -1,0 +1,61 @@
+.div-uploadTip-update {
+    text-align: center;
+    width: 90%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 5%;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.div-tip-update {
+    width: 80%;
+}
+
+.tip-update {
+    position: relative;
+}
+
+.paper-tip-update {
+    position: relative !important;
+    text-align: left !important;
+    min-width: 100%;
+    min-height: fit-content;
+    display: flex;
+    overflow-wrap: break-word;
+    font-size: larger !important;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 5%;
+    border: 2px solid !important;
+    border-radius: 25 !important;
+    font-family: 'Times New Roman', Times, serif;
+    border-color: #5bc0de !important;
+    color: rgb(75, 70, 70) !important;
+}
+
+.paper-tip-update:hover {
+    transition: 0.5s;
+    border-color: blue !important;
+}
+
+.label-upload-tip-update {
+    width: 11em;
+    height: 2em;
+    margin-left: 270%;
+    margin-bottom: 1em;
+}
+
+.submit-tip-update {
+    width: 20%;
+}
+
+.div-datatable-tips-update {
+    text-align: center;
+    width: 80%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 10%;
+    background-color: white;
+    border-radius: 12px;
+}

@@ -110,34 +110,44 @@ const ImageState = props => {
             dispatch({
                 type: ELIMINAR_IMAGEN_CARGANDO,
             })
-            const respuesta = await clienteAxios.delete(`/api/images/user/${id_imagen}`)
-
             Swal.fire({
-                icon: 'success',
-                title: 'Proceso exitoso',
-                text: 'Su imagen se eliminó exitosamente!',
-            });
-            setTimeout(() => {
-                dispatch({
-                    type: ELIMINAR_IMAGEN,
-                    payload: respuesta.data
-                })
-            }, 1500);
-            
+                title: 'Confirme su decisión',
+                showDenyButton: true,
+                confirmButtonText: `Eliminar`,
+                denyButtonText: `Cancelar`,
+                allowOutsideClick: false
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    const respuesta = await clienteAxios.delete(`/api/images/user/${id_imagen}`)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Su Imagen se eliminó exitosamente!',
+                    })
+                    
+                    setTimeout(() => {
+                        dispatch({
+                            type: ELIMINAR_IMAGEN,
+                        })
+                    }, 1000);
+                }
+                else if (result.isDenied) {
+                    Swal.fire('No se eliminó la Imagen', '', 'info')
+                    dispatch({
+                        type: ELIMINAR_IMAGEN_ERROR,
+                    })
+                }
+            })
+
         } catch (error) {
-            console.log(error)
-            const alerta = {
-                msg: error.response.data.msg,
-                categoria: 'alerta-error'
-            }
+            // console.log(error)
             dispatch({
                 type: ELIMINAR_IMAGEN_ERROR,
-                payload: alerta
+                payload: error
             })
             Swal.fire({
                 icon: 'error',
-                title: 'Lo sentimos, hubo un error',
-                text: `${alerta.msg}`,
+                title: 'Lo sentimos',
+                text: 'Hubo un error, inténtelo nuevamente!',
             })
         }
     }

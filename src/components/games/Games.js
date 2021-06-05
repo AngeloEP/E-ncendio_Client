@@ -12,6 +12,7 @@ import AuthContext from '../../context/autentificacion/authContext';
 import imageContext from '../../context/images/imageContext';
 import wordContext from '../../context/words/wordContext';
 import FourImagesOneWordContext from '../../context/fourImagesOneWord/fourImagesOneWordContext';
+import TipContext from '../../context/tips/tipContext';
 
 import minions from '../../assets/img/minions.jpg';
 import encendio from '../../assets/img/incendio.png';
@@ -61,6 +62,10 @@ const Games = ({ history }) => {
     const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
     const { obtenerAhorcados  } = fourImagesOneWordContext
 
+    // Extraer la información de el context de los tips
+    const tipContext = useContext(TipContext)
+    const { obtenerTips  } = tipContext
+
     useEffect(() => {
         usuarioAutenticado()
 
@@ -70,6 +75,7 @@ const Games = ({ history }) => {
         obtenerImagenes()
         obtenerPalabras()
         obtenerAhorcados()
+        obtenerTips()
     }, [])
 
     const classes = useStyles()

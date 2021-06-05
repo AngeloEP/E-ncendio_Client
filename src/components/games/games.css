@@ -29,3 +29,9 @@
     -moz-transition: all 0.7s;
     transition: all 0.7s;
 }
+
+.makeStyles-imageSrc-294 {
+    background-size: contain !important;
+    width: 100%;
+    background-repeat: no-repeat;
+}

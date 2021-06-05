@@ -5,30 +5,28 @@ import imageContext from '../../../context/images/imageContext';
 import profileContext from '../../../context/profile/profileContext';
 import categoryContext from '../../../context/categories/categoryContext';
 import tagContext from '../../../context/tag/tagContext';
+import TipContext from '../../../context/tips/tipContext';
 
 import Fire from '../../common/fire/Fire';
 
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { withRouter, Switch, Route, Link } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
 
 import { Col, Container, Image, Row, Button } from 'react-bootstrap';
-import ProgressBar from 'react-bootstrap/ProgressBar'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Tooltip from 'react-bootstrap/Tooltip'
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
-import Grid from '@material-ui/core/Grid';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
-import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
+import ClipLoader from "react-spinners/ClipLoader";
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { Label } from '@material-ui/icons';
 import "./tagImage.css";
 
-
+import infoIcon from '../../../assets/info.svg';
 
 const TagImage = ( props ) => {
 
@@ -44,6 +42,10 @@ const TagImage = ( props ) => {
     const imagesContext = useContext(imageContext)
     const { imagenes, largoImagenes, obtenerImagenes  } = imagesContext
 
+    // Extraer la información de el context de los tips
+    const tipContext = useContext(TipContext)
+    const { tips, largoTips, obtenerTips  } = tipContext
+
     // Extraer la información del context de perfiles
     const profilesContext = useContext(profileContext)
     const { perfil, obtenerPerfil, actualizarPerfil } = profilesContext
@@ -54,10 +56,52 @@ const TagImage = ( props ) => {
 
     // Extraer la información del context de etiquetar
     const tagsContext = useContext(tagContext)
-    const { etiquetarImagen } = tagsContext
+    const { etiquetarImagen, verTip } = tagsContext
 
     let imagenActual = JSON.parse(localStorage.getItem("imagenActual"))
+    let tipActual = 0 
+    if (tips.length > 0) {
+        tipActual = Math.floor(Math.random() * (largoTips));
+    }
 
+    const [ newContent, setNewContent ] = useState(false)
+    const [ tipReceive, setTipReceive ] = useState(false)
+
+    const CustomToast = ({closedToast}) => {
+        return (
+            <div className={`notification-container`}>
+                <div className="notification-image">
+                    <img src={infoIcon} alt="" />
+                </div>
+                <div>
+                    <p className="notification-title"> Aprendiendo con E-ncendio </p>
+                    <p className="notification-message">
+                        {tips[tipActual].text}
+                    </p>
+                </div>
+            </div>
+        )
+    }
+    toast.configure()
+    const notify = () => {
+        // toast('Basic notification!', {position: toast.POSITION.TOP_RIGHT})
+        // toast.success('Success notification!', 
+        //     {
+        //         position: toast.POSITION.TOP_CENTER,
+        //         autoClose: 7000
+        //     }
+        // )
+        // toast.warn('Warning notification!', {position: toast.POSITION.TOP_LEFT})
+        // toast.info('Info notification!', {position: toast.POSITION.BOTTOM_LEFT})
+        // toast.error('Error notification!', {position: toast.POSITION.BOTTOM_RIGHT})
+        toast.info(<CustomToast />,
+            {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 8000,
+                closeOnClick: false,
+            }
+        )
+    }
     
     useEffect(() => {
         // Traer el perfil del usuario score, etc. /api/user/{id}/profile
@@ -71,6 +115,43 @@ const TagImage = ( props ) => {
 
         // Traer las imágenes del nivel correspondiente /api/league/{id}/images 
         obtenerImagenes()
+
+        // Traer los tips disponibles
+        obtenerTips()
+
+        const interval = setInterval(() => {
+            notify()
+            verTip(tips[tipActual]._id)
+            setTipReceive(true)
+            let addPoints = 0;
+            switch (perfil.league_id.league) {
+                case "Bronce":
+                    addPoints = 10;
+                    break;
+
+                case "Plata":
+                    addPoints = 7;
+                    break;
+
+                case "Oro":
+                    addPoints = 5;
+                    break;
+            
+                default:
+                    break;
+            }
+            setPoints(addPoints)
+            perfil.score = perfil.score + addPoints;
+            if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+                perfil.league_id = perfil.league_id.league
+            }
+            actualizarPerfil(perfil)
+            setTimeout(() => {
+                setTipReceive(false)
+            }, 2000);
+        }, 60000); // 60 seconds
+        return () => clearInterval(interval);
+        
     }, [])
 
     const [ isWinner, setIsWinner ] = useState(false)
@@ -205,12 +286,27 @@ const TagImage = ( props ) => {
         // return
         
         // console.log("imagenActual: ",imagenActual, "  limite: ", largoImagenes - 1)
+        setNewContent(true);
+        setChecked({
+            prevencion: false,
+            mitigacion: false,
+            riesgo: false,
+            combate: false,
+            impacto: false,
+            recuperacion: false,
+            amenaza: false,
+    
+            selected: null
+        })
         // Avanzar a la siguiente imagen
         if ( imagenActual < largoImagenes - 1 ) {
             console.log("aun quedan imágenes")
             setTimeout(() => {
                 localStorage.setItem( 'imagenActual', imagenActual + 1 );
-                window.location.reload();
+                // window.location.reload();
+                setTimeout(() => {
+                    setNewContent(false)
+                }, 1000);
             }, 1000);
         } else {
             // Revisar si sube de nivel de imágenes? /api/user/{id}/level-image
@@ -256,8 +352,7 @@ const TagImage = ( props ) => {
         labelProgress = ((nowProgress / maxProgress) * 100).toPrecision(3)
         userLeague = perfil.league_id.league
     }
-    let colorProgress = labelProgress < 50 ? "success" : labelProgress < 80 ? "warning" : "danger"
-
+    let colorProgress = labelProgress < 50 ? "success" : labelProgress < 80 ? "warning" : "danger";
     return (
         <Container fluid className="backgroundGif" >
             <div className="topCenter" >
@@ -280,7 +375,7 @@ const TagImage = ( props ) => {
                                             label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
                                 />
                             </OverlayTrigger>
-                            <p className={isWinner ? "final-text winner" : "final-text"} > +{points} puntos </p>
+                            <p className={isWinner == true | tipReceive == true ? "final-text winner" : "final-text"} > +{points} puntos </p>
                         </Fragment>
                     : null
                     }
@@ -290,63 +385,73 @@ const TagImage = ( props ) => {
             </div>
             { imagenes.length != 0
                 ?
-                <>
-                    <div className="center">
-                        <div className="row">
-                            <div className="col categoritas" style={{ marginRight: "-10%" }}>
-                                <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
+                    newContent === false
+                    ?
+                        <>
+                            <div className="center">
+                                <div className="row">
+                                    <div className="col categoritas" style={{ marginRight: "-10%" }}>
+                                        <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
+                                    </div>
+                                    <div className="col categoritas" style={{ marginRight: "-10%" }} >
+                                        <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
+                                    </div>
+                                    <div className="col categoritas" >
+                                        <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col categoritas" style={{ marginTop: "-4%" }} >
+                                        <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
+                                    </div>
+                                    <div className="col div-imagen" >
+                                        { imagenes.length == 0
+                                            ? null
+                                            :
+                                            <Col>
+                                                <Image
+                                                    className="imagen"
+                                                    src={imagenes[imagenActual].imageUrl} rounded
+                                                />
+                                            </Col>
+                                        }
+                                    </div>
+                                    <div className="col categoritas" style={{ marginTop: "-4%" }} >
+                                        <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col categoritas" style={{ marginRight: "-10%", marginTop: "-4%" }}>
+                                        <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
+                                    </div>
+                                    <div className="col categoritas">
+                                    </div>
+                                    <div className="col categoritas" style={{ marginLeft: "-8%", marginTop: "-4%" }}>
+                                        <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
+                                    </div>
+                                </div>
                             </div>
-                            <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
-                            </div>
-                            <div className="col categoritas" >
-                                <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col categoritas" style={{ marginTop: "-4%" }} >
-                                <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
-                            </div>
-                            <div className="col div-imagen" >
-                                { imagenes.length == 0
-                                    ? null
-                                    :
+
+                            <div className="bottomCenter-images" >
+                                <Row style={{ marginLeft: "0px", marginRight: "0px" }} >
+                                    {/* <Col >
+                                        <Button variant="secondary"> Anterior </Button>{' '}
+                                    </Col> */}
+
                                     <Col>
-                                        <Image
-                                            className="imagen"
-                                            src={imagenes[imagenActual].imageUrl} rounded
-                                        />
+                                        <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
                                     </Col>
-                                }
+                                </Row>
                             </div>
-                            <div className="col categoritas" style={{ marginTop: "-4%" }} >
-                                <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
-                            </div>
+                        </>
+                    :
+                        <div className="text-center position-relative" style={{ top: "50%" }} >
+                            <ClipLoader
+                                color={"#000"}
+                                loading={true}
+                                size={70}
+                            />
                         </div>
-                        <div className="row">
-                            <div className="col categoritas" style={{ marginRight: "-10%", marginTop: "-4%" }}>
-                                <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
-                            </div>
-                            <div className="col categoritas">
-                            </div>
-                            <div className="col categoritas" style={{ marginLeft: "-8%", marginTop: "-4%" }}>
-                                <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="bottomCenter-images" >
-                        <Row style={{ marginLeft: "0px", marginRight: "0px" }} >
-                            {/* <Col >
-                                <Button variant="secondary"> Anterior </Button>{' '}
-                            </Col> */}
-
-                            <Col>
-                                <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
-                            </Col>
-                        </Row>
-                    </div>
-                    </>
                 :
                 <div className="container" >
                     <div className="no-images" >

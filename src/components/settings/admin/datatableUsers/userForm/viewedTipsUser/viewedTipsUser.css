@@ -1,0 +1,54 @@
+.cards-tag-tips {
+    margin-top: 2%;
+}
+
+.div-reset-tag-tips {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.tarjeta-tag-tips {
+    background-color: rgb(228, 226, 226);
+    border-radius: 15px;
+}
+
+.titulo-points-card-tip {
+    color: white;
+    background-color: black;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.points-card-tip {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(206, 237, 255);
+    color: rgb(21, 62, 117);
+}
+
+.palabra-tarjeta-vista {
+    position: relative !important;
+    text-align: left !important;
+    min-width: 90%;
+    max-width: 90%;
+    margin-left: 5%;
+    min-height: fit-content;
+    display: flex;
+    overflow-wrap: break-word;
+    font-size: larger !important;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 5%;
+    border: 2px solid !important;
+    border-radius: 25 !important;
+    font-family: 'Times New Roman', Times, serif;
+    border-color: #5bc0de !important;
+    color: rgb(75, 70, 70) !important;
+}
+
+.palabra-tarjeta-vista:hover {
+    transition: 0.5s;
+    border-color: blue !important;
+}
