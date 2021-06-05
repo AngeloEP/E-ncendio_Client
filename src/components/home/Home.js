@@ -273,7 +273,7 @@ const Home = () => {
                         </Grid>
 
                         <Grid container xs={12} style={{ marginTop: "3%" }} >
-                            <Grid item xs={7} >
+                            <Grid item xs={12} >
                                 <div className="párrafo-ligas" >
                                     <h2 className="section-title"> ¡Sigue subiendo y apoyando! </h2>
                                     <p className="parrafo-home" >
@@ -289,9 +289,9 @@ const Home = () => {
                                     </ul>
                                 </div>
                             </Grid>
-                            <Grid item xs={5} >
+                            {/* <Grid item xs={5} >
                                 <Doughnut data={dataDoughnut} options={optionsDoughnut} />
-                            </Grid>
+                            </Grid> */}
                         </Grid>
 
                         {/* tarjetas */}
@@ -368,7 +368,7 @@ const Home = () => {
                         </Grid>
                         {/* Gráficas */}
                         {/* Barras */}
-                        <Grid item xs={7} className="mt-5 mr-5" style={{ height: "30vh" }} >
+                        {/* <Grid item xs={7} className="mt-5 mr-5" style={{ height: "30vh" }} >
                                 <Bar data={dataBar} options={opcionesBar} height={140} />
                         </Grid>
 
@@ -378,7 +378,7 @@ const Home = () => {
                         
                         <Grid item xs={5} className="mt-5" >
                             <Paper >xs=12</Paper>
-                        </Grid> 
+                        </Grid>  */}
                         
 
                         <Grid container direction="row" justify="center" alignItems="center" xs={12} className="mt-5" >
