@@ -16,7 +16,7 @@ import { Label, Typography } from '@material-ui/core';
 import HashLoader from "react-spinners/HashLoader";
 
 import Carousel from 'react-bootstrap/Carousel';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
 
 import './home.css';
 
@@ -359,7 +359,7 @@ const Home = () => {
                                 <Card.Text className="card-text" >
                                     Puedes aportar tu granito de arena y colaborar con el objetivo de E-ncendio 
                                     subiendo imágenes, agregar palabras desde la liga de <span style={{ color: "#8A9597" }} > Plata </span> y también subir contenido para el juego
-                                    de 4 palabras y 1 imagen desde la liga de <span style={{ color: "#FFBF00" }} > Oro </span>,
+                                    de 4 palabras y 1 imagen o los tips de información desde la liga de <span style={{ color: "#FFBF00" }} > Oro </span>,
                                     cada uno de estos serán evaluadas por los administradores para ver si cumplen con los requisitos.
                                 </Card.Text>
                                 </Card.Body>

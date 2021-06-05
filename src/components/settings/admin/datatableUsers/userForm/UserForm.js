@@ -30,6 +30,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import SpellcheckIcon from '@material-ui/icons/Spellcheck';
 import PublishIcon from '@material-ui/icons/Publish';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
+import InfoIcon from '@material-ui/icons/Info';
 
 import './userForm.css';
 import UploadImagesUser from './uploadImagesUser/UploadImagesUser';
@@ -38,6 +39,8 @@ import TaggedImagesUser from './taggedImagesUser/TaggedImagesUser';
 import TaggedWordsUser from './taggedWordsUser/TaggedWordsUser';
 import TaggedHangmansUser from './taggedHangmansUser/TaggedHangmansUser';
 import UploadHangmansUser from './uploadHangmansUser/UploadHangmansUser';
+import UploadTipsUser from './uploadTipsUser/UploadTipsUser';
+import ViewedTipsUser from './viewedTipsUser/ViewedTipsUser';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -111,6 +114,16 @@ const UserForm = ({ usuario, handleClose }) => {
         cargandoHabilitarInhabilitarAhorcado,
         cargandoEliminarAhorcadoPorAdmin,
         cargandoModificarDificultadPuntosAhorcadoPorAdmin,
+
+        tipsPorUsuario,
+        obtenerTipsUsuarioAdmin,
+        habilitarInhabilitarTipPorUsuario,
+        eliminarTipPorUsuarioDesdeAdmin,
+        modificarPuntosTip,
+        cargandoTipsUsuarioDesdeAdmin,
+        cargandoHabilitarInhabilitarTip,
+        cargandoEliminarTipPorAdmin,
+        cargandoModificarDificultadPuntosTipPorAdmin,
     } = usuariosContext
 
     // Extraer informacion del context imágenes
@@ -143,6 +156,12 @@ const UserForm = ({ usuario, handleClose }) => {
         cargandoResetearEtiquetasAhorcados,
         obtenerAhorcadosEtiquetadosPorUsuario,
         eliminarAhorcadosEtiquetadosPorUsuario,
+
+        tipsVistos,
+        cargandoTipsVistosUsuarioDesdeAdmin,
+        cargandoResetearTipsVistos,
+        obtenerTipsVistosPorUsuario,
+        eliminarTipsVistosPorUsuario,
     } = tagContext
 
     const [ user, setUser ] = useState({
@@ -162,9 +181,11 @@ const UserForm = ({ usuario, handleClose }) => {
         obtenerImagenesUsuarioAdmin(usuario._id)
         obtenerPalabrasUsuarioAdmin(usuario._id)
         obtenerAhorcadosUsuarioAdmin(usuario._id)
+        obtenerTipsUsuarioAdmin(usuario._id)
         obtenerImagenesEtiquetadasPorUsuario(usuario._id)
         obtenerPalabrasEtiquetadasPorUsuario(usuario._id)
         obtenerAhorcadosEtiquetadosPorUsuario(usuario._id)
+        obtenerTipsVistosPorUsuario(usuario._id)
 
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
@@ -200,6 +221,10 @@ const UserForm = ({ usuario, handleClose }) => {
         eliminarAhorcadosEtiquetadosPorUsuario(user_id)
     }
 
+    const resetearTipsVistos = (user_id) => {
+        eliminarTipsVistosPorUsuario(user_id)
+    }
+
     const modificarPropiedadHabilitarImagen = (image_id, isEnabled) => {
         habilitarInhabilitarImagenPorUsuario(image_id, {isEnabled})
     }
@@ -212,6 +237,10 @@ const UserForm = ({ usuario, handleClose }) => {
         habilitarInhabilitarAhorcadoPorUsuario(hangman_id, {isEnabled})
     }
 
+    const modificarPropiedadHabilitarTip = (tip_id, isEnabled) => {
+        habilitarInhabilitarTipPorUsuario(tip_id, {isEnabled})
+    }
+
     const eliminarImagenDesdeAdmin = (image_id) => {
         eliminarImagenPorUsuarioDesdeAdmin(image_id)
     }
@@ -222,6 +251,10 @@ const UserForm = ({ usuario, handleClose }) => {
 
     const eliminarAhorcadoDesdeAdmin = (hangman_id) => {
         eliminarAhorcadoPorUsuarioDesdeAdmin(hangman_id)
+    }
+
+    const eliminarTipDesdeAdmin = (tip_id) => {
+        eliminarTipPorUsuarioDesdeAdmin(tip_id)
     }
 
     const onSubmitUpdate = e => {
@@ -366,6 +399,12 @@ const UserForm = ({ usuario, handleClose }) => {
                                                 {ahorcadosPorUsuario.length}
                                             </div>
                                         </div>
+                                        <div className="tips-upload" >
+                                            Tips Subidos
+                                            <div className="num-tips-upload" >
+                                                {tipsPorUsuario.length}
+                                            </div>
+                                        </div>
                                         <div className="tag-images" >
                                             Imágenes Etiquetadas
                                             <div className="num-tag-images" >
@@ -384,6 +423,12 @@ const UserForm = ({ usuario, handleClose }) => {
                                                 {ahorcadosEtiquetados.length}
                                             </div>
                                         </div>
+                                        <div className="tag-tips" >
+                                            Tips Vistos
+                                            <div className="num-tag-tips" >
+                                                {tipsVistos.length}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </Grid>
@@ -394,15 +439,18 @@ const UserForm = ({ usuario, handleClose }) => {
                                         onChange={handleChange}
                                         // indicatorColor="primary"
                                         // textColor="primary"
-                                        variant="fullWidth"
+                                        scrollButtons="on"
+                                        variant="scrollable"
                                         aria-label="full width tabs example"
                                     >
                                         <Tab label="Imágenes Subidas" icon={<PublishIcon />} {...a11yProps(0)} />
                                         <Tab label="Palabras Subidas" icon={<PublishIcon />} {...a11yProps(1)} />
                                         <Tab label="Ahorcados Subidos" icon={<PublishIcon />} {...a11yProps(2)} />
-                                        <Tab label="Imágenes Asociadas" icon={<ImageIcon />} {...a11yProps(3)} />
-                                        <Tab label="Palabras Asociadas" icon={<SpellcheckIcon />} {...a11yProps(4)} />
-                                        <Tab label="Ahorcados Completados" icon={<ImageSearchIcon />} {...a11yProps(5)} />
+                                        <Tab label="Tips Subidos" icon={<PublishIcon />} {...a11yProps(3)} />
+                                        <Tab label="Imágenes Asociadas" icon={<ImageIcon />} {...a11yProps(4)} />
+                                        <Tab label="Palabras Asociadas" icon={<SpellcheckIcon />} {...a11yProps(5)} />
+                                        <Tab label="Ahorcados Completados" icon={<ImageSearchIcon />} {...a11yProps(6)} />
+                                        <Tab label="Tips Vistos" icon={<InfoIcon />} {...a11yProps(7)} />
                                     </Tabs>
                                 </AppBar>
                                 <SwipeableViews
@@ -450,6 +498,19 @@ const UserForm = ({ usuario, handleClose }) => {
                                         />
                                     </TabPanel>
                                     <TabPanel value={value} index={3} dir={theme.direction}>
+                                        <UploadTipsUser
+                                            usuario={usuario}
+                                            tips={tipsPorUsuario}
+                                            funcionHabilitarInhabilitar={modificarPropiedadHabilitarTip}
+                                            cargandoHabilitarInhabilitarTip={cargandoHabilitarInhabilitarTip}
+                                            funcionEliminar={eliminarTipDesdeAdmin}
+                                            cargandoEliminarTipPorAdmin={cargandoEliminarTipPorAdmin}
+                                            cargandoTipsUsuarioDesdeAdmin={cargandoTipsUsuarioDesdeAdmin}
+                                            funcionModificarDificultadYPuntos={modificarPuntosTip}
+                                            cargandoModificarDificultadPuntosTipPorAdmin={cargandoModificarDificultadPuntosTipPorAdmin}
+                                        />
+                                    </TabPanel>
+                                    <TabPanel value={value} index={4} dir={theme.direction}>
                                         <TaggedImagesUser
                                             usuario={usuario}
                                             imagenesEtiquetadas={imagenesEtiquetadas}
@@ -458,7 +519,7 @@ const UserForm = ({ usuario, handleClose }) => {
                                             cargandoImagenesEtiquetadasUsuarioDesdeAdmin={cargandoImagenesEtiquetadasUsuarioDesdeAdmin}
                                         />
                                     </TabPanel>
-                                    <TabPanel value={value} index={4} dir={theme.direction}>
+                                    <TabPanel value={value} index={5} dir={theme.direction}>
                                         <TaggedWordsUser
                                             usuario={usuario}
                                             palabrasEtiquetadas={palabrasEtiquetadas}
@@ -467,13 +528,22 @@ const UserForm = ({ usuario, handleClose }) => {
                                             cargandoPalabrasEtiquetadasUsuarioDesdeAdmin={cargandoPalabrasEtiquetadasUsuarioDesdeAdmin}
                                         />
                                     </TabPanel>
-                                    <TabPanel value={value} index={5} dir={theme.direction}>
+                                    <TabPanel value={value} index={6} dir={theme.direction}>
                                         <TaggedHangmansUser
                                             usuario={usuario}
                                             ahorcadosEtiquetados={ahorcadosEtiquetados}
                                             funcionResetear={resetearEtiquetasAhorcados}
                                             cargandoResetearEtiquetasAhorcados={cargandoResetearEtiquetasAhorcados}
                                             cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin={cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin}
+                                        />
+                                    </TabPanel>
+                                    <TabPanel value={value} index={7} dir={theme.direction}>
+                                        <ViewedTipsUser
+                                            usuario={usuario}
+                                            tipsVistos={tipsVistos}
+                                            funcionResetear={resetearTipsVistos}
+                                            cargandoResetearTipsVistos={cargandoResetearTipsVistos}
+                                            cargandoTipsVistosUsuarioDesdeAdmin={cargandoTipsVistosUsuarioDesdeAdmin}
                                         />
                                     </TabPanel>
                                 </SwipeableViews>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react';
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
-import WordContext from '../../../context/words/wordContext';
+import TipContext from '../../../context/tips/tipContext';
 
-import './uploadWord.css';
+import './uploadTip.css';
 
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -18,9 +18,9 @@ import Paper from '@material-ui/core/Paper';
 
 import ClipLoader from "react-spinners/ClipLoader";
 
-import DatatableWords from './datatableWords/DatatableWords';
+import DatatableTips from './datatableTips/DatatableTips';
 
-const UploadWord = () => {
+const UploadTip = () => {
 
     // Extraer los valores del context
     const alertaContext = useContext(AlertaContext)
@@ -30,57 +30,70 @@ const UploadWord = () => {
     const authContext = useContext(AuthContext)
     const { mensaje } = authContext
 
-    const wordContext = useContext(WordContext)
-    const { palabras, cargandoSubirPalabra, cargandoEliminarPalabra, cargandoModificarPalabra, guardarPalabra, traerPalabrasPorUsuario, eliminarPalabra } = wordContext
+    const tipContext = useContext(TipContext)
+    const {
+        tips,
+        cargandoSubirTip,
+        cargandoEliminarTip,
+        cargandoModificarTip,
+        guardarTip,
+        traerTipsPorUsuario,
+        eliminarTip
+    } = tipContext
 
-    // En caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
     useEffect(() => {
-        // Ir a buscar las imágenes subidas por el usuario
-        traerPalabrasPorUsuario();
+        // Ir a buscar los Tips subidos por el usuario
+        traerTipsPorUsuario();
 
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
 
-    }, [ mensaje, palabras, cargandoSubirPalabra, cargandoEliminarPalabra, cargandoModificarPalabra ] )
+    }, [
+        mensaje,
+        tips,
+        cargandoSubirTip,
+        cargandoEliminarTip,
+        cargandoModificarTip
+    ] )
 
-    const [ fieldsWord, setFieldsWord ] = useState({
-        name: "Ejemplo",
+    const [ fieldsTip, setFieldsTip ] = useState({
+        text: "Ejemplo",
     })
 
-    const { name } = fieldsWord;
+    const { text } = fieldsTip;
 
     const onChange = e => {
-        setFieldsWord({
-            ...fieldsWord,
+        setFieldsTip({
+            ...fieldsTip,
             [e.target.name]: e.target.value
         })
     }
 
-    const onDelete = (id_word) => {
-        // console.log(id_word)
-        eliminarPalabra(id_word)
+    const onDelete = (id_tip) => {
+        // console.log(id_tip)
+        eliminarTip(id_tip)
     }
 
     const onSubmit = e => {
         e.preventDefault()
         // Validar que no hayan campos vacíos
-        if (name.trim() === ''  ) {
+        if (text.trim() === ''  ) {
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
                 return
         }
 
-        guardarPalabra({ name })
+        guardarTip({ text })
 
         // Resetear campos
-        setFieldsWord({
-            name: "Ejemplo",
+        setFieldsTip({
+            text: "Ejemplo",
         })
     }
 
     return (
         <Fragment>
-            <Container className="div-uploadWord" >
+            <Container className="div-uploadTip" >
                 <Grid container component="main" >
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
                         { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
@@ -88,23 +101,23 @@ const UploadWord = () => {
                         <Grid container spacing={5} >
 
                             <Grid item xs={4} >
-                                <div className="col palabra" >
+                                <div className="col tip" >
                                     <Col>
-                                        <Paper className="paper-word" elevation={10} variant="outlined"  >
-                                            {name}
+                                        <Paper className="paper-tip" elevation={10} variant="outlined"  >
+                                            {text}
                                         </Paper>
                                     </Col>
                                 </div>
                             </Grid>
                             <Grid item xs={8} >
-                                <div className="div-filename" >                        
+                                <div className="div-text" >                        
                                     <TextField
-                                        className="textfield-filename"
-                                        value={name}
-                                        name="name"
+                                        className="textfield-text"
+                                        value={text}
+                                        name="text"
                                         variant="outlined"
-                                        id="name"
-                                        label="Nombre de la palabra"
+                                        id="text"
+                                        label="Contenido del Tip"
                                         autoFocus
                                         onChange={onChange}
                                     />
@@ -115,11 +128,11 @@ const UploadWord = () => {
                                     type="submit"
                                     variant="contained"
                                     color="primary"
-                                    className="submit-word"
-                                    disabled={cargandoSubirPalabra}
+                                    className="submit-tip"
+                                    disabled={cargandoSubirTip}
                                 >
                                     {
-                                            cargandoSubirPalabra
+                                            cargandoSubirTip
                                             ?
                                             <Grid container
                                                 direction="row"
@@ -139,7 +152,7 @@ const UploadWord = () => {
                                             </Grid>
                                                 
                                             :
-                                            "Subir Palabra"
+                                            "Subir Tip"
                                     }
                                 </Button>
                             </Grid>
@@ -149,15 +162,15 @@ const UploadWord = () => {
                 </Grid>
                 
             </Container>
-            <div className="div-datatable-words" >
-                <DatatableWords
-                    words={palabras}
+            <div className="div-datatable-tips" >
+                <DatatableTips
+                    tips={tips}
                     deleteFunction={onDelete}
-                    loadingDelete={cargandoEliminarPalabra}
+                    loadingDelete={cargandoEliminarTip}
                 />
             </div>
         </Fragment>
     );
 }
  
-export default UploadWord;
+export default UploadTip;

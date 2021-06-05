@@ -1,4 +1,4 @@
-.div-uploadWord {
+.div-uploadTip {
     position: relative;
     text-align: center;
     width: 90%;
@@ -9,40 +9,42 @@
     border-radius: 16px;
 }
 
-.div-word {
+.div-tip {
     position: relative;
     width: 10%;
 }
 
-.palabra {
+.tip {
     position: relative;
     margin-left: -5%;
     margin-top: 5%;
     margin-bottom: 3%;
 }
 
-.paper-word {
+.paper-tip {
     position: relative !important;
-    text-align: center !important;
-    min-width: 400px;
-    min-height: 250px;
+    text-align: left !important;
+    min-width: 100%;
+    margin-top: 10%;
+    overflow-wrap: break-word;
+    min-height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border: 2px solid !important;
     border-radius: 25 !important;
-    font-size: 50px !important;
+    font-size: larger !important;
     font-family: 'Times New Roman', Times, serif;
-    border-color: red !important;
+    border-color: #5bc0de !important;
     color: rgb(75, 70, 70) !important;
 }
 
-.paper:hover {
+.paper-tip:hover {
     transition: 0.5s;
     border-color: blue !important;
 }
 
-.word-upload {
+.tip-upload {
     position: relative;
     min-width: 200px;
     max-width: 400px;
@@ -52,7 +54,7 @@
     margin-bottom: 1em;
 }
 
-.label-upload-word {
+.label-upload-tip {
     width: 11em;
     height: 2em;
     margin-left: 270%;
@@ -60,39 +62,20 @@
 }
 
 
-.div-filename {
+.div-text {
     margin-top: 1em;
     margin-left: -6em;
 }
 
-.textfield-filename {
+.textfield-text {
     width: 60%;
 }
 
-.div-difficulty {
-    margin-top: 2em;
-    margin-left: -25em;
-}
-
-.select-difficulty {
-    width: 15em;
-}
-
-.div-points {
-    margin-top: 2em;
-    margin-left: -6em;
-}
-
-.textfield-points {
-    width: 60%;
-}
-
-
-.submit-word {
+.submit-tip {
     width: 20%;
 }
 
-.div-datatable-words {
+.div-datatable-tips {
     text-align: center;
     width: 80%;
     margin-top: 5em;
@@ -102,33 +85,21 @@
     border-radius: 12px;
 }
 
-.word-user {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    min-width: 200px;
-    max-width: 200px;
-    min-height: 150px;
-    max-height: 280px;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
 @media only screen and (max-width: 1376px){
-    .div-uploadWord {
+    .div-uploadTip {
         width: 85% !important;
         margin-left: 7.5% !important ;
         margin-top: 3em;
         margin-bottom: 2em;
     }
 
-    .div-word {
+    .div-tip {
         width: 15%;
         height: 100%;
         margin-left: 25%;
     }
 
-    .palabra {
+    .tip {
         position: relative;
         margin-left: 15%;
         margin-top: 10%;
@@ -143,57 +114,28 @@
         font-family: 'Times New Roman', Times, serif;
     }
 
-    .word-upload {
+    .tip-upload {
         min-width: 200px;
         max-width: 300px;
         min-height: 150px;
         max-height: 250px;
     }
 
-    .label-upload-word { /* Agregar palabra */
+    .label-upload-tip { /* Agregar tip */
         margin-left: 100%;
     }
 
-    .div-filename {
+    .div-text {
         margin-top: 1em;
         margin-left: 5%;
 
     }
     
-    .div-difficulty {
-        position: relative;
-        margin-top: 1em;
-        margin-left: -5vw;
-        /* margin-left: calc(100% / -20vh); */
-        zoom: calc(100% / 1);
-    }
-    
-    .div-points {
-        margin-top: 1.5em;
-        margin-left: 5%;
-    }
-    
-    .submit-word {
+    .submit-tip {
         width: 15%;
     }
 
-    .textfield-filename {
+    .textfield-text {
         width: 50%;
-    }
-    .select-difficulty {
-        min-width: 70%;
-        max-width: 70%;
-    }
-    .textfield-points {
-        width: 50%;
-    }
-
-    .word-user {
-        min-width: 180px;
-        max-width: 180px;
-        min-height: 140px;
-        max-height: 140px;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
     }
 }

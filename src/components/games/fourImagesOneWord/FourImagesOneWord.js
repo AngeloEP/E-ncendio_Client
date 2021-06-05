@@ -12,18 +12,23 @@ import step6 from "../../../assets/img/hangman/6.jpg";
 import testImage from "../../../assets/img/test4.jpg";
 
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
 import FourImagesOneWordContext from '../../../context/fourImagesOneWord/fourImagesOneWordContext';
 import profileContext from '../../../context/profile/profileContext';
-import categoryContext from '../../../context/categories/categoryContext';
 import tagContext from '../../../context/tag/tagContext';
+import TipContext from '../../../context/tips/tipContext';
 
 import { Col, Container, Image, Row, Button } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Tooltip from 'react-bootstrap/Tooltip'
+import Tooltip from 'react-bootstrap/Tooltip';
+import ClipLoader from "react-spinners/ClipLoader";
+
+import infoIcon from '../../../assets/info.svg';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -44,18 +49,53 @@ const FourImagesOneWord = ( props ) => {
     const profilesContext = useContext(profileContext)
     const { perfil, obtenerPerfil, actualizarPerfil } = profilesContext
 
-    // Extraer la información del context de niveles
-    // const categoriesContext = useContext(categoryContext)
-    // const { categorias, obtenerCategorias } = categoriesContext
+    // Extraer la información de el context de los tips
+    const tipContext = useContext(TipContext)
+    const { tips, largoTips, obtenerTips  } = tipContext
 
     // Extraer la información del context de etiquetar
     const tagsContext = useContext(tagContext)
-    const { etiquetarAhorcado } = tagsContext
+    const { etiquetarAhorcado, verTip } = tagsContext
 
     let ahorcadoActual = JSON.parse(localStorage.getItem("ahorcadoActual"))
     const [answer, setAnswer] = useState( "" )
     if (ahorcados.length > 0 && answer === "") {
         setAnswer(ahorcados[ahorcadoActual].associatedWord)
+    }
+    let tipActual = 0 
+    if (tips.length > 0) {
+        tipActual = Math.floor(Math.random() * (largoTips));
+    }
+
+    const [ newContent, setNewContent ] = useState(false)
+    const [ tipReceive, setTipReceive ] = useState(false)
+    const [ points, setPoints ] = useState(0)
+
+    const CustomToast = ({closedToast}) => {
+        return (
+            <div className={`notification-container`}>
+                <div className="notification-image">
+                    <img src={infoIcon} alt="" />
+                </div>
+                <div>
+                    <p className="notification-title"> Aprendiendo con E-ncendio </p>
+                    <p className="notification-message">
+                        {tips[tipActual].text}
+                    </p>
+                </div>
+            </div>
+        )
+    }
+
+    toast.configure()
+    const notify = () => {
+        toast.info(<CustomToast />,
+            {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 8000,
+                closeOnClick: false,
+            }
+        )
     }
 
     useEffect(() => {
@@ -65,9 +105,28 @@ const FourImagesOneWord = ( props ) => {
         // falta para subir al otro nivel del jugador
         obtenerPerfil()
 
-
         // Traer las imágenes y palabra del nivel correspondiente /api/league/{id}/words 
         obtenerAhorcados()
+
+        // Traer los tips disponibles
+        obtenerTips()
+
+        const interval = setInterval(() => {
+            notify()
+            verTip(tips[tipActual]._id)
+            setTipReceive(true)
+            let addPoints = 5;
+            setPoints(addPoints)
+            perfil.score = perfil.score + addPoints;
+            if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+                perfil.league_id = perfil.league_id.league
+            }
+            actualizarPerfil(perfil)
+            setTimeout(() => {
+                setTipReceive(false)
+            }, 2000);
+        }, 60000); // 60 seconds
+        return () => clearInterval(interval);
     }, [])
 
     const [maxWrong, setMaxWrong] = useState(6)
@@ -155,6 +214,7 @@ const FourImagesOneWord = ( props ) => {
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
         let addPoints = 15;
+        setPoints(addPoints)
         
         perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
@@ -163,12 +223,15 @@ const FourImagesOneWord = ( props ) => {
         }
         actualizarPerfil(perfil)
 
+        setNewContent(true);
         // Avanzar al siguiente ahorcado
         if ( ahorcadoActual < largoAhorcados - 1 ) {
             // console.log("aun quedan ahorcados")
             setTimeout(() => {
                 localStorage.setItem( 'ahorcadoActual', ahorcadoActual + 1 );
-                window.location.reload();
+                setTimeout(() => {
+                    setNewContent(false)
+                }, 1000);
             }, 1000);
         } else {
             // Revisar si sube de nivel de ahorcados? /api/user/{id}/level-image
@@ -232,21 +295,6 @@ const FourImagesOneWord = ( props ) => {
         }, 6000);
     }
 
-    
-    const onHide = () => {
-        setOpacity(0)
-        setTimeout(() => {
-            setOpacity(1)
-        }, 2000);
-    }
-
-    const onScale = () => {
-        // if (scale > 1) {
-            
-        // } else setScale
-        setScale(scale > 1 ? 1 : 1.1)
-    }
-
     let nowProgress = 0
     let maxProgress = 0
     let labelProgress = 0
@@ -284,7 +332,7 @@ const FourImagesOneWord = ( props ) => {
                                                         label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
                                             />
                                         </OverlayTrigger>
-                                        <p className={isWinner ? "final-text winner" : gameOver ? "final-text gameover" : "final-text"} > {isWinner ? "+" : gameOver ? "-" : ""}15 puntos </p>
+                                        <p className={isWinner == true | tipReceive == true ? "final-text winner" : gameOver ? "final-text gameover" : "final-text"} > {isWinner ? "+" : gameOver ? "-" : ""}{points} puntos </p>
                                     </Fragment>
                                 : null
                                 }
@@ -296,34 +344,44 @@ const FourImagesOneWord = ( props ) => {
                         {
                             ahorcados.length != 0 && answer != ""
                             ?
-                                <div className="Hangman container">
-                                    {/* <h1 className='text-center'> El Ahorcado </h1> */}
-                                    <Row className="four-images" >
-                                        <img src={ ahorcados[ahorcadoActual].imageUrl_1 } alt="" className="imagesToTag" />
-                                        <img src={ ahorcados[ahorcadoActual].imageUrl_2 } alt="" className="imagesToTag" />
-                                        <img src={ ahorcados[ahorcadoActual].imageUrl_3 } alt="" className="imagesToTag" />
-                                        <img src={ ahorcados[ahorcadoActual].imageUrl_4 } alt="" className="imagesToTag" />
-                                    </Row>
-                                    <div className="text-center d-flex">
-                                        <Col>
-                                            <img className="mistake-images" src={images[mistake]} alt=""/>
-                                        </Col>
-                                        <Col className="align-self-center"  >
-                                            <div className="float-center wrongs"> <span className="font-weight-bold" >Errores</span> : {mistake} of {maxWrong} </div>
-                                            <p className="gameStat" > Adivina la palabra oculta: </p>
-                                            <p className="gameStat" >
-                                                {!gameOver && answer
-                                                    ? guessedWord()
-                                                    : answer
-                                                }
-                                            </p>
-                                        </Col>
+                                newContent === false
+                                ?
+                                    <div className="Hangman container">
+                                        {/* <h1 className='text-center'> El Ahorcado </h1> */}
+                                        <Row className="four-images" >
+                                            <img src={ ahorcados[ahorcadoActual].imageUrl_1 } alt="" className="imagesToTag" />
+                                            <img src={ ahorcados[ahorcadoActual].imageUrl_2 } alt="" className="imagesToTag" />
+                                            <img src={ ahorcados[ahorcadoActual].imageUrl_3 } alt="" className="imagesToTag" />
+                                            <img src={ ahorcados[ahorcadoActual].imageUrl_4 } alt="" className="imagesToTag" />
+                                        </Row>
+                                        <div className="text-center d-flex">
+                                            <Col>
+                                                <img className="mistake-images" src={images[mistake]} alt=""/>
+                                            </Col>
+                                            <Col className="align-self-center"  >
+                                                <div className="float-center wrongs"> <span className="font-weight-bold" >Errores</span> : {mistake} of {maxWrong} </div>
+                                                <p className="gameStat" > Adivina la palabra oculta: </p>
+                                                <p className="gameStat" >
+                                                    {!gameOver && answer
+                                                        ? guessedWord()
+                                                        : answer
+                                                    }
+                                                </p>
+                                            </Col>
+                                        </div>
+                                        <div className="text-center">
+                                            <p className="gameStat" >{gameStat}</p>
+                                            <button className='btn btn-info' onClick={() => resetButton()}> Reiniciar </button>
+                                        </div>
                                     </div>
-                                    <div className="text-center">
-                                        <p className="gameStat" >{gameStat}</p>
-                                        <button className='btn btn-info' onClick={() => resetButton()}> Reiniciar </button>
+                                :
+                                    <div className="text-center position-relative" style={{ top: "50%" }} >
+                                        <ClipLoader
+                                            color={"#000"}
+                                            loading={true}
+                                            size={70}
+                                        />
                                     </div>
-                                </div>
                             :
                                 <div className="container" >
                                     <div className="no-images" >

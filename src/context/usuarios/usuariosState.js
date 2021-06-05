@@ -49,6 +49,18 @@ import {
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO,
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_CARGANDO,
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_ERROR,
+    OBTENER_TIPS_POR_USUARIO_ADMIN,
+    OBTENER_TIPS_POR_USUARIO_ADMIN_ERROR,
+    OBTENER_TIPS_POR_USUARIO_ADMIN_CARGANDO,
+    HABILITAR_INHABILITAR_TIP,
+    HABILITAR_INHABILITAR_TIP_CARGANDO,
+    HABILITAR_INHABILITAR_TIP_ERROR,
+    ELIMINAR_TIP_DESDE_ADMIN,
+    ELIMINAR_TIP_DESDE_ADMIN_CARGANDO,
+    ELIMINAR_TIP_DESDE_ADMIN_ERROR,
+    MODIFICAR_DIFICULTAD_PUNTOS_TIP,
+    MODIFICAR_DIFICULTAD_PUNTOS_TIP_CARGANDO,
+    MODIFICAR_DIFICULTAD_PUNTOS_TIP_ERROR,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -74,6 +86,11 @@ const UsuariosState = props => {
         cargandoHabilitarInhabilitarAhorcado: false,
         cargandoEliminarAhorcadoPorAdmin: false,
         cargandoModificarDificultadPuntosAhorcadoPorAdmin: false,
+        tipsPorUsuario: [],
+        cargandoTipsUsuarioDesdeAdmin: false,
+        cargandoHabilitarInhabilitarTip: false,
+        cargandoEliminarTipPorAdmin: false,
+        cargandoModificarDificultadPuntosTipPorAdmin: false,
     }
 
     const [ state, dispatch ] = useReducer(usuariosReducer, initialState)
@@ -146,9 +163,6 @@ const UsuariosState = props => {
                 title: 'Lo sentimos',
                 text: 'No se pudo modificar su usuario, inténtelo nuevamente!',
             })
-
-            
-            
         }
     }
 
@@ -544,7 +558,7 @@ const UsuariosState = props => {
         }
     }
 
-    // ** //
+    // *ahorcados* //
     const obtenerAhorcadosUsuarioAdmin = async (user_id) => {
         try {
             dispatch({
@@ -741,6 +755,204 @@ const UsuariosState = props => {
         }
     }
     // ** //
+    // TIPS
+    const obtenerTipsUsuarioAdmin = async (user_id) => {
+        try {
+            dispatch({
+                type: OBTENER_TIPS_POR_USUARIO_ADMIN_CARGANDO,
+            })
+            const respuesta = await clienteAxios.get(`/api/usuarios/${user_id}/tips`)
+            dispatch({
+                type: OBTENER_TIPS_POR_USUARIO_ADMIN,
+                payload: respuesta.data.tips
+            })
+        } catch (error) {
+            // console.log(error)
+            dispatch({
+                type: OBTENER_TIPS_POR_USUARIO_ADMIN_ERROR,
+                payload: error
+            })
+        }
+    }
+
+    const habilitarInhabilitarTipPorUsuario = async ( tip_id, datos ) => {
+        try {
+            dispatch({
+                type: HABILITAR_INHABILITAR_TIP_CARGANDO,
+                payload: true
+            })
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger ml-4'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Confirme su decisión',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: `Modificar`,
+                cancelButtonText: 'Cancelar',
+                allowOutsideClick: false,
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    const respuesta = await clienteAxios.put(`/api/tips/user/tip/isEnabled/${tip_id}`, datos)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Modificación exitosa',
+                        text: "La propiedad se cambió exitosamente",
+                    })
+                    
+                    setTimeout(() => {
+                        dispatch({
+                            type: HABILITAR_INHABILITAR_TIP,
+                            payload: respuesta.data.tipAntiguo
+                        })
+                    }, 1000);
+                }
+                else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('No se modificó el Tip', '', 'info')
+                    dispatch({
+                        type: HABILITAR_INHABILITAR_TIP_ERROR,
+                    })
+                }
+            })
+
+        } catch (error) {
+            console.log(error)
+            dispatch({
+                type: HABILITAR_INHABILITAR_TIP_ERROR,
+                payload: error
+            })
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo modificar la propiedad, inténtelo nuevamente!',
+            })
+        }
+    }
+
+    const eliminarTipPorUsuarioDesdeAdmin = async ( tip_id ) => {
+        try {
+            dispatch({
+                type: ELIMINAR_TIP_DESDE_ADMIN_CARGANDO,
+                payload: true
+            })
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger ml-4'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Al eliminarlo, también eliminará las vistas de este Tip',
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: `Eliminar`,
+                allowOutsideClick: false,
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    const respuesta = await clienteAxios.delete(`/api/tips/user/tip/${tip_id}`)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Proceso exitoso',
+                        text: "El Tip se eliminó exitosamente",
+                    })
+                    
+                    setTimeout(() => {
+                        dispatch({
+                            type: ELIMINAR_TIP_DESDE_ADMIN,
+                            payload: tip_id
+                        })
+                    }, 1000);
+                }
+                else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('No se eliminó el Tip', '', 'info')
+                    dispatch({
+                        type: ELIMINAR_TIP_DESDE_ADMIN_ERROR,
+                    })
+                }
+            })
+
+        } catch (error) {
+            console.log(error)
+            dispatch({
+                type: ELIMINAR_TIP_DESDE_ADMIN_ERROR,
+                payload: error
+            })
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo eliminar el Tip, inténtelo nuevamente!',
+            })
+        }
+    }
+
+    const modificarPuntosTip = async (tip_id, data) => {
+        try {
+            dispatch({
+                type: MODIFICAR_DIFICULTAD_PUNTOS_TIP_CARGANDO,
+                payload: true
+            })
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger ml-4'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: '¡Modificará los puntos asociados!',
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: `Modificar`,
+                allowOutsideClick: false,
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    const respuesta = await clienteAxios.put(`/api/tips/user/tip/points/${tip_id}`, data)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Proceso exitoso',
+                        text: "El Tip se modificó exitosamente",
+                    })
+                    
+                    setTimeout(() => {
+                        dispatch({
+                            type: MODIFICAR_DIFICULTAD_PUNTOS_TIP,
+                            payload: respuesta.data.tipNuevo
+                        })
+                    }, 1000);
+                }
+                else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('No se modificó el Tip', '', 'info')
+                    dispatch({
+                        type: MODIFICAR_DIFICULTAD_PUNTOS_TIP_ERROR,
+                    })
+                }
+            })
+
+        } catch (error) {
+            console.log(error)
+            dispatch({
+                type: MODIFICAR_DIFICULTAD_PUNTOS_TIP_ERROR,
+                payload: error
+            })
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo modificar el Tip, inténtelo nuevamente!',
+            })
+        }
+    }
+
+    // ** //
 
     return (
         <usuariosContext.Provider
@@ -764,6 +976,11 @@ const UsuariosState = props => {
                 cargandoHabilitarInhabilitarAhorcado: state.cargandoHabilitarInhabilitarAhorcado,
                 cargandoEliminarAhorcadoPorAdmin: state.cargandoEliminarAhorcadoPorAdmin,
                 cargandoModificarDificultadPuntosAhorcadoPorAdmin: state.cargandoModificarDificultadPuntosAhorcadoPorAdmin,
+                tipsPorUsuario: state.tipsPorUsuario,
+                cargandoTipsUsuarioDesdeAdmin: state.cargandoTipsUsuarioDesdeAdmin,
+                cargandoHabilitarInhabilitarTip: state.cargandoHabilitarInhabilitarTip,
+                cargandoEliminarTipPorAdmin: state.cargandoEliminarTipPorAdmin,
+                cargandoModificarDificultadPuntosTipPorAdmin: state.cargandoModificarDificultadPuntosTipPorAdmin,
                 obtenerDistribucionEdadesUsuarios,
                 obtenerTodosLosUsuarios,
                 modificarAdminYBloqueo,
@@ -779,6 +996,10 @@ const UsuariosState = props => {
                 habilitarInhabilitarAhorcadoPorUsuario,
                 eliminarAhorcadoPorUsuarioDesdeAdmin,
                 modificarDificultadYPuntosAhorcado,
+                obtenerTipsUsuarioAdmin,
+                habilitarInhabilitarTipPorUsuario,
+                eliminarTipPorUsuarioDesdeAdmin,
+                modificarPuntosTip,
             }}
         >
             {props.children}

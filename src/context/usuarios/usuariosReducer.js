@@ -42,6 +42,18 @@ import {
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO,
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_CARGANDO,
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_ERROR,
+    OBTENER_TIPS_POR_USUARIO_ADMIN,
+    OBTENER_TIPS_POR_USUARIO_ADMIN_ERROR,
+    OBTENER_TIPS_POR_USUARIO_ADMIN_CARGANDO,
+    HABILITAR_INHABILITAR_TIP,
+    HABILITAR_INHABILITAR_TIP_CARGANDO,
+    HABILITAR_INHABILITAR_TIP_ERROR,
+    ELIMINAR_TIP_DESDE_ADMIN,
+    ELIMINAR_TIP_DESDE_ADMIN_CARGANDO,
+    ELIMINAR_TIP_DESDE_ADMIN_ERROR,
+    MODIFICAR_DIFICULTAD_PUNTOS_TIP,
+    MODIFICAR_DIFICULTAD_PUNTOS_TIP_CARGANDO,
+    MODIFICAR_DIFICULTAD_PUNTOS_TIP_ERROR,
 } from '../../types';
 
 export default (state, action) => {
@@ -51,7 +63,11 @@ export default (state, action) => {
                 ...state,
                 distribucion: action.payload,
             }
-
+        
+        case MODIFICAR_DIFICULTAD_PUNTOS_TIP_ERROR:
+        case HABILITAR_INHABILITAR_TIP_ERROR:
+        case ELIMINAR_TIP_DESDE_ADMIN_ERROR:
+        case OBTENER_TIPS_POR_USUARIO_ADMIN_ERROR:
         case MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_ERROR:
         case HABILITAR_INHABILITAR_AHORCADO_ERROR:
         case ELIMINAR_AHORCADO_DESDE_ADMIN_ERROR:
@@ -72,17 +88,21 @@ export default (state, action) => {
                 errores: action.payload,
                 cargandoAdminYBloqueo: false,
                 cargandoImagenesUsuarioDesdeAdmin: false,
-                cargandoPalabrasUsuarioDesdeAdmin: false,
                 cargandoHabilitarInhabilitarImagen: false,
                 cargandoEliminarImagenPorAdmin: false,
+                cargandoModificarDificultadPuntosImagenPorAdmin: false,
+                cargandoPalabrasUsuarioDesdeAdmin: false,
                 cargandoHabilitarInhabilitarPalabra: false,
                 cargandoEliminarPalabraPorAdmin: false,
-                cargandoModificarDificultadPuntosImagenPorAdmin: false,
                 cargandoModificarDificultadPuntosPalabraPorAdmin: false,
                 cargandoAhorcadosUsuarioDesdeAdmin: false,
                 cargandoHabilitarInhabilitarAhorcado: false,
                 cargandoEliminarAhorcadoPorAdmin: false,
-                cargandoModificarDificultadPuntosAhorcadoPorAdmin: false,        
+                cargandoModificarDificultadPuntosAhorcadoPorAdmin: false,
+                cargandoTipsUsuarioDesdeAdmin: false,
+                cargandoHabilitarInhabilitarTip: false,
+                cargandoEliminarTipPorAdmin: false,
+                cargandoModificarDificultadPuntosTipPorAdmin: false,        
             }
     
         case OBTENER_USUARIOS:
@@ -130,6 +150,19 @@ export default (state, action) => {
                 cargandoAhorcadosUsuarioDesdeAdmin: false,
             }
 
+        case OBTENER_TIPS_POR_USUARIO_ADMIN_CARGANDO:
+            return {
+                ...state,
+                cargandoTipsUsuarioDesdeAdmin: true,
+            }
+
+        case OBTENER_TIPS_POR_USUARIO_ADMIN:
+            return {
+                ...state,
+                tipsPorUsuario: action.payload,
+                cargandoTipsUsuarioDesdeAdmin: false,
+            }
+
         case OBTENER_PALABRAS_POR_USUARIO_ADMIN_CARGANDO:
             return {
                 ...state,
@@ -175,6 +208,20 @@ export default (state, action) => {
                 cargandoHabilitarInhabilitarAhorcado: false
             }
 
+        case HABILITAR_INHABILITAR_TIP_CARGANDO:
+            return {
+                ...state,
+                cargandoHabilitarInhabilitarTip: true
+            }
+
+        case HABILITAR_INHABILITAR_TIP:
+            return {
+                ...state,
+                tipsPorUsuario: state.tipsPorUsuario.map(tip => tip._id ===
+                    action.payload[0]._id ? action.payload[0] : tip ),
+                cargandoHabilitarInhabilitarTip: false
+            }
+
         case ELIMINAR_IMAGEN_DESDE_ADMIN_CARGANDO:
             return {
                 ...state,
@@ -203,6 +250,21 @@ export default (state, action) => {
                     ahorcado => ahorcado._id !== action.payload
                     ),
                 cargandoEliminarAhorcadoPorAdmin: false
+            }
+
+        case ELIMINAR_TIP_DESDE_ADMIN_CARGANDO:
+            return {
+                ...state,
+                cargandoEliminarTipPorAdmin: true
+            }
+
+        case ELIMINAR_TIP_DESDE_ADMIN:
+            return {
+                ...state,
+                tipsPorUsuario: state.tipsPorUsuario.filter(
+                    tip => tip._id !== action.payload
+                    ),
+                cargandoEliminarTipPorAdmin: false
             }
 
         case HABILITAR_INHABILITAR_PALABRA_CARGANDO:
@@ -260,6 +322,20 @@ export default (state, action) => {
                 ahorcadosPorUsuario: state.ahorcadosPorUsuario.map(ahorcado => ahorcado._id ===
                     action.payload[0]._id ? action.payload[0] : ahorcado ),
                 cargandoModificarDificultadPuntosAhorcadoPorAdmin: false
+            }
+
+        case MODIFICAR_DIFICULTAD_PUNTOS_TIP_CARGANDO:
+            return {
+                ...state,
+                cargandoModificarDificultadPuntosTipPorAdmin: true
+            }
+
+        case MODIFICAR_DIFICULTAD_PUNTOS_TIP:
+            return {
+                ...state,
+                tipsPorUsuario: state.tipsPorUsuario.map(tip => tip._id ===
+                    action.payload[0]._id ? action.payload[0] : tip ),
+                cargandoModificarDificultadPuntosTipPorAdmin: false
             }
 
         case MODIFICAR_DIFICULTAD_PUNTOS_PALABRA_CARGANDO:

@@ -29,6 +29,14 @@ import {
     ELIMINAR_ETIQUETAS_AHORCADOS,
     ELIMINAR_ETIQUETAS_AHORCADOS_CARGANDO,
     ELIMINAR_ETIQUETAS_AHORCADOS_ERROR,
+    VER_TIP,
+    VER_TIP_ERROR,
+    OBTENER_TIPS_VISTOS,
+    OBTENER_TIPS_VISTOS_CARGANDO,
+    OBTENER_TIPS_VISTOS_ERROR,
+    ELIMINAR_TIPS_VISTOS,
+    ELIMINAR_TIPS_VISTOS_CARGANDO,
+    ELIMINAR_TIPS_VISTOS_ERROR,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -37,13 +45,16 @@ const TagState = props => {
         imagenesEtiquetadas: [],
         palabrasEtiquetadas: [],
         ahorcadosEtiquetados: [],
+        tipsVistos: [],
         errores: [],
         cargandoImagenesEtiquetadasUsuarioDesdeAdmin: false,
         cargandoPalabrasEtiquetadasUsuarioDesdeAdmin: false,
         cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin: false,
+        cargandoTipsVistosUsuarioDesdeAdmin: false,
         cargandoResetearEtiquetasPalabras: false,
         cargandoResetearEtiquetasImagenes: false,
         cargandoResetearEtiquetasAhorcados: false,
+        cargandoResetearTipsVistos: false,
     }
 
     const [ state, dispatch ] = useReducer(tagReducer, initialState)
@@ -91,6 +102,22 @@ const TagState = props => {
             // console.log(error)
             dispatch({
                 type: ETIQUETAR_AHORCADO_ERROR,
+                payload: error
+            })
+        }
+    }
+
+    const verTip = async ( tip_id ) => {
+        try {
+            const respuesta = await clienteAxios.post(`/api/view-tips/${tip_id}`)
+            dispatch({
+                type: VER_TIP,
+                payload: []
+            })
+        } catch (error) {
+            // console.log(error)
+            dispatch({
+                type: VER_TIP_ERROR,
                 payload: error
             })
         }
@@ -152,6 +179,26 @@ const TagState = props => {
             })
         }
     }
+
+    const obtenerTipsVistosPorUsuario = async ( user_id ) => {
+        try {
+            dispatch({
+                type: OBTENER_TIPS_VISTOS_CARGANDO,
+            })
+            const respuesta = await clienteAxios.get(`/api/view-tips/user/${user_id}`)
+            dispatch({
+                type: OBTENER_TIPS_VISTOS,
+                payload: respuesta.data.asociacionesTips
+            })
+        } catch (error) {
+            // console.log(error)
+            dispatch({
+                type: OBTENER_TIPS_VISTOS_ERROR,
+                payload: error
+            })
+        }
+    }
+
 
     const eliminarPalabrasEtiquetadasPorUsuario = async ( user_id ) => {
         try {
@@ -304,6 +351,55 @@ const TagState = props => {
         }
     }
 
+    const eliminarTipsVistosPorUsuario = async ( user_id ) => {
+        try {
+            dispatch({
+                type: ELIMINAR_TIPS_VISTOS_CARGANDO,
+                payload: true
+            })
+            Swal.fire({
+                title: 'Confirme su decisión',
+                showDenyButton: true,
+                confirmButtonText: `Eliminar`,
+                denyButtonText: `Cancelar`,
+                allowOutsideClick: false
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    const respuesta = await clienteAxios.delete(`/api/view-tips/user/${user_id}`)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Reseteo de tips vistos exitosa',
+                        text: respuesta.data,
+                    })
+                    
+                    setTimeout(() => {
+                        dispatch({
+                            type: ELIMINAR_TIPS_VISTOS,
+                        })
+                    }, 1000);
+                }
+                else if (result.isDenied) {
+                    Swal.fire('No se eliminaron los tips vistos', '', 'info')
+                    dispatch({
+                        type: ELIMINAR_TIPS_VISTOS_ERROR,
+                    })
+                }
+            })
+
+        } catch (error) {
+            // console.log(error)
+            dispatch({
+                type: ELIMINAR_TIPS_VISTOS_ERROR,
+                payload: error
+            })
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo eliminar los tips vistos, inténtelo nuevamente!',
+            })
+        }
+    }
+
     return (
         <tagContext.Provider
             value={{
@@ -316,6 +412,9 @@ const TagState = props => {
                 cargandoResetearEtiquetasPalabras: state.cargandoResetearEtiquetasPalabras,
                 cargandoResetearEtiquetasImagenes: state.cargandoResetearEtiquetasImagenes,
                 cargandoResetearEtiquetasAhorcados: state.cargandoResetearEtiquetasAhorcados,
+                tipsVistos: state.tipsVistos,
+                cargandoTipsVistosUsuarioDesdeAdmin: state.cargandoTipsVistosUsuarioDesdeAdmin,
+                cargandoResetearTipsVistos: state.cargandoResetearTipsVistos,
                 etiquetarImagen,
                 etiquetarPalabra,
                 obtenerImagenesEtiquetadasPorUsuario,
@@ -325,6 +424,9 @@ const TagState = props => {
                 etiquetarAhorcado,
                 obtenerAhorcadosEtiquetadosPorUsuario,
                 eliminarAhorcadosEtiquetadosPorUsuario,
+                verTip,
+                obtenerTipsVistosPorUsuario,
+                eliminarTipsVistosPorUsuario,
             }}
         >
             {props.children}
