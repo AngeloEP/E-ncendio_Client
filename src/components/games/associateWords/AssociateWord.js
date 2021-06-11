@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react';
+import React, { useEffect, useContext, Fragment } from 'react';
+import useState from 'react-usestateref';
 
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
@@ -68,6 +69,9 @@ const AssociateWords = ( props ) => {
 
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
+    const [ userPoints, setUserPoints, userPointsRef ] = useState(
+        perfil != null ? perfil.score : 0
+    )
 
     const CustomToast = ({closedToast}) => {
         return (
@@ -130,14 +134,15 @@ const AssociateWords = ( props ) => {
                     break;
             }
             setPoints(addPoints)
-            perfil.score = perfil.score + addPoints;
-            if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-                perfil.league_id = perfil.league_id.league
-            }
-            actualizarPerfil(perfil)
+            setUserPoints( prevTime => prevTime + addPoints)
             setTimeout(() => {
+                perfil.score = userPointsRef.current;
+                if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+                    perfil.league_id = perfil.league_id.league
+                }
+                actualizarPerfil(perfil)
                 setTipReceive(false)
-            }, 2000);
+            }, 1000);
         }, 60000); // 60 seconds
         return () => clearInterval(interval);
     }, [])
@@ -211,6 +216,7 @@ const AssociateWords = ( props ) => {
         let addPoints = 0;
         if (perfil.league_id.league === "Plata") addPoints = 25; else addPoints = 15;
         setPoints(addPoints)
+        setUserPoints( prevTime => prevTime + addPoints)
         perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             console.log("Subir de nivel")
@@ -282,7 +288,7 @@ const AssociateWords = ( props ) => {
     let labelProgress = 0
     let userLeague = ''
     if (perfil) {
-        nowProgress = perfil.score
+        nowProgress = userPoints
         maxProgress = perfil.league_id.pointsNextLeague
         labelProgress = ((nowProgress / maxProgress) * 100).toPrecision(3)
         userLeague = perfil.league_id.league
