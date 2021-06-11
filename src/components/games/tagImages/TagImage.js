@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react';
+import React, { useEffect, useContext, Fragment } from 'react';
+import useState from 'react-usestateref';
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
 import imageContext from '../../../context/images/imageContext';
@@ -66,6 +67,9 @@ const TagImage = ( props ) => {
 
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
+    const [ userPoints, setUserPoints, userPointsRef ] = useState(
+        perfil != null ? perfil.score : 0
+    )
 
     const CustomToast = ({closedToast}) => {
         return (
@@ -141,14 +145,15 @@ const TagImage = ( props ) => {
                     break;
             }
             setPoints(addPoints)
-            perfil.score = perfil.score + addPoints;
-            if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-                perfil.league_id = perfil.league_id.league
-            }
-            actualizarPerfil(perfil)
+            setUserPoints( prevTime => prevTime + addPoints)
             setTimeout(() => {
+                perfil.score = userPointsRef.current;
+                if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+                    perfil.league_id = perfil.league_id.league
+                }
+                actualizarPerfil(perfil)
                 setTipReceive(false)
-            }, 2000);
+            }, 1000);
         }, 60000); // 60 seconds
         return () => clearInterval(interval);
         
@@ -255,6 +260,7 @@ const TagImage = ( props ) => {
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
+        // console.log("etiquetar: ", perfil)
         let addPoints = 0;
         switch (perfil.league_id.league) {
             case "Bronce":
@@ -273,6 +279,7 @@ const TagImage = ( props ) => {
                 break;
         }
         setPoints(addPoints)
+        setUserPoints( prevTime => prevTime + addPoints)
         perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             // console.log("Subir de nivel")
@@ -300,7 +307,7 @@ const TagImage = ( props ) => {
         })
         // Avanzar a la siguiente imagen
         if ( imagenActual < largoImagenes - 1 ) {
-            console.log("aun quedan imágenes")
+            // console.log("aun quedan imágenes")
             setTimeout(() => {
                 localStorage.setItem( 'imagenActual', imagenActual + 1 );
                 // window.location.reload();
@@ -311,7 +318,7 @@ const TagImage = ( props ) => {
         } else {
             // Revisar si sube de nivel de imágenes? /api/user/{id}/level-image
 
-            console.log("Ya se acabaron las imágenes")
+            // console.log("Ya se acabaron las imágenes")
 
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -347,7 +354,7 @@ const TagImage = ( props ) => {
     let labelProgress = 0
     let userLeague = ''
     if (perfil) {
-        nowProgress = perfil.score
+        nowProgress = userPoints
         maxProgress = perfil.league_id.pointsNextLeague
         labelProgress = ((nowProgress / maxProgress) * 100).toPrecision(3)
         userLeague = perfil.league_id.league

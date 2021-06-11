@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react';
+import React, { useEffect, useContext, Fragment } from 'react';
+import useState from 'react-usestateref';
 
 import './fourImagesOneWord.css';
 
@@ -70,6 +71,9 @@ const FourImagesOneWord = ( props ) => {
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
     const [ points, setPoints ] = useState(0)
+    const [ userPoints, setUserPoints, userPointsRef ] = useState(
+        perfil != null ? perfil.score : 0
+    )
 
     const CustomToast = ({closedToast}) => {
         return (
@@ -117,14 +121,15 @@ const FourImagesOneWord = ( props ) => {
             setTipReceive(true)
             let addPoints = 5;
             setPoints(addPoints)
-            perfil.score = perfil.score + addPoints;
-            if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-                perfil.league_id = perfil.league_id.league
-            }
-            actualizarPerfil(perfil)
+            setUserPoints( prevTime => prevTime + addPoints)
             setTimeout(() => {
+                perfil.score = userPointsRef.current;
+                if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+                    perfil.league_id = perfil.league_id.league
+                }
+                actualizarPerfil(perfil)
                 setTipReceive(false)
-            }, 2000);
+            }, 1000);
         }, 60000); // 60 seconds
         return () => clearInterval(interval);
     }, [])
@@ -208,15 +213,15 @@ const FourImagesOneWord = ( props ) => {
     let gameStat = generateButtons();
 
     const winnerFunction = () => {
-        console.log("Ganó")
+        // console.log("Ganó")
         etiquetarAhorcado(ahorcados[ahorcadoActual]._id, ahorcados[ahorcadoActual].associatedWord)
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
         let addPoints = 15;
         setPoints(addPoints)
-        
-        perfil.score = perfil.score + addPoints;
+        setUserPoints( prevTime => prevTime + addPoints)
+        perfil.score = userPointsRef.current;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             // console.log("Subir de nivel")
             perfil.league_id = perfil.league_id.league
@@ -266,12 +271,13 @@ const FourImagesOneWord = ( props ) => {
     }
 
     const gameoverFunction = () => {
-        console.log("Perdió")
+        // console.log("Perdió")
         let addPoints = -15;
-        
-        perfil.score = perfil.score + addPoints;
+
+        setUserPoints( prevTime => prevTime + addPoints)
+        perfil.score = userPointsRef.current;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-            console.log("Subir de nivel")
+            // console.log("Subir de nivel")
             perfil.league_id = perfil.league_id.league
         }
         actualizarPerfil(perfil)
@@ -300,10 +306,10 @@ const FourImagesOneWord = ( props ) => {
     let labelProgress = 0
     let userLeague = ''
     if (perfil) {
-        nowProgress = perfil.score
-        maxProgress = perfil.league_id.pointsNextLeague
-        labelProgress = ((nowProgress / maxProgress) * 100).toPrecision(3)
-        userLeague = perfil.league_id.league
+        nowProgress = userPointsRef.current;
+        maxProgress = perfil.league_id.pointsNextLeague;
+        labelProgress = ((nowProgress / maxProgress) * 100).toPrecision(3);
+        userLeague = perfil.league_id.league;
     }
     let colorProgress = labelProgress < 50 ? "success" : labelProgress < 80 ? "warning" : "danger"
     return (
