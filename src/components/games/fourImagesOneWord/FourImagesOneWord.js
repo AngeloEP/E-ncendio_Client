@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, Fragment } from 'react';
 import useState from 'react-usestateref';
+import useInterval from "../useInterval";
 
 import './fourImagesOneWord.css';
 
@@ -68,6 +69,12 @@ const FourImagesOneWord = ( props ) => {
         tipActual = Math.floor(Math.random() * (largoTips));
     }
 
+    // top profile info
+    const [nowProgress, setNowProgress, nowProgressRef] = useState(0)
+    const [maxProgress, setMaxProgress, maxProgressRef] = useState(0)
+    const [labelProgress, setLabelProgress, labelProgressRef] = useState(0)
+    const [userLeague, setUserLeague, userLeagueRef] = useState('')
+
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
     const [ points, setPoints ] = useState(0)
@@ -114,24 +121,6 @@ const FourImagesOneWord = ( props ) => {
 
         // Traer los tips disponibles
         obtenerTips()
-
-        const interval = setInterval(() => {
-            notify()
-            verTip(tips[tipActual]._id)
-            setTipReceive(true)
-            let addPoints = 5;
-            setPoints(addPoints)
-            setUserPoints( prevTime => prevTime + addPoints)
-            setTimeout(() => {
-                perfil.score = userPointsRef.current;
-                if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-                    perfil.league_id = perfil.league_id.league
-                }
-                actualizarPerfil(perfil)
-                setTipReceive(false)
-            }, 1000);
-        }, 60000); // 60 seconds
-        return () => clearInterval(interval);
     }, [])
 
     const [maxWrong, setMaxWrong] = useState(6)
@@ -221,6 +210,10 @@ const FourImagesOneWord = ( props ) => {
         let addPoints = 15;
         setPoints(addPoints)
         setUserPoints( prevTime => prevTime + addPoints)
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
         perfil.score = userPointsRef.current;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             // console.log("Subir de nivel")
@@ -301,17 +294,37 @@ const FourImagesOneWord = ( props ) => {
         }, 6000);
     }
 
-    let nowProgress = 0
-    let maxProgress = 0
-    let labelProgress = 0
-    let userLeague = ''
-    if (perfil) {
-        nowProgress = userPointsRef.current;
-        maxProgress = perfil.league_id.pointsNextLeague;
-        labelProgress = ((nowProgress / maxProgress) * 100).toPrecision(3);
-        userLeague = perfil.league_id.league;
+    useInterval(() => {
+        notify()
+        verTip(tips[tipActual]._id)
+        setTipReceive(true)
+        let addPoints = 5;
+        setPoints(addPoints)
+        setUserPoints( prevTime => prevTime + addPoints)
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
+        tipActual = Math.floor(Math.random() * (largoTips));
+        setTimeout(() => {
+            perfil.score = userPointsRef.current;
+            if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+                perfil.league_id = perfil.league_id.league
+            }
+            actualizarPerfil(perfil)
+            setTipReceive(false)
+        }, 1500);
+    }, 60000)
+
+    if (nowProgressRef.current === 0 && perfil != null) {
+        setUserPoints( perfil.score )
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
     }
-    let colorProgress = labelProgress < 50 ? "success" : labelProgress < 80 ? "warning" : "danger"
+    let colorProgress = labelProgressRef.current < 50 ? "success" : labelProgressRef.current < 80 ? "warning" : "danger";
+    
     return (
         <Container fluid className="backgroundGif"  >
             {
@@ -329,13 +342,13 @@ const FourImagesOneWord = ( props ) => {
                                 {perfil
                                 ?
                                     <Fragment>
-                                        <p className="progressTitle4" > {userLeague} </p>
+                                        <p className="progressTitle4" > {userLeagueRef.current} </p>
                                         <OverlayTrigger
                                             placement="bottom"
-                                            overlay={<Tooltip className="mt-3" id="button-tooltip-1" > Puntos: {nowProgress} </Tooltip>}
+                                            overlay={<Tooltip className="mt-3" id="button-tooltip-1" > Puntos: {nowProgressRef.current} </Tooltip>}
                                         >
-                                            <ProgressBar max={maxProgress} className="userProgress4" variant={colorProgress} animated striped  now={nowProgress}  
-                                                        label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
+                                            <ProgressBar max={maxProgressRef.current} className="userProgress4" variant={colorProgress} animated striped  now={nowProgressRef.current}  
+                                                        label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgressRef.current}% </span>)}
                                             />
                                         </OverlayTrigger>
                                         <p className={isWinner == true | tipReceive == true ? "final-text winner" : gameOver ? "final-text gameover" : "final-text"} > {isWinner ? "+" : gameOver ? "-" : ""}{points} puntos </p>

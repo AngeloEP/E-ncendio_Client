@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react';
+import React, { useEffect, useContext, Fragment } from 'react';
+import useState from 'react-usestateref';
+
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
 import FourImagesOneWordContext from '../../../context/fourImagesOneWord/fourImagesOneWordContext';
@@ -49,11 +51,13 @@ const UploadFourImagesOneWord = () => {
 
     const [ associatedWord, setAssociateWord ] = useState("")
     const [ pathImages, setPathImages ] = useState([])
-    const [ selectedFiles, setSelectedFiles ] = useState([]);
+    const [ selectedFiles, setSelectedFiles, selectedFilesRef ] = useState([]);
 
     const handleImageChange = (e) => {
 		if (e.target.files) {
-			setSelectedFiles((prevImages) => prevImages.concat(e.target.files));
+            for (let file of e.target.files) {
+                setSelectedFiles((prevImages) => prevImages.concat(file));
+            }
             Array.from(e.target.files).map((file) => {
                 if (file.type.includes("image")) {
                     const reader = new FileReader()
@@ -97,15 +101,14 @@ const UploadFourImagesOneWord = () => {
             return
         }
 
-        if (selectedFiles[0].length != 4) {
+        if (selectedFiles.length != 4) {
             mostrarAlerta("Debe adjuntar solo 4 imágenes", 'alerta-error')
             return
         }
         
-        console.log(associatedWord, selectedFiles)
         const formData = new FormData();
-        for (let index = 0; index < selectedFiles[0].length; index++) {
-            formData.append('images', selectedFiles[0][index]);
+        for (let index = 0; index < selectedFiles.length; index++) {
+            formData.append('images', selectedFiles[index]);
         }
         formData.append('associatedWord', associatedWord);
         guardarAhorcado(formData)
