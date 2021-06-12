@@ -60,14 +60,16 @@ const FourImagesOneWord = ( props ) => {
     const { etiquetarAhorcado, verTip } = tagsContext
 
     let ahorcadoActual = JSON.parse(localStorage.getItem("ahorcadoActual"))
-    const [answer, setAnswer] = useState( "" )
-    if (ahorcados.length > 0 && answer === "") {
+    const [answer, setAnswer, answerRef] = useState( "" )
+    if (ahorcados.length > 0 && answerRef.current != ahorcados[ahorcadoActual].associatedWord ) {
         setAnswer(ahorcados[ahorcadoActual].associatedWord)
     }
     let tipActual = 0 
     if (tips.length > 0) {
         tipActual = Math.floor(Math.random() * (largoTips));
     }
+
+    const [winnerWord, setWinnerWord, winnerWordRef] = useState(false)
 
     // top profile info
     const [nowProgress, setNowProgress, nowProgressRef] = useState(0)
@@ -77,7 +79,7 @@ const FourImagesOneWord = ( props ) => {
 
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
-    const [ points, setPoints ] = useState(0)
+    const [ points, setPoints, pointsRef ] = useState(0)
     const [ userPoints, setUserPoints, userPointsRef ] = useState(
         perfil != null ? perfil.score : 0
     )
@@ -139,14 +141,14 @@ const FourImagesOneWord = ( props ) => {
 
     const handleGuess = e => {
         let letter = e.target.value;
-        let acierto = answer.search(letter) === -1 ? 1 : 0;
+        let acierto = answerRef.current.search(letter) === -1 ? 1 : 0;
         setGuessed(`${guessed}${letter}`)
         setMistake(mistake + acierto)
         setNum(num + acierto)
     }
 
     const guessedWord = () => {
-        return answer.toString().split("").map(letter => (guessed.toString().search(letter) != -1 ? letter : " _ "));
+        return answerRef.current.toString().split("").map(letter => (guessed.toString().search(letter) != -1 ? letter : " _ "));
     }
 
     const generateButtons = () => {
@@ -196,19 +198,16 @@ const FourImagesOneWord = ( props ) => {
     }
 
     const gameOver = mistake >= maxWrong;
-    // console.log("errores: ", mistake, " maxErrores: ", maxWrong)
     const isWinner = answer ? guessedWord().join("") === answer : false;
-    // console.log("ganador: ", isWinner, " Perdedor: ", gameOver)
-    let gameStat = generateButtons();
+    let gameStat = winnerWordRef.current ? winnerMessage() : gameOver ? gameoverMessage() : generateButtons();
 
-    const winnerFunction = () => {
+    const winnerFunction = (addPoints) => {
         // console.log("Ganó")
         etiquetarAhorcado(ahorcados[ahorcadoActual]._id, ahorcados[ahorcadoActual].associatedWord)
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
-        let addPoints = 15;
-        setPoints(addPoints)
+        
         setUserPoints( prevTime => prevTime + addPoints)
         setNowProgress( userPointsRef.current )
         setMaxProgress( perfil.league_id.pointsNextLeague )
@@ -223,10 +222,12 @@ const FourImagesOneWord = ( props ) => {
 
         setNewContent(true);
         // Avanzar al siguiente ahorcado
+        setWinnerWord(false)
         if ( ahorcadoActual < largoAhorcados - 1 ) {
             // console.log("aun quedan ahorcados")
             setTimeout(() => {
                 localStorage.setItem( 'ahorcadoActual', ahorcadoActual + 1 );
+                setAnswer("")
                 setTimeout(() => {
                     setNewContent(false)
                 }, 1000);
@@ -263,11 +264,14 @@ const FourImagesOneWord = ( props ) => {
         }
     }
 
-    const gameoverFunction = () => {
+    const gameoverFunction = (addPoints) => {
         // console.log("Perdió")
-        let addPoints = -15;
-
+        
         setUserPoints( prevTime => prevTime + addPoints)
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
         perfil.score = userPointsRef.current;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
             // console.log("Subir de nivel")
@@ -276,22 +280,28 @@ const FourImagesOneWord = ( props ) => {
         actualizarPerfil(perfil)
     }
 
-    if ( ahorcados.length != 0 && answer != "" && isWinner) {
-        gameStat = winnerMessage();
+    if ( ahorcados.length != 0 && answerRef.current != "" && isWinner && guessed != "" ) {
+        // console.log("ganando")
+        // gameStat = winnerMessage();
+        let addPoints = 15;
+        setPoints(addPoints)
+        setWinnerWord(true)
         setTimeout(() => {
-            winnerFunction()
-            setGuessed("")
+            winnerFunction(addPoints)
             setMistake(0)
         }, 6000);
+        setGuessed("")
     }
 
-    if ( ahorcados.length != 0 && answer != "" && gameOver) {
-        gameStat = gameoverMessage();
+    if ( ahorcados.length != 0 && answerRef.current != "" && gameOver && guessed != "" ) {
+        // gameStat = gameoverMessage();
+        let addPoints = -15;
+        setPoints(addPoints)
         setTimeout(() => {
-            gameoverFunction()
-            setGuessed("")
+            gameoverFunction(addPoints)
             setMistake(0)
         }, 6000);
+        setGuessed("")
     }
 
     useInterval(() => {
@@ -351,7 +361,7 @@ const FourImagesOneWord = ( props ) => {
                                                         label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgressRef.current}% </span>)}
                                             />
                                         </OverlayTrigger>
-                                        <p className={isWinner == true | tipReceive == true ? "final-text winner" : gameOver ? "final-text gameover" : "final-text"} > {isWinner ? "+" : gameOver ? "-" : ""}{points} puntos </p>
+                                        <p className={winnerWordRef.current == true | tipReceive == true ? "final-text winner" : gameOver ? "final-text gameover" : "final-text"} > {winnerWordRef.current | tipReceive ? "+" : gameOver ? "" : ""}{pointsRef.current} puntos </p>
                                     </Fragment>
                                 : null
                                 }
@@ -361,7 +371,7 @@ const FourImagesOneWord = ( props ) => {
                             { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         </div>
                         {
-                            ahorcados.length != 0 && answer != ""
+                            ahorcados.length != 0 && answerRef.current != ""
                             ?
                                 newContent === false
                                 ?
@@ -378,19 +388,19 @@ const FourImagesOneWord = ( props ) => {
                                                 <img className="mistake-images" src={images[mistake]} alt=""/>
                                             </Col>
                                             <Col className="align-self-center"  >
-                                                <div className="float-center wrongs"> <span className="font-weight-bold" >Errores</span> : {mistake} of {maxWrong} </div>
+                                                <div className="float-center wrongs"> <span className="font-weight-bold" >Errores</span> : {mistake} de {maxWrong} </div>
                                                 <p className="gameStat" > Adivina la palabra oculta: </p>
                                                 <p className="gameStat" >
-                                                    {!gameOver && answer
+                                                    {!winnerWord && answerRef.current
                                                         ? guessedWord()
-                                                        : answer
+                                                        : answerRef.current
                                                     }
                                                 </p>
                                             </Col>
                                         </div>
                                         <div className="text-center">
                                             <p className="gameStat" >{gameStat}</p>
-                                            <button className='btn btn-info' onClick={() => resetButton()}> Reiniciar </button>
+                                            {/* <button className='btn btn-info' onClick={() => resetButton()}> Reiniciar </button> */}
                                         </div>
                                     </div>
                                 :

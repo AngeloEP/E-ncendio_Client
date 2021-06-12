@@ -93,7 +93,11 @@ const UploadFourImagesOneWord = () => {
     const onSubmit = e => {
         e.preventDefault()
         if ( associatedWord === "" ) {
-            mostrarAlerta("Debe asignar una palabra a las 4 imágenes", 'alerta-error')
+            mostrarAlerta("Debe asignar UNA palabra a las 4 imágenes", 'alerta-error')
+            return
+        }
+        if (/\s/.test(associatedWord)) {
+            mostrarAlerta("Debe asignar UNA sola palabra SIN espacios ", 'alerta-error')
             return
         }
         if (selectedFiles.length === 0) {
@@ -110,7 +114,7 @@ const UploadFourImagesOneWord = () => {
         for (let index = 0; index < selectedFiles.length; index++) {
             formData.append('images', selectedFiles[index]);
         }
-        formData.append('associatedWord', associatedWord);
+        formData.append('associatedWord', associatedWord.toLowerCase());
         guardarAhorcado(formData)
 
         // Resetear campos

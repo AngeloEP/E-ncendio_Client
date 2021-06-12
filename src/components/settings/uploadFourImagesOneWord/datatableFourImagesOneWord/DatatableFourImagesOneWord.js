@@ -113,6 +113,10 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
             mostrarAlerta("Debe asignar una palabra a las 4 imágenes", 'alerta-error')
             return
         }
+        if (/\s/.test(associatedWordUpdate)) {
+            mostrarAlerta("Debe asignar UNA sola palabra SIN espacios ", 'alerta-error')
+            return
+        }
         let formData = new FormData();
 
         if (selectedFilesUpdate.length === 0) {
@@ -129,7 +133,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
 
         }
 
-        formData.append('associatedWord', associatedWordUpdate);
+        formData.append('associatedWord', associatedWordUpdate.toLowerCase());
         modificarAhorcado( id_hangman_selected, formData)
         
         setTimeout(() => {
