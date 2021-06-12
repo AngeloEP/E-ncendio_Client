@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, Fragment } from 'react';
 import useState from 'react-usestateref';
+import useInterval from "../useInterval";
 
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
@@ -67,6 +68,12 @@ const AssociateWords = ( props ) => {
         tipActual = Math.floor(Math.random() * (largoTips));
     }
 
+    // top profile info
+    const [nowProgress, setNowProgress, nowProgressRef] = useState(0)
+    const [maxProgress, setMaxProgress, maxProgressRef] = useState(0)
+    const [labelProgress, setLabelProgress, labelProgressRef] = useState(0)
+    const [userLeague, setUserLeague, userLeagueRef] = useState('')
+
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
     const [ userPoints, setUserPoints, userPointsRef ] = useState(
@@ -115,36 +122,6 @@ const AssociateWords = ( props ) => {
 
         // Traer los tips disponibles
         obtenerTips()
-
-        const interval = setInterval(() => {
-            notify()
-            verTip(tips[tipActual]._id)
-            setTipReceive(true)
-            let addPoints = 0;
-            switch (perfil.league_id.league) {
-                case "Plata":
-                    addPoints = 7;
-                    break;
-
-                case "Oro":
-                    addPoints = 5;
-                    break;
-            
-                default:
-                    break;
-            }
-            setPoints(addPoints)
-            setUserPoints( prevTime => prevTime + addPoints)
-            setTimeout(() => {
-                perfil.score = userPointsRef.current;
-                if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-                    perfil.league_id = perfil.league_id.league
-                }
-                actualizarPerfil(perfil)
-                setTipReceive(false)
-            }, 1000);
-        }, 60000); // 60 seconds
-        return () => clearInterval(interval);
     }, [])
 
     const [ isWinner, setIsWinner ] = useState(false)
@@ -217,9 +194,13 @@ const AssociateWords = ( props ) => {
         if (perfil.league_id.league === "Plata") addPoints = 25; else addPoints = 15;
         setPoints(addPoints)
         setUserPoints( prevTime => prevTime + addPoints)
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
         perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-            console.log("Subir de nivel")
+            // console.log("Subir de nivel")
             perfil.league_id = perfil.league_id.league
         }
         actualizarPerfil(perfil)
@@ -283,17 +264,48 @@ const AssociateWords = ( props ) => {
         }
     }
 
-    let nowProgress = 0
-    let maxProgress = 0
-    let labelProgress = 0
-    let userLeague = ''
-    if (perfil) {
-        nowProgress = userPoints
-        maxProgress = perfil.league_id.pointsNextLeague
-        labelProgress = ((nowProgress / maxProgress) * 100).toPrecision(3)
-        userLeague = perfil.league_id.league
+    useInterval(() => {
+        notify()
+        verTip(tips[tipActual]._id)
+        setTipReceive(true)
+        let addPoints = 0;
+        switch (perfil.league_id.league) {
+            case "Plata":
+                addPoints = 7;
+                break;
+
+            case "Oro":
+                addPoints = 5;
+                break;
+        
+            default:
+                break;
+        }
+        setPoints(addPoints)
+        setUserPoints( prevTime => prevTime + addPoints)
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
+        tipActual = Math.floor(Math.random() * (largoTips));
+        setTimeout(() => {
+            perfil.score = userPointsRef.current;
+            if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+                perfil.league_id = perfil.league_id.league
+            }
+            actualizarPerfil(perfil)
+            setTipReceive(false)
+        }, 1500);
+    }, 60000)
+
+    if (nowProgressRef.current === 0 && perfil != null) {
+        setUserPoints( perfil.score )
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
     }
-    let colorProgress = labelProgress < 50 ? "success" : labelProgress < 80 ? "warning" : "danger"
+    let colorProgress = labelProgressRef.current < 50 ? "success" : labelProgressRef.current < 80 ? "warning" : "danger";
 
     return (
         <Container fluid className="backgroundGif" >
@@ -312,13 +324,13 @@ const AssociateWords = ( props ) => {
                             {perfil
                             ?
                                 <Fragment>
-                                    <p className="progressTitle" > {userLeague} </p>
+                                    <p className="progressTitle" > {userLeagueRef.current} </p>
                                     <OverlayTrigger
                                         placement="bottom"
-                                        overlay={<Tooltip className="mt-3" id="button-tooltip-1" > Puntos: {nowProgress} </Tooltip>}
+                                        overlay={<Tooltip className="mt-3" id="button-tooltip-1" > Puntos: {nowProgressRef.current} </Tooltip>}
                                     >
-                                        <ProgressBar max={maxProgress} className="userProgress" variant={colorProgress} animated striped  now={nowProgress}  
-                                                    label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgress}% </span>)}
+                                        <ProgressBar max={maxProgressRef.current} className="userProgress" variant={colorProgress} animated striped  now={nowProgressRef.current}  
+                                                    label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgressRef.current}% </span>)}
                                         />
                                     </OverlayTrigger>
                                     <p className={isWinner == true | tipReceive == true ? "final-text winner" : "final-text"} > +{points} puntos </p>

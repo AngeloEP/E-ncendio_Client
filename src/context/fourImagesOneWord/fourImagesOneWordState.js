@@ -57,7 +57,6 @@ const FourImagesOneWordState = props => {
             })
 
             const respuesta = await clienteAxios.post('/api/hangmans', datos)
-            console.log(respuesta.data)
 
             Swal.fire({
                 icon: 'success',
