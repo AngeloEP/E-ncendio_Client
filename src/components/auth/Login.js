@@ -125,7 +125,7 @@ const Login = ( props ) => {
   }
 
   return (
-    <div >
+    <div className="main-login" >
       {
         loadingPage
         ?

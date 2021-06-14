@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import ClipLoader from "react-spinners/ClipLoader";
 
 const TaggedHangmansUser = ({ usuario, ahorcadosEtiquetados, funcionResetear, cargandoResetearEtiquetasAhorcados }) => {
-
+    console.log(ahorcadosEtiquetados)
     return (
         <div className="cards-tag-hangmans" >
             <div className="div-reset-tag-hangmans" >

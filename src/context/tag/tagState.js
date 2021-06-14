@@ -167,6 +167,7 @@ const TagState = props => {
                 type: OBTENER_AHORCADOS_ETIQUETADOS_CARGANDO,
             })
             const respuesta = await clienteAxios.get(`/api/tag-hangmans/user/${user_id}`)
+            console.log(respuesta.data)
             dispatch({
                 type: OBTENER_AHORCADOS_ETIQUETADOS,
                 payload: respuesta.data.asociacionesAhorcados

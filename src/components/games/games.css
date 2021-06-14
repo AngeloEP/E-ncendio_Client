@@ -30,8 +30,8 @@
     transition: all 0.7s;
 }
 
-.makeStyles-imageSrc-294 {
+/* .makeStyles-imageSrc-10 {
     background-size: contain !important;
-    width: 100%;
+    min-width: 100% !important;
     background-repeat: no-repeat;
-}
+} */

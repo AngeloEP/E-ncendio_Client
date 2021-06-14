@@ -49,23 +49,6 @@ const Profile = ( props ) => {
         props.history.push('/profile/edit')
     }
 
-    // const retornarMedalla = (liga) => {
-    //     switch (liga) {
-    //         case "Bronce":
-    //             BronceBadge
-    //             break;
-    //         case "Plata":
-    //             PlataBadge
-    //             break;
-    //         case "Oro":
-    //             OroBadge
-    //             break;
-        
-    //         default:
-    //             break;
-    //     }
-    // }
-
     return (
         <div class="page-content page-container" id="page-content" >
             { perfil != null

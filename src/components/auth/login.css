@@ -13,11 +13,15 @@
     padding: 55px 55px 45px 55px;
     border-radius: 15px;
     transition: all .3s;
-
+    min-height: 100% !important;
 }
 .avatar-title {
     display: inline-flex !important;
     justify-content: center;
+}
+
+.main-login {
+    height: 100vh;
 }
 
 .form {
@@ -33,7 +37,6 @@
     background-image: url(../../assets/img/login-background.jpg) ;
     background-repeat: no-repeat;
     background-color: grey;
-      /* theme.palette.type === light ? theme.palette.grey[50] : theme.palette.grey[900], */
     background-size: cover;
     background-position: center;
     display: flex;
@@ -41,12 +44,6 @@
     flex-direction: column;
     text-align: right;
     height: 100vh;
-    /* [theme.breakpoints.up('lg')]: {
-      height: "100vh",
-    },
-    [theme.breakpoints.up('xs')]: {
-      height: "100vh",
-    }, */
 }
 
 .img-login {
@@ -57,7 +54,7 @@
 /* 1376x768 */
 @media only screen and (min-width: 1377px){
     .divlogin {
-        height: 100vh;
+        height: 100% !important;
     }
 
     .img-login {
@@ -146,6 +143,6 @@
     }
 
     .divlogin {
-        height: 110vh !important;
+        /* height: 110vh !important; */
     }
 }

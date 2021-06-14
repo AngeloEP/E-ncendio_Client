@@ -1,8 +1,13 @@
 import React from 'react';
+import './help.css';
 
 const Help = () => {
     return (
-        <h2> Sección de Ayuda </h2>
+        <div className="main-help" style={{ top: "0%" }} >
+            <div className="text-content" >
+                <p className="no-content" > Se encuentra en desarrollo </p>
+            </div>
+        </div>
     );
 }
  
