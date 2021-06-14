@@ -103,7 +103,7 @@ const AuthState = props => {
     // Cuando el usuario inicia sesión
     const iniciarSesion = async datos => {
         try {
-            console.log(datos)
+            // console.log(datos)
             const respuesta = await clienteAxios.post('/api/auth', datos)
             dispatch({
                 type: LOGIN_EXITOSO,
@@ -144,7 +144,6 @@ const AuthState = props => {
 
     const modificarUsuario = async (usuario, usuario_id) => {
         try {
-            console.log("ahahahahahaha")
             dispatch({
                 type: MODIFICAR_USUARIO_CARGANDO,
                 payload: true
@@ -152,7 +151,7 @@ const AuthState = props => {
             // console.log(usuario, usuario_id)
             // return
             const resultado = await clienteAxios.put(`/api/usuarios/profile/edit/${usuario_id}`, usuario )
-            console.log("authState: ", resultado.data)
+            // console.log("authState: ", resultado.data)
 
             Swal.fire({
                 icon: 'success',
@@ -185,7 +184,6 @@ const AuthState = props => {
     }
 
     const cambiarStateModificacionUsuario = async () => {
-        console.log("APAGANDO")
         dispatch({
             type: MODIFICAR_USUARIO_SALIR,
         })
