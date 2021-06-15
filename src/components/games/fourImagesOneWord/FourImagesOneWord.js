@@ -11,7 +11,6 @@ import step3 from "../../../assets/img/hangman/3.jpg";
 import step4 from "../../../assets/img/hangman/4.jpg";
 import step5 from "../../../assets/img/hangman/5.jpg";
 import step6 from "../../../assets/img/hangman/6.jpg";
-import testImage from "../../../assets/img/test4.jpg";
 
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
@@ -24,7 +23,7 @@ import profileContext from '../../../context/profile/profileContext';
 import tagContext from '../../../context/tag/tagContext';
 import TipContext from '../../../context/tips/tipContext';
 
-import { Col, Container, Image, Row, Button } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -37,11 +36,11 @@ import Typography from '@material-ui/core/Typography';
 const FourImagesOneWord = ( props ) => {
     // Extraer los valores del context
     const alertaContext = useContext(AlertaContext)
-    const { alerta, mostrarAlerta } = alertaContext
+    const { alerta } = alertaContext
 
     // Extraer la información de autentificación del usuario
     const authContext = useContext(AuthContext)
-    const { usuario, cargando, usuarioAutenticado} = authContext
+    const { usuarioAutenticado} = authContext
 
     // Extraer la información de el context de Palabras
     const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
@@ -61,7 +60,7 @@ const FourImagesOneWord = ( props ) => {
 
     let ahorcadoActual = JSON.parse(localStorage.getItem("ahorcadoActual"))
     const [answer, setAnswer, answerRef] = useState( "" )
-    if (ahorcados.length > 0 && answerRef.current != ahorcados[ahorcadoActual].associatedWord ) {
+    if (ahorcados.length > 0 && answerRef.current !== ahorcados[ahorcadoActual].associatedWord ) {
         setAnswer(ahorcados[ahorcadoActual].associatedWord)
     }
     let tipActual = 0 
@@ -72,15 +71,15 @@ const FourImagesOneWord = ( props ) => {
     const [winnerWord, setWinnerWord, winnerWordRef] = useState(false)
 
     // top profile info
-    const [nowProgress, setNowProgress, nowProgressRef] = useState(0)
-    const [maxProgress, setMaxProgress, maxProgressRef] = useState(0)
-    const [labelProgress, setLabelProgress, labelProgressRef] = useState(0)
-    const [userLeague, setUserLeague, userLeagueRef] = useState('')
+    const [ , setNowProgress, nowProgressRef] = useState(0)
+    const [ , setMaxProgress, maxProgressRef] = useState(0)
+    const [ , setLabelProgress, labelProgressRef] = useState(0)
+    const [ , setUserLeague, userLeagueRef] = useState('')
 
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
-    const [ points, setPoints, pointsRef ] = useState(0)
-    const [ userPoints, setUserPoints, userPointsRef ] = useState(
+    const [  , setPoints, pointsRef ] = useState(0)
+    const [  , setUserPoints, userPointsRef ] = useState(
         perfil != null ? perfil.score : 0
     )
 
@@ -123,21 +122,22 @@ const FourImagesOneWord = ( props ) => {
 
         // Traer los tips disponibles
         obtenerTips()
+        // eslint-disable-next-line
     }, [])
 
-    const [maxWrong, setMaxWrong] = useState(6)
-    const [mistake, setMistake] = useState(0)
-    const [num, setNum] = useState(0)
-    const [guessed, setGuessed] = useState("")
-    const [images, setImages] = useState([
+    const [ maxWrong, ] = useState(6)
+    const [ mistake, setMistake] = useState(0)
+    const [ num, setNum] = useState(0)
+    const [ guessed, setGuessed] = useState("")
+    const [ images, ] = useState([
         step0, step1, step2, step3, step4, step5, step6
     ])
 
     const styles = {
         transition: 'all 1s ease-out'
     };
-    const [ opacity, setOpacity ] = useState(1)
-    const [ scale, setScale ] = useState(1)
+    const [ opacity,  ] = useState(1)
+    const [ scale,  ] = useState(1)
 
     const handleGuess = e => {
         let letter = e.target.value;
@@ -148,7 +148,7 @@ const FourImagesOneWord = ( props ) => {
     }
 
     const guessedWord = () => {
-        return answerRef.current.toString().split("").map(letter => (guessed.toString().search(letter) != -1 ? letter : " _ "));
+        return answerRef.current.toString().split("").map(letter => (guessed.toString().search(letter) !== -1 ? letter : " _ "));
     }
 
     const generateButtons = () => {
@@ -165,11 +165,11 @@ const FourImagesOneWord = ( props ) => {
         ));
     }
 
-    const resetButton = () => {
-        setMistake(0)
-        setGuessed("")
-        setAnswer(ahorcados[ahorcadoActual].associatedWord)
-    }
+    // const resetButton = () => {
+    //     setMistake(0)
+    //     setGuessed("")
+    //     setAnswer(ahorcados[ahorcadoActual].associatedWord)
+    // }
 
     const winnerMessage = () => {
         return (
@@ -280,7 +280,7 @@ const FourImagesOneWord = ( props ) => {
         actualizarPerfil(perfil)
     }
 
-    if ( ahorcados.length != 0 && answerRef.current != "" && isWinner && guessed != "" ) {
+    if ( ahorcados.length !== 0 && answerRef.current !== "" && isWinner && guessed !== "" ) {
         // console.log("ganando")
         // gameStat = winnerMessage();
         let addPoints = 15;
@@ -293,7 +293,7 @@ const FourImagesOneWord = ( props ) => {
         setGuessed("")
     }
 
-    if ( ahorcados.length != 0 && answerRef.current != "" && gameOver && guessed != "" ) {
+    if ( ahorcados.length !== 0 && answerRef.current !== "" && gameOver && guessed !== "" ) {
         // gameStat = gameoverMessage();
         let addPoints = -15;
         setPoints(addPoints)
@@ -361,7 +361,7 @@ const FourImagesOneWord = ( props ) => {
                                                         label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgressRef.current}% </span>)}
                                             />
                                         </OverlayTrigger>
-                                        <p className={winnerWordRef.current == true | tipReceive == true ? "final-text winner" : gameOver ? "final-text gameover" : "final-text"} > {winnerWordRef.current | tipReceive ? "+" : gameOver ? "" : ""}{pointsRef.current} puntos </p>
+                                        <p className={winnerWordRef.current === true | tipReceive === true ? "final-text winner" : gameOver ? "final-text gameover" : "final-text"} > {winnerWordRef.current | tipReceive ? "+" : gameOver ? "" : ""}{pointsRef.current} puntos </p>
                                     </Fragment>
                                 : null
                                 }
@@ -371,7 +371,7 @@ const FourImagesOneWord = ( props ) => {
                             { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         </div>
                         {
-                            ahorcados.length != 0 && answerRef.current != ""
+                            ahorcados.length !== 0 && answerRef.current !== ""
                             ?
                                 newContent === false
                                 ?

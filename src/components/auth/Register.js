@@ -21,7 +21,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
 import ClipLoader from "react-spinners/ClipLoader";
@@ -47,7 +46,7 @@ const Register = (props) => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-
+        // eslint-disable-next-line
     }, [mensaje, autenticado, cargandoRegistroUsuario, props.history ] )
 
     // State para logearse
@@ -55,12 +54,12 @@ const Register = (props) => {
         firstname: '',
         lastname: '',
         gender: '',  // string: Masculino, Femenino, Otro
-        age: null,  // int
+        age: "",  // int
         phone: '',
         email: '',
         password: '',
         confirmar: '',
-        esExperto: null, // bool
+        esExperto: "", // bool
     })
 
     const { firstname, lastname, gender, age, phone, email, password, confirmar, esExperto } = usuario
@@ -103,17 +102,17 @@ const Register = (props) => {
         if (firstname.trim() === '' ||
             lastname.trim() === '' ||
             gender.trim() === '' ||
-            age === null ||
+            age === "" ||
             phone.trim() === '' ||
             // image === null ||
             email.trim() === '' ||
             password.trim() === '' ||
             confirmar.trim() === '' ||
-            esExperto === null ) {
+            esExperto === "" ) {
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
                 return
         }
-        if ( phone.length != 9 ) {
+        if ( phone.length !== 9 ) {
             mostrarAlerta("Su Teléfono debe tener 9 dígitos", 'alerta-error')
             return
         }
@@ -246,7 +245,7 @@ const Register = (props) => {
                             onChange={onFileChange}
                             style={{ display: "none" }}
                         />
-                        <img className="img-fluid img-thumbnail image_user" src={pathImage} alt="Image" />
+                        <img className="img-fluid img-thumbnail image_user" src={pathImage} alt="" />
                         <label htmlFor="contained-button-file">
                             <Button variant="contained" color="primary" component="span">
                                 Subir imagen

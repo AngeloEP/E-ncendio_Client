@@ -12,7 +12,7 @@ import {
     MODIFICAR_USUARIO_SALIR,
 } from '../../types/';
 
-export default (state, action) => {
+const authReducer = (state, action) => {
     switch (action.type) {
         case REGISTRO_EXITOSO_CARGANDO:
             return {
@@ -86,3 +86,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default authReducer;

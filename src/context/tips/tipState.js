@@ -118,7 +118,7 @@ const TipState = props => {
                 allowOutsideClick: false
             }).then(async (result) =>  {
                 if (result.isConfirmed) {
-                    const respuesta = await clienteAxios.delete(`/api/tips/user/${id_tip}`)
+                    await clienteAxios.delete(`/api/tips/user/${id_tip}`)
                     Swal.fire({
                         icon: 'success',
                         title: 'Su Tip se eliminó exitosamente!',

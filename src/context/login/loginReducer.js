@@ -5,7 +5,7 @@ import {
     PASSWORD_SUCCESS
 } from '../../types';
 
-export default (state, action) => {
+const loginReducer = (state, action) => {
     switch (action.type) {
         case VALIDAR_EMAIL:
             return {
@@ -35,3 +35,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default loginReducer;

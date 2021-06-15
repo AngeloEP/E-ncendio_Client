@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FormContact from './formContact/FormContact';
 
 import AuthContext from '../../context/autentificacion/authContext';
@@ -9,10 +9,10 @@ import incendio from '../../assets/img/incendio.png';
 import {useStyles} from './homeStyles';
 
 import { Image } from 'react-bootstrap';
-import { Bar, Doughnut, Line } from '@reactchartjs/react-chart.js';
-import Paper from '@material-ui/core/Paper';
+// import { Bar, Doughnut, Line } from '@reactchartjs/react-chart.js';
+// import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { Label, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import HashLoader from "react-spinners/HashLoader";
 
 import Carousel from 'react-bootstrap/Carousel';
@@ -31,11 +31,11 @@ const Home = () => {
 
     // Extraer la información de las ligas
     const leagueContext = useContext(LeagueContext)
-    const { ligas, obtenerDistribucionDeLigas } = leagueContext
+    const { obtenerDistribucionDeLigas } = leagueContext
 
     // Extraer la información de los usuarios
     const usuariosContext = useContext(UsuariosContext)
-    const { distribucion, obtenerDistribucionEdadesUsuarios } = usuariosContext
+    const { obtenerDistribucionEdadesUsuarios } = usuariosContext
 
     const [ loading, setLoading ] = useState(false)
 
@@ -51,169 +51,170 @@ const Home = () => {
         setTimeout(() => {
             setLoading(false);
         }, 1500);
+        // eslint-disable-next-line
     }, [])
 
     const classes = useStyles()
 
     // Gráfico de barras
-    let labelsEdades = []
-    let dataEdades = []
-    let dataBar = []
-    if ( distribucion.length != 0 ) {
-        dataBar = {
-            labels: distribucion.range,
-            datasets: [{
-                label: 'Rango etario',
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                ],
-                borderWidth: 1,
-                hoverBorderColor: '#FFFF00',
-                data: distribucion.total
-            }]
-        }
-    }
-    const opcionesBar = {
-        maintainAspectRatio: false,
-        responsive: true,
-        aspectRatio: 1,
-        title: {
-            display: true,
-            text: 'Rango Etario de los participantes'
-        },
-        layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: -12,
-                bottom: -10
-            }
-        },
-        legend: {
-            display: false,
-        }
-    }
+    // let labelsEdades = []
+    // let dataEdades = []
+    // let dataBar = []
+    // if ( distribucion.length !== 0 ) {
+    //     dataBar = {
+    //         labels: distribucion.range,
+    //         datasets: [{
+    //             label: 'Rango etario',
+    //             backgroundColor: [
+    //                 'rgba(255, 99, 132, 0.2)',
+    //                 'rgba(54, 162, 235, 0.2)',
+    //                 'rgba(255, 206, 86, 0.2)',
+    //                 'rgba(75, 192, 192, 0.2)',
+    //             ],
+    //             borderColor: [
+    //                 'rgba(255, 99, 132, 1)',
+    //                 'rgba(54, 162, 235, 1)',
+    //                 'rgba(255, 206, 86, 1)',
+    //                 'rgba(75, 192, 192, 1)',
+    //             ],
+    //             borderWidth: 1,
+    //             hoverBorderColor: '#FFFF00',
+    //             data: distribucion.total
+    //         }]
+    //     }
+    // }
+    // const opcionesBar = {
+    //     maintainAspectRatio: false,
+    //     responsive: true,
+    //     aspectRatio: 1,
+    //     title: {
+    //         display: true,
+    //         text: 'Rango Etario de los participantes'
+    //     },
+    //     layout: {
+    //         padding: {
+    //             left: 0,
+    //             right: 0,
+    //             top: -12,
+    //             bottom: -10
+    //         }
+    //     },
+    //     legend: {
+    //         display: false,
+    //     }
+    // }
 
     // Gráfico de dona(doughnut)
-    let labelsLigas = []
-    let dataLigas = []
-    let backgroundColors = []
-    let borderColors = []
-    let dataDoughnut = {}
-    if (ligas.length != 0) {
-        ligas.map((liga) => {
-            labelsLigas.push(liga._id)
-            dataLigas.push(liga.Total)
-            switch (liga._id) {
-                case "Oro":
-                    backgroundColors.push('#ffbf00')
-                    borderColors.push('#cc9900')
-                    break;
+    // let labelsLigas = []
+    // let dataLigas = []
+    // let backgroundColors = []
+    // let borderColors = []
+    // // let dataDoughnut = {}
+    // if (ligas.length !== 0) {
+    //     ligas.map((liga) => {
+    //         labelsLigas.push(liga._id)
+    //         dataLigas.push(liga.Total)
+    //         switch (liga._id) {
+    //             case "Oro":
+    //                 backgroundColors.push('#ffbf00')
+    //                 borderColors.push('#cc9900')
+    //                 break;
 
-                case "Plata":
-                    backgroundColors.push('#d7d7d7')
-                    borderColors.push('#b4b6b9')
-                    break;
+    //             case "Plata":
+    //                 backgroundColors.push('#d7d7d7')
+    //                 borderColors.push('#b4b6b9')
+    //                 break;
 
-                case "Bronce":
-                    backgroundColors.push('#cd7f32')
-                    borderColors.push('#a86624')
-                    break;
+    //             case "Bronce":
+    //                 backgroundColors.push('#cd7f32')
+    //                 borderColors.push('#a86624')
+    //                 break;
             
-                default:
-                    break;
-            }
-        })
-        dataDoughnut = {
-            labels: labelsLigas,
-            datasets: [
-                {
-                    data: dataLigas,
-                    backgroundColor: backgroundColors,
-                    borderColor: borderColors,
-                    borderWidth: 1,
-                    hoverBorderColor: '#231A18'
-                }
-            ]
-        }
-    }
+    //             default:
+    //                 break;
+    //         }
+    //     })
+    //     dataDoughnut = {
+    //         labels: labelsLigas,
+    //         datasets: [
+    //             {
+    //                 data: dataLigas,
+    //                 backgroundColor: backgroundColors,
+    //                 borderColor: borderColors,
+    //                 borderWidth: 1,
+    //                 hoverBorderColor: '#231A18'
+    //             }
+    //         ]
+    //     }
+    // }
 
-    const optionsDoughnut = {
-        title: {
-            display: true,
-            text: 'Distribución de Ligas'
-        }
-    }
+    // const optionsDoughnut = {
+    //     title: {
+    //         display: true,
+    //         text: 'Distribución de Ligas'
+    //     }
+    // }
 
 
-    const dataLine = {
-        labels: [ "1", "2", "3", "4", "5", "6" ],
-        datasets: [
-            {
-                label: "# of votes",
-                data: [12, 19, 3, 5, 2, 3],
-                fill: false,
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgba(255, 99, 132, 0.2)',
-                yAxisID: 'y-axis-1',
-            },
-            {
-                label: '# of No Votes',
-                data: [1, 2, 1, 1, 2, 2],
-                fill: false,     // colorear con el backgroundColor debajo de la curva
-                backgroundColor: 'rgb(54, 162, 235)',
-                borderColor: 'rgba(54, 162, 235, 0.2)',
-                yAxisID: 'y-axis-2',
-            },
-        ]
-    }
+    // const dataLine = {
+    //     labels: [ "1", "2", "3", "4", "5", "6" ],
+    //     datasets: [
+    //         {
+    //             label: "# of votes",
+    //             data: [12, 19, 3, 5, 2, 3],
+    //             fill: false,
+    //             backgroundColor: 'rgb(255, 99, 132)',
+    //             borderColor: 'rgba(255, 99, 132, 0.2)',
+    //             yAxisID: 'y-axis-1',
+    //         },
+    //         {
+    //             label: '# of No Votes',
+    //             data: [1, 2, 1, 1, 2, 2],
+    //             fill: false,     // colorear con el backgroundColor debajo de la curva
+    //             backgroundColor: 'rgb(54, 162, 235)',
+    //             borderColor: 'rgba(54, 162, 235, 0.2)',
+    //             yAxisID: 'y-axis-2',
+    //         },
+    //     ]
+    // }
     
-    const optionsLine = {
-        scales: {
-            yAxes: [
-                {
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Y text'
-                    },
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    id: 'y-axis-1',
-                },
-                {
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Y2 text'
-                    },
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    id: 'y-axis-2',
-                    gridLines: {
-                      drawOnArea: false,
-                    },
-                }
-            ],
-            xAxes: [
-                {
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'X text'
-                    }
-                }
-            ]
-        }
-    }
+    // const optionsLine = {
+    //     scales: {
+    //         yAxes: [
+    //             {
+    //                 scaleLabel: {
+    //                     display: true,
+    //                     labelString: 'Y text'
+    //                 },
+    //                 type: 'linear',
+    //                 display: true,
+    //                 position: 'left',
+    //                 id: 'y-axis-1',
+    //             },
+    //             {
+    //                 scaleLabel: {
+    //                     display: true,
+    //                     labelString: 'Y2 text'
+    //                 },
+    //                 type: 'linear',
+    //                 display: true,
+    //                 position: 'right',
+    //                 id: 'y-axis-2',
+    //                 gridLines: {
+    //                   drawOnArea: false,
+    //                 },
+    //             }
+    //         ],
+    //         xAxes: [
+    //             {
+    //                 scaleLabel: {
+    //                     display: true,
+    //                     labelString: 'X text'
+    //                 }
+    //             }
+    //         ]
+    //     }
+    // }
 
     return (
         
@@ -229,8 +230,8 @@ const Home = () => {
                         />
                     </div>
                 :
-                    <Grid container xs={12} direction="row" justify="center" alignItems="center" spacing={0}>
-                        <Grid  xs={12} className="mt-5" style={{  }} >
+                    <Grid container direction="row" justify="center" alignItems="center" spacing={0}>
+                        <Grid item xs={12} className="mt-5" style={{  }} >
 
                             <Carousel>
                                 <Carousel.Item>
@@ -241,7 +242,7 @@ const Home = () => {
                                     />
                                     <Carousel.Caption>
                                     <h2 className="carousel-title" > ¡Bienvenid@ a E-ncendio! </h2>
-                                    <subtitle1 className="carousel-subtitle" > Navega y ayúdanos a recaudar información de la comunidad. </subtitle1>
+                                    <p className="carousel-subtitle" > Navega y ayúdanos a recaudar información de la comunidad. </p>
                                     </Carousel.Caption>
                                 </Carousel.Item>
                                 <Carousel.Item>
@@ -253,7 +254,7 @@ const Home = () => {
 
                                     <Carousel.Caption>
                                     <h2 className="carousel-title" > Apóyanos Jugando </h2>
-                                    <subtitle1 className="carousel-subtitle" > Tu participación es vital para dimensionar el estado actual de la ciudadanía para enfrentar los incendios. </subtitle1>
+                                    <p className="carousel-subtitle" > Tu participación es vital para dimensionar el estado actual de la ciudadanía para enfrentar los incendios. </p>
                                     </Carousel.Caption>
                                 </Carousel.Item>
                                 <Carousel.Item>
@@ -265,14 +266,14 @@ const Home = () => {
 
                                     <Carousel.Caption>
                                     <h2 className="carousel-title" > ¡Recompensas a los mejores participantes! </h2>
-                                    <subtitle1 className="carousel-subtitle" > Al final de este proyecto, se premiarán a los participantes más destacados. </subtitle1>
+                                    <p className="carousel-subtitle" > Al final de este proyecto, se premiarán a los participantes más destacados. </p>
                                     </Carousel.Caption>
                                 </Carousel.Item>
                             </Carousel>
 
                         </Grid>
 
-                        <Grid container xs={12} style={{ marginTop: "3%" }} >
+                        <Grid container  style={{ marginTop: "3%" }} >
                             <Grid item xs={12} >
                                 <div className="párrafo-ligas" >
                                     <h2 className="section-title"> ¡Sigue subiendo y apoyando! </h2>
@@ -295,7 +296,7 @@ const Home = () => {
                         </Grid>
 
                         {/* tarjetas */}
-                        <Grid container xs={12} style={{ justifyContent: "center", marginTop: "3%", marginBottom: "3%" }} >
+                        <Grid container style={{ justifyContent: "center", marginTop: "3%", marginBottom: "3%" }} >
                             <Card
                                 bg="light"
                                 key="1"
@@ -314,7 +315,7 @@ const Home = () => {
 
                             <Card
                                 bg="light"
-                                key="1"
+                                key="2"
                                 text="dark"
                                 className="card-other"
                             >
@@ -330,7 +331,7 @@ const Home = () => {
 
                             <Card
                                 bg="light"
-                                key="1"
+                                key="3"
                                 text="dark"
                                 className="card-first"
                             >
@@ -348,7 +349,7 @@ const Home = () => {
 
                             <Card
                                 bg="light"
-                                key="1"
+                                key="4"
                                 text="dark"
                                 className="card-other"
                             >
@@ -381,16 +382,16 @@ const Home = () => {
                         </Grid> */}
                         {/*          */}
 
-                        <Grid container direction="row" justify="center" alignItems="center" xs={12} className="mt-5" >
+                        <Grid container direction="row" justify="center" alignItems="center" className="mt-5" >
                             <h2> Contáctanos </h2>
                         </Grid>
-                        <Grid container item xs={12} direction="row" justify="center" alignItems="center" className="mt-2" >
+                        <Grid container direction="row" justify="center" alignItems="center" className="mt-2" >
                             <Typography variant="subtitle1" gutterBottom>
                                 Si tienes alguna observación sobre algún problema que se te presentó en la Aplicación, no dudes
                                 en decirnos, ¡recibirás recompensas!, contáctanos aquí:
                             </Typography>
                         </Grid>
-                        <Grid container item xs={12}  className="mt-4  " >
+                        <Grid container  className="mt-4  " >
                             <Grid item xs={6} >
                                 <Image src={incendio} />
                             </Grid>
@@ -401,10 +402,10 @@ const Home = () => {
                             
                         </Grid>
 
-                        <Grid container xs={12} style={{ justifyContent: "center" }} >
+                        <Grid container style={{ justifyContent: "center" }} >
                             <Card
                                 bg="light"
-                                key="1"
+                                key="5"
                                 text="dark"
                                 className="card-other"
                             >
@@ -420,7 +421,7 @@ const Home = () => {
 
                             <Card
                                 bg="light"
-                                key="1"
+                                key="6"
                                 text="dark"
                                 className="card-other"
                             >

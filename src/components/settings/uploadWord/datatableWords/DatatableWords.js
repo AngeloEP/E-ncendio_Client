@@ -9,10 +9,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import { Col} from 'react-bootstrap';
 import Paper from '@material-ui/core/Paper';
 
@@ -32,10 +28,10 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
 
     // Extraer informacion del context auth
     const authContext = useContext(AuthContext)
-    const { mensaje, autenticado, cargandoRegistroUsuario, registrarUsuario } = authContext
+    const { mensaje } = authContext
 
     const wordContext = useContext(WordContext)
-    const { palabras, cargandoModificarPalabra, traerPalabrasPorUsuario, modificarPalabra } = wordContext
+    const {  cargandoModificarPalabra, traerPalabrasPorUsuario, modificarPalabra } = wordContext
 
     useEffect(() => {
         // Ir a buscar las imágenes subidas por el usuario
@@ -44,7 +40,7 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-
+        // eslint-disable-next-line
     }, [ mensaje, cargandoModificarPalabra ] )
     
     const columns = words[0] && Object.keys(words[0])
@@ -97,7 +93,7 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
         <Fragment>
             <Table responsive striped bordered hover  >
             {
-                words.length != 0
+                words.length !== 0
                 ?
                     <Fragment>
                         <thead>

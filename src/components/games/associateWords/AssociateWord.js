@@ -16,9 +16,9 @@ import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { withRouter, Switch, Route, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-import { Col, Container, Image, Row, Button } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -40,7 +40,7 @@ const AssociateWords = ( props ) => {
 
     // Extraer la información de autentificación del usuario
     const authContext = useContext(AuthContext)
-    const { usuario, cargando, usuarioAutenticado} = authContext
+    const { usuarioAutenticado} = authContext
 
     // Extraer la información de el context de Palabras
     const wordsContext = useContext(wordContext)
@@ -69,14 +69,14 @@ const AssociateWords = ( props ) => {
     }
 
     // top profile info
-    const [nowProgress, setNowProgress, nowProgressRef] = useState(0)
-    const [maxProgress, setMaxProgress, maxProgressRef] = useState(0)
-    const [labelProgress, setLabelProgress, labelProgressRef] = useState(0)
-    const [userLeague, setUserLeague, userLeagueRef] = useState('')
+    const [ , setNowProgress, nowProgressRef] = useState(0)
+    const [ , setMaxProgress, maxProgressRef] = useState(0)
+    const [ , setLabelProgress, labelProgressRef] = useState(0)
+    const [ , setUserLeague, userLeagueRef] = useState('')
 
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
-    const [ userPoints, setUserPoints, userPointsRef ] = useState(
+    const [  , setUserPoints, userPointsRef ] = useState(
         perfil != null ? perfil.score : 0
     )
 
@@ -122,6 +122,8 @@ const AssociateWords = ( props ) => {
 
         // Traer los tips disponibles
         obtenerTips()
+
+        // eslint-disable-next-line
     }, [])
 
     const [ isWinner, setIsWinner ] = useState(false)
@@ -310,7 +312,7 @@ const AssociateWords = ( props ) => {
     return (
         <Container fluid className="backgroundGif" >
             {
-                perfil != null && perfil.league_id.league != "Bronce"
+                perfil !== null && perfil.league_id.league !== "Bronce"
                 ?
                     <>
                     <div className="topCenter" >
@@ -333,7 +335,7 @@ const AssociateWords = ( props ) => {
                                                     label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgressRef.current}% </span>)}
                                         />
                                     </OverlayTrigger>
-                                    <p className={isWinner == true | tipReceive == true ? "final-text winner" : "final-text"} > +{points} puntos </p>
+                                    <p className={isWinner === true | tipReceive === true ? "final-text winner" : "final-text"} > +{points} puntos </p>
                                 </Fragment>
                             : null
                             }
@@ -341,7 +343,7 @@ const AssociateWords = ( props ) => {
                         </Row>
                         { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                     </div>
-                    { palabras.length != 0
+                    { palabras.length !== 0
                         ?
                             newContent === false
                             ?
@@ -363,7 +365,7 @@ const AssociateWords = ( props ) => {
                                                 <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
                                             </div>
                                             <div className="col palabra" >
-                                                { palabras.length == 0
+                                                { palabras.length === 0
                                                 ? null
                                                 :
                                                     <Col>

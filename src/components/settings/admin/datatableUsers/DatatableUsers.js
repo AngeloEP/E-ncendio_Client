@@ -1,14 +1,8 @@
-import React, { Fragment, useState, useEffect, useContext } from 'react';
+import React, { Fragment, useState } from 'react';
 import UserForm from './userForm/UserForm';
-import AlertaContext from '../../../../context/alertas/alertaContext';
-import AuthContext from '../../../../context/autentificacion/authContext';
-import WordContext from '../../../../context/words/wordContext';
 
-import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import LockIcon from '@material-ui/icons/Lock';
@@ -16,13 +10,6 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { Col} from 'react-bootstrap';
-import Paper from '@material-ui/core/Paper';
 
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -59,7 +46,7 @@ const DatatableUsers = ({ users }) => {
         <Fragment>
             <Table responsive striped bordered hover  >
             {
-                users.length != 0
+                users.length !== 0
                 ?
                     <Fragment>
                         <thead>
@@ -123,7 +110,6 @@ const DatatableUsers = ({ users }) => {
                                                 key={index+1}
                                                 variant="contained"
                                                 color="secondary"
-                                                style={{ width: "90%" }}
                                                 startIcon={<SettingsIcon />}
                                                 style={{ backgroundColor: "#779AD1", marginTop: "5%", height: "10%", width: "90%" }}
                                                 onClick={() => handleShow(row["_id"])}

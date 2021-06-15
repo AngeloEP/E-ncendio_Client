@@ -14,7 +14,7 @@ import {
     MODIFICAR_IMAGEN_ERROR,
 } from '../../types';
 
-export default (state, action) => {
+const imageReducer = (state, action) => {
     switch (action.type) {
         case OBTENER_IMAGENES:
             return {
@@ -88,3 +88,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default imageReducer;

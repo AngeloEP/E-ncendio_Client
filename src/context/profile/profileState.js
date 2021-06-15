@@ -43,7 +43,7 @@ const ProfileState = props => {
         try {
             const respuesta = await clienteAxios.get(`/api/profiles`)
             let newProfiles = respuesta.data.perfiles
-            for (const [ index, perfil] of Object.entries(respuesta.data.perfiles) ) {
+            for (const [ index, ] of Object.entries(respuesta.data.perfiles) ) {
                 newProfiles[index] = {
                     user_id: newProfiles[index].user_id._id,
                     Nombre: newProfiles[index].user_id.firstname,

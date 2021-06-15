@@ -4,7 +4,7 @@ import {
     ENVIAR_FORMULARIO_DE_CONTACTO_ERROR
 } from '../../types/';
 
-export default (state, action) => {
+const contactFormReducer = (state, action) => {
     switch (action.type) {
         case ENVIAR_FORMULARIO_DE_CONTACTO:
             return {
@@ -30,3 +30,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default contactFormReducer;

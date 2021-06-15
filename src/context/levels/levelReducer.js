@@ -3,7 +3,7 @@ import {
     OBTENER_NIVEL_IMAGENES_USUARIO_ERROR
 } from '../../types';
 
-export default (state, action) => {
+const levelReducer = (state, action) => {
     switch (action.type) {
         case OBTENER_NIVEL_IMAGENES_USUARIO:
             return {
@@ -23,3 +23,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default levelReducer;

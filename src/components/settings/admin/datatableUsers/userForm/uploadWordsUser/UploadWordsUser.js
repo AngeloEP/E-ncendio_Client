@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import './uploadWordsUser.css';
 
 import AlertaContext from '../../../../../../context/alertas/alertaContext';
@@ -85,7 +85,7 @@ const UploadWordsUser = ({ usuario,
             <div className="row">
                 { cargandoPalabrasUsuarioDesdeAdmin === false
                     ?
-                        palabras.length != 0
+                        palabras.length !== 0
                         ?
                             palabras.map((palabra, index) =>
 

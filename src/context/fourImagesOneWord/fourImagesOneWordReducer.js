@@ -14,7 +14,7 @@ import {
     MODIFICAR_AHORCADO_ERROR,
 } from '../../types';
 
-export default (state, action) => {
+const fourImagesOneWordReducer = (state, action) => {
     switch (action.type) {
         case OBTENER_AHORCADOS:
             return {
@@ -86,3 +86,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default fourImagesOneWordReducer;

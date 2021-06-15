@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import './uploadImagesUser.css';
 
 import AlertaContext from '../../../../../../context/alertas/alertaContext';
@@ -85,14 +85,14 @@ const UploadImagesUser = ({ usuario,
             <div className="row">
                 { cargandoImagenesUsuarioDesdeAdmin === false
                     ?
-                        imagenes.length != 0
+                        imagenes.length !== 0
                         ?
                             imagenes.map((imagen, index) =>
 
                                 <div key={index} className="col-sm-3 col-md-4" >
                                     
                                     <div className="card text-white tarjeta" >
-                                        <img className="card-img-top imagen-tarjeta" src={imagen.Imagen} alt="Card image cap" />
+                                        <img className="card-img-top imagen-tarjeta" src={imagen.Imagen} alt="" />
                                         <div className="card-body text-center">
                                             <h5 className="card-title titulo-nombre-card-image"> Nombre </h5>
                                             <p className="card-text nombre-card-image"> {imagen.Nombre} </p>
@@ -226,7 +226,7 @@ const UploadImagesUser = ({ usuario,
                                     <Grid container spacing={5} >
                                         <Grid item xs={4} >
                                             <div className="div-image-update" >
-                                                <img className="img-fluid img-thumbnail image-upload-update" src={pathImageUpdate} alt="Image" />
+                                                <img className="img-fluid img-thumbnail image-upload-update" src={pathImageUpdate} alt="" />
                                             </div>
                                         </Grid>
                                         <Grid item xs={8} >

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { } from 'react';
 import './taggedWordsUser.css';
 
 import Button from '@material-ui/core/Button';
@@ -24,7 +24,7 @@ const TaggedWordsUser = ({ usuario,
                     // style={{ width: "90%" }}
                     startIcon={<DeleteIcon />}
                     onClick={() => funcionResetear(usuario._id)}
-                    disabled={cargandoResetearEtiquetasPalabras || palabrasEtiquetadas.length == 0 ? true : false }
+                    disabled={cargandoResetearEtiquetasPalabras || palabrasEtiquetadas.length === 0 ? true : false }
                 >
                     {
                         cargandoResetearEtiquetasPalabras
@@ -54,7 +54,7 @@ const TaggedWordsUser = ({ usuario,
             <div className="row">
                 { cargandoPalabrasEtiquetadasUsuarioDesdeAdmin === false
                     ? 
-                        palabrasEtiquetadas.length != 0
+                        palabrasEtiquetadas.length !== 0
                         ?
                             <>
                                 {palabrasEtiquetadas.map((palabraEtiquetada, index) =>

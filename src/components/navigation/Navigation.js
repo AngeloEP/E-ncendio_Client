@@ -10,9 +10,6 @@ import OroBadge from '../../assets/badges/gold-badge.png';
 import BronceBadge from '../../assets/badges/bronze-badge.png';
 import PlataBadge from '../../assets/badges/medal.png';
 
-import { FaBars, FaTimes } from 'react-icons/fa';
-import { MenuItems } from "./MenuItems";
-
 import "./exitButton.css";
 import "./navigation.css";
 
@@ -28,16 +25,10 @@ import {
     PNav
   } from './NavbarElements';
 // import './NavbarElements.css';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Link from '@material-ui/core/Link';
 // import { Nav, NavLink } from 'react-bootstrap';
 import { Fragment } from 'react';
-import { Button } from '@material-ui/core';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -73,6 +64,7 @@ const Navigation =  ({ location, history })  => {
         usuarioAutenticado()
 
         obtenerPerfil()
+        // eslint-disable-next-line
     }, [])
     
     const classes = useStyles();
@@ -157,7 +149,7 @@ const Navigation =  ({ location, history })  => {
                                         : perfil.league_id.league === "Plata" ? PlataBadge
                                         : perfil.league_id.league === "Oro" ? OroBadge : null
                                     }
-                                    alt="image"
+                                    alt=""
                                     className="user-badge-nav"
                                 />
                             </span>

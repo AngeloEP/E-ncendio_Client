@@ -29,7 +29,7 @@ const LevelState = props => {
         } catch (error) {
             console.log(error)
             dispatch({
-                type: OBTENER_NIVEL_IMAGENES_USUARIO,
+                type: OBTENER_NIVEL_IMAGENES_USUARIO_ERROR,
                 payload: error
             })
         }

@@ -14,7 +14,7 @@ import {
     ELIMINAR_TIP_ERROR,
 } from '../../types';
 
-export default (state, action) => {
+const tipReducer = (state, action) => {
     switch (action.type) {
         case OBTENER_TIPS:
             return {
@@ -86,3 +86,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default tipReducer;

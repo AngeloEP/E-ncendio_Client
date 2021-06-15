@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import './uploadHangmansUser.css';
 
 import AlertaContext from '../../../../../../context/alertas/alertaContext';
@@ -89,7 +89,7 @@ const UploadHangmansUser = ({ usuario,
             <div className="row">
                 { cargandoAhorcadosUsuarioDesdeAdmin === false
                     ?
-                        ahorcados.length != 0
+                        ahorcados.length !== 0
                         ?
                             ahorcados.map((ahorcado, index) =>
 
@@ -99,18 +99,18 @@ const UploadHangmansUser = ({ usuario,
                                         {/* <img className="card-img-top imagenes-tarjeta" src={ahorcado.Imagen1} alt="Card image cap" /> */}
                                         <div className="fila">
                                             <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen1} />
+                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen1} alt="" />
                                             </div>
                                             <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen2} />
+                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen2} alt="" />
                                             </div>
                                         </div>
                                         <div className="fila">
                                             <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen3} />
+                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen3} alt="" />
                                             </div>
                                             <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen4} />
+                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen4} alt="" />
                                             </div>
                                         </div>
                                         <div className="card-body text-center">
@@ -242,18 +242,18 @@ const UploadHangmansUser = ({ usuario,
                                         <Grid item xs={6} >
                                             <div className="fila-update">
                                                 <div className="columna-update">
-                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[0]} />
+                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[0]} alt="" />
                                                 </div>
                                                 <div className="columna-update">
-                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[1]} />
+                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[1]} alt="" />
                                                 </div>
                                             </div>
                                             <div className="fila-update">
                                                 <div className="columna-update">
-                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[2]} />
+                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[2]} alt="" />
                                                 </div>
                                                 <div className="columna-update">
-                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[3]} />
+                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[3]} alt="" />
                                                 </div>
                                             </div>
                                         </Grid>

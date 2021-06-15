@@ -68,7 +68,6 @@ const Games = ({ history }) => {
 
     useEffect(() => {
         usuarioAutenticado()
-
         obtenerPerfil()
 
         // Traer contenido para los juegos previamente
@@ -76,6 +75,7 @@ const Games = ({ history }) => {
         obtenerPalabras()
         obtenerAhorcados()
         obtenerTips()
+        // eslint-disable-next-line
     }, [])
 
     const classes = useStyles()
@@ -89,7 +89,7 @@ const Games = ({ history }) => {
 
 
     return (
-        <Grid container direction='column' alignItems='center' justify="center"
+        <Grid container alignItems='center' justify="center"
             style={{
                 display: 'flex',
                 justifyContent: "center",
@@ -99,7 +99,7 @@ const Games = ({ history }) => {
             {
                 perfil != null
                 ?
-                    <Grid direction='row'  className={classes.root} >
+                    <Grid  className={classes.root} >
                         {images.map((image) => (
                             <ButtonBase
                                 focusRipple

@@ -56,7 +56,7 @@ import {
     MODIFICAR_DIFICULTAD_PUNTOS_TIP_ERROR,
 } from '../../types';
 
-export default (state, action) => {
+const usuariosReducer = (state, action) => {
     switch (action.type) {
         case OBTENER_DISTRIBUCION_EDADES_USUARIOS:
             return {
@@ -356,3 +356,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default usuariosReducer;

@@ -14,7 +14,7 @@ import {
     ELIMINAR_PALABRA_ERROR,
 } from '../../types';
 
-export default (state, action) => {
+const wordReducer = (state, action) => {
     switch (action.type) {
         case OBTENER_PALABRAS:
             return {
@@ -86,3 +86,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default wordReducer;

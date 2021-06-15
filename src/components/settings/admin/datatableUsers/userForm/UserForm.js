@@ -5,8 +5,8 @@ import AlertaContext from '../../../../../context/alertas/alertaContext';
 import AuthContext from '../../../../../context/autentificacion/authContext';
 import UsuariosContext from '../../../../../context/usuarios/usuariosContext';
 import TagContext from '../../../../../context/tag/tagContext';
-import ImageContext from '../../../../../context/images/imageContext';
-import WordContext from '../../../../../context/words/wordContext';
+// import ImageContext from '../../../../../context/images/imageContext';
+// import WordContext from '../../../../../context/words/wordContext';
 
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -83,7 +83,7 @@ const UserForm = ({ usuario, handleClose }) => {
     const usuariosContext = useContext(UsuariosContext)
     const { modificarAdminYBloqueo,
         cargandoAdminYBloqueo,
-        mensajeUsuarios,
+        // mensajeUsuarios,
 
         imagenesPorUsuario,
         obtenerImagenesUsuarioAdmin,
@@ -127,14 +127,14 @@ const UserForm = ({ usuario, handleClose }) => {
     } = usuariosContext
 
     // Extraer informacion del context imágenes
-    const wordContext = useContext(WordContext)
-    const {
-        } = wordContext
+    // const wordContext = useContext(WordContext)
+    // const {
+    //     } = wordContext
 
     // Extraer informacion del context imágenes
-    const imageContext = useContext(ImageContext)
-    const {
-        } = imageContext
+    // const imageContext = useContext(ImageContext)
+    // const {
+    //     } = imageContext
 
     // Extraer informacion del context etiquetas
     const tagContext = useContext(TagContext)
@@ -172,7 +172,7 @@ const UserForm = ({ usuario, handleClose }) => {
     })
 
     const theme = useTheme();
-    const { firstname, email, isAdmin, isBlocked } = user;
+    const { firstname, isAdmin, isBlocked } = user;
     const [value, setValue] = useState(0);
 
     useEffect(() => {
@@ -190,7 +190,7 @@ const UserForm = ({ usuario, handleClose }) => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-
+        // eslint-disable-next-line
     }, [ mensaje,
     ] )
     

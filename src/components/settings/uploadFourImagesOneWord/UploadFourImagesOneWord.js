@@ -13,7 +13,6 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
 import ClipLoader from "react-spinners/ClipLoader";
-import uploadImage from '../../../assets/img/upload_image.jpg';
 
 import DatatableFourImagesOneWord from './datatableFourImagesOneWord/DatatableFourImagesOneWord';
 
@@ -43,7 +42,7 @@ const UploadFourImagesOneWord = () => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-
+        // eslint-disable-next-line
     }, [ mensaje,
         cargandoSubirAhorcado,
         // cargandoModificarImagen
@@ -51,7 +50,7 @@ const UploadFourImagesOneWord = () => {
 
     const [ associatedWord, setAssociateWord ] = useState("")
     const [ pathImages, setPathImages ] = useState([])
-    const [ selectedFiles, setSelectedFiles, selectedFilesRef ] = useState([]);
+    const [ selectedFiles, setSelectedFiles,   ] = useState([]);
 
     const handleImageChange = (e) => {
 		if (e.target.files) {
@@ -69,6 +68,7 @@ const UploadFourImagesOneWord = () => {
                 } else {
                     mostrarAlerta("Debe seleccionar archivos de tipo imagen, se admiten extensiones: jpeg, jpg, png y gif", "alerta-error")
                 }
+                return console.log("a")
             });
 		}
 	};
@@ -105,7 +105,7 @@ const UploadFourImagesOneWord = () => {
             return
         }
 
-        if (selectedFiles.length != 4) {
+        if (selectedFiles.length !== 4) {
             mostrarAlerta("Debe adjuntar solo 4 imágenes", 'alerta-error')
             return
         }

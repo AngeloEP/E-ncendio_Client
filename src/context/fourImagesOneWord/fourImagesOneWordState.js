@@ -127,7 +127,7 @@ const FourImagesOneWordState = props => {
                 allowOutsideClick: false,
             }).then(async (result) =>  {
                 if (result.isConfirmed) {
-                    const respuesta = await clienteAxios.delete(`/api/hangmans/user/${id_ahorcado}`)
+                    await clienteAxios.delete(`/api/hangmans/user/${id_ahorcado}`)
                     Swal.fire({
                         icon: 'success',
                         title: 'Proceso exitoso',

@@ -33,7 +33,7 @@ import {
     ELIMINAR_TIPS_VISTOS_ERROR,
 } from '../../types';
 
-export default (state, action) => {
+const tagReducer = (state, action) => {
     switch (action.type) {
         case ETIQUETAR_PALABRA:
         case ETIQUETAR_IMAGEN:
@@ -176,3 +176,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default tagReducer;

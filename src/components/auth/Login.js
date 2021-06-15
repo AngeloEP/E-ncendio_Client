@@ -11,11 +11,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './makestyles/login';
@@ -36,7 +33,7 @@ const Login = ( props ) => {
 
   // Obtener el state del formulario
   const loginsContext = useContext(loginContext)
-  const { emailerror, passworderror, validarEmail, validarPassword, emailCorrecto, passwordCorrecto } = loginsContext
+  const { emailerror, passworderror } = loginsContext
 
   const [ loadingPage, setLoadingPage ] = useState(false)
   const [ loadingLogin, setLoadingLogin] = useState(false)
@@ -57,7 +54,7 @@ const Login = ( props ) => {
     setTimeout(() => {
       setLoadingPage(false);
     }, 1500);
-
+    // eslint-disable-next-line
   }, [mensaje, autenticado, props.history ] )
 
   // State para iniciar sesión
@@ -65,13 +62,6 @@ const Login = ( props ) => {
     email: '',
     password: ''
   })
-
-  
-
-  const userStatic = {
-    email: 'angelocristobalep@gmail.com',
-    password: '123'
-  }
 
   // Extraer de usuario
   const { email, password } = usuario
@@ -233,7 +223,7 @@ const Login = ( props ) => {
               </Grid>
             </Grid>
           <div  >
-            <Typography variant="body1" color="#fff" align="center">
+            <Typography variant="body1" color="inherit" align="center">
               {'Copyright © '}
               {'E-ncendio '}
               {new Date().getFullYear()}

@@ -9,10 +9,6 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import { Col} from 'react-bootstrap';
 import Paper from '@material-ui/core/Paper';
 
@@ -48,7 +44,7 @@ const UploadTip = () => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-
+        // eslint-disable-next-line
     }, [
         mensaje,
         tips,

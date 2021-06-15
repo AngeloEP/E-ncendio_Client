@@ -131,7 +131,7 @@ const AuthState = props => {
             dispatch({
                 type: CERRAR_SESION
             })
-            const resultado = await clienteAxios.get(`/api/auth/logout`)
+            await clienteAxios.get(`/api/auth/logout`)
         } catch (error) {
             console.log(error)
             Swal.fire({

@@ -78,7 +78,7 @@ const UploadTipsUser = ({
             <div className="row">
                 { cargandoTipsUsuarioDesdeAdmin === false
                     ?
-                        tips.length != 0
+                        tips.length !== 0
                         ?
                             tips.map((tip, index) =>
 

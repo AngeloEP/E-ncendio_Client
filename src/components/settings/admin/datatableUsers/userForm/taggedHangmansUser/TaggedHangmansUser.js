@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { } from 'react';
 import './taggedHangmansUser.css';
 
 import Button from '@material-ui/core/Button';
@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import ClipLoader from "react-spinners/ClipLoader";
 
 const TaggedHangmansUser = ({ usuario, ahorcadosEtiquetados, funcionResetear, cargandoResetearEtiquetasAhorcados }) => {
-    console.log(ahorcadosEtiquetados)
     return (
         <div className="cards-tag-hangmans" >
             <div className="div-reset-tag-hangmans" >
@@ -17,7 +16,7 @@ const TaggedHangmansUser = ({ usuario, ahorcadosEtiquetados, funcionResetear, ca
                     // style={{ width: "90%" }}
                     startIcon={<DeleteIcon />}
                     onClick={() => funcionResetear(usuario._id)}
-                    disabled={cargandoResetearEtiquetasAhorcados || ahorcadosEtiquetados.length == 0 ? true : false }
+                    disabled={cargandoResetearEtiquetasAhorcados || ahorcadosEtiquetados.length === 0 ? true : false }
                 >
                     {
                         cargandoResetearEtiquetasAhorcados
@@ -45,7 +44,7 @@ const TaggedHangmansUser = ({ usuario, ahorcadosEtiquetados, funcionResetear, ca
                 </Button>
             </div>
             <div className="row">
-                { ahorcadosEtiquetados.length != 0
+                { ahorcadosEtiquetados.length !== 0
                     ?
                         ahorcadosEtiquetados.map((ahorcadoEtiquetado, index) =>
 
@@ -54,18 +53,18 @@ const TaggedHangmansUser = ({ usuario, ahorcadosEtiquetados, funcionResetear, ca
                                 <div className="card text-white tarjeta-tag-hangman" >
                                     <div className="fila">
                                         <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcadoEtiquetado.hangman_id.imageUrl_1} />
+                                                <img className="imagenes-tarjeta" src={ahorcadoEtiquetado.hangman_id.imageUrl_1} alt="" />
                                         </div>
                                         <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcadoEtiquetado.hangman_id.imageUrl_2} />
+                                                <img className="imagenes-tarjeta" src={ahorcadoEtiquetado.hangman_id.imageUrl_2} alt="" />
                                         </div>
                                     </div>
                                     <div className="fila">
                                             <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcadoEtiquetado.hangman_id.imageUrl_3} />
+                                                <img className="imagenes-tarjeta" src={ahorcadoEtiquetado.hangman_id.imageUrl_3} alt="" />
                                             </div>
                                             <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcadoEtiquetado.hangman_id.imageUrl_4} />
+                                                <img className="imagenes-tarjeta" src={ahorcadoEtiquetado.hangman_id.imageUrl_4} alt="" />
                                             </div>
                                     </div>
                                     <div className="card-body text-center">

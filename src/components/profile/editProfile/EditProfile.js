@@ -18,10 +18,10 @@ import ClipLoader from "react-spinners/ClipLoader";
 import './editProfile.css';
 
 import {
-    FaFacebook,
-    FaTwitter,
-    FaSnapchat,
-    FaInstagram,
+    // FaFacebook,
+    // FaTwitter,
+    // FaSnapchat,
+    // FaInstagram,
     FaEdit,
 } from 'react-icons/fa';
 
@@ -57,6 +57,7 @@ const EditProfile = ( props ) => {
 
         // obteniendo el perfil del usuario
         obtenerPerfil();
+        // eslint-disable-next-line
     }, [ mensaje, cargando, modificacionUsuarioExitosa ])
 
     const [ perfilUsuario, guardarPerfilUsuario ] = useState({
@@ -70,7 +71,7 @@ const EditProfile = ( props ) => {
         // esExperto: null, // bool
     })
 
-    const { firstname, lastname, gender, age, phone, esExperto } = perfilUsuario
+    const { firstname, lastname, gender, age, phone } = perfilUsuario
     const [ image, setImage ] = useState(null)
     const [ pathImage, setPathImage ] = useState( perfilUsuario ? perfilUsuario.urlFile : ProfileDefault )
 
@@ -124,7 +125,7 @@ const EditProfile = ( props ) => {
         //     return
         // }
 
-        if ( phone.length != 9 ) {
+        if ( phone.length !== 9 ) {
             mostrarAlerta("Su Teléfono debe tener 9 dígitos", 'alerta-error')
             return
         }
@@ -157,22 +158,22 @@ const EditProfile = ( props ) => {
     }
 
     return (
-        <div class="page-content page-container" id="page-content" >
-            { perfil != null
+        <div className="page-content page-container" id="page-content" >
+            { perfil !== null
             ?
-                perfil.league_id.league != "Bronce"
+                perfil.league_id.league !== "Bronce"
                 ?
                     <form onSubmit={onSubmit} >
                             { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-                            <div class="padding">
-                                <div class="col container d-flex justify-content-center">
-                                    <div class="col-xl-12 col-md-12">
-                                        <div class="card user-card-full">
-                                            <div class="row m-l-0 m-r-0">
-                                                    <div class="col-sm-4 bg-c-lite-green user-profile">
-                                                        <div class="card-block text-center text-white">
-                                                            <img className="img-fluid img-thumbnail image_user" src={ pathImage } alt="Image" />
-                                                            <div class="m-b-25">
+                            <div className="padding">
+                                <div className="col container d-flex justify-content-center">
+                                    <div className="col-xl-12 col-md-12">
+                                        <div className="card user-card-full">
+                                            <div className="row m-l-0 m-r-0">
+                                                    <div className="col-sm-4 bg-c-lite-green user-profile">
+                                                        <div className="card-block text-center text-white">
+                                                            <img className="img-fluid img-thumbnail image_user" src={ pathImage } alt="" />
+                                                            <div className="m-b-25">
                                                                 <input
                                                                     accept="image/*"
                                                                     className="image-input"
@@ -221,7 +222,7 @@ const EditProfile = ( props ) => {
                                                                 onChange={onChange}
                                                             />
 
-                                                            <p class="f-w-200" > <i>
+                                                            <p className="f-w-200" > <i>
                                                                 { usuario.isExpert
                                                                 ?
                                                                     "Integrante de FireSES"
@@ -231,13 +232,13 @@ const EditProfile = ( props ) => {
                                                             </i> </p> 
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-8">
-                                                        <div class="card-block">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600"> Mi información de perfil de usuario </h6>
+                                                    <div className="col-sm-8">
+                                                        <div className="card-block">
+                                                            <div className="row">
+                                                                <div className="col-sm-6">
+                                                                    <h6 className="m-b-20 p-b-5 b-b-default f-w-600"> Mi información de perfil de usuario </h6>
                                                                 </div>
-                                                                <div class="col-sm-6">
+                                                                <div className="col-sm-6">
                                                                     <button className="update-btn" type="submit" >
                                                                         {
                                                                             cargandoModificacionUsuario
@@ -262,11 +263,11 @@ const EditProfile = ( props ) => {
                                                                                 
                                                                             :
                                                                             <div>
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-6 col-log-12 col-xl-9">
+                                                                                <div className="row">
+                                                                                    <div className="col-sm-6 col-log-12 col-xl-9">
                                                                                         Modificar Perfil
                                                                                     </div>
-                                                                                    <div class="col-sm-6 col-log-12 col-xl-3">
+                                                                                    <div className="col-sm-6 col-log-12 col-xl-3">
                                                                                         <FaEdit className="update-icon"/>
                                                                                     </div>
                                                                                 </div>
@@ -275,13 +276,13 @@ const EditProfile = ( props ) => {
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <p class="m-b-10 f-w-600"> Email </p>
-                                                                    <h6 class="text-muted f-w-400"> {usuario.email} </h6>
+                                                            <div className="row">
+                                                                <div className="col-sm-6">
+                                                                    <p className="m-b-10 f-w-600"> Email </p>
+                                                                    <h6 className="text-muted f-w-400"> {usuario.email} </h6>
                                                                 </div>
-                                                                <div class="col-sm-6">
-                                                                    <p class="m-b-10 f-w-600"> Teléfono </p>
+                                                                <div className="col-sm-6">
+                                                                    <p className="m-b-10 f-w-600"> Teléfono </p>
                                                                     <TextField
                                                                         className="phone-input"
                                                                         variant="outlined"
@@ -296,9 +297,9 @@ const EditProfile = ( props ) => {
                                                                 </div>
                                                             </div>
                                                             <br/>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <p class="m-b-10 f-w-600"> Edad </p>
+                                                            <div className="row">
+                                                                <div className="col-sm-6">
+                                                                    <p className="m-b-10 f-w-600"> Edad </p>
                                                                     <TextField
                                                                         className="age-input"
                                                                         variant="outlined"
@@ -311,8 +312,8 @@ const EditProfile = ( props ) => {
                                                                         onChange={onChange}
                                                                     />
                                                                 </div>
-                                                                <div class="col-sm-6">
-                                                                    <p class="m-b-10 f-w-600"> Género </p>
+                                                                <div className="col-sm-6">
+                                                                    <p className="m-b-10 f-w-600"> Género </p>
                                                                     <FormControl variant="outlined" >
                                                                         <InputLabel id="demo-simple-select-outlined-label"> Género </InputLabel>
                                                                         <Select
@@ -335,46 +336,46 @@ const EditProfile = ( props ) => {
                                                                 </div>
                                                             </div>
 
-                                                            <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"> Perfil de juego en E-ncendio </h6>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <p class="m-b-10 f-w-600"> Liga </p>
-                                                                    <h6 class="text-muted f-w-400">
+                                                            <h6 className="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"> Perfil de juego en E-ncendio </h6>
+                                                            <div className="row">
+                                                                <div className="col-sm-6">
+                                                                    <p className="m-b-10 f-w-600"> Liga </p>
+                                                                    <h6 className="text-muted f-w-400">
                                                                         {perfil.league_id.league}
-                                                                        <span class="badge badge-pill badge-light align-middle">
+                                                                        <span className="badge badge-pill badge-light align-middle">
                                                                             <img src={
                                                                                     perfil.league_id.league === "Bronce" ? BronceBadge
                                                                                     : perfil.league_id.league === "Plata" ? PlataBadge
                                                                                     : perfil.league_id.league === "Oro" ? OroBadge : null
                                                                                 }
-                                                                                alt="image"
+                                                                                alt=""
                                                                                 className="user-badge"
                                                                             />
                                                                         </span>
                                                                     </h6>
                                                                 </div>
-                                                                <div class="col-sm-6">
-                                                                    <p class="m-b-10 f-w-600"> Puntuación </p>
-                                                                    <h6 class="text-muted f-w-400"> {perfil.score} </h6>
+                                                                <div className="col-sm-6">
+                                                                    <p className="m-b-10 f-w-600"> Puntuación </p>
+                                                                    <h6 className="text-muted f-w-400"> {perfil.score} </h6>
                                                                 </div>
                                                             </div>
                                                             <br/>
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-                                                                    <p class="m-b-10 f-w-600"> Nivel etiquetando Imágenes </p>
-                                                                    <h6 class="text-muted f-w-400"> {perfil.level_image_id.level} </h6>
+                                                            <div className="row">
+                                                                <div className="col-sm-4">
+                                                                    <p className="m-b-10 f-w-600"> Nivel etiquetando Imágenes </p>
+                                                                    <h6 className="text-muted f-w-400"> {perfil.level_image_id.level} </h6>
                                                                 </div>
-                                                                <div class="col-sm-4">
-                                                                    <p class="m-b-10 f-w-600"> Nivel etiquetando Palabras </p>
-                                                                    <h6 class="text-muted f-w-400"> {perfil.level_word_id.level} </h6>
+                                                                <div className="col-sm-4">
+                                                                    <p className="m-b-10 f-w-600"> Nivel etiquetando Palabras </p>
+                                                                    <h6 className="text-muted f-w-400"> {perfil.level_word_id.level} </h6>
                                                                 </div>
-                                                                <div class="col-sm-4">
-                                                                    <p class="m-b-10 f-w-600"> Nivel asignando 1 palabra a imágenes </p>
-                                                                    <h6 class="text-muted f-w-400"> {perfil.level_four_image_id.level} </h6>
+                                                                <div className="col-sm-4">
+                                                                    <p className="m-b-10 f-w-600"> Nivel asignando 1 palabra a imágenes </p>
+                                                                    <h6 className="text-muted f-w-400"> {perfil.level_four_image_id.level} </h6>
                                                                 </div>
                                                             </div>
 
-                                                            {/* <ul class="social-link list-unstyled m-t-40 m-b-10">
+                                                            {/* <ul className="social-link list-unstyled m-t-40 m-b-10">
                                                                 <li> <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"> <FaFacebook/> </a> </li>
                                                                 <li> <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"> <FaTwitter/> </a> </li>
                                                                 <li> <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"> <FaInstagram/> </a> </li>

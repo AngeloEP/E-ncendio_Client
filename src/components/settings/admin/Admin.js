@@ -12,11 +12,11 @@ import './admin.css';
 const Admin = () => {
     // Extraer los valores del context
     const alertaContext = useContext(AlertaContext)
-    const { alerta, mostrarAlerta } = alertaContext
+    const { mostrarAlerta } = alertaContext
 
     // Extraer informacion del context auth
     const authContext = useContext(AuthContext)
-    const { mensaje, autenticado, cargandoRegistroUsuario, registrarUsuario } = authContext
+    const { mensaje } = authContext
 
     // Extraer los valores del context de usuarios
     const usuariosContext = useContext(UsuariosContext)
@@ -26,7 +26,7 @@ const Admin = () => {
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
-    const [sorting, setSorting] = useState({ field: "", order: "" });
+    const [sorting, ] = useState({ field: "", order: "" });
     // setTotalItems(users.length);
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const Admin = () => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-
+        // eslint-disable-next-line
     }, [ mensaje, cargandoAdminYBloqueo ] )
 
     const usersData = useMemo(() => {

@@ -26,16 +26,16 @@ const Rank = () => {
     const { perfiles, obtenerTodosLosPerfiles } = profilecontext
 
 
-    let [ datos, setDatos ] = useState( [] )
+    let [ datos,  ] = useState( [] )
 
     const [filterLeague, setFilterLeague] = useState('');
     const [filterAge, setFilterAge] = useState('');
     const [filterPoints, setFilterPoints] = useState('');
 
     const [ query, setQuery ] = useState("");
-    const [ searchColumns, setSearchColumns ] = useState([
-        "nombre"
-    ]);
+    // const [ searchColumns, setSearchColumns ] = useState([
+    //     "nombre"
+    // ]);
     
     useEffect(() => {
         usuarioAutenticado()
@@ -43,7 +43,7 @@ const Rank = () => {
         
         // obteniendo los perfiles para la tabla
         obtenerTodosLosPerfiles();
-
+        // eslint-disable-next-line
     }, [])
 
     const setColorTable = ( league ) => {
@@ -66,7 +66,7 @@ const Rank = () => {
     }
     
     let user_league = ""
-    if ( perfiles.length != 0 ) {
+    if ( perfiles.length !== 0 ) {
         datos = [...perfiles]
 
         // Setear el color de la tabla
@@ -88,7 +88,7 @@ const Rank = () => {
             // )
         );
     }
-    const columns = datos[0] && Object.keys(datos[0])
+    // const columns = datos[0] && Object.keys(datos[0])
     return (
         <div className="container" >
             <div className="title-div" >
@@ -122,7 +122,7 @@ const Rank = () => {
                                         const checked = searchColumns.includes(column);
                                         setSearchColumns((prev) =>
                                             checked
-                                                ? prev.filter((sc) => sc !== column)
+                                                ? prev.filter((sc) => sc !=== column)
                                                 : [...prev, column]
                                         );
                                     }}
@@ -131,7 +131,7 @@ const Rank = () => {
                             </label>
                         ))
                     } */}
-                    <Grid item xs={2} spacing={1} >
+                    <Grid item xs={2} >
                         <FormControl variant="outlined" id="select-league" >
                             <InputLabel id="demo-simple-select-outlined-label"> Liga </InputLabel>
                             <Select
@@ -198,7 +198,7 @@ const Rank = () => {
             <div className="table-rank" style={{ border: `3px solid 
                 ${user_league} ` 
             }} >
-                { perfiles.length != 0
+                { perfiles.length !== 0
                 ?
                     <Datatable
                         data={search(datos)}

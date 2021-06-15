@@ -267,7 +267,7 @@ const UsuariosState = props => {
                 allowOutsideClick: false,
             }).then(async (result) =>  {
                 if (result.isConfirmed) {
-                    const respuesta = await clienteAxios.delete(`/api/images/user/image/${image_id}`)
+                    await clienteAxios.delete(`/api/images/user/image/${image_id}`)
                     Swal.fire({
                         icon: 'success',
                         title: 'Proceso exitoso',
@@ -463,7 +463,7 @@ const UsuariosState = props => {
                 allowOutsideClick: false,
             }).then(async (result) =>  {
                 if (result.isConfirmed) {
-                    const respuesta = await clienteAxios.delete(`/api/words/user/word/${word_id}`)
+                    await clienteAxios.delete(`/api/words/user/word/${word_id}`)
                     Swal.fire({
                         icon: 'success',
                         title: 'Proceso exitoso',
@@ -660,7 +660,7 @@ const UsuariosState = props => {
                 allowOutsideClick: false,
             }).then(async (result) =>  {
                 if (result.isConfirmed) {
-                    const respuesta = await clienteAxios.delete(`/api/hangmans/user/hangman/${hangman_id}`)
+                    await clienteAxios.delete(`/api/hangmans/user/hangman/${hangman_id}`)
                     Swal.fire({
                         icon: 'success',
                         title: 'Proceso exitoso',
@@ -857,7 +857,7 @@ const UsuariosState = props => {
                 allowOutsideClick: false,
             }).then(async (result) =>  {
                 if (result.isConfirmed) {
-                    const respuesta = await clienteAxios.delete(`/api/tips/user/tip/${tip_id}`)
+                    await clienteAxios.delete(`/api/tips/user/tip/${tip_id}`)
                     Swal.fire({
                         icon: 'success',
                         title: 'Proceso exitoso',

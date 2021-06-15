@@ -23,7 +23,7 @@ const UploadImage = () => {
 
     // Extraer informacion del context auth
     const authContext = useContext(AuthContext)
-    const { mensaje, autenticado } = authContext
+    const { mensaje } = authContext
 
     const imageContext = useContext(ImageContext)
     const { imagenes,
@@ -43,7 +43,7 @@ const UploadImage = () => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-
+        // eslint-disable-next-line
     }, [ mensaje, imagenes, cargandoSubirImagen, cargandoEliminarImagen, cargandoModificarImagen ] )
 
     const [ image, setImage ] = useState(null)
@@ -109,7 +109,7 @@ const UploadImage = () => {
                                         onChange={onFileChange}
                                         style={{ display: "none" }}
                                         />
-                                    <img className="img-fluid img-thumbnail image-upload" src={pathImage} alt="Image" />
+                                    <img className="img-fluid img-thumbnail image-upload" src={pathImage} alt="" />
                                     <label htmlFor="contained-button-file" className="label-upload-image" >
                                         <Button  variant="contained" style={{ backgroundColor: "greenyellow", height: "85%" }}  component="span">
                                             Agregar imagen

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useContext, useRef } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import AlertaContext from '../../../../context/alertas/alertaContext';
 import AuthContext from '../../../../context/autentificacion/authContext';
 import FourImagesOneWordContext from '../../../../context/fourImagesOneWord/fourImagesOneWordContext';
@@ -38,7 +38,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-
+        // eslint-disable-next-line
     }, [ mensaje, cargandoModificarAhorcado ] )
     
     const columns = hangmans[0] && Object.keys(hangmans[0])
@@ -90,6 +90,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
                 } else {
                     mostrarAlerta("Debe seleccionar archivos de tipo imagen, se admiten extensiones: jpeg, jpg, png y gif", "alerta-error")
                 }
+                return console.log("b")
             });
             
 		}
@@ -122,7 +123,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
         if (selectedFilesUpdate.length === 0) {
             // console.log("No adjunto ninguna imagen")
         } else{
-            if (selectedFilesUpdate[0].length != 4) {
+            if (selectedFilesUpdate[0].length !== 4) {
                 mostrarAlerta("Debe adjuntar solo 4 imágenes", 'alerta-error')
                 return
             } else {
@@ -154,7 +155,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
         <Fragment>
             <Table responsive striped bordered hover  >
             {
-                hangmans.length != 0
+                hangmans.length !== 0
                 ?
                     <Fragment>
                         <thead>
@@ -186,7 +187,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
 
                                                     { column === "Imagen1" | column === "Imagen2" | column === "Imagen3" | column === "Imagen4"
                                                         ?
-                                                            <td style={{ width: "7%" }} > <img className="img-fluid img-thumbnail images-hangman" src={row[column]} alt="Image" /> </td>
+                                                            <td style={{ width: "7%" }} > <img className="img-fluid img-thumbnail images-hangman" src={row[column]} alt="" /> </td>
                                                         :
                                                             column === "Estado"
                                                             ?

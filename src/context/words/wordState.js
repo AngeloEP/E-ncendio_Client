@@ -118,7 +118,7 @@ const WordState = props => {
                 allowOutsideClick: false
             }).then(async (result) =>  {
                 if (result.isConfirmed) {
-                    const respuesta = await clienteAxios.delete(`/api/words/user/${id_palabra}`)
+                    await clienteAxios.delete(`/api/words/user/${id_palabra}`)
                     Swal.fire({
                         icon: 'success',
                         title: 'Su Palabra se eliminó exitosamente!',

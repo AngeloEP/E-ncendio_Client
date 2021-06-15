@@ -118,7 +118,7 @@ const ImageState = props => {
                 allowOutsideClick: false
             }).then(async (result) =>  {
                 if (result.isConfirmed) {
-                    const respuesta = await clienteAxios.delete(`/api/images/user/${id_imagen}`)
+                    await clienteAxios.delete(`/api/images/user/${id_imagen}`)
                     Swal.fire({
                         icon: 'success',
                         title: 'Su Imagen se eliminó exitosamente!',

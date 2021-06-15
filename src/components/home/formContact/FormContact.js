@@ -1,20 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
+import './formContact.css';
 
 import AlertaContext from '../../../context/alertas/alertaContext';
 import ContactFormContext from '../../../context/contactForm/contactFormContext';
 
-import { Button, CardActions, TextareaAutosize, TextField } from '@material-ui/core';
+import { Button, TextareaAutosize, TextField } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import Box from '@material-ui/core/Box';
 import ClipLoader from "react-spinners/ClipLoader";
-
-const styles = {
-    
-    root: {
-        justifyContent: 'center'
-    }
-};
 
 const FormContact = () => {
 
@@ -33,7 +25,7 @@ const FormContact = () => {
     })
 
     const { subject, email, message } = formulario
-    const [ loadingContact, setLoadingContact] = useState(false)
+    const [  , setLoadingContact] = useState(false)
 
     useEffect(() => {
         
@@ -42,7 +34,7 @@ const FormContact = () => {
             setLoadingContact(false)
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-    
+        // eslint-disable-next-line
     }, [ mensaje, cargandoEnvioCorreo ] )
 
     const onChange = e => {
@@ -77,9 +69,10 @@ const FormContact = () => {
     return (
         <form id="contact-form" onSubmit={handleSubmit}>
             { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-            <div className="col-lg-10">
+            <div className="col-md-4 col-lg-5 col-xl-7">
                 <div className="form-group">
                     <TextField
+                        className="emailContact"
                         id="email"
                         name='email'
                         type="email"
@@ -92,9 +85,10 @@ const FormContact = () => {
                 </div>
             </div>
 
-            <div className="col-lg-10">
+            <div className="col-md-4 col-lg-5 col-xl-7">
                 <div className="form-group">
                     <TextField
+                        className="subjectContact"
                         id="subject"
                         name="subject"
                         type="text"
@@ -107,23 +101,23 @@ const FormContact = () => {
                 </div>
             </div>
 
-            <div className="col-lg-10" >
-                <div className="form-group">
+            <div className="col-md-4 col-lg-5 col-xl-7" >
+                <div className="form-group messageContact">
                     <TextareaAutosize 
                         id="message"
                         name="message"
                         placeholder="Ingresa tu Mensaje*"
                         value={message}
                         variant="outlined"
-                        className="form-control" 
+                        className="form-control " 
                         onChange={onChange}
                     />
                 </div>
             </div>
             
-            <div className="col-lg-10" >
+            <div className="col-md-4 col-lg-5 col-xl-7" >
 
-                <div className="container" style={{
+                <div className="container buttonContact" style={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent:"center",

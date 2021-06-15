@@ -7,7 +7,7 @@ import {
     ACTUALIZAR_PERFIL_ERROR
 } from '../../types';
 
-export default (state, action) => {
+const profileReducer = (state, action) => {
     switch (action.type) {
         case ACTUALIZAR_PERFIL:
         case OBTENER_PERFIL_USUARIO:
@@ -37,3 +37,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default profileReducer;

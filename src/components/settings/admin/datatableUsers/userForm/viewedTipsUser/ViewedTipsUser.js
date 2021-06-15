@@ -24,7 +24,7 @@ const ViewedTipsUser = ({
                     color="secondary"
                     startIcon={<DeleteIcon />}
                     onClick={() => funcionResetear(usuario._id)}
-                    disabled={cargandoResetearTipsVistos || tipsVistos.length == 0 ? true : false }
+                    disabled={cargandoResetearTipsVistos || tipsVistos.length === 0 ? true : false }
                 >
                     {
                         cargandoResetearTipsVistos
@@ -54,7 +54,7 @@ const ViewedTipsUser = ({
             <div className="row">
                 { cargandoTipsVistosUsuarioDesdeAdmin === false
                     ? 
-                        tipsVistos.length != 0
+                        tipsVistos.length !== 0
                         ?
                             <>
                                 {tipsVistos.map((tipVisto, index) =>

@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { withRouter, Switch, Route, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { Col, Container, Image, Row, Button } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -25,8 +25,8 @@ import Tooltip from 'react-bootstrap/Tooltip';
 
 import ClipLoader from "react-spinners/ClipLoader";
 import Typography from '@material-ui/core/Typography';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import "./tagImage.css";
 
 import infoIcon from '../../../assets/info.svg';
@@ -39,7 +39,7 @@ const TagImage = ( props ) => {
 
     // Extraer la información de autentificación del usuario
     const authContext = useContext(AuthContext)
-    const { usuario, cargando, usuarioAutenticado} = authContext
+    const { usuarioAutenticado} = authContext
 
     // Extraer la información de el context de imagenes
     const imagesContext = useContext(imageContext)
@@ -64,20 +64,20 @@ const TagImage = ( props ) => {
     let imagenActual = JSON.parse(localStorage.getItem("imagenActual"))
     const [consejos, setConsejos, consejosRef] = useState([])
     let tipActual = 0 
-    if (tips.length > 0 && consejos.length == 0) {
+    if (tips.length > 0 && consejos.length === 0) {
         tipActual = Math.floor(Math.random() * (largoTips));
         setConsejos(tips)
     }
 
     // top profile info
-    const [nowProgress, setNowProgress, nowProgressRef] = useState(0)
-    const [maxProgress, setMaxProgress, maxProgressRef] = useState(0)
-    const [labelProgress, setLabelProgress, labelProgressRef] = useState(0)
-    const [userLeague, setUserLeague, userLeagueRef] = useState('')
+    const [ , setNowProgress, nowProgressRef] = useState(0)
+    const [ , setMaxProgress, maxProgressRef] = useState(0)
+    const [ , setLabelProgress, labelProgressRef] = useState(0)
+    const [ , setUserLeague, userLeagueRef] = useState('')
 
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
-    const [ userPoints, setUserPoints, userPointsRef ] = useState(
+    const [  , setUserPoints, userPointsRef ] = useState(
         perfil != null ? perfil.score : 0
     )
     const CustomToast = ({closedToast}) => {
@@ -131,7 +131,7 @@ const TagImage = ( props ) => {
 
         // Traer los tips disponibles
         obtenerTips()
-        
+        // eslint-disable-next-line
     }, [])
     const [ isWinner, setIsWinner ] = useState(false)
     const [ points, setPoints ] = useState(0)
@@ -187,40 +187,40 @@ const TagImage = ( props ) => {
         setChecked({ ...checked, checkboxes });        
     }
 
-    const Checksito = ({ state, label, name, disable }) => {
-        return (
-        <FormControlLabel
+    // const Checksito = ({ state, label, name, disable }) => {
+    //     return (
+    //     <FormControlLabel
             
-            control={
-              <Checkbox
-                checked={state}
-                value={name}
-                onChange={(e) => onCheck(name, e.target.value)}
-                color="secondary"
-              />
-            }
-            label= {label}
-          />
-        )
-    }
+    //         control={
+    //           <Checkbox
+    //             checked={state}
+    //             value={name}
+    //             onChange={(e) => onCheck(name, e.target.value)}
+    //             color="secondary"
+    //           />
+    //         }
+    //         label= {label}
+    //       />
+    //     )
+    // }
     
-    const categories = [
-        <Row  >
-            <Col xs={6} > <Checksito state={checked.prevencion} label='Prevención' name='prevencion'  /> </Col> 
-            <Col xs={6} > <Checksito state={checked.mitigacion} label='Mitigación' name='mitigacion'  /> </Col> 
-        </Row>,
-        <Row>
-            <Col xs={6} > <Checksito state={checked.riesgo} label='Riesgo' name='riesgo' /> </Col> 
-            <Col xs={6} > <Checksito state={checked.combate} label='Combate' name='combate' /> </Col>
-        </Row>,
-        <Row>
-            <Col xs={6} > <Checksito state={checked.impacto} label='Impacto' name='impacto' /> </Col> 
-            <Col xs={6} > <Checksito state={checked.recuperacion} label='Recuperación' name='recuperacion' /> </Col> 
-        </Row>,
-        <Row>
-            <Col> <Checksito state={checked.amenaza} label='Amenaza' name='amenaza' /> </Col> 
-        </Row>,
-    ]
+    // const categories = [
+    //     <Row  >
+    //         <Col xs={6} > <Checksito state={checked.prevencion} label='Prevención' name='prevencion'  /> </Col> 
+    //         <Col xs={6} > <Checksito state={checked.mitigacion} label='Mitigación' name='mitigacion'  /> </Col> 
+    //     </Row>,
+    //     <Row>
+    //         <Col xs={6} > <Checksito state={checked.riesgo} label='Riesgo' name='riesgo' /> </Col> 
+    //         <Col xs={6} > <Checksito state={checked.combate} label='Combate' name='combate' /> </Col>
+    //     </Row>,
+    //     <Row>
+    //         <Col xs={6} > <Checksito state={checked.impacto} label='Impacto' name='impacto' /> </Col> 
+    //         <Col xs={6} > <Checksito state={checked.recuperacion} label='Recuperación' name='recuperacion' /> </Col> 
+    //     </Row>,
+    //     <Row>
+    //         <Col> <Checksito state={checked.amenaza} label='Amenaza' name='amenaza' /> </Col> 
+    //     </Row>,
+    // ]
 
     const onRender = () => {
         if ( checked.selected == null ) {
@@ -397,7 +397,7 @@ const TagImage = ( props ) => {
                                             label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgressRef.current}% </span>)}
                                 />
                             </OverlayTrigger>
-                            <p className={isWinner == true | tipReceive == true ? "final-text winner" : "final-text"} > +{points} puntos </p>
+                            <p className={isWinner === true | tipReceive === true ? "final-text winner" : "final-text"} > +{points} puntos </p>
                         </Fragment>
                     : null
                     }
@@ -405,7 +405,7 @@ const TagImage = ( props ) => {
                 </Row>
                 { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
             </div>
-            { imagenes.length != 0
+            { imagenes.length !== 0
                 ?
                     newContent === false
                     ?
@@ -427,7 +427,7 @@ const TagImage = ( props ) => {
                                         <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
                                     </div>
                                     <div className="col div-imagen" >
-                                        { imagenes.length == 0
+                                        { imagenes.length === 0
                                             ? null
                                             :
                                             <Col>

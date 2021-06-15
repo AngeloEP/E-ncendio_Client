@@ -3,7 +3,7 @@ import {
     OBTENER_CATEGORIAS_ERROR
 } from '../../types';
 
-export default (state, action) => {
+const categoryReducer = (state, action) => {
     switch (action.type) {
         case OBTENER_CATEGORIAS:
             return {
@@ -21,3 +21,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default categoryReducer;

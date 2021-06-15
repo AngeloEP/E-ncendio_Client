@@ -27,7 +27,7 @@ const Settings = () => {
 
     // Extraer la información de autentificación del usuario
     const authContext = useContext(AuthContext)
-    const { usuario, usuarioAutenticado, cerrarSesión } = authContext
+    const { usuario, usuarioAutenticado } = authContext
 
     // Extraer la información de los perfiles
     const profilecontext = useContext(ProfileContext)
@@ -38,6 +38,7 @@ const Settings = () => {
 
         // obteniendo el perfil del usuario
         obtenerPerfil();
+        // eslint-disable-next-line
     }, [])
     return (
         <div>

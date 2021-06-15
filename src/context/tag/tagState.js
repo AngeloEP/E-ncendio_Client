@@ -61,7 +61,7 @@ const TagState = props => {
 
     const etiquetarImagen = async ( image_id, category_id ) => {
         try {
-            const respuesta = await clienteAxios.post(`/api/tag-images/${image_id}/category/${category_id}`)
+            await clienteAxios.post(`/api/tag-images/${image_id}/category/${category_id}`)
             dispatch({
                 type: ETIQUETAR_IMAGEN,
                 payload: []
@@ -77,7 +77,7 @@ const TagState = props => {
 
     const etiquetarPalabra = async ( palabra_id, category_id ) => {
         try {
-            const respuesta = await clienteAxios.post(`/api/tag-words/${palabra_id}/category/${category_id}`)
+            await clienteAxios.post(`/api/tag-words/${palabra_id}/category/${category_id}`)
             dispatch({
                 type: ETIQUETAR_PALABRA,
                 payload: []
@@ -93,7 +93,7 @@ const TagState = props => {
 
     const etiquetarAhorcado = async ( hangman_id, associatedWord ) => {
         try {
-            const respuesta = await clienteAxios.post(`/api/tag-hangmans/${hangman_id}/word/${associatedWord}`)
+            await clienteAxios.post(`/api/tag-hangmans/${hangman_id}/word/${associatedWord}`)
             dispatch({
                 type: ETIQUETAR_AHORCADO,
                 payload: []
@@ -109,7 +109,7 @@ const TagState = props => {
 
     const verTip = async ( tip_id ) => {
         try {
-            const respuesta = await clienteAxios.post(`/api/view-tips/${tip_id}`)
+            await clienteAxios.post(`/api/view-tips/${tip_id}`)
             dispatch({
                 type: VER_TIP,
                 payload: []
@@ -167,7 +167,6 @@ const TagState = props => {
                 type: OBTENER_AHORCADOS_ETIQUETADOS_CARGANDO,
             })
             const respuesta = await clienteAxios.get(`/api/tag-hangmans/user/${user_id}`)
-            console.log(respuesta.data)
             dispatch({
                 type: OBTENER_AHORCADOS_ETIQUETADOS,
                 payload: respuesta.data.asociacionesAhorcados

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useContext, useRef } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import AlertaContext from '../../../../context/alertas/alertaContext';
 import AuthContext from '../../../../context/autentificacion/authContext';
 import ImageContext from '../../../../context/images/imageContext';
@@ -38,7 +38,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-
+        // eslint-disable-next-line
     }, [ mensaje, cargandoModificarImagen ] )
     
     const columns = images[0] && Object.keys(images[0])
@@ -107,7 +107,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
         <Fragment>
             <Table responsive striped bordered hover  >
             {
-                images.length != 0
+                images.length !== 0
                 ?
                     <Fragment>
                         <thead>
@@ -139,7 +139,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
 
                                                     { column === "Imagen"
                                                         ?
-                                                            <td style={{ width: "7%" }} > <img className="img-fluid img-thumbnail image-user" src={row[column]} alt="Image" /> </td>
+                                                            <td style={{ width: "7%" }} > <img className="img-fluid img-thumbnail image-user" src={row[column]} alt="" /> </td>
                                                         :
                                                             column === "Estado"
                                                             ?
@@ -261,7 +261,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                                                     onChange={onFileChangeUpdate}
                                                     style={{ display: "none" }}
                                                     />
-                                                <img className="img-fluid img-thumbnail image-upload-update" src={pathImageUpdate} alt="Image" />
+                                                <img className="img-fluid img-thumbnail image-upload-update" src={pathImageUpdate} alt="" />
                                                 <label htmlFor="imageUpdate" className="label-upload-image-update" >
                                                     <Button  variant="contained" style={{ backgroundColor: "greenyellow" }}  component="span">
                                                         Agregar imagen

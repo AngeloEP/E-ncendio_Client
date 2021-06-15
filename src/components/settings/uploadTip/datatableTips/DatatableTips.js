@@ -44,7 +44,7 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
-
+        // eslint-disable-next-line
     }, [ mensaje, cargandoModificarTip ] )
     
     const columns = tips[0] && Object.keys(tips[0])
@@ -97,7 +97,7 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
         <Fragment>
             <Table responsive striped bordered hover  >
             {
-                tips.length != 0
+                tips.length !== 0
                 ?
                     <Fragment>
                         <thead>

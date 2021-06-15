@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { } from 'react';
 import './taggedImagesUser.css';
 
 import Button from '@material-ui/core/Button';
@@ -17,7 +17,7 @@ const TaggedImagesUser = ({ usuario, imagenesEtiquetadas, funcionResetear, carga
                     // style={{ width: "90%" }}
                     startIcon={<DeleteIcon />}
                     onClick={() => funcionResetear(usuario._id)}
-                    disabled={cargandoResetearEtiquetasImagenes || imagenesEtiquetadas.length == 0 ? true : false }
+                    disabled={cargandoResetearEtiquetasImagenes || imagenesEtiquetadas.length === 0 ? true : false }
                 >
                     {
                         cargandoResetearEtiquetasImagenes
@@ -45,14 +45,14 @@ const TaggedImagesUser = ({ usuario, imagenesEtiquetadas, funcionResetear, carga
                 </Button>
             </div>
             <div className="row">
-                { imagenesEtiquetadas.length != 0
+                { imagenesEtiquetadas.length !== 0
                     ?
                         imagenesEtiquetadas.map((imagenEtiquetada, index) =>
 
                             <div key={index} className="col-sm-3 col-md-4" >
                                 
                                 <div className="card text-white tarjeta-tag-image" >
-                                    <img className="card-img-top imagen-tarjeta-etiquetada" src={imagenEtiquetada.urlImagen} alt="Card image cap" />
+                                    <img className="card-img-top imagen-tarjeta-etiquetada" src={imagenEtiquetada.urlImagen} alt="" />
                                     <div className="card-body text-center">
                                         <h5 className="card-title titulo-nombre-card-tag-image"> Eligió etiqueta </h5>
                                         <p className="card-text nombre-card-tag-image"> {imagenEtiquetada.categoria} </p>

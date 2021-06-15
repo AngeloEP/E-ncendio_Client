@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import background from '../../../assets/img/login-background.jpg';
 
 export const useStyles = makeStyles((theme) => ({
     avatar: {

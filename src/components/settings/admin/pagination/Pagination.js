@@ -30,6 +30,7 @@ const PaginationComponent = ({
         }
 
         return pages;
+        // eslint-disable-next-line
     }, [totalPages, currentPage]);
 
     if (totalPages === 0) return null;

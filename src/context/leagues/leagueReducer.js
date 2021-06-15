@@ -3,7 +3,7 @@ import {
     OBTENER_DISTRIBUCION_LIGAS_ERROR,
 } from '../../types';
 
-export default (state, action) => {
+const leagueReducer = (state, action) => {
     switch (action.type) {
         case OBTENER_DISTRIBUCION_LIGAS:
             return {
@@ -21,3 +21,5 @@ export default (state, action) => {
             return state;
     }
 }
+
+export default leagueReducer;

@@ -10,8 +10,8 @@ const Datatable = ({ data, user_id }) => {
             <thead>
                 <tr>
                     
-                    { data[0] && columns.map((heading) => 
-                        <Fragment>
+                    { data[0] && columns.map((heading, headIndex) => 
+                        <Fragment key={headIndex} >
                         {heading === "user_id"
                         ?
                             <th> # </th> 
@@ -25,10 +25,10 @@ const Datatable = ({ data, user_id }) => {
             <tbody>
                 {
                     data.map((row, index) =>
-                        <tr id={row["user_id"] == user_id ? "td-user" : null} >
+                        <tr id={row["user_id"] === user_id ? "td-user" : null} key={index} >
                             {
-                                columns.map(column =>  
-                                    <Fragment>
+                                columns.map((column, colIndex) =>  
+                                    <Fragment key={colIndex} >
 
                                         { column === "user_id"
                                             ?

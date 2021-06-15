@@ -1,0 +1,34 @@
+.emailContact {
+    left: 50%;
+}
+
+.subjectContact {
+    left: 50%;
+}
+
+.messageContact {
+    margin-left: 50%;
+    min-width: 100%;
+}
+
+.buttonContact {
+    margin-left: 50%;
+}
+
+@media only screen and (max-width: 1376px){
+    .emailContact {
+        left: 50%;
+    }
+    
+    .subjectContact {
+        left: 50%;
+    }
+    
+    .messageContact {
+        left: 50%;
+    }
+    
+    .buttonContact {
+        margin-left: 50%;
+    }
+}
