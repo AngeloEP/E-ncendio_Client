@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+// import useState from 'react-usestateref';
 
 import {useStyles} from './gamesStyles';
 import './games.css';
@@ -69,12 +70,13 @@ const Games = ({ history }) => {
     useEffect(() => {
         usuarioAutenticado()
         obtenerPerfil()
-
+        console.log("useEffect Games")
         // Traer contenido para los juegos previamente
         obtenerImagenes()
         obtenerPalabras()
         obtenerAhorcados()
         obtenerTips()
+        return () => console.log('unmounting...');
         // eslint-disable-next-line
     }, [])
 

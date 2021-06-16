@@ -131,6 +131,8 @@ const TagImage = ( props ) => {
 
         // Traer los tips disponibles
         obtenerTips()
+        console.log("useEffect TagImage")
+        return () => console.log('unmounting...TagImage');
         // eslint-disable-next-line
     }, [])
     const [ isWinner, setIsWinner ] = useState(false)

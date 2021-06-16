@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.1.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "postcss-cli": "^8.3.1"
   }
 }

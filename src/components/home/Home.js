@@ -51,6 +51,7 @@ const Home = () => {
         setTimeout(() => {
             setLoading(false);
         }, 1500);
+        return () => console.log('unmounting...Home');
         // eslint-disable-next-line
     }, [])
 
