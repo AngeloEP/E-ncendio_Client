@@ -34,7 +34,7 @@ body {
 
 .user-card-full .user-profile {
     border-radius: 5px 0 0 5px;
-    height: 100%;
+    min-height: 100% !important;
 }
 
 .bg-c-lite-green {
