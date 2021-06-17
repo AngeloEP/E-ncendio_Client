@@ -39,6 +39,8 @@ const ResetPassword = ( props ) => {
         correoUsuario,
         cargandoEnviarCodigo,
         cargandoResetearContraseña,
+        returnLogin,
+        cambiarReturn,
     } = resetPasswordContext
 
 
@@ -61,6 +63,11 @@ const ResetPassword = ( props ) => {
     codigo: '',
     confirmPassword: ''
   })
+
+  if (returnLogin) {
+        cambiarReturn()
+      props.history.push("login")
+  }
 
   // Extraer de usuario
   const { email, password, codigo, confirmPassword } = usuario

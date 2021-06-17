@@ -4,7 +4,8 @@ import {
     VALIDAR_EMAIL_RESET_PASSWORD_ERROR,
     VALIDAR_PASSWORD_RESET_PASSWORD,
     VALIDAR_PASSWORD_RESET_PASSWORD_CARGANDO,
-    VALIDAR_PASSWORD_RESET_PASSWORD_ERROR
+    VALIDAR_PASSWORD_RESET_PASSWORD_ERROR,
+    CAMBIAR_RETURN,
 } from '../../types';
 
 const resetPasswordReducer = (state, action) => {
@@ -37,7 +38,14 @@ const resetPasswordReducer = (state, action) => {
                 ...state,
                 correoUsuario: "",
                 code: "",
+                returnLogin: true,
                 cargandoResetearContraseña: false,
+            }
+
+        case CAMBIAR_RETURN:
+            return {
+                ...state,
+                returnLogin: false
             }
 
         case VALIDAR_PASSWORD_RESET_PASSWORD_CARGANDO:

@@ -9,7 +9,8 @@ import {
     VALIDAR_EMAIL_RESET_PASSWORD_ERROR,
     VALIDAR_PASSWORD_RESET_PASSWORD,
     VALIDAR_PASSWORD_RESET_PASSWORD_CARGANDO,
-    VALIDAR_PASSWORD_RESET_PASSWORD_ERROR
+    VALIDAR_PASSWORD_RESET_PASSWORD_ERROR,
+    CAMBIAR_RETURN,
 } from '../../types';
 
 import Swal from 'sweetalert2';
@@ -21,6 +22,7 @@ const ResetPasswordState = props => {
         passworderror: false,
         correoUsuario: "",
         code: "",
+        returnLogin: false,
         cargandoEnviarCodigo: false,
         cargandoResetearContraseña: false,
     }
@@ -29,6 +31,13 @@ const ResetPasswordState = props => {
 
     // Funciones
     // enviar codigo al correo
+
+    const cambiarReturn = async () => {
+        dispatch({
+            type: CAMBIAR_RETURN
+        })
+    }
+
     const enviarCodigo = async (data) => {
         try {
             dispatch({
@@ -101,10 +110,12 @@ const ResetPasswordState = props => {
                 passworderror: state.passworderror,
                 correoUsuario: state.correoUsuario,
                 code: state.code,
+                returnLogin: state.returnLogin,
                 cargandoEnviarCodigo: state.cargandoEnviarCodigo,
                 cargandoResetearContraseña: state.cargandoResetearContraseña,
                 enviarCodigo,
                 cambiarContraseña,
+                cambiarReturn,
             }}
         >
             {props.children}
