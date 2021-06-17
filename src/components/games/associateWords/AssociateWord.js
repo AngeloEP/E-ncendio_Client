@@ -193,7 +193,7 @@ const AssociateWords = ( props ) => {
         // Revisar si sube de nivel de perfil, misma función de API
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
         let addPoints = 0;
-        if (perfil.league_id.league === "Plata") addPoints = 25; else addPoints = 15;
+        if (perfil.league_id.league === "Plata") addPoints = 15; else addPoints = 7;
         setPoints(addPoints)
         setUserPoints( prevTime => prevTime + addPoints)
         setNowProgress( userPointsRef.current )
