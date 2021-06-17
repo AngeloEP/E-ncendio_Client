@@ -15,6 +15,7 @@ const FooterPage = ({ location }) => {
             {
                 location.pathname !== "/login" &&
                 location.pathname !== "/register" &&
+                location.pathname !== "/reset-password" &&
                 location.pathname !== "/games/images" &&
                 location.pathname !== "/games/words" &&
                 location.pathname !== "/games/four-images-one-word"

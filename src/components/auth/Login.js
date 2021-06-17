@@ -212,9 +212,11 @@ const Login = ( props ) => {
                   "Iniciar Sesión"
               }
             </Button>
-            <Grid container>
+            <Grid container direction="column" >
               <Grid item xs>
-                
+                <Link href="/reset-password" variant="body2">
+                  {"Te olvisate de tu contraseña?, cambiala aquí"}
+                </Link>
               </Grid>
               <Grid item>
                 <Link href="/register" variant="body2">

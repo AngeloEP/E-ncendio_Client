@@ -103,7 +103,7 @@ const Navigation =  ({ location, history })  => {
 
     return (
         <Fragment>
-            { location.pathname !== "/login" && location.pathname !== "/register"  ? 
+            { location.pathname !== "/login" && location.pathname !== "/register"  && location.pathname !== "/reset-password"  ? 
                 <Nav>
                     <NavLinkLogo to='/' >
                         <img src={logo} alt='logo' style={{ width:"50px", height: "50px" }} />
