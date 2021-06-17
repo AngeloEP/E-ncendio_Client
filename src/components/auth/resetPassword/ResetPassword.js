@@ -141,7 +141,7 @@ const ResetPassword = ( props ) => {
               </p>
           </div>
           { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-          { code !== "" ?
+          { code === "" ?
             <form className="form-resetpass" onSubmit={onSubmitReceiveCode} >
                 <TextField
                 className="inputs-resetpass"
