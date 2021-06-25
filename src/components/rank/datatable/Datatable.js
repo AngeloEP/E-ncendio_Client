@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import Table from 'react-bootstrap/Table'
 
 const Datatable = ({ data, user_id }) => {
-
+    data = data.sort((a, b) => parseFloat(b["Puntuación"]) - parseFloat(a["Puntuación"]));
     const columns = data[0] && Object.keys(data[0])
     return (
         // <table cellPadding={0} cellSpacing={0} >

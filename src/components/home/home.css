@@ -65,6 +65,7 @@ h2.section-title::after {
 .parrafo-home {
     margin-left: 10%;
     margin-right: 10%;
+    font-size: large;
 }
 
 /* li {
@@ -82,6 +83,7 @@ h2.section-title::after {
     grid-template-columns: 20px auto;
     justify-content: start;
     align-items: center;
+    font-size: large;
 }
 
 .li-home::before {

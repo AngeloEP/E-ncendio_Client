@@ -20,7 +20,14 @@ import Card from 'react-bootstrap/Card';
 
 import './home.css';
 
-import { FaGamepad, FaFire, FaCog, FaUserFriends, FaQuestionCircle, FaUpload } from 'react-icons/fa';
+import {
+    FaGamepad,
+    FaFire,
+    FaCog,
+    FaUserFriends,
+    FaQuestionCircle,
+    FaUpload
+} from 'react-icons/fa';
 
 
 const Home = () => {
