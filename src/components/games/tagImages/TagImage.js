@@ -10,6 +10,7 @@ import categoryContext from '../../../context/categories/categoryContext';
 import tagContext from '../../../context/tag/tagContext';
 import TipContext from '../../../context/tips/tipContext';
 
+import HelpIcon from '@material-ui/icons/Help';
 import Fire from '../../common/fire/Fire';
 
 import Swal from 'sweetalert2';
@@ -415,18 +416,30 @@ const TagImage = ( props ) => {
                             <div className="center">
                                 <div className="row">
                                     <div className="col categoritas" style={{ marginRight: "-10%" }}>
-                                        <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
+                                        <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck}
+                                            title="Superficie con peligro de provocar un incendio."
+                                            placement="left"
+                                        />
                                     </div>
                                     <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                        <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
+                                        <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck}
+                                            title="Se aprecian medidas para evitar un incendio."
+                                            placement="top"
+                                        />
                                     </div>
                                     <div className="col categoritas" >
-                                        <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
+                                        <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck}
+                                            title="Terreno que pasa por período de transformación para recuperarse de un incendio."
+                                            placement="right"
+                                        />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col categoritas" style={{ marginTop: "-4%" }} >
-                                        <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
+                                        <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck}
+                                            title="Se pueden ver técnicas para buscar reducir al máximo los efectos potenciales de un incendio."
+                                            placement="left"
+                                        />
                                     </div>
                                     <div className="col div-imagen" >
                                         { imagenes.length === 0
@@ -441,17 +454,26 @@ const TagImage = ( props ) => {
                                         }
                                     </div>
                                     <div className="col categoritas" style={{ marginTop: "-4%" }} >
-                                        <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
+                                        <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck}
+                                            title="Estado preocupante o amenazante en el cual el incendio llegue a ser muy grave y casi incontrolable."
+                                            placement="right"
+                                        />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col categoritas" style={{ marginRight: "-10%", marginTop: "-4%" }}>
-                                        <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
+                                        <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck}
+                                            title="Consecuencias post-incendio del terreno."
+                                            placement="left"
+                                        />
                                     </div>
                                     <div className="col categoritas">
                                     </div>
                                     <div className="col categoritas" style={{ marginLeft: "-8%", marginTop: "-4%" }}>
-                                        <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
+                                        <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck}
+                                            title="Se trata de contener al incendio, para detener su avance."
+                                            placement="right"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -462,8 +484,20 @@ const TagImage = ( props ) => {
                                         <Button variant="secondary"> Anterior </Button>{' '}
                                     </Col> */}
 
-                                    <Col>
+                                    <Col xs={11} >
                                         <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
+                                    </Col>
+                                    <Col xs={1} >
+                                        <OverlayTrigger
+                                            key={9}
+                                            placement={"top"}
+                                            overlay={
+                                        <Tooltip className="" id="help-icon-tooltip-1" > Debe seleccionar la categoría que considere que se asocie más a la imagen
+                                        </Tooltip>
+                                        }
+                                        >
+                                            <HelpIcon className="help-icon-tagImage" color="primary" />
+                                        </OverlayTrigger>
                                     </Col>
                                 </Row>
                             </div>

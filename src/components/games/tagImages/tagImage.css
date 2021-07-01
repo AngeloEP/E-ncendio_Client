@@ -13,6 +13,16 @@
     border-radius: 10px;
 }
 
+.tooltip-tagImage {
+    font-size: large !important;
+}
+
+.help-icon-tagImage{
+    position: relative !important;
+    font-size: 70px !important;
+    margin-right: auto !important;
+}
+
 .spansito-no-images {
     display: table-cell;
     vertical-align: middle;
@@ -138,8 +148,9 @@
     border: none;
     font-size: 25px;
     border-radius: 10px;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin-left: 10% !important;
+    /* margin-left: auto !important;
+    margin-right: auto !important; */
     margin-top: 0%;
     margin-bottom: 1% !important;
     font-family: 'Times New Roman', Times, serif;

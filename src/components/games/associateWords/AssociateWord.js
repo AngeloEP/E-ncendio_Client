@@ -30,7 +30,7 @@ import Typography from '@material-ui/core/Typography';
 import "./associateWord.css";
 
 import infoIcon from '../../../assets/info.svg';
-
+import HelpIcon from '@material-ui/icons/Help';
 
 const AssociateWords = ( props ) => {
 
@@ -351,18 +351,30 @@ const AssociateWords = ( props ) => {
                                     <div className="center">
                                         <div className="row">
                                             <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                                <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck} />
+                                                <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck}
+                                                    title="Superficie con peligro de provocar un incendio."
+                                                    placement="left"
+                                                />
                                             </div>
                                             <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                                <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck} />
+                                                <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck}
+                                                    title="Se aprecian medidas para evitar un incendio."
+                                                    placement="top"
+                                                />
                                             </div>
                                             <div className="col categoritas" >
-                                                <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck} />
+                                                <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck}
+                                                    title="Terreno que pasa por período de transformación para recuperarse de un incendio."
+                                                    placement="right"
+                                                />
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="col categoritas" style={{ marginRight: "-4%" }} >
-                                                <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck} />
+                                                <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck}
+                                                    title="Se pueden ver técnicas para buscar reducir al máximo los efectos potenciales de un incendio."
+                                                    placement="left"
+                                                />
                                             </div>
                                             <div className="col palabra" >
                                                 { palabras.length === 0
@@ -376,25 +388,46 @@ const AssociateWords = ( props ) => {
                                                 }
                                             </div>
                                             <div className="col categoritas" style={{ marginLeft: "-1%" }} >
-                                                <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck} />
+                                                <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck}
+                                                    title="Estado preocupante o amenazante en el cual el incendio llegue a ser muy grave y casi incontrolable."
+                                                    placement="right"
+                                                />
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                                <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck} />
+                                                <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck}
+                                                    title="Consecuencias post-incendio del terreno."
+                                                    placement="left"
+                                                />
                                             </div>
                                             <div className="col categoritas">
                                             </div>
                                             <div className="col categoritas" style={{ marginLeft: "-10%" }} >
-                                                <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck} />
+                                                <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck}
+                                                    title="Se trata de contener al incendio, para detener su avance."
+                                                    placement="right"
+                                                />
                                             </div>
                                         </div>
                                     </div>
                     
                                     <div className="bottomCenter" >
                                         <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
-                                            <Col>
+                                            <Col xs={11} >
                                                 <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
+                                            </Col>
+                                            <Col xs={1} >
+                                                <OverlayTrigger
+                                                    key={9}
+                                                    placement={"top"}
+                                                    overlay={
+                                                <Tooltip className="" id="help-icon-tooltip-1" > Selecciona la categoría que represente mejor al texto mostrado.
+                                                </Tooltip>
+                                                }
+                                                >
+                                                    <HelpIcon className="help-icon-tagImage" color="primary" />
+                                                </OverlayTrigger>
                                             </Col>
                                         </Row>
                                     </div>

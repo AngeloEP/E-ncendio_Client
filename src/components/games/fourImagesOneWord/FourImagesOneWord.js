@@ -32,6 +32,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import infoIcon from '../../../assets/info.svg';
 
 import Typography from '@material-ui/core/Typography';
+import HelpIcon from '@material-ui/icons/Help';
 
 const FourImagesOneWord = ( props ) => {
     // Extraer los valores del context
@@ -396,6 +397,19 @@ const FourImagesOneWord = ( props ) => {
                                                         : answerRef.current
                                                     }
                                                 </p>
+                                            </Col>
+                                            <Col>
+                                                <OverlayTrigger
+                                                    key={9}
+                                                    placement={"top"}
+                                                    overlay={
+                                                <Tooltip className="" id="help-icon-tooltip-1" >
+                                                    Necesita completar la palabra que se encuentra asociada a las 4 imágenes, ¡antes de perder sus oportunidades!.
+                                                </Tooltip>
+                                                }
+                                                >
+                                                    <HelpIcon style={{ marginTop: "35%" }} className="help-icon-tagImage" color="primary" />
+                                                </OverlayTrigger>
                                             </Col>
                                         </div>
                                         <div className="text-center">

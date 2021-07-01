@@ -11,8 +11,11 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { Col} from 'react-bootstrap';
 import Paper from '@material-ui/core/Paper';
+import HelpIcon from '@material-ui/icons/Help';
 
 import ClipLoader from "react-spinners/ClipLoader";
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 import DatatableTips from './datatableTips/DatatableTips';
 
@@ -120,37 +123,54 @@ const UploadTip = () => {
                                 </div>
                             </Grid>
                             <Grid item xs={12} style={{ marginBottom: "2%" }} >
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    className="submit-tip"
-                                    disabled={cargandoSubirTip}
-                                >
-                                    {
-                                            cargandoSubirTip
-                                            ?
-                                            <Grid container
-                                                direction="row"
-                                                justify="center"
-                                                alignItems="center"
-                                            >
-                                                <Grid item xs={6} style={{ color: "#000" }} >
-                                                    Cargando...
-                                                </Grid>
-                                                <Grid item xs={3} >
-                                                <ClipLoader
-                                                    color={"#000"}
-                                                    loading={true}
-                                                    size={20}
-                                                />
-                                                </Grid>
-                                            </Grid>
-                                                
-                                            :
-                                            "Subir Tip"
-                                    }
-                                </Button>
+                                <div className="row">
+                                    <Col xs={11}>
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                            className="submit-tip"
+                                            disabled={cargandoSubirTip}
+                                        >
+                                            {
+                                                    cargandoSubirTip
+                                                    ?
+                                                    <Grid container
+                                                        direction="row"
+                                                        justify="center"
+                                                        alignItems="center"
+                                                    >
+                                                        <Grid item xs={6} style={{ color: "#000" }} >
+                                                            Cargando...
+                                                        </Grid>
+                                                        <Grid item xs={3} >
+                                                        <ClipLoader
+                                                            color={"#000"}
+                                                            loading={true}
+                                                            size={20}
+                                                        />
+                                                        </Grid>
+                                                    </Grid>
+                                                        
+                                                    :
+                                                    "Subir Tip"
+                                            }
+                                        </Button>
+                                    </Col>
+                                    <Col xs={1}>
+                                        <OverlayTrigger
+                                            key={9}
+                                            placement={"top"}
+                                            overlay={
+                                        <Tooltip className="" id="help-icon-tooltip-1" >
+                                            Aquí debe escribir un consejo/información/tip sobre los incendios para darle a conocer un dato curioso o llamativo.
+                                        </Tooltip>
+                                        }
+                                        >
+                                            <HelpIcon className="help-icon-tagImage" color="primary" />
+                                        </OverlayTrigger>
+                                    </Col>
+                                </div>
                             </Grid>
                         </Grid>
                         </form>

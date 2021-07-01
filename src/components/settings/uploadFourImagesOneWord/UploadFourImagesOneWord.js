@@ -11,8 +11,12 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import HelpIcon from '@material-ui/icons/Help';
 
 import ClipLoader from "react-spinners/ClipLoader";
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { Col} from 'react-bootstrap';
 
 import DatatableFourImagesOneWord from './datatableFourImagesOneWord/DatatableFourImagesOneWord';
 
@@ -166,39 +170,55 @@ const UploadFourImagesOneWord = () => {
                                     />
                                 </div>
                             </Grid>
-                            <Grid item xs={2} style={{  }} >
-                                <div className="div-submit-imageAndWord" >
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        color="primary"
-                                        className="submit-imageAndWord"
-                                        disabled={cargandoSubirAhorcado}
-                                    >
-                                        {
-                                                cargandoSubirAhorcado
-                                                ?
-                                                <Grid container
-                                                    direction="row"
-                                                    justify="center"
-                                                    alignItems="center"
-                                                >
-                                                    <Grid item xs={11} style={{ color: "#000" }} >
-                                                        Cargando...
+                            <Grid item xs={4} style={{  }} >
+                                <div className="row" >
+                                    <Col xs={9}>
+                                        <div className="div-submit-imageAndWord" >
+                                            <Button
+                                                type="submit"
+                                                variant="contained"
+                                                color="primary"
+                                                className="submit-imageAndWord"
+                                                disabled={cargandoSubirAhorcado}
+                                            >
+                                                {
+                                                    cargandoSubirAhorcado
+                                                    ?
+                                                    <Grid container
+                                                        direction="row"
+                                                        justify="center"
+                                                        alignItems="center"
+                                                    >
+                                                        <Grid item xs={11} style={{ color: "#000" }} >
+                                                            Cargando...
+                                                        </Grid>
+                                                        <Grid item xs={1} >
+                                                        <ClipLoader
+                                                            color={"#000"}
+                                                            loading={true}
+                                                            size={20}
+                                                        />
+                                                        </Grid>
                                                     </Grid>
-                                                    <Grid item xs={1} >
-                                                    <ClipLoader
-                                                        color={"#000"}
-                                                        loading={true}
-                                                        size={20}
-                                                    />
-                                                    </Grid>
-                                                </Grid>
-                                                    
-                                                :
-                                                "Subir contenido"
+                                                    :
+                                                        "Subir contenido"
+                                                }
+                                            </Button>
+                                        </div>
+                                    </Col>
+                                    <Col xs={3}>
+                                        <OverlayTrigger
+                                            key={9}
+                                            placement={"top"}
+                                            overlay={
+                                        <Tooltip className="" id="help-icon-tooltip-1" >
+                                            Deben ser 4 imágenes con alguna relación con incedios y la palabra estar efectivamente plasmada en cada una de ellas.
+                                        </Tooltip>
                                         }
-                                    </Button>
+                                        >
+                                            <HelpIcon className="help-icon-tagImage" color="primary" />
+                                        </OverlayTrigger>
+                                    </Col>
                                 </div>
                             </Grid>
                         </Grid>

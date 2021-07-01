@@ -11,10 +11,15 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { Col} from 'react-bootstrap';
 import Paper from '@material-ui/core/Paper';
+import HelpIcon from '@material-ui/icons/Help';
 
 import ClipLoader from "react-spinners/ClipLoader";
 
 import DatatableWords from './datatableWords/DatatableWords';
+
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+
 
 const UploadWord = () => {
 
@@ -107,37 +112,55 @@ const UploadWord = () => {
                                 </div>
                             </Grid>
                             <Grid item xs={12} style={{ marginBottom: "2%" }} >
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    className="submit-word"
-                                    disabled={cargandoSubirPalabra}
-                                >
-                                    {
-                                            cargandoSubirPalabra
-                                            ?
-                                            <Grid container
-                                                direction="row"
-                                                justify="center"
-                                                alignItems="center"
-                                            >
-                                                <Grid item xs={6} style={{ color: "#000" }} >
-                                                    Cargando...
-                                                </Grid>
-                                                <Grid item xs={3} >
-                                                <ClipLoader
-                                                    color={"#000"}
-                                                    loading={true}
-                                                    size={20}
-                                                />
-                                                </Grid>
-                                            </Grid>
-                                                
-                                            :
-                                            "Subir Palabra"
-                                    }
-                                </Button>
+                                <div className="row" >
+                                    <Col xs={11} >
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                            className="submit-word"
+                                            disabled={cargandoSubirPalabra}
+                                        >
+                                            {
+                                                    cargandoSubirPalabra
+                                                    ?
+                                                    <Grid container
+                                                        direction="row"
+                                                        justify="center"
+                                                        alignItems="center"
+                                                    >
+                                                        <Grid item xs={6} style={{ color: "#000" }} >
+                                                            Cargando...
+                                                        </Grid>
+                                                        <Grid item xs={3} >
+                                                        <ClipLoader
+                                                            color={"#000"}
+                                                            loading={true}
+                                                            size={20}
+                                                        />
+                                                        </Grid>
+                                                    </Grid>
+                                                        
+                                                    :
+                                                    "Subir Palabra"
+                                            }
+                                        </Button>
+                                    </Col>
+                                    <Col xs={1} >
+                                        <OverlayTrigger
+                                            key={9}
+                                            placement={"top"}
+                                            overlay={
+                                        <Tooltip className="" id="help-icon-tooltip-1" >
+                                            La palabra escrita debe estar relacionada a los incendios y poder ser categorizada con una de las 7 opciones: 
+                                            Prevención, Riesgo, Recuperación, Mitigación, Amenaza, Impacto o Combate.
+                                        </Tooltip>
+                                        }
+                                        >
+                                            <HelpIcon className="help-icon-tagImage" color="primary" />
+                                        </OverlayTrigger>
+                                    </Col>
+                                </div>
                             </Grid>
                         </Grid>
                         </form>
