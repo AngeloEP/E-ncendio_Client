@@ -54,7 +54,7 @@ const Store = () => {
                     { new Date().getDate() + '-' + new Date().toLocaleDateString(undefined, { month: 'long'}) + '-' + new Date().getFullYear() }
                 </span>
             </div>
-            {perfil != null && perfil.league_id.league != "Bronce"
+            {perfil != null && perfil.league_id.league !== "Bronce"
             ?
                 <div>
                     

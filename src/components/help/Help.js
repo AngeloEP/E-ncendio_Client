@@ -16,13 +16,6 @@ import rankingIcon from '../../assets/vectorial graphics/flame.svg';
 import gamesIcon from '../../assets/vectorial graphics/gamepad2.svg';
 import contentIcon from '../../assets/vectorial graphics/upload.svg';
 
-import {
-    FaGamepad,
-    FaFire,
-    FaCog,
-    FaUpload
-} from 'react-icons/fa';
-
 const Help = () => {
     useEffect(() => {
     }, [])

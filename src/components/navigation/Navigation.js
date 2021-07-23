@@ -22,6 +22,7 @@ import {
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
+    DrawerCloseButton,
 } from "@chakra-ui/react";
 import { Badge } from "@chakra-ui/react";
 
@@ -214,31 +215,32 @@ const Navigation =  ({ location, history })  => {
                             <Drawer onClose={onClose} isOpen={isOpen} size="xs">
                                 <DrawerOverlay />
                                 <DrawerContent>
-                                <DrawerHeader> Estas son tus tareas hoy </DrawerHeader>
-                                <DrawerBody>
-                                    { tareasDiarias.length > 0
-                                    ?
-                                        tareasDiarias.map((tarea, index) => 
-                                            <Fragment key={index} >
-                                                <div>
-                                                    <Badge ml="1" fontSize="0.8em" colorScheme={tarea.isClaimed ? "green" : "red" } >
-                                                        {tarea.isClaimed ? "Listo" : "pendiente" }
-                                                    </Badge>
-                                                    {tarea.message} ({tarea.newCount}/{tarea.total})
-                                                    <br/><br/><br/>
-                                                </div>
-                                            </Fragment>
-                                            )
-                                    :
-                                        <div className="text-center position-relative" style={{ top: "50%" }} >
-                                            <ClipLoader
-                                                color={"#000"}
-                                                loading={true}
-                                                size={70}
-                                                />
-                                        </div>
-                                    }
-                                </DrawerBody>
+                                    <DrawerCloseButton />
+                                    <DrawerHeader> Estas son tus tareas hoy </DrawerHeader>
+                                    <DrawerBody>
+                                        { tareasDiarias.length > 0
+                                        ?
+                                            tareasDiarias.map((tarea, index) => 
+                                                <Fragment key={index} >
+                                                    <div>
+                                                        <Badge ml="1" fontSize="0.8em" colorScheme={tarea.isClaimed ? "green" : "red" } >
+                                                            {tarea.isClaimed ? "Listo" : "pendiente" }
+                                                        </Badge>
+                                                        {tarea.message} ({tarea.newCount}/{tarea.total})
+                                                        <br/><br/><br/>
+                                                    </div>
+                                                </Fragment>
+                                                )
+                                        :
+                                            <div className="text-center position-relative" style={{ top: "50%" }} >
+                                                <ClipLoader
+                                                    color={"#000"}
+                                                    loading={true}
+                                                    size={70}
+                                                    />
+                                            </div>
+                                        }
+                                    </DrawerBody>
                                 </DrawerContent>
                             </Drawer>
                         </div>
