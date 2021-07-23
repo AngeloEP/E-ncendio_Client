@@ -1,12 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import useState from 'react-usestateref';
 import FormContact from './formContact/FormContact';
 
 import AuthContext from '../../context/autentificacion/authContext';
 import LeagueContext from '../../context/leagues/leagueContext';
 import UsuariosContext from '../../context/usuarios/usuariosContext';
 
-import incendio from '../../assets/img/incendio.png';
+import settingIcon from '../../assets/vectorial graphics/gear2.svg';
+import rankingIcon from '../../assets/vectorial graphics/flame.svg';
+import gamesIcon from '../../assets/vectorial graphics/gamepad2.svg';
+import contentIcon from '../../assets/vectorial graphics/upload.svg';
+import aboutIcon from '../../assets/vectorial graphics/people.svg';
+import helpIcon from '../../assets/vectorial graphics/help.svg';
+
+import contacUs from '../../assets/img/contactUs.jpg';
+import welcome from '../../assets/img/welcome.jpg';
+import forest from '../../assets/img/forest.jpg';
+import tree from '../../assets/img/tree.jpg';
+
 import {useStyles} from './homeStyles';
+
+
 
 import { Image } from 'react-bootstrap';
 // import { Bar, Doughnut, Line } from '@reactchartjs/react-chart.js';
@@ -19,22 +33,20 @@ import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
 
 import './home.css';
-
-import {
-    FaGamepad,
-    FaFire,
-    FaCog,
-    FaUserFriends,
-    FaQuestionCircle,
-    FaUpload
-} from 'react-icons/fa';
+import RewardNotification from '../common/fire/RewardNotification';
 
 
 const Home = () => {
 
     // Extraer la información de autentificación
     const authContext = useContext(AuthContext)
-    const { usuarioAutenticado } = authContext
+    const {
+        recompensas,
+        recompensasTareas,
+        usuarioAutenticado,
+        borrarRecompensas,
+        borrarRecompensasModificarPerfilTareas,
+    } = authContext
 
     // Extraer la información de las ligas
     const leagueContext = useContext(LeagueContext)
@@ -55,10 +67,10 @@ const Home = () => {
 
         obtenerDistribucionEdadesUsuarios();
 
+
         setTimeout(() => {
             setLoading(false);
         }, 1500);
-        return () => console.log('unmounting...Home');
         // eslint-disable-next-line
     }, [])
 
@@ -223,7 +235,6 @@ const Home = () => {
     //         ]
     //     }
     // }
-
     return (
         
         <div className={classes.divContent} >
@@ -238,17 +249,36 @@ const Home = () => {
                         />
                     </div>
                 :
+                
                     <Grid container direction="row" justify="center" alignItems="center" spacing={0}>
-                        <Grid item xs={12} className="mt-5" style={{  }} >
+                        <Grid item xs={12} className="" style={{  }} >
+
+                            {recompensas !== null
+                            ?
+                                <RewardNotification
+                                    recompensas={recompensas}
+                                    borrarRecompensas={borrarRecompensas}
+                                />
+                            : null
+                            }
+
+                            {recompensasTareas !== null
+                            ?
+                                <RewardNotification
+                                    recompensas={recompensasTareas}
+                                    borrarRecompensas={borrarRecompensasModificarPerfilTareas}
+                                />
+                            : null
+                            }
 
                             <Carousel>
                                 <Carousel.Item>
                                     <img
                                     className="slides-carousel"
-                                    src="https://cdn.pixabay.com/photo/2018/08/21/23/29/fog-3622519__340.jpg"
+                                    src={welcome}
                                     alt="First slide"
                                     />
-                                    <Carousel.Caption>
+                                    <Carousel.Caption className="carousel-caption1" >
                                     <h2 className="carousel-title" > ¡Bienvenid@ a E-ncendio! </h2>
                                     <p className="carousel-subtitle" > Navega y ayúdanos a recaudar información de la comunidad. </p>
                                     </Carousel.Caption>
@@ -256,11 +286,11 @@ const Home = () => {
                                 <Carousel.Item>
                                     <img
                                     className="slides-carousel"
-                                    src="https://cdn.pixabay.com/photo/2015/06/19/21/24/avenue-815297__340.jpg"
+                                    src={forest}
                                     alt="Second slide"
                                     />
 
-                                    <Carousel.Caption>
+                                    <Carousel.Caption className="carousel-caption2" >
                                     <h2 className="carousel-title" > Apóyanos Jugando </h2>
                                     <p className="carousel-subtitle" > Tu participación es vital para dimensionar el estado actual de la ciudadanía para enfrentar los incendios. </p>
                                     </Carousel.Caption>
@@ -268,11 +298,11 @@ const Home = () => {
                                 <Carousel.Item>
                                     <img
                                     className="slides-carousel"
-                                    src="https://cdn.pixabay.com/photo/2015/12/01/20/28/forest-1072828__340.jpg"
+                                    src={tree}
                                     alt="Third slide"
                                     />
 
-                                    <Carousel.Caption>
+                                    <Carousel.Caption className="carousel-caption3" >
                                     <h2 className="carousel-title" > ¡Recompensas a los mejores participantes! </h2>
                                     <p className="carousel-subtitle" > Al final de este proyecto, se premiarán a los participantes más destacados. </p>
                                     </Carousel.Caption>
@@ -311,8 +341,10 @@ const Home = () => {
                                 text="dark"
                                 className="card-other"
                             >
-                                <FaCog className="card-icons" />
-                                <Card.Header className="card-header" > <a className="nav-link" href="/profile"> Perfil </a> </Card.Header>
+                                <img className="profileImageCard" src={settingIcon} alt="" />
+                                <Card.Header className="card-header" >
+                                    <a className="nav-link" href="/profile"> Perfil </a> 
+                                </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Edita tu perfil </Card.Title>
                                 <Card.Text className="card-text" >
@@ -327,7 +359,7 @@ const Home = () => {
                                 text="dark"
                                 className="card-other"
                             >
-                                <FaFire className="card-icons" />
+                                <img className="rankImageCard" src={rankingIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/rank"> Ranking </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Rivaliza con los demás </Card.Title>
@@ -343,7 +375,7 @@ const Home = () => {
                                 text="dark"
                                 className="card-first"
                             >
-                                <FaGamepad className="card-icons" />
+                                <img className="gamesImageCard" src={gamesIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/games"> Juegos </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Interactúa en los juegos </Card.Title>
@@ -361,7 +393,7 @@ const Home = () => {
                                 text="dark"
                                 className="card-other"
                             >
-                                <FaUpload className="card-icons" />
+                                <img className="contentImageCard" src={contentIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/settings"> Contenido </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Sube tu propio contenido </Card.Title>
@@ -391,7 +423,7 @@ const Home = () => {
                         {/*          */}
 
                         <Grid container direction="row" justify="center" alignItems="center" className="mt-5" >
-                            <h2> Contáctanos </h2>
+                            <h2 className="about-home-title" > Contáctanos </h2>
                         </Grid>
                         <Grid container direction="row" justify="center" alignItems="center" className="mt-2" >
                             <Typography variant="subtitle1" gutterBottom>
@@ -401,7 +433,7 @@ const Home = () => {
                         </Grid>
                         <Grid container  className="mt-4  " >
                             <Grid item xs={6} >
-                                <Image src={incendio} />
+                                <Image className="contactUsHome" src={contacUs} />
                             </Grid>
 
                             <Grid item xs={6} className={classes.formContact} >    
@@ -417,7 +449,7 @@ const Home = () => {
                                 text="dark"
                                 className="card-other"
                             >
-                                <FaUserFriends className="card-icons" />
+                                <img className="aboutImageCard" src={aboutIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/about"> Conócenos </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Averigua quienes somos </Card.Title>
@@ -433,7 +465,7 @@ const Home = () => {
                                 text="dark"
                                 className="card-other"
                             >
-                                <FaQuestionCircle className="card-icons" />
+                                <img className="helpImageCard" src={helpIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/help"> Ayuda </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Conoce el funcionamiento básico de la Aplicación </Card.Title>

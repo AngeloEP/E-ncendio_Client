@@ -22,20 +22,30 @@ const ProfileState = props => {
 
     const [ state, dispatch ] = useReducer(profileReducer, initialState)
 
-    const obtenerPerfil = async () => {
-        try {
-            const respuesta = await clienteAxios.get(`/api/usuarios/profile`)
-            dispatch({
-                type: OBTENER_PERFIL_USUARIO,
-                payload: respuesta.data
-            })
+    const delay = (ms) =>
+        new Promise((res) => {
+            setTimeout(() => {
+            res()
+            }, ms)
+        })
 
-        } catch (error) {
-            console.log(error)
-            dispatch({
-                type: OBTENER_PERFIL_USUARIO_ERROR,
-                payload: error
-            })
+    const obtenerPerfil = async () => {
+        while(true) {
+            try {
+                const respuesta = await clienteAxios.get(`/api/usuarios/profile`)
+                dispatch({
+                    type: OBTENER_PERFIL_USUARIO,
+                    payload: respuesta.data
+                })
+
+            } catch (error) {
+                // console.log(error)
+                dispatch({
+                    type: OBTENER_PERFIL_USUARIO_ERROR,
+                    payload: error
+                })
+            }
+            await delay(6000)
         }
     }
 
@@ -46,7 +56,12 @@ const ProfileState = props => {
             for (const [ index, ] of Object.entries(respuesta.data.perfiles) ) {
                 newProfiles[index] = {
                     user_id: newProfiles[index].user_id._id,
+                    Imagen: {
+                        url: newProfiles[index].user_id.urlFile,
+                        frameUsedCss: newProfiles[index].frameUsedCss,
+                    },
                     Nombre: newProfiles[index].user_id.firstname,
+                    Apodo: newProfiles[index].nicknameUsed,
                     Liga: newProfiles[index].league_id.league,
                     Edad: newProfiles[index].user_id.age,
                     Puntuación: newProfiles[index].score

@@ -19,6 +19,8 @@ import { Col } from 'react-bootstrap';
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
+import RewardNotification from '../../common/fire/RewardNotification';
+
 const UploadImage = () => {
 
     // Extraer los valores del context
@@ -31,12 +33,16 @@ const UploadImage = () => {
 
     const imageContext = useContext(ImageContext)
     const { imagenes,
+        recompensasSubirImagen,
+        recompensasTareasSubirImagen,
         cargandoSubirImagen,
         cargandoEliminarImagen,
         cargandoModificarImagen,
         guardarImagen,
         traerImagenesPorUsuario,
-        eliminarImagen
+        eliminarImagen,
+        borrarRecompensasSubirImagen,
+        borrarRecompensasTareasSubirImagen,
     } = imageContext
 
     // En caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
@@ -48,7 +54,7 @@ const UploadImage = () => {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
         // eslint-disable-next-line
-    }, [ mensaje, imagenes, cargandoSubirImagen, cargandoEliminarImagen, cargandoModificarImagen ] )
+    }, [ mensaje, cargandoSubirImagen, cargandoEliminarImagen, cargandoModificarImagen ] )
 
     const [ image, setImage ] = useState(null)
     const [ pathImage, setPathImage ] = useState(uploadImage)
@@ -73,7 +79,6 @@ const UploadImage = () => {
     const onDelete = (id_image) => {
         eliminarImagen(id_image)
     }
-
     const onSubmit = e => {
         e.preventDefault()
 
@@ -95,6 +100,25 @@ const UploadImage = () => {
 
     return (
         <Fragment>
+
+            {recompensasSubirImagen !== null
+                ?
+                    <RewardNotification
+                        recompensas={recompensasSubirImagen}
+                        borrarRecompensas={borrarRecompensasSubirImagen}
+                    />
+                : null
+            }
+
+            {recompensasTareasSubirImagen !== null
+                ?
+                    <RewardNotification
+                        recompensas={recompensasTareasSubirImagen}
+                        borrarRecompensas={borrarRecompensasTareasSubirImagen}
+                    />
+                : null
+            }
+
             <Container className="div-uploadImage" >
                 <Grid container component="main" >
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
@@ -175,7 +199,7 @@ const UploadImage = () => {
                                             key={9}
                                             placement={"top"}
                                             overlay={
-                                        <Tooltip className="" id="help-icon-tooltip-1" >
+                                        <Tooltip className="tooltipUploadImage" id="help-icon-tooltip-1" >
                                             La imagen subida debe estar relacionada a los incendios y poder ser categorizada con una de las 7 opciones: 
                                             Prevención, Riesgo, Recuperación, Mitigación, Amenaza, Impacto o Combate.
                                         </Tooltip>

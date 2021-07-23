@@ -40,17 +40,15 @@ a:focus {
     line-height: 165px;
     font-size: 2.7em;
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
     white-space: nowrap;
     z-index: 1;
 }
 
 .tm-icon {
     display: block;
-    color: #37A;
-    width: 70px;
-    height: 70px;
-    margin-left: -10% !important;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.4);
 }
 
 .tm-text-primary {
@@ -199,8 +197,9 @@ a:focus {
     }
 
     .tm-icon {
-        width: 45px;
-        height: 45px;
+        transform: scale(1.4);
+        width: 100%;
+        height: 100%;
     }
 
     .tm-section-title {

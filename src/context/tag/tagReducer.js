@@ -31,6 +31,8 @@ import {
     ELIMINAR_TIPS_VISTOS,
     ELIMINAR_TIPS_VISTOS_CARGANDO,
     ELIMINAR_TIPS_VISTOS_ERROR,
+    ELIMINAR_RECOMPENSAS_ETIQUETAS,
+    ELIMINAR_RECOMPENSAS_ETIQUETAS_TAREA,
 } from '../../types';
 
 const tagReducer = (state, action) => {
@@ -41,6 +43,8 @@ const tagReducer = (state, action) => {
         case VER_TIP:
             return {
                 ...state,
+                recompensas: action.payload.reward,
+                recompensasTareas: action.payload.rewardTasks,
             }
 
         case ELIMINAR_ETIQUETAS_AHORCADOS_ERROR:
@@ -170,6 +174,18 @@ const tagReducer = (state, action) => {
             return {
                 ...state,
                 cargandoResetearTipsVistos: action.payload
+            }
+
+        case ELIMINAR_RECOMPENSAS_ETIQUETAS:
+            return {
+                ...state,
+                recompensas: null,
+            }
+
+        case ELIMINAR_RECOMPENSAS_ETIQUETAS_TAREA:
+            return {
+                ...state,
+                recompensasTareas: null,
             }
 
         default:

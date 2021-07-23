@@ -30,6 +30,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import ClipLoader from "react-spinners/ClipLoader";
 
 import infoIcon from '../../../assets/info.svg';
+import RewardNotification from '../../common/fire/RewardNotification';
 
 import Typography from '@material-ui/core/Typography';
 import HelpIcon from '@material-ui/icons/Help';
@@ -57,7 +58,14 @@ const FourImagesOneWord = ( props ) => {
 
     // Extraer la información del context de etiquetar
     const tagsContext = useContext(tagContext)
-    const { etiquetarAhorcado, verTip } = tagsContext
+    const {
+        recompensas,
+        recompensasTareas,
+        etiquetarAhorcado,
+        verTip,
+        borrarRecompensasEtiquetas,
+        borrarRecompensasEtiquetasTareas,
+    } = tagsContext
 
     let ahorcadoActual = JSON.parse(localStorage.getItem("ahorcadoActual"))
     const [answer, setAnswer, answerRef] = useState( "" )
@@ -104,7 +112,7 @@ const FourImagesOneWord = ( props ) => {
     const notify = () => {
         toast.info(<CustomToast />,
             {
-                position: toast.POSITION.TOP_RIGHT,
+                position: toast.POSITION.TOP_CENTER,
                 autoClose: 8000,
                 closeOnClick: false,
             }
@@ -345,7 +353,7 @@ const FourImagesOneWord = ( props ) => {
                         <div className="topCenter4" >
                             <Row className="rowTitle4" >
                                 <Col className="align-self-center" >
-                                    <Typography variant="h4" className="levelTitle4" >
+                                    <Typography component="span" variant="h4" className="levelTitle4" >
                                         { perfil ? `Nivel ${perfil.level_image_id.level}` : null}
                                     </Typography>
                                 </Col>
@@ -371,6 +379,25 @@ const FourImagesOneWord = ( props ) => {
                             </Row>
                             { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         </div>
+
+                        {recompensas !== null
+                        ?
+                            <RewardNotification
+                                recompensas={recompensas}
+                                borrarRecompensas={borrarRecompensasEtiquetas}
+                            />
+                        : null
+                        }
+
+                        {recompensasTareas !== null
+                            ?
+                                <RewardNotification
+                                    recompensas={recompensasTareas}
+                                    borrarRecompensas={borrarRecompensasEtiquetasTareas}
+                                />
+                            : null
+                        }
+
                         {
                             ahorcados.length !== 0 && answerRef.current !== ""
                             ?
@@ -403,7 +430,7 @@ const FourImagesOneWord = ( props ) => {
                                                     key={9}
                                                     placement={"top"}
                                                     overlay={
-                                                <Tooltip className="" id="help-icon-tooltip-1" >
+                                                <Tooltip className="tooltipHangmanGame" id="help-icon-tooltip-1" >
                                                     Necesita completar la palabra que se encuentra asociada a las 4 imágenes, ¡antes de perder sus oportunidades!.
                                                 </Tooltip>
                                                 }

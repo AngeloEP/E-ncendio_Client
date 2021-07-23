@@ -19,6 +19,8 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 import DatatableTips from './datatableTips/DatatableTips';
 
+import RewardNotification from '../../common/fire/RewardNotification';
+
 const UploadTip = () => {
 
     // Extraer los valores del context
@@ -32,12 +34,16 @@ const UploadTip = () => {
     const tipContext = useContext(TipContext)
     const {
         tips,
+        recompensasSubirTip,
+        recompensasTareasSubirTip,
         cargandoSubirTip,
         cargandoEliminarTip,
         cargandoModificarTip,
         guardarTip,
         traerTipsPorUsuario,
-        eliminarTip
+        eliminarTip,
+        borrarRecompensasSubirTip,
+        borrarRecompensasTareasSubirTip,
     } = tipContext
 
     useEffect(() => {
@@ -92,6 +98,25 @@ const UploadTip = () => {
 
     return (
         <Fragment>
+
+            {recompensasSubirTip !== null
+                ?
+                    <RewardNotification
+                        recompensas={recompensasSubirTip}
+                        borrarRecompensas={borrarRecompensasSubirTip}
+                    />
+                : null
+            }
+
+            {recompensasTareasSubirTip !== null
+                ?
+                    <RewardNotification
+                        recompensas={recompensasTareasSubirTip}
+                        borrarRecompensas={borrarRecompensasTareasSubirTip}
+                    />
+                : null
+            }
+
             <Container className="div-uploadTip" >
                 <Grid container component="main" >
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
@@ -162,7 +187,7 @@ const UploadTip = () => {
                                             key={9}
                                             placement={"top"}
                                             overlay={
-                                        <Tooltip className="" id="help-icon-tooltip-1" >
+                                        <Tooltip className="tooltipUploadTip" id="help-icon-tooltip-1" >
                                             Aquí debe escribir un consejo/información/tip sobre los incendios para darle a conocer un dato curioso o llamativo.
                                         </Tooltip>
                                         }

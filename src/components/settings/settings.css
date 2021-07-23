@@ -44,6 +44,48 @@
     color: blue;
 }
 
+.settings-title{ 
+    color: #111;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 64px;
+    margin: 0 0 0;
+    padding: 20px 30px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.date-settings {
+    color: #111;
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    padding-bottom: 38px;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    margin-bottom: 3%;
+}
+
+.date-settings:before {
+    border-top: 1px solid #111;
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 60%;
+    margin-left: 20%;
+    z-index: -1;
+}
+
+.date-settings span {
+    background: #fdfdfd;
+    padding: 0 10px;
+    text-transform: uppercase;
+}
+
+
 @media only screen and (max-width: 1376px){
     .title-div {
         width: 70%;
@@ -65,5 +107,9 @@
         width: 100%;
         display: grid;
         align-items: center;
+    }
+
+    .settings-title{ 
+        font-size: 31px;
     }
 }

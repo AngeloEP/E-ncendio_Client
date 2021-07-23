@@ -12,6 +12,8 @@ import {
     MODIFICAR_IMAGEN,
     MODIFICAR_IMAGEN_CARGANDO,
     MODIFICAR_IMAGEN_ERROR,
+    ELIMINAR_RECOMPENSAS_SUBIR_IMAGEN,
+    ELIMINAR_RECOMPENSAS_SUBIR_IMAGEN_TAREA,
 } from '../../types';
 
 const imageReducer = (state, action) => {
@@ -47,7 +49,9 @@ const imageReducer = (state, action) => {
         case GUARDAR_IMAGEN:
             return {
                 ...state,
-                imagen: action.payload,
+                imagen: action.payload.imagen,
+                recompensasSubirImagen: action.payload.reward,
+                recompensasTareasSubirImagen: action.payload.rewardTasks,
                 cargandoSubirImagen: false
             }
 
@@ -84,6 +88,18 @@ const imageReducer = (state, action) => {
                 cargandoModificarImagen: false
             }
     
+        case ELIMINAR_RECOMPENSAS_SUBIR_IMAGEN:
+            return {
+                ...state,
+                recompensasSubirImagen: null
+            }
+
+        case ELIMINAR_RECOMPENSAS_SUBIR_IMAGEN_TAREA:
+            return {
+                ...state,
+                recompensasTareasSubirImagen: null
+            }
+
         default:
             return state;
     }

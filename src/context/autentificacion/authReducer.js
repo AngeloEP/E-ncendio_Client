@@ -10,6 +10,9 @@ import {
     MODIFICAR_USUARIO,
     MODIFICAR_USUARIO_ERROR,
     MODIFICAR_USUARIO_SALIR,
+    ELIMINAR_RECOMPENSAS_LOGIN,
+    ELIMINAR_RECOMPENSAS_MODIFICAR_PERFIL,
+    ELIMINAR_RECOMPENSAS_MODIFICAR_PERFIL_TAREA,
 } from '../../types/';
 
 const authReducer = (state, action) => {
@@ -28,6 +31,8 @@ const authReducer = (state, action) => {
                 autenticado: true,
                 mensaje: null,
                 cargando: false,
+                recompensas: action.payload.reward,
+                recompensasTareas: action.payload.rewardTasks,
                 cargandoRegistroUsuario: false
             }
         
@@ -64,7 +69,9 @@ const authReducer = (state, action) => {
                 ...state,
                 cargandoModificacionUsuario: false,
                 mensaje: null,
-                usuario: action.payload,
+                usuario: action.payload.usuarioAntiguo,
+                recompensasModificarPerfil: action.payload.reward,
+                recompensasTareas: action.payload.rewardTasks,
                 modificacionUsuarioExitosa: true
             }
 
@@ -80,6 +87,24 @@ const authReducer = (state, action) => {
             return {
                 ...state,
                 modificacionUsuarioExitosa: false
+            }
+
+        case ELIMINAR_RECOMPENSAS_LOGIN:
+            return {
+                ...state,
+                recompensas: null
+            }
+
+        case ELIMINAR_RECOMPENSAS_MODIFICAR_PERFIL:
+            return {
+                ...state,
+                recompensasModificarPerfil: null
+            }
+
+        case ELIMINAR_RECOMPENSAS_MODIFICAR_PERFIL_TAREA:
+            return {
+                ...state,
+                recompensasTareas: null,
             }
 
         default:

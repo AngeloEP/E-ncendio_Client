@@ -34,7 +34,6 @@
     border: 2px solid !important;
     border-radius: 25 !important;
     font-size: larger !important;
-    font-family: 'Times New Roman', Times, serif;
     border-color: #5bc0de !important;
     color: rgb(75, 70, 70) !important;
 }
@@ -85,6 +84,10 @@
     border-radius: 12px;
 }
 
+.tooltipUploadTip {
+    font-size: medium;
+}
+
 @media only screen and (max-width: 1376px){
     .div-uploadTip {
         width: 85% !important;
@@ -111,7 +114,6 @@
         min-height: 150px;
         border-radius: 25 !important;
         font-size: 35px !important;
-        font-family: 'Times New Roman', Times, serif;
     }
 
     .tip-upload {

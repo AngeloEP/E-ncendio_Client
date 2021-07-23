@@ -45,8 +45,11 @@ const Settings = () => {
             { perfil != null
                 ?
                     <>
-                        <div className="title-div" >
-                            <h3 className="title-settings" > Gestionar contenido del Sitio </h3>
+                        <h1 className="settings-title" > Contenido de E-ncendio </h1>
+                        <div className="date-settings" >
+                            <span>
+                                { new Date().getDate() + '-' + new Date().toLocaleDateString(undefined, { month: 'long'}) + '-' + new Date().getFullYear() }
+                            </span>
                         </div>
                         <div className="text-center ml-auto mr-auto" >
                             { perfil.league_id.league === "Bronce"
@@ -60,7 +63,7 @@ const Settings = () => {
                                         "¡Ahora ya puede subir el contenido que desee al sitio para ser evaluado!"
                             }
                         </div>
-                        <div className="row buttonsNavigation" >
+                        <div className=" buttonsNavigation" >
                             <BottomNavigation
                                 value={navigation}
                                 onChange={(event, newValue) => {

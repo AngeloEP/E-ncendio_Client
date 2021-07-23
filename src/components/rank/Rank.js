@@ -15,6 +15,12 @@ import TextField from '@material-ui/core/TextField';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import StarsIcon from '@material-ui/icons/Stars';
+import ClipLoader from "react-spinners/ClipLoader";
+
+import HelpIcon from '@material-ui/icons/Help';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+
 
 const Rank = () => {
     // Extraer la información de autentificación
@@ -31,8 +37,8 @@ const Rank = () => {
     const [filterLeague, setFilterLeague] = useState('');
     const [filterAge, setFilterAge] = useState('');
     const [filterPoints, setFilterPoints] = useState('');
-
     const [ query, setQuery ] = useState("");
+
     // const [ searchColumns, setSearchColumns ] = useState([
     //     "nombre"
     // ]);
@@ -45,6 +51,7 @@ const Rank = () => {
         obtenerTodosLosPerfiles();
         // eslint-disable-next-line
     }, [])
+    // console.log(perfiles[0])
 
     const setColorTable = ( league ) => {
         // #ffbf00
@@ -81,18 +88,25 @@ const Rank = () => {
                 // (column) =>
                 row["Nombre"].toString().toLowerCase().indexOf(query.toLocaleLowerCase()) > -1 &&
                 row["Liga"].toString().toLowerCase().indexOf(filterLeague.toLocaleLowerCase()) > -1 &&
-                row["Edad"].toString().toLowerCase().indexOf(filterAge.toLocaleLowerCase()) > -1 &&
-                row["Puntuación"].toString().toLowerCase().indexOf(filterPoints.toLocaleLowerCase()) > -1
+                row["Edad"] >= filterAge &&
+                row["Puntuación"] >= filterPoints
                 // row.nombre.toLowerCase().indexOf(query) > -1 ||
                 // row.email.toLowerCase().indexOf(query) > -1 
             // )
         );
     }
+    let filtrado;
+    if (query === "" && filterLeague === "" && filterAge === "" && filterPoints === "") {
+        filtrado = 0
+    } else { filtrado = 1 }
     // const columns = datos[0] && Object.keys(datos[0])
     return (
-        <div className="container" >
-            <div className="title-div" >
-                <h2 className="title-rank" > Tabla de Clasificaciones </h2>
+        <div className="w-75 mr-auto ml-auto" > {/* sm, md, lg, xl, xxl */  }
+            <h1 className="games-title" > Tabla de Clasificaciones </h1>
+            <div className="author" >
+                <span>
+                    { new Date().getDate() + '-' + new Date().toLocaleDateString(undefined, { month: 'long'}) + '-' + new Date().getFullYear() }
+                </span>
             </div>
 
             <div className="filters-rank" >
@@ -192,6 +206,18 @@ const Rank = () => {
                             />
                         </Grid>
                     </Grid>
+                    <Grid item xs={1} container spacing={1} >
+                        <OverlayTrigger
+                            key={9}
+                            placement={"top"}
+                            overlay={
+                        <Tooltip className="tooltipRank" id="help-icon-tooltip-1" > Al final del día se premiará con 25, 20 y 15 Fire Points al 1°, 2°, y 3° puesto respectivamente.
+                        </Tooltip>
+                        }
+                        >
+                            <HelpIcon className="help-icon-tagImage" color="primary" />
+                        </OverlayTrigger>
+                    </Grid>
                 </Grid>
             </div>
 
@@ -203,9 +229,16 @@ const Rank = () => {
                     <Datatable
                         data={search(datos)}
                         user_id={usuario._id}
+                        filtrado={filtrado}
                     />
                 :
-                    null
+                    <div className="text-center position-relative" style={{ top: "50%" }} >
+                        <ClipLoader
+                            color={"#000"}
+                            loading={true}
+                            size={70}
+                        />
+                    </div>
                 }
             </div>
         </div>

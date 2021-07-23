@@ -30,8 +30,102 @@
     transition: all 0.7s;
 }
 
-/* .makeStyles-imageSrc-10 {
-    background-size: contain !important;
-    min-width: 100% !important;
-    background-repeat: no-repeat;
-} */
+.games-title{ 
+    color: #111;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 64px;
+    margin: 0 0 0;
+    padding: 20px 30px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.author {
+    color: #111;
+    display: block;
+    font-size: 16px;
+    padding-bottom: 38px;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+}
+
+.author:before {
+    border-top: 1px solid #111;
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 60%;
+    margin-left: 20%;
+    z-index: -1;
+}
+
+.author span {
+    background: #fdfdfd;
+    padding: 0 10px;
+    text-transform: uppercase;
+}
+
+.floatingButtonsGames {
+    position: relative;
+    margin-bottom: 20% !important;
+}
+
+.floatingButtonsGames li:nth-child(2) { /* Iz */
+    margin-left: -300% !important;
+}
+
+.floatingButtonsGames li:nth-child(3) { /* central */
+    margin-left: 0% !important;
+}
+
+.floatingButtonsGames li:nth-child(4) { /* Dr */
+    margin-left: 300% !important;
+    margin-top: -170% !important;
+}
+
+.floatingButtonsGames li:nth-child(2):hover {
+    color: #D40;
+}
+
+.floatingButtonsGames li:nth-child(3):hover {
+    color: #D40;
+}
+
+.floatingButtonsGames li:nth-child(4):hover {
+    color: #D40;
+}
+
+.lockGame {
+    background-color: gray !important;
+    color: white;
+    position: relative;
+    pointer-events: none !important;
+}
+  
+.lockGame:before {
+    content: "\1F512";
+    transform: scale(1.7);
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 70%;
+    width: 50px !important;
+    height: 47px !important;
+    border-radius: 35px 35px 0 0;
+}
+
+.text-games {
+    text-align: center;
+    font-size: larger;
+    position: relative;
+}
+
+@media only screen and (max-width: 1376px){
+    .games-title{
+        font-size: 31px;
+        margin-bottom: 0%;
+    }
+}

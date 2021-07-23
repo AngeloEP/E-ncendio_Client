@@ -18,6 +18,8 @@ import {
     ELIMINAR_PALABRA,
     ELIMINAR_PALABRA_CARGANDO,
     ELIMINAR_PALABRA_ERROR,
+    ELIMINAR_RECOMPENSAS_SUBIR_PALABRA,
+    ELIMINAR_RECOMPENSAS_SUBIR_PALABRA_TAREA,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -25,6 +27,8 @@ const WordState = props => {
     const initialState = {
         palabra: null,
         palabras: [],
+        recompensasSubirPalabra: null,
+        recompensasTareasSubirPalabra: null,
         largoPalabras: 0,
         errores: [],
         cargandoSubirPalabra: false,
@@ -57,7 +61,6 @@ const WordState = props => {
             })
 
             const respuesta = await clienteAxios.post('/api/words', datos)
-            console.log(respuesta.data)
 
             Swal.fire({
                 icon: 'success',
@@ -67,7 +70,7 @@ const WordState = props => {
             setTimeout(() => {
                 dispatch({
                     type: GUARDAR_PALABRA,
-                    payload: respuesta.data.palabra
+                    payload: respuesta.data
                 })
             }, 1500);
             
@@ -157,10 +160,7 @@ const WordState = props => {
             dispatch({
                 type: MODIFICAR_PALABRA_CARGANDO,
             })
-            console.log(datos)
             const respuesta = await clienteAxios.put(`/api/words/user/word/${id_palabra}`, datos)
-            console.log(respuesta.data)
-            // return
 
             Swal.fire({
                 icon: 'success',
@@ -193,11 +193,45 @@ const WordState = props => {
         }
     }
 
+    // Eliminar recompensas
+    const borrarRecompensasSubirPalabra = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_SUBIR_PALABRA
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa!',
+            })
+        }
+    }
+
+    // Eliminar recompensas
+    const borrarRecompensasTareasSubirPalabra = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_SUBIR_PALABRA_TAREA
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa de tarea!',
+            })
+        }
+    }
+
     return (
         <wordContext.Provider
             value={{
                 palabra: state.palabra,
                 palabras: state.palabras,
+                recompensasSubirPalabra: state.recompensasSubirPalabra,
+                recompensasTareasSubirPalabra: state.recompensasTareasSubirPalabra,
                 largoPalabras: state.largoPalabras,
                 cargandoSubirPalabra: state.cargandoSubirPalabra,
                 cargandoEliminarPalabra: state.cargandoEliminarPalabra,
@@ -209,6 +243,8 @@ const WordState = props => {
                 traerPalabrasPorUsuario,
                 eliminarPalabra,
                 modificarPalabra,
+                borrarRecompensasSubirPalabra,
+                borrarRecompensasTareasSubirPalabra,
             }}
         >
             {props.children}

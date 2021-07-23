@@ -20,6 +20,8 @@ import { Col} from 'react-bootstrap';
 
 import DatatableFourImagesOneWord from './datatableFourImagesOneWord/DatatableFourImagesOneWord';
 
+import RewardNotification from '../../common/fire/RewardNotification';
+
 const UploadFourImagesOneWord = () => {
 
     // Extraer los valores del context
@@ -32,11 +34,15 @@ const UploadFourImagesOneWord = () => {
 
     const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
     const { ahorcados,
+        recompensasSubirAhorcado,
+        recompensasTareasSubirAhorcado,
         traerAhorcadosPorUsuario,
         cargandoSubirAhorcado,
         cargandoEliminarAhorcado,
         eliminarAhorcado,
         guardarAhorcado,
+        borrarRecompensasSubirAhorcado,
+        borrarRecompensasTareasSubirAhorcado,
     } = fourImagesOneWordContext
 
     useEffect(() => {
@@ -130,6 +136,25 @@ const UploadFourImagesOneWord = () => {
 
     return (
         <Fragment>
+
+            {recompensasSubirAhorcado !== null
+                ?
+                    <RewardNotification
+                        recompensas={recompensasSubirAhorcado}
+                        borrarRecompensas={borrarRecompensasSubirAhorcado}
+                    />
+                : null
+            }
+
+            {recompensasTareasSubirAhorcado !== null
+                ?
+                    <RewardNotification
+                        recompensas={recompensasTareasSubirAhorcado}
+                        borrarRecompensas={borrarRecompensasTareasSubirAhorcado}
+                    />
+                : null
+            }
+
             <Container className="div-uploadFourImagesOneWord" >
                 <Grid container component="main" >
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
@@ -211,7 +236,7 @@ const UploadFourImagesOneWord = () => {
                                             key={9}
                                             placement={"top"}
                                             overlay={
-                                        <Tooltip className="" id="help-icon-tooltip-1" >
+                                        <Tooltip className="tooltipUploadHangman" id="help-icon-tooltip-1" >
                                             Deben ser 4 imágenes con alguna relación con incedios y la palabra estar efectivamente plasmada en cada una de ellas.
                                         </Tooltip>
                                         }

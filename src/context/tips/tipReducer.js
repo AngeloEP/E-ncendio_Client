@@ -12,6 +12,8 @@ import {
     ELIMINAR_TIP,
     ELIMINAR_TIP_CARGANDO,
     ELIMINAR_TIP_ERROR,
+    ELIMINAR_RECOMPENSAS_SUBIR_TIP,
+    ELIMINAR_RECOMPENSAS_SUBIR_TIP_TAREA,
 } from '../../types';
 
 const tipReducer = (state, action) => {
@@ -45,7 +47,9 @@ const tipReducer = (state, action) => {
         case GUARDAR_TIP:
             return {
                 ...state,
-                tip: action.payload,
+                tip: action.payload.tip,
+                recompensasSubirTip: action.payload.reward,
+                recompensasTareasSubirTip: action.payload.rewardTasks,
                 cargandoSubirTip: false
             }
 
@@ -80,6 +84,18 @@ const tipReducer = (state, action) => {
                 tips: state.tips.map(tip => tip._id ===
                     action.payload._id ? tip : action.payload ),
                 cargandoModificarTip: false
+            }
+
+        case ELIMINAR_RECOMPENSAS_SUBIR_TIP:
+            return {
+                ...state,
+                recompensasSubirTip: null
+            }
+
+        case ELIMINAR_RECOMPENSAS_SUBIR_TIP_TAREA:
+            return {
+                ...state,
+                recompensasTareasSubirTip: null
             }
 
         default:

@@ -19,12 +19,18 @@ import {
     MODIFICAR_USUARIO,
     MODIFICAR_USUARIO_ERROR,
     MODIFICAR_USUARIO_SALIR,
+    ELIMINAR_RECOMPENSAS_LOGIN,
+    ELIMINAR_RECOMPENSAS_MODIFICAR_PERFIL,
+    ELIMINAR_RECOMPENSAS_MODIFICAR_PERFIL_TAREA,
 } from '../../types/';
 
 const AuthState = props => {
 
     const initialState = {
         token: localStorage.getItem('token'),
+        recompensas: null,
+        recompensasModificarPerfil: null,
+        recompensasTareas: null,
         autenticado: null,
         usuario: null,
         mensaje: null,
@@ -125,6 +131,22 @@ const AuthState = props => {
         }
     }
 
+    // Eliminar recompensas
+    const borrarRecompensas = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_LOGIN
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa!',
+            })
+        }
+    }
+
     // Cierra la sesión del usuario
     const cerrarSesión = async () => {
         try {
@@ -148,10 +170,7 @@ const AuthState = props => {
                 type: MODIFICAR_USUARIO_CARGANDO,
                 payload: true
             })
-            // console.log(usuario, usuario_id)
-            // return
             const resultado = await clienteAxios.put(`/api/usuarios/profile/edit/${usuario_id}`, usuario )
-            // console.log("authState: ", resultado.data)
 
             Swal.fire({
                 icon: 'success',
@@ -161,7 +180,7 @@ const AuthState = props => {
             setTimeout(() => {
                 dispatch({
                     type: MODIFICAR_USUARIO,
-                    payload: resultado.data.usuarioAntiguo
+                    payload: resultado.data
                 })
             }, 1500);
 
@@ -189,6 +208,38 @@ const AuthState = props => {
         })
     }
 
+    // Eliminar recompensas
+    const borrarRecompensasModificarPerfil = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_MODIFICAR_PERFIL
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa!',
+            })
+        }
+    }
+
+    // Eliminar recompensas tareas
+    const borrarRecompensasModificarPerfilTareas = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_MODIFICAR_PERFIL_TAREA
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa de tarea!',
+            })
+        }
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -196,6 +247,9 @@ const AuthState = props => {
                 autenticado: state.autenticado,
                 usuario: state.usuario,
                 mensaje: state.mensaje,
+                recompensas: state.recompensas,
+                recompensasModificarPerfil: state.recompensasModificarPerfil,
+                recompensasTareas: state.recompensasTareas,
                 cargando: state.cargando,
                 cargandoRegistroUsuario: state.cargandoRegistroUsuario,
                 cargandoModificacionUsuario: state.cargandoModificacionUsuario,
@@ -206,6 +260,9 @@ const AuthState = props => {
                 cerrarSesión,
                 modificarUsuario,
                 cambiarStateModificacionUsuario,
+                borrarRecompensas,
+                borrarRecompensasModificarPerfil,
+                borrarRecompensasModificarPerfilTareas,
             }}
         >
             {props.children}

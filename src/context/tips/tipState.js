@@ -18,6 +18,8 @@ import {
     ELIMINAR_TIP,
     ELIMINAR_TIP_CARGANDO,
     ELIMINAR_TIP_ERROR,
+    ELIMINAR_RECOMPENSAS_SUBIR_TIP,
+    ELIMINAR_RECOMPENSAS_SUBIR_TIP_TAREA,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -25,6 +27,8 @@ const TipState = props => {
     const initialState = {
         tip: null,
         tips: [],
+        recompensasSubirTip: null,
+        recompensasTareasSubirTip: null,
         largoTips: 0,
         errores: [],
         cargandoSubirTip: false,
@@ -57,7 +61,6 @@ const TipState = props => {
             })
 
             const respuesta = await clienteAxios.post('/api/tips', datos)
-            console.log(respuesta.data)
 
             Swal.fire({
                 icon: 'success',
@@ -67,7 +70,7 @@ const TipState = props => {
             setTimeout(() => {
                 dispatch({
                     type: GUARDAR_TIP,
-                    payload: respuesta.data.tip
+                    payload: respuesta.data
                 })
             }, 1500);
             
@@ -193,11 +196,44 @@ const TipState = props => {
         }
     }
 
+    // Eliminar recompensas
+    const borrarRecompensasSubirTip = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_SUBIR_TIP
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa!',
+            })
+        }
+    }
+
+    const borrarRecompensasTareasSubirTip = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_SUBIR_TIP_TAREA
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa de tarea!',
+            })
+        }
+    }
+
     return (
         <tipContext.Provider
             value={{
                 tip: state.tip,
                 tips: state.tips,
+                recompensasSubirTip: state.recompensasSubirTip,
+                recompensasTareasSubirTip: state.recompensasTareasSubirTip,
                 largoTips: state.largoTips,
                 cargandoSubirTip: state.cargandoSubirTip,
                 cargandoEliminarTip: state.cargandoEliminarTip,
@@ -209,6 +245,8 @@ const TipState = props => {
                 traerTipsPorUsuario,
                 eliminarTip,
                 modificarTip,
+                borrarRecompensasSubirTip,
+                borrarRecompensasTareasSubirTip,
             }}
         >
             {props.children}

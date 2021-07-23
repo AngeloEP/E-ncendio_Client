@@ -18,6 +18,8 @@ import {
     ELIMINAR_AHORCADO,
     ELIMINAR_AHORCADO_CARGANDO,
     ELIMINAR_AHORCADO_ERROR,
+    ELIMINAR_RECOMPENSAS_SUBIR_AHORCADO,
+    ELIMINAR_RECOMPENSAS_SUBIR_AHORCADO_TAREA,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -25,6 +27,8 @@ const FourImagesOneWordState = props => {
     const initialState = {
         ahorcado: null,
         ahorcados: [],
+        recompensasSubirAhorcado: null,
+        recompensasTareasSubirAhorcado: null,
         largoAhorcados: 0,
         errores: [],
         cargandoSubirAhorcado: false,
@@ -66,7 +70,7 @@ const FourImagesOneWordState = props => {
             setTimeout(() => {
                 dispatch({
                     type: GUARDAR_AHORCADO,
-                    payload: respuesta.data.ahorcado
+                    payload: respuesta.data
                 })
             }, 1500);
             
@@ -205,11 +209,44 @@ const FourImagesOneWordState = props => {
         }
     }
 
+    // Eliminar recompensas
+    const borrarRecompensasSubirAhorcado = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_SUBIR_AHORCADO
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa!',
+            })
+        }
+    }
+
+    const borrarRecompensasTareasSubirAhorcado = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_SUBIR_AHORCADO_TAREA
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa de tarea!',
+            })
+        }
+    }
+
     return (
         <fourImagesOneWordContext.Provider
             value={{
                 ahorcado: state.ahorcado,
                 ahorcados: state.ahorcados,
+                recompensasSubirAhorcado: state.recompensasSubirAhorcado,
+                recompensasTareasSubirAhorcado: state.recompensasTareasSubirAhorcado,
                 largoAhorcados: state.largoAhorcados,
                 ahorcadoActual: state.ahorcadoActual,
                 cargandoSubirAhorcado: state.cargandoSubirAhorcado,
@@ -222,6 +259,8 @@ const FourImagesOneWordState = props => {
                 traerAhorcadosPorUsuario,
                 eliminarAhorcado,
                 modificarAhorcado,
+                borrarRecompensasSubirAhorcado,
+                borrarRecompensasTareasSubirAhorcado,
             }}
         >
             {props.children}

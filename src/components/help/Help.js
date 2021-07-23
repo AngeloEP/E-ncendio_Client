@@ -6,8 +6,15 @@ import ImageIcon from '@material-ui/icons/Image';
 import SpellcheckIcon from '@material-ui/icons/Spellcheck';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import InfoIcon from '@material-ui/icons/Info';
-
 import Table from 'react-bootstrap/Table';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { green } from '@material-ui/core/colors';
+import LockIcon from '@material-ui/icons/Lock';
+
+import settingIcon from '../../assets/vectorial graphics/gear2.svg';
+import rankingIcon from '../../assets/vectorial graphics/flame.svg';
+import gamesIcon from '../../assets/vectorial graphics/gamepad2.svg';
+import contentIcon from '../../assets/vectorial graphics/upload.svg';
 
 import {
     FaGamepad,
@@ -22,8 +29,11 @@ const Help = () => {
     return (
         <div className="main-help" >
 
-            <div className="title-div-help" >
-                <h3 className="title-help" > Sección de Ayuda </h3>
+            <h1 className="settings-title" > Sección de ayuda </h1>
+            <div className="date-settings" >
+                <span>
+                    { new Date().getDate() + '-' + new Date().toLocaleDateString(undefined, { month: 'long'}) + '-' + new Date().getFullYear() }
+                </span>
             </div>
 
             <div className="container mb-5">
@@ -53,7 +63,7 @@ const Help = () => {
 
                 <div className="row tm-content-box">
                     <div className="col-lg-1">
-                        <FaGamepad className="tm-icon" />
+                        <img className="tm-icon" src={gamesIcon} alt="" />
                     </div>
                     <div className="col-lg-5">
                         <div className="tm-intro-text-container">
@@ -65,7 +75,7 @@ const Help = () => {
                     </div>
                     
                     <div className="col-lg-1">
-                        <FaCog className="tm-icon" />
+                        <img className="tm-icon" src={settingIcon} alt="" />
                     </div>
                     <div className="col-lg-5">
                         <div className="tm-intro-text-container">
@@ -80,7 +90,7 @@ const Help = () => {
 
                 <div className="row tm-content-box">
                     <div className="col-lg-1">
-                        <FaUpload className="tm-icon" />
+                        <img className="tm-icon" src={contentIcon} alt="" />
                     </div>
                     <div className="col-lg-5">
                         <div className="tm-intro-text-container">
@@ -95,7 +105,7 @@ const Help = () => {
                         </div>
                     </div>
                     <div className="col-lg-1">
-                        <FaFire className="tm-icon" />
+                        <img className="tm-icon" src={rankingIcon} alt="" />
                     </div>
                     <div className="col-lg-5">
                         <div className="tm-intro-text-container">
@@ -108,7 +118,7 @@ const Help = () => {
                 </div>
                 
                 <h2 className="tm-text-primary mb-4 mt-4 tm-section-title">
-                    Recompensa de puntos por acción
+                    Acciones disponibles por liga
                 </h2>
                 <Table striped bordered hover responsive className="text-center" >
                     <thead>
@@ -121,58 +131,70 @@ const Help = () => {
                     </thead>
                     <tbody style={{ fontSize: "large" }} >
                         <tr>
-                            <td> Editar perfil </td>
-                            <td> - </td>
-                            <td> 7 por atributo </td>
-                            <td> 5 por atributo </td>
-                        </tr>
-                        <tr>
-                            <td> Editar imagen </td>
-                            <td> 35 </td>
-                            <td> 20 </td>
-                            <td> 10 </td>
-                        </tr>
-                        <tr>
-                            <td> Etiquetar palabra </td>
-                            <td> - </td>
-                            <td> 15 </td>
-                            <td> 7 </td>
-                        </tr>
-                        <tr>
-                            <td> Completar ahorcado </td>
-                            <td> - </td>
-                            <td> - </td>
-                            <td> 15 </td>
+                            <td> Etiquetar imagen </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
                         </tr>
                         <tr>
                             <td> Tip visto </td>
-                            <td> 10 </td>
-                            <td> 7 </td>
-                            <td> 5 </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
                         </tr>
                         <tr>
                             <td> Subir un imagen </td>
-                            <td> 35 </td>
-                            <td> 30 </td>
-                            <td> 20 </td>
-                        </tr>
-                        <tr>
-                            <td> Subir un palabra </td>
-                            <td> - </td>
-                            <td> 25 </td>
-                            <td> 15 </td>
-                        </tr>
-                        <tr>
-                            <td> Subir un ahorcado </td>
-                            <td> - </td>
-                            <td> - </td>
-                            <td> 25 </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
                         </tr>
                         <tr>
                             <td> Subir un tip </td>
-                            <td> 10 </td>
-                            <td> 7 </td>
-                            <td> 5 </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                        </tr>
+                        <tr>
+                            <td> Editar perfil </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                        </tr>
+                        <tr>
+                            <td> Comprar en la tienda </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                        </tr>
+                        <tr>
+                            <td> Gestionar compras hechas en tienda </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                        </tr>
+                        <tr>
+                            <td> Etiquetar palabra </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                        </tr>
+                        <tr>
+                            <td> Subir un palabra </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                        </tr>
+                        <tr>
+                            <td> Completar ahorcado </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                        </tr>
+                        <tr>
+                            <td> Subir un ahorcado </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
                         </tr>
                     </tbody>
                 </Table>

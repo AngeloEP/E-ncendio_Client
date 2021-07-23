@@ -17,7 +17,6 @@
     line-height: 165px;
     font-size: 2.7em;
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
     white-space: nowrap;
     z-index: 99999;
 }
@@ -51,6 +50,56 @@
 #td-user{
     background-color: rgb(179, 170, 170);
     color:white;
+}
+
+.nickname-rank {
+    color: #CEF0D4;
+    font-style: oblique;
+    font-size: x-large;
+    font-weight: 900;
+    text-shadow: 1px 1px 2px #082b34;
+}
+
+.div-imageUser-rank {
+    width: 30%;
+    min-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.td-imageUserRank {
+    width: 30%;
+    height: 100%;
+    min-width: 30%;
+    max-width: 30%;
+    min-height: 100%;
+    max-height: 100%;
+}
+
+.td-medal-rank {
+    display: block;
+    border: thin !important;
+    transform: scale(2, 2);
+    margin-top: 20%;
+}
+
+.tooltipRank {
+    font-size: medium;
+}
+
+@media only screen and (max-width: 1417px){
+    #starIcon {
+        margin-top: 0px;
+    }
+
+    #ageIcon {
+        margin-top: 0em;
+    }
+
+    #select-league {
+        min-width: 8em;
+        margin-top: 20%;
+    }
 }
 
 @media only screen and (max-width: 1376px){

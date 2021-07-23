@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import AlertaContext from '../../context/alertas/alertaContext';
 import AuthContext from '../../context/autentificacion/authContext';
 import loginContext from '../../context/login/loginContext';
+import ProfileContext from '../../context/profile/profileContext';
+import DailyTasksContext from '../../context/dailyTasks/dailyTasksContext';
 
 import logo from '../../assets/img/logo.png';
 
@@ -35,6 +37,12 @@ const Login = ( props ) => {
   const loginsContext = useContext(loginContext)
   const { emailerror, passworderror } = loginsContext
 
+  const profilecontext = useContext(ProfileContext)
+  const { obtenerPerfil } = profilecontext
+
+  const dailyTasksContext = useContext(DailyTasksContext)
+  const { obtenerTareasDiarias } = dailyTasksContext
+
   const [ loadingPage, setLoadingPage ] = useState(false)
   const [ loadingLogin, setLoadingLogin] = useState(false)
 
@@ -44,6 +52,8 @@ const Login = ( props ) => {
     if (autenticado) {
         setLoadingLogin(false)
         props.history.push('/home')
+        obtenerPerfil();
+        obtenerTareasDiarias();
     }
 
     if (mensaje) {

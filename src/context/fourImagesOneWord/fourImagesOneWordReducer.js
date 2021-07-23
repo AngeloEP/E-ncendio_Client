@@ -12,6 +12,8 @@ import {
     MODIFICAR_AHORCADO,
     MODIFICAR_AHORCADO_CARGANDO,
     MODIFICAR_AHORCADO_ERROR,
+    ELIMINAR_RECOMPENSAS_SUBIR_AHORCADO,
+    ELIMINAR_RECOMPENSAS_SUBIR_AHORCADO_TAREA,
 } from '../../types';
 
 const fourImagesOneWordReducer = (state, action) => {
@@ -45,7 +47,9 @@ const fourImagesOneWordReducer = (state, action) => {
         case GUARDAR_AHORCADO:
             return {
                 ...state,
-                ahorcado: action.payload,
+                ahorcado: action.payload.ahorcado,
+                recompensasSubirAhorcado: action.payload.reward,
+                recompensasTareasSubirAhorcado: action.payload.rewardTasks,
                 cargandoSubirAhorcado: false
             }
 
@@ -80,6 +84,18 @@ const fourImagesOneWordReducer = (state, action) => {
                 ahorcados: state.ahorcados.map(ahorcado => ahorcado._id ===
                     action.payload._id ? ahorcado : action.payload ),
                 cargandoModificarAhorcado: false
+            }
+
+        case ELIMINAR_RECOMPENSAS_SUBIR_AHORCADO:
+            return {
+                ...state,
+                recompensasSubirAhorcado: null
+            }
+
+        case ELIMINAR_RECOMPENSAS_SUBIR_AHORCADO_TAREA:
+            return {
+                ...state,
+                recompensasTareasSubirAhorcado: null
             }
     
         default:

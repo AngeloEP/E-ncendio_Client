@@ -37,11 +37,15 @@ import {
     ELIMINAR_TIPS_VISTOS,
     ELIMINAR_TIPS_VISTOS_CARGANDO,
     ELIMINAR_TIPS_VISTOS_ERROR,
+    ELIMINAR_RECOMPENSAS_ETIQUETAS,
+    ELIMINAR_RECOMPENSAS_ETIQUETAS_TAREA,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
 const TagState = props => {
     const initialState = {
+        recompensas: null,
+        recompensasTareas: null,
         imagenesEtiquetadas: [],
         palabrasEtiquetadas: [],
         ahorcadosEtiquetados: [],
@@ -61,10 +65,10 @@ const TagState = props => {
 
     const etiquetarImagen = async ( image_id, category_id ) => {
         try {
-            await clienteAxios.post(`/api/tag-images/${image_id}/category/${category_id}`)
+            const respuesta = await clienteAxios.post(`/api/tag-images/${image_id}/category/${category_id}`)
             dispatch({
                 type: ETIQUETAR_IMAGEN,
-                payload: []
+                payload: respuesta.data
             })
         } catch (error) {
             // console.log(error)
@@ -77,10 +81,10 @@ const TagState = props => {
 
     const etiquetarPalabra = async ( palabra_id, category_id ) => {
         try {
-            await clienteAxios.post(`/api/tag-words/${palabra_id}/category/${category_id}`)
+            const respuesta = await clienteAxios.post(`/api/tag-words/${palabra_id}/category/${category_id}`)
             dispatch({
                 type: ETIQUETAR_PALABRA,
-                payload: []
+                payload: respuesta.data
             })
         } catch (error) {
             console.log(error)
@@ -93,10 +97,10 @@ const TagState = props => {
 
     const etiquetarAhorcado = async ( hangman_id, associatedWord ) => {
         try {
-            await clienteAxios.post(`/api/tag-hangmans/${hangman_id}/word/${associatedWord}`)
+            const respuesta = await clienteAxios.post(`/api/tag-hangmans/${hangman_id}/word/${associatedWord}`)
             dispatch({
                 type: ETIQUETAR_AHORCADO,
-                payload: []
+                payload: respuesta.data
             })
         } catch (error) {
             // console.log(error)
@@ -109,10 +113,10 @@ const TagState = props => {
 
     const verTip = async ( tip_id ) => {
         try {
-            await clienteAxios.post(`/api/view-tips/${tip_id}`)
+            const respuesta = await clienteAxios.post(`/api/view-tips/${tip_id}`)
             dispatch({
                 type: VER_TIP,
-                payload: []
+                payload: respuesta.data
             })
         } catch (error) {
             // console.log(error)
@@ -400,9 +404,44 @@ const TagState = props => {
         }
     }
 
+    // Eliminar recompensas
+    const borrarRecompensasEtiquetas = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_ETIQUETAS
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa!',
+            })
+        }
+    }
+
+    // Eliminar recompensas tareas
+    const borrarRecompensasEtiquetasTareas = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_ETIQUETAS_TAREA
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa de tarea!',
+            })
+        }
+    }
+
+
     return (
         <tagContext.Provider
             value={{
+                recompensas: state.recompensas,
+                recompensasTareas: state.recompensasTareas,
                 imagenesEtiquetadas: state.imagenesEtiquetadas,
                 palabrasEtiquetadas: state.palabrasEtiquetadas,
                 ahorcadosEtiquetados: state.ahorcadosEtiquetados,
@@ -427,6 +466,8 @@ const TagState = props => {
                 verTip,
                 obtenerTipsVistosPorUsuario,
                 eliminarTipsVistosPorUsuario,
+                borrarRecompensasEtiquetas,
+                borrarRecompensasEtiquetasTareas,
             }}
         >
             {props.children}

@@ -7,7 +7,7 @@ import styled from 'styled-components';
   height: 80px;
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem calc((80vw - 1000px) / 2);
+  /* padding: 0.5rem calc((70vw - 1000px) / 2); */
   z-index: 9999;
 `;
 
@@ -104,8 +104,12 @@ export const NavMenu = styled.div`
 
 export const NavBtn = styled.nav`
   display: flex;
+  width: 21%;
   align-items: center;
-  margin-right: 4px;
+  margin-right: 0px;
+  @media screen and (max-width: 1366px) {
+    width: 29%;
+  }
   @media screen and (max-width: 875px) {
     display: none;
   }
@@ -138,6 +142,6 @@ export const PNav = styled.p`
   font-size: 1.0rem;
   margin: 0;
   margin-top: 0.5rem;
-  margin-left: 2rem;
+  margin-left: 0rem;
   margin-right: .5rem;
 `; 

@@ -28,6 +28,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import "./associateWord.css";
+import RewardNotification from '../../common/fire/RewardNotification';
 
 import infoIcon from '../../../assets/info.svg';
 import HelpIcon from '@material-ui/icons/Help';
@@ -60,7 +61,14 @@ const AssociateWords = ( props ) => {
 
     // Extraer la información del context de etiquetar
     const tagsContext = useContext(tagContext)
-    const { etiquetarPalabra, verTip } = tagsContext
+    const {
+        recompensas,
+        recompensasTareas,
+        etiquetarPalabra,
+        verTip,
+        borrarRecompensasEtiquetas,
+        borrarRecompensasEtiquetasTareas,
+    } = tagsContext
 
     let palabraActual = JSON.parse(localStorage.getItem("palabraActual"))
     let tipActual = 0 
@@ -100,7 +108,7 @@ const AssociateWords = ( props ) => {
     const notify = () => {
         toast.info(<CustomToast />,
             {
-                position: toast.POSITION.TOP_RIGHT,
+                position: toast.POSITION.TOP_CENTER,
                 autoClose: 8000,
                 closeOnClick: false,
             }
@@ -308,7 +316,6 @@ const AssociateWords = ( props ) => {
         setUserLeague( perfil.league_id.league )
     }
     let colorProgress = labelProgressRef.current < 50 ? "success" : labelProgressRef.current < 80 ? "warning" : "danger";
-
     return (
         <Container fluid className="backgroundGif" >
             {
@@ -343,6 +350,25 @@ const AssociateWords = ( props ) => {
                         </Row>
                         { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                     </div>
+
+                    {recompensas !== null
+                        ?
+                            <RewardNotification
+                                recompensas={recompensas}
+                                borrarRecompensas={borrarRecompensasEtiquetas}
+                            />
+                        : null
+                    }
+
+                    {recompensasTareas !== null
+                        ?
+                            <RewardNotification
+                                recompensas={recompensasTareas}
+                                borrarRecompensas={borrarRecompensasEtiquetasTareas}
+                            />
+                        : null
+                    }
+
                     { palabras.length !== 0
                         ?
                             newContent === false
@@ -422,7 +448,7 @@ const AssociateWords = ( props ) => {
                                                     key={9}
                                                     placement={"top"}
                                                     overlay={
-                                                <Tooltip className="" id="help-icon-tooltip-1" > Selecciona la categoría que represente mejor al texto mostrado.
+                                                <Tooltip className="tooltipTagWord" id="help-icon-tooltip-1" > Selecciona la categoría que represente mejor al texto mostrado.
                                                 </Tooltip>
                                                 }
                                                 >

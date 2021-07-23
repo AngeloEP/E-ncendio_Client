@@ -173,6 +173,10 @@
     margin-bottom: 7%;
 }
 
+.tooltipTagWord {
+    font-size: medium;
+}
+
 @media only screen and (max-width: 1376px){
     .rowTitle {
         position: relative;

@@ -1,0 +1,51 @@
+.notification-container {
+	font-size: 14px !important;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 999999;
+    transition: .2s ease;
+}
+
+.notification-title {
+	font-weight: 700;
+	font-size: 100%;
+	text-align: left;
+    width: auto;
+    height: 18px;
+}
+
+.notification-message {
+	text-align: left;
+    height: fit-content;
+    font-size: 100%;
+    width: fit-content;
+    overflow-wrap: auto;
+}
+
+.notification-image {
+    float: left;
+    margin-right: 10%;
+}
+
+.notification-image img {
+    width: 30px;
+    height: 30px;
+}
+
+.toast {
+    height: fit-content;
+    width: fit-content;
+	color: #fff;
+	padding: 20px 15px 10px 10px;
+}
+
+.Toastify__toast--info {
+    box-sizing: border-box;
+    transition: .2s ease;
+}
+
+.Toastify__toast--info:hover {
+    box-shadow: 0 0 22px #5bc0de;
+	opacity: 1;
+	cursor: pointer;
+}

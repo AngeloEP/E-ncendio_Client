@@ -18,6 +18,8 @@ import {
     ELIMINAR_IMAGEN,
     ELIMINAR_IMAGEN_CARGANDO,
     ELIMINAR_IMAGEN_ERROR,
+    ELIMINAR_RECOMPENSAS_SUBIR_IMAGEN,
+    ELIMINAR_RECOMPENSAS_SUBIR_IMAGEN_TAREA,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -25,6 +27,8 @@ const ImageState = props => {
     const initialState = {
         imagen: null,
         imagenes: [],
+        recompensasSubirImagen: null,
+        recompensasTareasSubirImagen: null,
         largoImagenes: 0,
         errores: [],
         cargandoSubirImagen: false,
@@ -57,7 +61,6 @@ const ImageState = props => {
             })
 
             const respuesta = await clienteAxios.post('/api/images', datos)
-            console.log(respuesta.data)
 
             Swal.fire({
                 icon: 'success',
@@ -67,7 +70,7 @@ const ImageState = props => {
             setTimeout(() => {
                 dispatch({
                     type: GUARDAR_IMAGEN,
-                    payload: respuesta.data.imagen
+                    payload: respuesta.data
                 })
             }, 1500);
             
@@ -158,7 +161,6 @@ const ImageState = props => {
                 type: MODIFICAR_IMAGEN_CARGANDO,
             })
             const respuesta = await clienteAxios.put(`/api/images/user/image/${id_imagen}`, datos)
-            console.log(respuesta.data)
             // return
 
             Swal.fire({
@@ -192,11 +194,45 @@ const ImageState = props => {
         }
     }
 
+    // Eliminar recompensas
+    const borrarRecompensasSubirImagen = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_SUBIR_IMAGEN
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa!',
+            })
+        }
+    }
+
+    // Eliminar recompensas
+    const borrarRecompensasTareasSubirImagen = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_RECOMPENSAS_SUBIR_IMAGEN_TAREA
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar su recompensa de tarea!',
+            })
+        }
+    }
+
     return (
         <imageContext.Provider
             value={{
                 imagen: state.imagen,
                 imagenes: state.imagenes,
+                recompensasSubirImagen: state.recompensasSubirImagen,
+                recompensasTareasSubirImagen: state.recompensasTareasSubirImagen,
                 largoImagenes: state.largoImagenes,
                 imagenActual: state.imagenActual,
                 cargandoSubirImagen: state.cargandoSubirImagen,
@@ -209,6 +245,8 @@ const ImageState = props => {
                 traerImagenesPorUsuario,
                 eliminarImagen,
                 modificarImagen,
+                borrarRecompensasSubirImagen,
+                borrarRecompensasTareasSubirImagen,
             }}
         >
             {props.children}

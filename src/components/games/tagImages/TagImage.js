@@ -26,9 +26,8 @@ import Tooltip from 'react-bootstrap/Tooltip';
 
 import ClipLoader from "react-spinners/ClipLoader";
 import Typography from '@material-ui/core/Typography';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import "./tagImage.css";
+import RewardNotification from '../../common/fire/RewardNotification';
 
 import infoIcon from '../../../assets/info.svg';
 
@@ -60,7 +59,14 @@ const TagImage = ( props ) => {
 
     // Extraer la información del context de etiquetar
     const tagsContext = useContext(tagContext)
-    const { etiquetarImagen, verTip } = tagsContext
+    const {
+        recompensas,
+        recompensasTareas,
+        etiquetarImagen,
+        verTip,
+        borrarRecompensasEtiquetas,
+        borrarRecompensasEtiquetasTareas,
+    } = tagsContext
 
     let imagenActual = JSON.parse(localStorage.getItem("imagenActual"))
     const [consejos, setConsejos, consejosRef] = useState([])
@@ -110,7 +116,7 @@ const TagImage = ( props ) => {
         // toast.error('Error notification!', {position: toast.POSITION.BOTTOM_RIGHT})
         toast.info(<CustomToast />,
             {
-                position: toast.POSITION.TOP_RIGHT,
+                position: toast.POSITION.TOP_CENTER,
                 autoClose: 8000,
                 closeOnClick: false,
             }
@@ -132,8 +138,6 @@ const TagImage = ( props ) => {
 
         // Traer los tips disponibles
         obtenerTips()
-        console.log("useEffect TagImage")
-        return () => console.log('unmounting...TagImage');
         // eslint-disable-next-line
     }, [])
     const [ isWinner, setIsWinner ] = useState(false)
@@ -408,6 +412,25 @@ const TagImage = ( props ) => {
                 </Row>
                 { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
             </div>
+
+            {recompensas !== null
+                ?
+                    <RewardNotification
+                        recompensas={recompensas}
+                        borrarRecompensas={borrarRecompensasEtiquetas}
+                    />
+                : null
+            }
+
+            {recompensasTareas !== null
+                ?
+                    <RewardNotification
+                        recompensas={recompensasTareas}
+                        borrarRecompensas={borrarRecompensasEtiquetasTareas}
+                    />
+                : null
+            }
+
             { imagenes.length !== 0
                 ?
                     newContent === false
@@ -492,7 +515,7 @@ const TagImage = ( props ) => {
                                             key={9}
                                             placement={"top"}
                                             overlay={
-                                        <Tooltip className="" id="help-icon-tooltip-1" > Debe seleccionar la categoría que considere que se asocie más a la imagen
+                                        <Tooltip className="tooltipTagImage" id="help-icon-tooltip-1" > Debe seleccionar la categoría que considere que se asocie más a la imagen
                                         </Tooltip>
                                         }
                                         >

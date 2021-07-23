@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
 
 * {
@@ -85,3 +81,163 @@
   min-height: 120px;
   max-height: 120px;
 }
+
+/*  Marcos de imagen de perfil, Menú de navegación */
+
+@keyframes moveGradient {
+  50% {
+    background-position: 20% 50%;
+  }
+}
+
+@keyframes o-rotate-360 {
+  0% { transform: rotate(0) }
+
+  100% { transform: rotate(360deg) }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes steam {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.fourColorsRotate {
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 0.4rem;
+}
+
+.fourColorsRotate::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: #399953;
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 50% 50%;
+  background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+  background-image: linear-gradient(#399953, #399953), linear-gradient(#fbb300, #fbb300), linear-gradient(#d53e33, #d53e33), linear-gradient(#377af5, #377af5);
+  animation: rotate 4s linear infinite;
+}
+
+.fourColorsRotate::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 6px;
+  top: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  background: white;
+  border-radius: 5px;
+}
+
+.cuncuna {
+  border:10px solid ;
+  background: none;
+  border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cstyle%3Epath%7Banimation:stroke 5s infinite linear%3B%7D%40keyframes stroke%7Bto%7Bstroke-dashoffset:776%3B%7D%7D%3C/style%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%232d3561' /%3E%3Cstop offset='25%25' stop-color='%23c05c7e' /%3E%3Cstop offset='50%25' stop-color='%23f3826f' /%3E%3Cstop offset='100%25' stop-color='%23ffb961' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='3' stroke-dasharray='388'/%3E %3C/svg%3E") 1;
+}
+
+.eightGradientColors {
+  --border-width: 3px;
+  border: calc(3px + 0.2vw) solid transparent;
+  background: linear-gradient(
+      60deg,
+      hsl(224, 85%, 66%),
+      hsl(269, 85%, 66%),
+      hsl(314, 85%, 66%),
+      hsl(359, 85%, 66%),
+      hsl(44, 85%, 66%),
+      hsl(89, 85%, 66%),
+      hsl(134, 85%, 66%),
+      hsl(179, 85%, 66%)
+  );
+  background-size: 300% 300%;
+  background-position: 80% 50%;
+  border-radius: calc(2 * var(--border-width));
+  animation: moveGradient 3s alternate infinite;  
+}
+
+.yellowPurpleFrame {
+  border: .5rem solid;
+  border-image: radial-gradient(#ff2, #55f) 10;
+  border-image-outset: 0.05; 
+}
+
+.pinkToWhiteFrame {
+  border: 8px solid black;
+  resize: both;
+  background: linear-gradient(to top, rgba(#cffffe, 0.3), rgba(#f9f7d9, 0.3), rgba(#fce2ce, 0.3), rgba(#ffc1f3, 0.3));
+  border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23cffffe' /%3E%3Cstop offset='25%25' stop-color='%23f9f7d9' /%3E%3Cstop offset='50%25' stop-color='%23fce2ce' /%3E%3Cstop offset='100%25' stop-color='%23ffc1f3' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='3'/%3E %3C/svg%3E") 1;
+}
+
+.turquoiseToPinkFrame {
+  border: 8px solid;
+  border-width: 20%;
+	border-image: repeating-radial-gradient(
+			circle at 10px,
+			turquoise,
+			pink 3px,
+			greenyellow 5px,
+			pink 2px
+  )
+  1;
+}
+
+.headshotOne {
+  flex-shrink: 0;
+	border: calc(3px + 0.2vw) solid transparent;
+	background-origin: border-box;
+	box-sizing: border-box;
+	box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 20%;
+	background-image: linear-gradient(#f9f047, #0fd850);
+}
+
+.headshotTwo {
+  flex-shrink: 0;
+	border: calc(3px + 0.2vw) solid transparent;
+	background-origin: border-box;
+	box-sizing: border-box;
+	box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 20%;
+	background-image: linear-gradient(to bottom right, #ff3cac, #562b7c, #2b86c5);
+}
+
+.headshotThree {
+  flex-shrink: 0;
+	border: calc(6px + 0.2vw) solid transparent;
+	background-origin: border-box;
+	box-sizing: border-box;
+	box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 45% 2%;
+	background-image: linear-gradient(to bottom left, #f83600, #f9d423);
+}
+
+.brightRainbow {
+  position: relative;
+  border: calc(6px + 0.2vw) solid transparent;
+  background-image: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
+    #0000ff, #00ff00,#ffff00, #ff0000);
+  animation: steam 20s linear infinite;
+  background-size: 400%;
+}
+/* 10 */

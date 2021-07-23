@@ -1,0 +1,208 @@
+.title-store{
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    padding-bottom: 10px;
+}
+
+.title-store::after {
+    position: absolute;
+    content: "";
+    width: 30%;
+    height: 7%;
+    bottom: 0;
+    left: 35%;
+    background: linear-gradient(to left, #4F84C4, #00539C, #4F84C4);
+    border-radius: 0 100% 100% 0; 
+}
+
+.frame-section-store {
+    margin-bottom: 2%;
+}
+
+.title-frame-section-store {
+    position: relative;
+    text-align: left;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    margin-left: 5%;
+    padding-bottom: 10px;
+}
+
+.title-frame-section-store::after {
+    position: absolute;
+    content: "";
+    width: 20%;
+    height: 5%;
+    bottom: 0;
+    left: 0%;
+    background: linear-gradient(to left, #8dc44f, #04ca32, #8dc44f);
+    border-radius: 0 100% 100% 0; 
+}
+
+.div-imageUser-store {
+    width: 40%;
+    height: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-store {
+    border-radius: 5px;
+    box-shadow: 0 1px 20px 0 rgb(69 90 100 / 8%);
+    border: none;
+    margin-bottom: 30px;
+}
+
+.tarjeta-store {
+    background-color: rgb(228, 226, 226);
+    border-radius: 15px;
+}
+
+.div-nickname {
+    text-align: center;
+    width: 100%;
+    height: 60%;
+    color: black;
+    font-size: x-large;
+}
+
+.nickname {
+    color: #CEF0D4;
+    font-style: oblique;
+    font-size: xx-large;
+    font-weight: 900;
+    line-height: 68px;
+    text-align: center;
+    text-shadow: 1px 1px 2px #082b34;
+}
+
+.titulo-nombre-card-frame {
+    color: white;
+    background-color: black;
+    max-width: 50%;
+    font-size: x-large;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nombre-card-frame {
+    max-width: 80%;
+    font-size: large;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(206, 237, 255);
+    color: rgb(21, 62, 117);
+}
+
+.titulo-costo-card-frame {
+    color: white;
+    margin-top: 2%;
+    font-size: x-large;
+    background-color: black;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.costo-card-frame {
+    max-width: 60%;
+    font-size: large;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(206, 237, 255);
+    color: rgb(21, 62, 117);
+}
+
+.title-nickname-section-store {
+    position: relative;
+    text-align: left;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1%;
+    margin-left: 5%;
+    padding-bottom: 10px;
+}
+
+.title-nickname-section-store::after {
+    position: absolute;
+    content: "";
+    width: 20%;
+    height: 5%;
+    bottom: 0;
+    left: 0%;
+    background: linear-gradient(to left, #8dc44f, #04ca32, #8dc44f);
+    border-radius: 0 100% 100% 0; 
+}
+
+.headshotOne {
+    border: calc(6px + 0.2vw) solid transparent;
+}
+.headshotTwo {
+    border: calc(8px + 0.2vw) solid transparent;
+}
+.headshotThree {
+    border: calc(15px + 0.2vw) solid transparent;
+}
+
+.blockContentStore {
+    position: relative;
+    text-align: center;
+    background-color: #e6e8ed;
+    font-size: xx-large;
+    width: 60%;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30%;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 1376px){
+    .title-store{
+        font-size: 25px;
+    }
+
+    .title-frame-section-store{
+        font-size: 22px;
+    }
+
+    .title-nickname-section-store {
+        font-size: 22px;
+    }
+
+    .nickname {
+        font-size: x-large;
+        font-weight: 800;
+        line-height: 30px;
+    }
+
+    .titulo-nombre-card-frame {
+        max-width: 40%;
+        font-size: large;
+    }
+    
+    .nombre-card-frame {
+        max-width: 70%;
+        font-size: medium;
+    }
+
+    .titulo-costo-card-frame {
+        margin-top: 5%;
+        font-size: large;
+        max-width: 50%;
+    }
+    
+    .costo-card-frame {
+        max-width: 60%;
+        font-size: medium;
+    }
+}

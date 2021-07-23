@@ -20,6 +20,7 @@ import DatatableWords from './datatableWords/DatatableWords';
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
+import RewardNotification from '../../common/fire/RewardNotification';
 
 const UploadWord = () => {
 
@@ -32,7 +33,19 @@ const UploadWord = () => {
     const { mensaje } = authContext
 
     const wordContext = useContext(WordContext)
-    const { palabras, cargandoSubirPalabra, cargandoEliminarPalabra, cargandoModificarPalabra, guardarPalabra, traerPalabrasPorUsuario, eliminarPalabra } = wordContext
+    const {
+        palabras,
+        recompensasSubirPalabra,
+        recompensasTareasSubirPalabra,
+        cargandoSubirPalabra,
+        cargandoEliminarPalabra,
+        cargandoModificarPalabra,
+        guardarPalabra,
+        traerPalabrasPorUsuario,
+        eliminarPalabra,
+        borrarRecompensasSubirPalabra,
+        borrarRecompensasTareasSubirPalabra,
+    } = wordContext
 
     // En caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
     useEffect(() => {
@@ -59,7 +72,6 @@ const UploadWord = () => {
     }
 
     const onDelete = (id_word) => {
-        // console.log(id_word)
         eliminarPalabra(id_word)
     }
 
@@ -81,6 +93,25 @@ const UploadWord = () => {
 
     return (
         <Fragment>
+
+            {recompensasSubirPalabra !== null
+                ?
+                    <RewardNotification
+                        recompensas={recompensasSubirPalabra}
+                        borrarRecompensas={borrarRecompensasSubirPalabra}
+                    />
+                : null
+            }
+
+            {recompensasTareasSubirPalabra !== null
+                ?
+                    <RewardNotification
+                        recompensas={recompensasTareasSubirPalabra}
+                        borrarRecompensas={borrarRecompensasTareasSubirPalabra}
+                    />
+                : null
+            }
+
             <Container className="div-uploadWord" >
                 <Grid container component="main" >
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
@@ -151,7 +182,7 @@ const UploadWord = () => {
                                             key={9}
                                             placement={"top"}
                                             overlay={
-                                        <Tooltip className="" id="help-icon-tooltip-1" >
+                                        <Tooltip className="tooltipUploadWord" id="help-icon-tooltip-1" >
                                             La palabra escrita debe estar relacionada a los incendios y poder ser categorizada con una de las 7 opciones: 
                                             Prevención, Riesgo, Recuperación, Mitigación, Amenaza, Impacto o Combate.
                                         </Tooltip>

@@ -12,6 +12,8 @@ import {
     ELIMINAR_PALABRA,
     ELIMINAR_PALABRA_CARGANDO,
     ELIMINAR_PALABRA_ERROR,
+    ELIMINAR_RECOMPENSAS_SUBIR_PALABRA,
+    ELIMINAR_RECOMPENSAS_SUBIR_PALABRA_TAREA,
 } from '../../types';
 
 const wordReducer = (state, action) => {
@@ -45,7 +47,9 @@ const wordReducer = (state, action) => {
         case GUARDAR_PALABRA:
             return {
                 ...state,
-                palabra: action.payload,
+                palabra: action.payload.palabra,
+                recompensasSubirPalabra: action.payload.reward,
+                recompensasTareasSubirPalabra: action.payload.rewardTasks,
                 cargandoSubirPalabra: false
             }
 
@@ -80,6 +84,18 @@ const wordReducer = (state, action) => {
                 palabras: state.palabras.map(palabra => palabra._id ===
                     action.payload._id ? palabra : action.payload ),
                 cargandoModificarPalabra: false
+            }
+
+        case ELIMINAR_RECOMPENSAS_SUBIR_PALABRA:
+            return {
+                ...state,
+                recompensasSubirPalabra: null
+            }
+
+        case ELIMINAR_RECOMPENSAS_SUBIR_PALABRA_TAREA:
+            return {
+                ...state,
+                recompensasTareasSubirPalabra: null
             }
 
         default:

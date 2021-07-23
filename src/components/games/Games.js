@@ -1,67 +1,59 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState, Fragment } from 'react';
 // import useState from 'react-usestateref';
 
-import {useStyles} from './gamesStyles';
 import './games.css';
 
 import Grid  from '@material-ui/core/Grid';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Typography from '@material-ui/core/Typography';
 
 import ProfileContext from '../../context/profile/profileContext';
 import AuthContext from '../../context/autentificacion/authContext';
-import imageContext from '../../context/images/imageContext';
-import wordContext from '../../context/words/wordContext';
-import FourImagesOneWordContext from '../../context/fourImagesOneWord/fourImagesOneWordContext';
+// import imageContext from '../../context/images/imageContext';
+// import wordContext from '../../context/words/wordContext';
+// import FourImagesOneWordContext from '../../context/fourImagesOneWord/fourImagesOneWordContext';
 import TipContext from '../../context/tips/tipContext';
-
-import minions from '../../assets/img/minions.jpg';
-import encendio from '../../assets/img/incendio.png';
-import incendios from '../../assets/img/incendios.jpg';
 
 import ClipLoader from "react-spinners/ClipLoader";
 
-const images = [
-    {
-      url: minions,
-      title: 'Etiquetar Imágenes',
-      width: '40%',
-      page: '/games/images'
-    },
-    {
-      url: encendio,
-      title: 'Asociar Palabras',
-      width: '30%',
-      page: '/games/words'
-    },
-    {
-      url: incendios,
-      title: '4 Imágenes y 1 Palabra',
-      width: '30%',
-      page: '/games/four-images-one-word'
-    },
-  ];
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import ImageIcon from '@material-ui/icons/Image';
+import ImageSearchIcon from '@material-ui/icons/ImageSearch';
+import SpellcheckIcon from '@material-ui/icons/Spellcheck';
+
+import {
+    FloatingMenu,
+    MainButton,
+    ChildButton,
+    Directions
+  } from 'react-floating-button-menu';
+  import MdClose from '@material-ui/icons/Clear';
+
+// const buttonsList = [
+//     { onClick: ()=> alert('clicked icon1'), src: "../../assets/gif/hojasCayendo.gif" },
+//     { onClick: ()=> alert('clicked icon2'), src: asdIcon },
+//     { onClick: ()=> alert('clicked icon2'), src: infoIcon },
+//   ]
 
 const Games = ({ history }) => {
-    // Extraer la información de autentificación
     const authContext = useContext(AuthContext)
     const { usuarioAutenticado } = authContext
 
-    // Extraer la información de los perfiles
     const profilecontext = useContext(ProfileContext)
     const { perfil, obtenerPerfil } = profilecontext
 
-    // Extraer la información de el context de imagenes
-    const imagesContext = useContext(imageContext)
-    const { obtenerImagenes  } = imagesContext
+    // const imagesContext = useContext(imageContext)
+    // const {
+    //     obtenerImagenes
+    //  } = imagesContext
 
-    // Extraer la información de el context de Palabras
-    const wordsContext = useContext(wordContext)
-    const { obtenerPalabras  } = wordsContext
+    // const wordsContext = useContext(wordContext)
+    // const {
+    //     obtenerPalabras
+    //  } = wordsContext
 
-    // Extraer la información de el context de Palabras
-    const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
-    const { obtenerAhorcados  } = fourImagesOneWordContext
+    // const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
+    // const {
+    //     obtenerAhorcados
+    //  } = fourImagesOneWordContext
 
     // Extraer la información de el context de los tips
     const tipContext = useContext(TipContext)
@@ -70,17 +62,13 @@ const Games = ({ history }) => {
     useEffect(() => {
         usuarioAutenticado()
         obtenerPerfil()
-        console.log("useEffect Games")
         // Traer contenido para los juegos previamente
-        obtenerImagenes()
-        obtenerPalabras()
-        obtenerAhorcados()
+        // obtenerImagenes()
+        // obtenerPalabras()
+        // obtenerAhorcados()
         obtenerTips()
-        return () => console.log('unmounting...');
         // eslint-disable-next-line
     }, [])
-
-    const classes = useStyles()
 
     const OnClick = (route) => {
         localStorage.setItem( 'imagenActual', 0 );
@@ -89,57 +77,172 @@ const Games = ({ history }) => {
         history.push(route)
     }
 
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <Grid container alignItems='center' justify="center"
-            style={{
-                display: 'flex',
-                justifyContent: "center",
-                height: "91.5vh"
-            }}
-        >
-            {
-                perfil != null
-                ?
-                    <Grid  className={classes.root} >
-                        {images.map((image) => (
-                            <ButtonBase
-                                focusRipple
-                                key={image.title}
-                                className={classes.image}
-                                disabled={
-                                    image.title === "Asociar Palabras"
+        <>
+            <h1 className="games-title" > Juegos </h1>
+            <div className="author" >
+                <span>
+                    { new Date().getDate() + '-' + new Date().toLocaleDateString(undefined, { month: 'long'}) + '-' + new Date().getFullYear() }
+                </span>
+            </div>
+            { perfil!= null ?
+            <div className="text-games" >
+                Se encuentran disponibles los juegos:
+                                    {perfil.league_id.league === "Bronce"
                                     ?
-                                        perfil.league_id.league === "Bronce"
-                                        ?
-                                            true
-                                        :
-                                            false
+                                        <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes</span> <span> , sube a la liga de Plata para etiquetar palabras y a la liga de Oro para completar Ahorcados </span> </>
                                     :
-                                        image.title === "4 Imágenes y 1 Palabra"
+                                        perfil.league_id.league === "Plata"
                                         ?
-                                            perfil.league_id.league === "Bronce" | perfil.league_id.league === "Plata"
+                                            <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes y Etiquetar palabras </span> <span> , sube a Oro para desbloquear el último </span> </>
+                                        :
+                                            <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes, Etiquetar palabras y 4 imágenes y 1 palabra </span> <span> </span> </>
+                                    }
+                            </div>
+                            : null
+            }
+            <Grid container alignItems='center' justify="center"
+                style={{
+                    display: 'flex',
+                    justifyContent: "center",
+                    height: "70.5vh"
+                }}
+            >
+                {
+                    perfil != null
+                    ?
+                    <Fragment>
+                        
+                            {/* <div className="floatingButtonsGames" >
+                                <FloatingButtons
+                                    
+                                    buttonType={infoIcon}
+                                    dimension={65}
+                                    buttonsList={buttonsList}
+                                    degree={-180}
+                                    left={'49%'}
+                                    top={'45%'}
+                                    direction="circular"
+                                    itemBackgroundColor="#f8f9fa"
+                                />
+                            </div> */}
+                            
+                            <FloatingMenu
+                                slideSpeed={500}
+                                direction={Directions.Down}
+                                spacing={8}
+                                isOpen={isOpen}
+                                className="floatingButtonsGames"
+                            >
+                                <MainButton
+                                    iconResting={<SportsEsportsIcon style={{ fontSize: 50 }} />}
+                                    iconActive={<MdClose style={{ fontSize: 30 }} />}
+                                    background="white"
+                                    onClick={() => setIsOpen(!isOpen)}
+                                    size={90}
+                                    disabled={true}
+                                />
+                                <ChildButton
+                                    icon={<ImageIcon style={{ fontSize: 40 }} />}
+                                    background="white"
+                                    size={75}
+                                    title="Etiquetar Imágenes"
+                                    onClick={() => OnClick('/games/images')}
+                                />
+                                <ChildButton
+                                    icon={<ImageSearchIcon style={{ fontSize: 40 }} />}
+                                    background="white"
+                                    size={75}
+                                    title={perfil.league_id.league !== "Oro"
+                                    ?
+                                        ""
+                                    :
+                                        "4 imágenes y una palabra"}
+                                    className={perfil.league_id.league !== "Oro"
+                                    ?
+                                        "lockGame"
+                                    :
+                                        ""}
+                                    onClick={() => OnClick('/games/four-images-one-word')}
+                                />
+
+                                <ChildButton
+                                    icon={<SpellcheckIcon style={{ fontSize: 40 }} />}
+                                    background="white"
+                                    size={75}
+                                    title={perfil.league_id.league === "Bronce"
+                                    ?
+                                        ""
+                                    :
+                                        "Etiquetar palabras"}
+                                    className={perfil.league_id.league === "Bronce"
+                                    ?
+                                        "lockGame"
+                                    :
+                                        ""}
+                                    onClick={() => OnClick('/games/words')}
+                                > 
+                                </ChildButton>
+                                {/* <SpellcheckIcon /> */}
+                            </FloatingMenu>
+                            </Fragment>
+                    :
+                        <div className="text-center ml-auto mr-auto" >
+                            <ClipLoader
+                                color={"#000"}
+                                loading={true}
+                                size={30}
+                            />
+                        </div>
+                }
+            </Grid>
+        </>
+    );
+}
+ 
+export default Games;
+
+/*
+<Grid  className={classes.root} >
+                            {images.map((image) => (
+                                <ButtonBase
+                                    focusRipple
+                                    key={image.title}
+                                    className={classes.image}
+                                    disabled={
+                                        image.title === "Asociar Palabras"
+                                        ?
+                                            perfil.league_id.league === "Bronce"
                                             ?
                                                 true
                                             :
                                                 false
                                         :
-                                            false
-                                }
-                                focusVisibleClassName={classes.focusVisible}
-                                style={{
-                                    width: image.width,
-                                }}
-                                onClick={() => OnClick(image.page)}
-                            >
-                            <span
-                                className={classes.imageSrc}
-                                style={{
-                                backgroundImage: `url(${image.url})`,
-                                }}
-                            />
-                            {/* <span className={classes.imageBackdrop} /> */}
-                            <span className={
+                                            image.title === "4 Imágenes y 1 Palabra"
+                                            ?
+                                                perfil.league_id.league === "Bronce" | perfil.league_id.league === "Plata"
+                                                ?
+                                                    true
+                                                :
+                                                    false
+                                            :
+                                                false
+                                    }
+                                    focusVisibleClassName={classes.focusVisible}
+                                    style={{
+                                        width: image.width,
+                                    }}
+                                    onClick={() => OnClick(image.page)}
+                                >
+                                <span
+                                    className={classes.imageSrc}
+                                    style={{
+                                    backgroundImage: `url(${image.url})`,
+                                    }}
+                                />
+                                <span className={
                                     image.title === "Asociar Palabras"
                                     ?
                                         perfil.league_id.league === "Bronce"
@@ -174,17 +277,4 @@ const Games = ({ history }) => {
                             </ButtonBase>
                         ))}
                     </Grid>
-                :
-                    <div className="text-center ml-auto mr-auto" >
-                        <ClipLoader
-                            color={"#000"}
-                            loading={true}
-                            size={30}
-                        />
-                    </div>
-            }
-        </Grid>
-    );
-}
- 
-export default Games;
+ */
