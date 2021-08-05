@@ -12,6 +12,7 @@ import gamesIcon from '../../assets/vectorial graphics/gamepad2.svg';
 import contentIcon from '../../assets/vectorial graphics/upload.svg';
 import aboutIcon from '../../assets/vectorial graphics/people.svg';
 import helpIcon from '../../assets/vectorial graphics/help.svg';
+import buyIcon from '../../assets/vectorial graphics/buy.svg';
 
 import contacUs from '../../assets/img/contactUs.jpg';
 import welcome from '../../assets/img/welcome.jpg';
@@ -314,17 +315,38 @@ const Home = () => {
                         <Grid container  style={{ marginTop: "3%" }} >
                             <Grid item xs={12} >
                                 <div className="párrafo-ligas" >
+                                    <h2 className="section-title"> E-ncendio y su objetivo </h2>
+                                    <p className="parrafo-home" >
+                                    Deseamos obtener la percepción de la ciudadanía sobre el impacto ecológico de
+                                    los incendios mediante una plataforma web interactiva, divertida, intuitiva y simple. Es importante
+                                    recalcar que también:
+                                    </p>
+                                    <ul className="ul-home" style={{ marginLeft: "10%" }} >
+                                        <li className="li-home" > <span > NO buscamos enseñarle a la comunidad sobre los incendios. </span> </li>
+                                        <li className="li-home" > <span > Queremos dimensionar el alcance del conocimiento de las personas. </span> </li>
+                                        <li className="li-home" > <span > Necesitamos de un alto compromiso y colaboración de cada usuario. </span> </li>
+                                        <li className="li-home" > <span > Deseamos que en primera instancia se desempeñen en los juegos. </span> </li>
+                                    </ul>
+                                </div>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container  style={{ marginTop: "5%" }} >
+                            <Grid item xs={12} >
+                                <div className="párrafo-ligas" >
                                     <h2 className="section-title"> ¡Sigue subiendo y apoyando! </h2>
                                     <p className="parrafo-home" >
-                                        No te conformes con tu nivel actual, sigue escalando en la tabla de clasificaciones,  
-                                        si llegas a la liga de Plata ya podrás subir palabras para que los administradores 
-                                        consideren si puedan ser etiquetadas por los demás, en la liga de Oro ya podrás hacerlo con las imágenes, 
+                                        No te conformes con tu nivel actual, sigue escalando en la tabla de clasificaciones, 
+                                        ya puedes subir imágenes o tips al sitio para que sean evaluados, 
+                                        si llegas a la liga de Plata podrás subir palabras para que los administradores 
+                                        consideren si puedan ser etiquetadas por los demás, en la liga de Oro ya podrás hacerlo con las imágenes para el juego Ahorcado, 
                                         para obtener más puntaje y subir de ligas tienes las siguientes opciones:
                                     </p>
                                     <ul className="ul-home" style={{ marginLeft: "10%" }} >
-                                        <li className="li-home" > <span > Desempeñándote en los juegos de la plataforma </span> </li>
-                                        <li className="li-home" > <span > Modificando el contenido de tu perfil </span> </li>
-                                        <li className="li-home" > <span > Subiendo en el ranking de los participantes de E-ncendio </span> </li>
+                                        <li className="li-home" > <span > Desempeñándote en los juegos de la plataforma, etiquetando imágenes/palabras o en el Ahorcado. </span> </li>
+                                        <li className="li-home" > <span > Modificando el contenido de tu perfil desde la liga de plata. </span> </li>
+                                        <li className="li-home" > <span > Subiendo contenido al sitio E-ncendio. </span> </li>
+                                        <li className="li-home" > <span > Subiendo en el ranking de los participantes de E-ncendio, donde los 3 primeros lugares tendrán FirePoints al final del día que servirán para comprar artículos en Tienda. </span> </li>
                                     </ul>
                                 </div>
                             </Grid>
@@ -402,6 +424,24 @@ const Home = () => {
                                     subiendo imágenes, agregar palabras desde la liga de <span style={{ color: "#8A9597" }} > Plata </span> y también subir contenido para el juego
                                     de 4 palabras y 1 imagen o los tips de información desde la liga de <span style={{ color: "#FFBF00" }} > Oro </span>,
                                     cada uno de estos serán evaluadas por los administradores para ver si cumplen con los requisitos.
+                                </Card.Text>
+                                </Card.Body>
+                            </Card>
+
+                            <Card
+                                bg="light"
+                                key="4"
+                                text="dark"
+                                className="card-other"
+                            >
+                                <img className="buyImageCard" src={buyIcon} alt="" />
+                                <Card.Header className="card-header" > <a className="nav-link" href="/store"> Tienda </a> </Card.Header>
+                                <Card.Body>
+                                <Card.Title className="card-title" > Comprar atículos en Tienda </Card.Title>
+                                <Card.Text className="card-text" >
+                                    A medida que cumplas con tus tareas diarias obtendrás FirePoints, al igual que consiguiendo logros
+                                    o quedando entre los 3 primeros lugares del Ranking cada día. Estos FirePoints le permitirán comprar
+                                    ciertos artículos en Tienda.
                                 </Card.Text>
                                 </Card.Body>
                             </Card>

@@ -111,13 +111,7 @@ const Settings = () => {
                                 <BottomNavigationAction
                                     label="Subir tip"
                                     icon={<InfoIcon/>}
-                                    disabled={
-                                        perfil.league_id.league === "Oro"
-                                        ?
-                                            false
-                                        :
-                                            true
-                                    }
+                                    disabled={false}
                                 />
                             </BottomNavigation>
                         </div>

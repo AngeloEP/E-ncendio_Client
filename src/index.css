@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
 
 * {
-  font-family: 'Times New Roman', Times, serif !important;
+  /* font-family: 'Times New Roman', Times, serif !important; */
+  /* font-family: "ubuntu" !important; */
+  font-family: 'Umpush' !important;
   box-sizing: border-box;
   margin: 0px;
   padding: 0;

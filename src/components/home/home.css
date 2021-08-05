@@ -105,6 +105,7 @@ h2.section-title::after {
     margin-left: 10%;
     margin-right: 10%;
     font-size: large;
+    text-align: left;
 }
 
 /* li {
@@ -198,6 +199,14 @@ h2.section-title::after {
     transform: scale(1.6);
     background-color: transparent !important;
     margin-left: 30%;
+}
+
+.buyImageCard {
+    width: 80% !important;
+    height: 25% !important;
+    transform: scale(1.4);
+    background-color: transparent !important;
+    margin-left: 15%;
 }
 
 .contactUsHome {
