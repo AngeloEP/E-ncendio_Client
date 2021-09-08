@@ -236,6 +236,7 @@ const Home = () => {
     //         ]
     //     }
     // }
+    
     return (
         
         <div className={classes.divContent} >
@@ -430,7 +431,7 @@ const Home = () => {
 
                             <Card
                                 bg="light"
-                                key="4"
+                                key="5"
                                 text="dark"
                                 className="card-other"
                             >

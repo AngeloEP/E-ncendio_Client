@@ -7,9 +7,6 @@ import Grid  from '@material-ui/core/Grid';
 
 import ProfileContext from '../../context/profile/profileContext';
 import AuthContext from '../../context/autentificacion/authContext';
-// import imageContext from '../../context/images/imageContext';
-// import wordContext from '../../context/words/wordContext';
-// import FourImagesOneWordContext from '../../context/fourImagesOneWord/fourImagesOneWordContext';
 import TipContext from '../../context/tips/tipContext';
 
 import ClipLoader from "react-spinners/ClipLoader";

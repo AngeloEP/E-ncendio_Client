@@ -95,6 +95,7 @@ const EditProfile = ( props ) => {
         firstname: localStorage.getItem('firstname'),
         lastname: localStorage.getItem('lastname'),
         gender: localStorage.getItem('gender'),  // string: Masculino, Femenino, Otro
+        city: localStorage.getItem('city'),
         age: localStorage.getItem('age'),  // int
         phone: localStorage.getItem('phone'),
         urlFile: localStorage.getItem('urlFile'),
@@ -104,9 +105,9 @@ const EditProfile = ( props ) => {
         // esExperto: null, // bool
     })
 
-    const { firstname, lastname, gender, age, phone, frame, nickname } = perfilUsuario
+    const { firstname, lastname, gender, city, age, phone, frame, nickname } = perfilUsuario
     const [ image, setImage ] = useState(null)
-    const [ pathImage, setPathImage ] = useState( perfilUsuario ? perfilUsuario.urlFile : ProfileDefault )
+    const [ pathImage, setPathImage ] = useState( perfilUsuario && perfilUsuario.urlFile!=="undefined" ? perfilUsuario.urlFile : ProfileDefault )
 
     const onChange = e => {
         guardarPerfilUsuario({
@@ -143,37 +144,27 @@ const EditProfile = ( props ) => {
         if (firstname.trim() === '' ||
             lastname.trim() === '' ||
             gender.trim() === '' ||
+            city.trim() === '' ||
             age === '' ||
             phone.trim() === ''
             // email.trim() === '' ||
             // esExperto === null 
             ) {
-                console.log("error")
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
                 return
         }
-
-        // if ( image === null ) {
-        //     mostrarAlerta("No ha seleccionado una imagen", 'alerta-error')
-        //     return
-        // }
 
         if ( phone.length !== 9 ) {
             mostrarAlerta("Su Teléfono debe tener 9 dígitos", 'alerta-error')
             return
         }
-        // let isExpert
-        // if ( esExperto === "si" ) {
-        //     isExpert = true
-        // } else {
-        //     isExpert = false
-        // }
 
         // pasarlo al action
         const formData = new FormData();
         formData.append('firstname', firstname);
         formData.append('lastname', lastname);
         formData.append('gender', gender);
+        formData.append('city', city);
         formData.append('frame', frame);
         formData.append('nickname', nickname);
         formData.append('age', age);
@@ -264,11 +255,16 @@ const EditProfile = ( props ) => {
                                     />
                                 </h5>
                                 <h6>
-                                            { usuario.isExpert
+                                            { usuario.isFireRelated
                                             ?
-                                                "Integrante de FireSES"
+                                                <>
+                                                    Estoy relacionado con los incendios 
+                                                    <div>
+                                                        Actividades: {usuario.fireRelation} 
+                                                    </div>
+                                                </>
                                             :
-                                                "No pertenezco a FireSES"
+                                                "No estoy relacionado con los incendios"
                                             }
                                 </h6>
                             </div>
@@ -315,14 +311,14 @@ const EditProfile = ( props ) => {
                         <div className="col-md-4">
                             <div className="profile-work">
                                 <p>Imágenes</p>
-                                <a href="!#">Etiquetadas: {perfil.imageTagCount} </a><br/>
-                                <a href="!#">Subidas: {imagenesPorUsuario.length} </a><br/>
+                                <div href="!#">Etiquetadas: {perfil.imageTagCount} </div>
+                                <div href="!#">Subidas: {imagenesPorUsuario.length} </div>
                                 <p>Palabras</p>
-                                <a href="!#">Etiquetadas: {perfil.wordTagCount} </a><br/>
-                                <a href="!#">Subidas: {palabrasPorUsuario.length} </a><br/>
+                                <div href="!#">Etiquetadas: {perfil.wordTagCount} </div>
+                                <div href="!#">Subidas: {palabrasPorUsuario.length} </div>
                                 <p>Ahorcados</p>
-                                <a href="!#">Completados: {perfil.hangmanTagCount} </a><br/>
-                                <a href="!#">Subidos: {ahorcadosPorUsuario.length} </a><br/>
+                                <div href="!#">Completados: {perfil.hangmanTagCount} </div>
+                                <div href="!#">Subidos: {ahorcadosPorUsuario.length} </div>
                             </div>
                         </div>
                         <div className="col-md-8 tab-content profile-tab">
@@ -398,6 +394,23 @@ const EditProfile = ( props ) => {
                                                 <MenuItem value={'Masculino'}> Masculino </MenuItem>
                                                 </Select>
                                             </FormControl>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <label className="mt-4" >Ciudad / comuna</label>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <TextField
+                                                className="city-input"
+                                                variant="outlined"
+                                                fullWidth
+                                                id="city"
+                                                label="Ciudad / Comuna"
+                                                value={city}
+                                                name='city'
+                                                onChange={onChange}
+                                            />
                                         </div>
                                     </div>
                                 </Tab>

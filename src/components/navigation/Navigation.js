@@ -159,6 +159,13 @@ const Navigation =  ({ location, history })  => {
                         <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/store"  activeStyle={{  }} >
                             Tienda
                         </NavLink>
+                        { usuario && usuario.isAdmin
+                        ?
+                            <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/analytics"  activeStyle={{  }} >
+                                Analíticas
+                            </NavLink>
+                        : null
+                        }
                         <NavLink className={classes.navlink} onMouseUp={MouseEnter} onMouseOver={MouseOver} onMouseOut={MouseOut} to="/help"  activeStyle={{  }} >
                             Ayuda
                         </NavLink>

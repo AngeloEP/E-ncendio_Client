@@ -36,6 +36,7 @@ import ContactFormState from './context/contactForm/contactFormState';
 import ResetPasswordState from './context/resetPassword/resetPasswordState';
 import DailyTasksState from './context/dailyTasks/dailyTasksState';
 import StoreState from './context/store/storeState';
+import AnalyticsState from './context/analytics/analyticsState';
 
 import { ChakraProvider } from "@chakra-ui/react";
 
@@ -46,6 +47,7 @@ import {
 
 import tokenAuth from './config/tokenAuth';
 import RutaPrivada from './components/rutas/RutaPrivada';
+import Analytic from './components/analytic/Analytic';
 
 // Revisar si tenemos un token
 const token = localStorage.getItem('token')
@@ -76,6 +78,7 @@ function App() {
                                     <ResetPasswordState>
                                       <DailyTasksState>
                                         <StoreState>
+                                          <AnalyticsState>
                                             <ChakraProvider>
                                           
                                             <Router>
@@ -101,6 +104,7 @@ function App() {
                                                     <RutaPrivada exact path="/games" component={Games} />
                                                     <RutaPrivada exact path="/store" component={Store} />
                                                     <RutaPrivada exact path="/help" component={Help} />
+                                                    <RutaPrivada exact path="/analytics" component={Analytic} />
                                                     <RutaPrivada exact path="/games/images" component={TagImage} />
                                                     <RutaPrivada exact path="/games/words" component={AssociateWord} />
                                                     <RutaPrivada exact path="/games/four-images-one-word" component={FourImagesOneWord} />  
@@ -115,9 +119,10 @@ function App() {
                                             </Router>
 
                                             </ChakraProvider>
-                                          </StoreState>
-                                        </DailyTasksState>
-                                      </ResetPasswordState>
+                                          </AnalyticsState>
+                                        </StoreState>
+                                      </DailyTasksState>
+                                    </ResetPasswordState>
                                   </FourImagesOneWordState>
                                 </ContactFormState>
                               </UsuariosState>

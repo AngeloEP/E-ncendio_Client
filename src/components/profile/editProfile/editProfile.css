@@ -60,6 +60,11 @@
     min-width: 130px;
 }
 
+.city-input {
+    min-width: 130px;
+    margin-top: 1em !important;
+}
+
 .phone-input {
     max-width: 40%;
     margin-top: 1em !important;

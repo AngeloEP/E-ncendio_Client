@@ -75,6 +75,7 @@ const Profile = ( props ) => {
         localStorage.setItem('firstname', usuario.firstname );
         localStorage.setItem('lastname', usuario.lastname );
         localStorage.setItem('gender', usuario.gender );
+        localStorage.setItem('city', usuario.city );
         localStorage.setItem('age', usuario.age );
         localStorage.setItem('phone', usuario.phone );
         localStorage.setItem('urlFile', usuario.urlFile );
@@ -126,11 +127,16 @@ const Profile = ( props ) => {
                                 {usuario.firstname} {usuario.lastname}
                                 </h5>
                                 <h6>
-                                            { usuario.isExpert
+                                            { usuario.isFireRelated
                                             ?
-                                                "Integrante de FireSES"
+                                                <>
+                                                    Estoy relacionado con los incendios 
+                                                    <div>
+                                                        Actividades: {usuario.fireRelation} 
+                                                    </div>
+                                                </>
                                             :
-                                                "No pertenezco a FireSES"
+                                                "No estoy relacionado con los incendios"
                                             }
                                 </h6>
                             </div>
@@ -168,14 +174,14 @@ const Profile = ( props ) => {
                         <div className="col-md-4">
                             <div className="profile-work">
                                 <p>Imágenes</p>
-                                <a href="!#">Etiquetadas: {perfil.imageTagCount} </a><br/>
-                                <a href="!#">Subidas: {imagenesPorUsuario.length} </a><br/>
+                                <div href="!#">Etiquetadas: {perfil.imageTagCount} </div>
+                                <div href="!#">Subidas: {imagenesPorUsuario.length} </div>
                                 <p>Palabras</p>
-                                <a href="!#">Etiquetadas: {perfil.wordTagCount} </a><br/>
-                                <a href="!#">Subidas: {palabrasPorUsuario.length} </a><br/>
+                                <div href="!#">Etiquetadas: {perfil.wordTagCount} </div>
+                                <div href="!#">Subidas: {palabrasPorUsuario.length} </div>
                                 <p>Ahorcados</p>
-                                <a href="!#">Completados: {perfil.hangmanTagCount} </a><br/>
-                                <a href="!#">Subidos: {ahorcadosPorUsuario.length} </a><br/>
+                                <div href="!#">Completados: {perfil.hangmanTagCount} </div>
+                                <div href="!#">Subidos: {ahorcadosPorUsuario.length} </div>
                             </div>
                         </div>
                         <div className="col-md-8 tab-content profile-tab">
@@ -211,6 +217,14 @@ const Profile = ( props ) => {
                                         </div>
                                         <div className="col-md-6">
                                             <p>{usuario.gender}</p>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <label>Ciudad / Comuna</label>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <p>{usuario.city}</p>
                                         </div>
                                     </div>
                                 </Tab>
@@ -272,7 +286,7 @@ const Profile = ( props ) => {
                                             <label>Apodo</label>
                                         </div>
                                         <div className="col-md-6">
-                                            <p>{perfil.nicknameUsed}</p>
+                                            <p>{perfil.nicknameUsed ? perfil.nicknameUsed : "No equipado"}</p>
                                         </div>
                                     </div>
                                     <div className="row mt-5">

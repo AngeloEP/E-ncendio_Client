@@ -54,17 +54,36 @@ const Register = (props) => {
         firstname: '',
         lastname: '',
         gender: '',  // string: Masculino, Femenino, Otro
+        city: '',
+        fireRelation: '',
         age: "",  // int
         phone: '',
         email: '',
         password: '',
         confirmar: '',
-        esExperto: "", // bool
+        estaRelacionadoConIncendios: "", // bool
     })
-
-    const { firstname, lastname, gender, age, phone, email, password, confirmar, esExperto } = usuario
+    const [geometry, setGeometry] = useState([])
+    const { firstname, lastname, gender, city, fireRelation, age, phone, email, password, confirmar, estaRelacionadoConIncendios } = usuario
     const [ image, setImage ] = useState(null)
     const [ pathImage, setPathImage ] = useState(uploadImage)
+
+    if (geometry.length === 0) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                console.log("Ubicación del usuario disponible", position.coords.latitude)
+                setGeometry({
+                    geometry: [position.coords.latitude,position.coords.longitude]
+                })
+            },
+            function(error) {
+                console.log("Ubicación del usuario NO disponible")
+                setGeometry({
+                    geometry: [0,0]
+                })
+            }
+        );
+    }
 
     const onChange = e => {
         guardarUsuario({
@@ -83,10 +102,7 @@ const Register = (props) => {
                 reader.onload = function load() {
                     setPathImage(reader.result)
                 }
-                // console.log(file)
-                // console.log(usuario)
                 setImage(file)
-                // console.log(usuario)
             } else {
                 mostrarAlerta("Debe seleccionar un archivo de tipo imagen, se admiten extensiones: jpeg, jpg, png y gif", "alerta-error")
             }
@@ -97,18 +113,18 @@ const Register = (props) => {
     // Cuando el usuario da clic en Registrarse
     const onSubmit = e => {
         e.preventDefault()
-        // return
         // Validar que no hayan campos vacíos
         if (firstname.trim() === '' ||
             lastname.trim() === '' ||
             gender.trim() === '' ||
+            city.trim() === '' ||
             age === "" ||
             phone.trim() === '' ||
             // image === null ||
             email.trim() === '' ||
             password.trim() === '' ||
             confirmar.trim() === '' ||
-            esExperto === "" ) {
+            estaRelacionadoConIncendios === "" ) {
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
                 return
         }
@@ -116,11 +132,15 @@ const Register = (props) => {
             mostrarAlerta("Su Teléfono debe tener 9 dígitos", 'alerta-error')
             return
         }
-        let isExpert
-        if ( esExperto === "si" ) {
-            isExpert = true
+        if (estaRelacionadoConIncendios === "si" && fireRelation === '') {
+            mostrarAlerta("Debe especificar su relación con los incendios", 'alerta-error')
+            return
+        }
+        let isFireRelated
+        if ( estaRelacionadoConIncendios === "si" ) {
+            isFireRelated = true
         } else {
-            isExpert = false
+            isFireRelated = false
         }
 
         // Password mínimo de 6 caracteres
@@ -134,18 +154,22 @@ const Register = (props) => {
             mostrarAlerta('Los password no son iguales', 'alerta-error')
             return
         }
+
         // pasarlo al action
         const formData = new FormData();
         formData.append('firstname', firstname);
         formData.append('lastname', lastname);
         formData.append('gender', gender);
+        formData.append('city', city);
+        formData.append('fireRelation', fireRelation);
+        // formData.append('geometry', geometry);
+        geometry["geometry"].forEach(geo => formData.append('geometry[]', geo))
         formData.append('age', age);
         formData.append('phone', phone);
         formData.append('email', email);
         formData.append('password', password);
-        formData.append('isExpert', isExpert);
+        formData.append('isFireRelated', isFireRelated);
         formData.append('image', image);
-        console.log(formData)
         registrarUsuario(formData)
     }
 
@@ -235,6 +259,17 @@ const Register = (props) => {
                             onChange={onChange}
                         />
                     </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            variant="outlined"
+                            fullWidth
+                            id="city"
+                            label="Ciudad o Comuna"
+                            value={city}
+                            name='city'
+                            onChange={onChange}
+                        />
+                    </Grid>
                     <Grid item xs={6}>
                         <input
                             accept="image/*"
@@ -303,16 +338,16 @@ const Register = (props) => {
                             onChange={onChange}
                         />
                     </Grid>
-                    <Grid item xs={10}>
+                    <Grid item xs={12}>
                         <div className="isExpert" >
-                            <Typography variant="subtitle1" color="textPrimary" align="center" className="mt-1" >
-                                Es integrante de FireSES
+                            <Typography variant="subtitle2" color="textPrimary" align="center" className="mt-1" >
+                                ¿Tus actividades se relacionan con los incendios?
                             </Typography>
-                            <RadioGroup row aria-label="position" name="esExperto" value={esExperto} onChange={onChange}>
+                            <RadioGroup row aria-label="position" name="estaRelacionadoConIncendios" value={estaRelacionadoConIncendios} onChange={onChange}>
                                     <FormControlLabel
                                         className="ml-5 mt-2"
                                         value="si"
-                                        name="esExperto"
+                                        name="estaRelacionadoConIncendios"
                                         label="Si"
                                         control={<Radio color="primary" />}
                                         labelPlacement="start"
@@ -320,13 +355,25 @@ const Register = (props) => {
                                     <FormControlLabel
                                         className="ml-5 mt-2"
                                         value="no"
-                                        name="esExperto"
+                                        name="estaRelacionadoConIncendios"
                                         label="No"
                                         control={<Radio />}
                                         labelPlacement="end"
                                         />
                             </RadioGroup>
                         </div>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            variant="outlined"
+                            fullWidth
+                            id="fireRelation"
+                            label={estaRelacionadoConIncendios === "si" ? "Especifique su relación*" : "Especifique su relación"}
+                            disabled={estaRelacionadoConIncendios === "si" ? false : true}
+                            value={fireRelation}
+                            name='fireRelation'
+                            onChange={onChange}
+                        />
                     </Grid>
                 </Grid>
 

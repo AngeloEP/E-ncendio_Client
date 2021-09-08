@@ -1,0 +1,198 @@
+.analytics-title{ 
+    color: #111;
+    font-size: 41px;
+    font-weight: 700;
+    line-height: 64px;
+    margin: 0 0 0;
+    padding: 20px 30px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.date-analytics {
+    color: #111;
+    display: block;
+    font-size: 16px;
+    padding-bottom: 38px;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    margin-bottom: -2%;
+}
+
+.date-analytics:before {
+    border-top: 1px solid #111;
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 60%;
+    margin-left: 20%;
+    z-index: -1;
+}
+
+.date-analytics span {
+    background: #fdfdfd;
+    padding: 0 10px;
+    text-transform: uppercase;
+}
+
+.divCategories {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* tarjetas */
+.tarjeta-analytic-image {
+    background-color: rgb(228, 226, 226);
+    border-radius: 15px;
+}
+
+.imagen-tarjeta-analytic {
+    position: relative;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    min-height: 15rem !important;
+    max-height: 15rem !important;
+}
+
+.distribucion-card-analytic-image {
+    max-width: 100%;
+    text-align: center;
+    background-color: rgb(206, 237, 255);
+    color: rgb(21, 62, 117);
+}
+
+.titulo-distribucion-card-analytic-image {
+    color: white;
+    background-color: black;
+    max-width: 55%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box {
+    float: left;
+    height: 17px;
+    width: 17px;
+    border: 1px solid black;
+    clear: both;
+    margin-right: 5px !important;
+}
+
+.boxDist {
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    border: 1px solid black !important;
+    font-size: medium !important;
+}
+
+.boxDist span {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+}
+
+.red {background-color: red; color: white; }
+
+.green {background-color: green;  color: black;}
+
+.blue {background-color: blue; color: white;}
+
+.orange {background-color: orange;}
+
+.yellow {background-color: yellow;}
+
+.purple {background-color: purple; color: white;}
+
+.aqua {background-color: aqua;}
+
+.withoutCategory {
+    color: black;
+    font-size: x-large;
+}
+
+.title-images-distribution-analytics {
+    position: relative;
+    text-align: left;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 2%;
+    margin-bottom: 4%;
+    margin-left: 5%;
+    padding-bottom: 10px;
+}
+
+.title-images-distribution-analytics::after {
+    position: absolute;
+    content: "";
+    width: 20%;
+    height: 5%;
+    bottom: 0;
+    left: 0%;
+    background: linear-gradient(to left, #8dc44f, #04ca32, #8dc44f);
+    border-radius: 0 100% 100% 0; 
+}
+
+.title-words-distribution-analytics {
+    position: relative;
+    text-align: left;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 5%;
+    margin-bottom: 4%;
+    margin-left: 5%;
+    padding-bottom: 10px;
+}
+
+.title-words-distribution-analytics::after {
+    position: absolute;
+    content: "";
+    width: 20%;
+    height: 5%;
+    bottom: 0;
+    left: 0%;
+    background: linear-gradient(to left, #8dc44f, #04ca32, #8dc44f);
+    border-radius: 0 100% 100% 0; 
+}
+
+@media only screen and (max-width: 1376px){
+    .analytics-title{ 
+        font-size: 31px;
+        margin-bottom: 0%;
+    }
+
+    .titulo-distribucion-card-analytic-image {
+        max-width: 70%;
+        font-size: medium;
+    }
+
+    .boxDist {
+        height: 3em;
+        width: 3em;
+        font-size: small !important;
+    }
+
+    .boxDist span {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .textBoxDist {
+        font-size: medium;
+    }
+
+    .title-images-distribution-analytics{
+        font-size: 22px;
+    }
+    
+    .title-words-distribution-analytics{
+        font-size: 22px;
+    }
+}

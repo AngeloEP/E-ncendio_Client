@@ -78,7 +78,7 @@ const AuthState = props => {
             Swal.fire({
                 icon: 'error',
                 title: 'Lo sentimos',
-                text: 'No se pudo registar su usuario, inténtelo nuevamente!',
+                text: 'No se pudo registrar su usuario, inténtelo nuevamente!',
             })
         }
     }
