@@ -27,6 +27,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import logo from '../../assets/img/logo.png';
 import uploadImage from '../../assets/img/upload_image.jpg';
 
+import { usePosition } from 'use-position';
+
 const Register = (props) => {
     const classes = useStyles();
 
@@ -63,27 +65,27 @@ const Register = (props) => {
         confirmar: '',
         estaRelacionadoConIncendios: "", // bool
     })
-    const [geometry, setGeometry] = useState([])
+    // const [geometry, setGeometry] = useState([])
     const { firstname, lastname, gender, city, fireRelation, age, phone, email, password, confirmar, estaRelacionadoConIncendios } = usuario
     const [ image, setImage ] = useState(null)
     const [ pathImage, setPathImage ] = useState(uploadImage)
 
-    if (geometry.length === 0) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                console.log("Ubicación del usuario disponible", position.coords.latitude)
-                setGeometry({
-                    geometry: [position.coords.latitude,position.coords.longitude]
-                })
-            },
-            function(error) {
-                console.log("Ubicación del usuario NO disponible")
-                setGeometry({
-                    geometry: [0,0]
-                })
-            }
-        );
-    }
+    // if (geometry.length === 0) {
+    //     navigator.geolocation.getCurrentPosition(
+    //         function(position) {
+    //             console.log("Ubicación del usuario disponible", position.coords.latitude)
+    //             setGeometry({
+    //                 geometry: [position.coords.latitude,position.coords.longitude]
+    //             })
+    //         },
+    //         function(error) {
+    //             console.log("Ubicación del usuario NO disponible")
+    //             setGeometry({
+    //                 geometry: [0,0]
+    //             })
+    //         }
+    //     );
+    // }
 
     const onChange = e => {
         guardarUsuario({
@@ -162,8 +164,8 @@ const Register = (props) => {
         formData.append('gender', gender);
         formData.append('city', city);
         formData.append('fireRelation', fireRelation);
-        // formData.append('geometry', geometry);
-        geometry["geometry"].forEach(geo => formData.append('geometry[]', geo))
+        // geometry["geometry"].forEach(geo => formData.append('geometry[]', geo))
+        [latitude, longitude].forEach(geo => formData.append('geometry[]', geo))
         formData.append('age', age);
         formData.append('phone', phone);
         formData.append('email', email);
@@ -172,6 +174,12 @@ const Register = (props) => {
         formData.append('image', image);
         registrarUsuario(formData)
     }
+
+    const watch = true;
+    const {
+        latitude,
+        longitude,
+    } = usePosition(watch, {enableHighAccuracy: true});
 
     return (
         <Grid container component="main" className={classes.divlogin}>

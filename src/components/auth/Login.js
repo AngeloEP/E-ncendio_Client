@@ -23,6 +23,8 @@ import { Alert } from '@material-ui/lab';
 import ClipLoader from "react-spinners/ClipLoader";
 import HashLoader from "react-spinners/HashLoader";
 
+import { usePosition } from 'use-position';
+
 const Login = ( props ) => {
   const classes = useStyles()
 
@@ -97,7 +99,7 @@ const Login = ( props ) => {
       }
       
       // Pasarlo al action
-      iniciarSesion({ email, password })
+      iniciarSesion({ email, password, latitude, longitude })
 
       // TODO: MODIFICAR LOGIN CONTEXT
       // Validar condiciones de los campos
@@ -123,6 +125,12 @@ const Login = ( props ) => {
       // history.push('/home');
       
   }
+
+  const watch = true;
+  const {
+    latitude,
+    longitude,
+  } = usePosition(watch, {enableHighAccuracy: true});
 
   return (
     <div className="main-login" >
