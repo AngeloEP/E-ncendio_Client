@@ -23,7 +23,6 @@ import { Alert } from '@material-ui/lab';
 import ClipLoader from "react-spinners/ClipLoader";
 import HashLoader from "react-spinners/HashLoader";
 
-import { usePosition } from 'use-position';
 
 const Login = ( props ) => {
   const classes = useStyles()
@@ -77,6 +76,8 @@ const Login = ( props ) => {
 
   // Extraer de usuario
   const { email, password } = usuario
+  const [latitude, setLatitude] = useState(0)
+  const [longitude, setLongitude] = useState(0)
 
   const onChange = e => {
       guardarUsuario({
@@ -97,11 +98,7 @@ const Login = ( props ) => {
         }, 250);
         return
       }
-      if ( !(latitude)) {
-        latitude = 0
-        longitude = 0
-      }
-      
+    
       // Pasarlo al action
       iniciarSesion({ email, password, latitude, longitude })
 
@@ -130,11 +127,22 @@ const Login = ( props ) => {
       
   }
 
-  const watch = true;
-  let {
-    latitude,
-    longitude,
-  } = usePosition(watch, {enableHighAccuracy: true});
+  // const watch = true;
+  // let {
+  //   latitude,
+  //   longitude,
+  // } = usePosition(watch, {enableHighAccuracy: true});
+
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      setLatitude(position.coords.latitude)
+      setLongitude(position.coords.longitude)
+    },
+    function(error) {
+      console.error("Geolocation is not saved = " + error.code + " - " + error.message);
+    }
+  );
+  
 
   return (
     <div className="main-login" >

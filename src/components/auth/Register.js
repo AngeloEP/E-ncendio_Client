@@ -27,7 +27,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 import logo from '../../assets/img/logo.png';
 import uploadImage from '../../assets/img/upload_image.jpg';
 
-import { usePosition } from 'use-position';
 
 const Register = (props) => {
     const classes = useStyles();
@@ -69,6 +68,9 @@ const Register = (props) => {
     const { firstname, lastname, gender, city, fireRelation, age, phone, email, password, confirmar, estaRelacionadoConIncendios } = usuario
     const [ image, setImage ] = useState(null)
     const [ pathImage, setPathImage ] = useState(uploadImage)
+
+    const [latitude, setLatitude] = useState(0)
+    const [longitude, setLongitude] = useState(0)
 
     // if (geometry.length === 0) {
     //     navigator.geolocation.getCurrentPosition(
@@ -155,12 +157,7 @@ const Register = (props) => {
         if (password !== confirmar) {
             mostrarAlerta('Los password no son iguales', 'alerta-error')
             return
-        }
-
-        if ( !(latitude)) {
-            latitude = 0
-            longitude = 0
-          }    
+        } 
 
         // pasarlo al action
         const formData = new FormData();
@@ -180,11 +177,15 @@ const Register = (props) => {
         registrarUsuario(formData)
     }
 
-    const watch = true;
-    let {
-        latitude,
-        longitude,
-    } = usePosition(watch, {enableHighAccuracy: true});
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+          setLatitude(position.coords.latitude)
+          setLongitude(position.coords.longitude)
+        },
+        function(error) {
+          console.error("Geolocation is not saved = " + error.code + " - " + error.message);
+        }
+      );    
 
     return (
         <Grid container component="main" className={classes.divlogin}>
