@@ -97,6 +97,10 @@ const Login = ( props ) => {
         }, 250);
         return
       }
+      if ( !(latitude)) {
+        latitude = 0
+        longitude = 0
+      }
       
       // Pasarlo al action
       iniciarSesion({ email, password, latitude, longitude })
@@ -127,7 +131,7 @@ const Login = ( props ) => {
   }
 
   const watch = true;
-  const {
+  let {
     latitude,
     longitude,
   } = usePosition(watch, {enableHighAccuracy: true});

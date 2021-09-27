@@ -157,6 +157,11 @@ const Register = (props) => {
             return
         }
 
+        if ( !(latitude)) {
+            latitude = 0
+            longitude = 0
+          }    
+
         // pasarlo al action
         const formData = new FormData();
         formData.append('firstname', firstname);
@@ -176,7 +181,7 @@ const Register = (props) => {
     }
 
     const watch = true;
-    const {
+    let {
         latitude,
         longitude,
     } = usePosition(watch, {enableHighAccuracy: true});
