@@ -4,6 +4,7 @@ import UploadImage from './uploadImage/UploadImage';
 import UploadFourImagesOneWord from './uploadFourImagesOneWord/UploadFourImagesOneWord';
 import UploadWord from './uploadWord/UploadWord';
 import UploadTip from './uploadTip/UploadTip';
+import UploadCategory from './uploadCategory/UploadCategory';
 import Admin from './admin/Admin';
 
 import AuthContext from '../../context/autentificacion/authContext';
@@ -16,6 +17,7 @@ import SpellcheckIcon from '@material-ui/icons/Spellcheck';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import PeopleIcon from '@material-ui/icons/People';
 import InfoIcon from '@material-ui/icons/Info';
+import CategoryIcon from '@material-ui/icons/Category';
 
 import './settings.css';
 
@@ -113,6 +115,15 @@ const Settings = () => {
                                     icon={<InfoIcon/>}
                                     disabled={false}
                                 />
+                                { usuario.isAdmin
+                                    ?
+                                        <BottomNavigationAction
+                                            label="Subir categoría"
+                                            icon={<CategoryIcon/>}
+                                        />
+                                    :
+                                        null
+                                }
                             </BottomNavigation>
                         </div>
 
@@ -137,7 +148,11 @@ const Settings = () => {
                                                 ?
                                                     <UploadTip />
                                                 :
-                                                    null 
+                                                    navigation === 5
+                                                    ?
+                                                        <UploadCategory />
+                                                    :
+                                                        null  
                             }
                         </div>
                     </>

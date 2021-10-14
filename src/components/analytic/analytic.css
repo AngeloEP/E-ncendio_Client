@@ -162,6 +162,14 @@
     border-radius: 0 100% 100% 0; 
 }
 
+.funcionalidades-analytics {
+    position: relative;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2em;
+}
+
 @media only screen and (max-width: 1376px){
     .analytics-title{ 
         font-size: 31px;

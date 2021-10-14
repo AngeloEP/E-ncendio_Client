@@ -51,3 +51,10 @@
 .div-tip-update-user {
     margin-left: 2em;
 }
+
+.tip-modal-user {
+    position: relative;
+    width: 75%;
+    margin-left: 20%;
+    margin-bottom: 3%;
+}

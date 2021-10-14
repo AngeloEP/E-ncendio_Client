@@ -33,6 +33,8 @@ import {
     ELIMINAR_TIPS_VISTOS_ERROR,
     ELIMINAR_RECOMPENSAS_ETIQUETAS,
     ELIMINAR_RECOMPENSAS_ETIQUETAS_TAREA,
+    ELIMINAR_PORCENTAJE_ETIQUETA_IMAGEN,
+    ELIMINAR_PORCENTAJE_ETIQUETA_PALABRA,
 } from '../../types';
 
 const tagReducer = (state, action) => {
@@ -45,6 +47,8 @@ const tagReducer = (state, action) => {
                 ...state,
                 recompensas: action.payload.reward,
                 recompensasTareas: action.payload.rewardTasks,
+                porcentajeEtiquetaImagen: action.payload.tagDistribution,
+                porcentajeEtiquetaPalabra: action.payload.tagDistribution,
             }
 
         case ELIMINAR_ETIQUETAS_AHORCADOS_ERROR:
@@ -186,6 +190,18 @@ const tagReducer = (state, action) => {
             return {
                 ...state,
                 recompensasTareas: null,
+            }
+
+        case ELIMINAR_PORCENTAJE_ETIQUETA_IMAGEN:
+            return {
+                ...state,
+                porcentajeEtiquetaImagen: null,
+            }
+
+        case ELIMINAR_PORCENTAJE_ETIQUETA_PALABRA:
+            return {
+                ...state,
+                porcentajeEtiquetaPalabra: null,
             }
 
         default:

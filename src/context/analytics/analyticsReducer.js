@@ -11,10 +11,14 @@ import {
     OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA,
     OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA_CARGANDO,
     OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA_ERROR,
+    OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES,
+    OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_CARGANDO,
+    OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR,
 } from '../../types';
 
 const analyticsReducer = (state, action) => {
     switch (action.type) {
+        case OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR:
         case OBTENER_DISTRIBUCION_CATEGORIAS_PALABRAS_ERROR:
         case OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA_ERROR:
         case OBTENER_DISTRIBUCION_CATEGORIAS_IMAGENES_ERROR:
@@ -26,6 +30,7 @@ const analyticsReducer = (state, action) => {
                 cargandoDistribucionCategoriasPalabras: false,
                 cargandoDistribucionCategoriasPorImagen: false,
                 cargandoDistribucionCategoriasPorPalabra: false,
+                cargandoDistribucionUsoFuncionalidades: false,
             }
 
         case OBTENER_DISTRIBUCION_CATEGORIAS_IMAGENES:
@@ -78,6 +83,19 @@ const analyticsReducer = (state, action) => {
             return {
                 ...state,
                 cargandoDistribucionCategoriasPorPalabra: true
+            }
+
+        case OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES:
+            return {
+                ...state,
+                distribucionUsoFuncionalidades: action.payload,
+                cargandoDistribucionUsoFuncionalidades: false
+            }
+    
+        case OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_CARGANDO:
+            return {
+                ...state,
+                cargandoDistribucionUsoFuncionalidades: true
             }
 
         default:

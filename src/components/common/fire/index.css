@@ -54,11 +54,13 @@
 }
 
 .fire {
-  position: absolute;
+  position: relative; /* nuevos */
   top: calc(55% - 120px);
   left: calc(40% - 80px);
   width: 70px;
   height: 70px;
+  margin-top: 2em; /* nuevos */
+  margin-bottom: 2em; /* nuevos */
   background-color: transparent;
   margin-left: auto;
   margin-right: auto;
@@ -270,4 +272,46 @@
   margin: 0;
   opacity: 1;
   transition: 0s;
+}
+
+@media only screen and (max-width: 1376px) {
+  .fire {
+    width: 45px;
+    height: 45px;
+    margin-top: 2em; /* nuevos */
+    margin-bottom: 2em; /* nuevos */
+    transition: 0.5s;
+  }
+  
+  .fire:hover {
+    transform: scale(0.9);
+  }
+  
+  .fire:hover .title {
+    transform: scale(0.9);
+  }
+
+  .title {
+    font-weight: 600;
+    left: calc(40% - 42px);
+    width: 100px;
+    height: 30px;
+  }
+
+  .title-pressed {
+    font-weight: 900;
+    left: calc(40% - 42px);
+    width: 100px;
+    height: 30px;
+  }
+
+  .title h5{
+    padding-top: 5px;
+    font-size: 15px;
+  }
+
+  .title-pressed h5{
+    padding-top: 5px;
+    font-size: 15px;
+  }
 }

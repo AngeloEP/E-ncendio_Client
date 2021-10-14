@@ -15,9 +15,9 @@ import helpIcon from '../../assets/vectorial graphics/help.svg';
 import buyIcon from '../../assets/vectorial graphics/buy.svg';
 
 import contacUs from '../../assets/img/contactUs.jpg';
-import welcome from '../../assets/img/welcome.jpg';
-import forest from '../../assets/img/forest.jpg';
-import tree from '../../assets/img/tree.jpg';
+import Banner1 from '../../assets/img/Banner1.png';
+import Banner2 from '../../assets/img/Banner2.png';
+import Banner3 from '../../assets/img/Banner3.png';
 
 import {useStyles} from './homeStyles';
 
@@ -251,9 +251,16 @@ const Home = () => {
                         />
                     </div>
                 :
+                <>
+                    <h1 className="home-title" > Inicio </h1>
+                    <div className="author" >
+                        <span>
+                            { new Date().getDate() + '-' + new Date().toLocaleDateString(undefined, { month: 'long'}) + '-' + new Date().getFullYear() }
+                        </span>
+                    </div>
                 
                     <Grid container direction="row" justify="center" alignItems="center" spacing={0}>
-                        <Grid item xs={12} className="" style={{  }} >
+                        <Grid item xs={10} className="" style={{ marginTop: "0em" }} >
 
                             {recompensas !== null
                             ?
@@ -277,83 +284,40 @@ const Home = () => {
                                 <Carousel.Item>
                                     <img
                                     className="slides-carousel"
-                                    src={welcome}
+                                    src={Banner1}
                                     alt="First slide"
                                     />
                                     <Carousel.Caption className="carousel-caption1" >
-                                    <h2 className="carousel-title" > ¡Bienvenid@ a E-ncendio! </h2>
-                                    <p className="carousel-subtitle" > Navega y ayúdanos a recaudar información de la comunidad. </p>
+                                    {/* <h2 className="carousel-title" > ¡Bienvenid@ a E-ncendio! </h2> */}
+                                    {/* <p className="carousel-subtitle" > Navega y ayúdanos a recaudar información de la comunidad. </p> */}
                                     </Carousel.Caption>
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <img
                                     className="slides-carousel"
-                                    src={forest}
+                                    src={Banner2}
                                     alt="Second slide"
                                     />
 
                                     <Carousel.Caption className="carousel-caption2" >
-                                    <h2 className="carousel-title" > Apóyanos Jugando </h2>
-                                    <p className="carousel-subtitle" > Tu participación es vital para dimensionar el estado actual de la ciudadanía para enfrentar los incendios. </p>
+                                    {/* <h2 className="carousel-title" > Apóyanos Jugando </h2> */}
+                                    {/* <p className="carousel-subtitle" > Tu participación es vital para dimensionar el estado actual de la ciudadanía para enfrentar los incendios. </p> */}
                                     </Carousel.Caption>
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <img
                                     className="slides-carousel"
-                                    src={tree}
+                                    src={Banner3}
                                     alt="Third slide"
                                     />
 
                                     <Carousel.Caption className="carousel-caption3" >
-                                    <h2 className="carousel-title" > ¡Recompensas a los mejores participantes! </h2>
-                                    <p className="carousel-subtitle" > Al final de este proyecto, se premiarán a los participantes más destacados. </p>
+                                    {/* <h2 className="carousel-title" > ¡Recompensas a los mejores participantes! </h2> */}
+                                    {/* <p className="carousel-subtitle" > Al final de este proyecto, se premiarán a los participantes más destacados. </p> */}
                                     </Carousel.Caption>
                                 </Carousel.Item>
                             </Carousel>
 
-                        </Grid>
-
-                        <Grid container  style={{ marginTop: "3%" }} >
-                            <Grid item xs={12} >
-                                <div className="párrafo-ligas" >
-                                    <h2 className="section-title"> E-ncendio y su objetivo </h2>
-                                    <p className="parrafo-home" >
-                                    Deseamos obtener la percepción de la ciudadanía sobre el impacto ecológico de
-                                    los incendios mediante una plataforma web interactiva, divertida, intuitiva y simple. Es importante
-                                    recalcar que también:
-                                    </p>
-                                    <ul className="ul-home" style={{ marginLeft: "10%" }} >
-                                        <li className="li-home" > <span > NO buscamos enseñarle a la comunidad sobre los incendios. </span> </li>
-                                        <li className="li-home" > <span > Queremos dimensionar el alcance del conocimiento de las personas. </span> </li>
-                                        <li className="li-home" > <span > Necesitamos de un alto compromiso y colaboración de cada usuario. </span> </li>
-                                        <li className="li-home" > <span > Deseamos que en primera instancia se desempeñen en los juegos. </span> </li>
-                                    </ul>
-                                </div>
-                            </Grid>
-                        </Grid>
-
-                        <Grid container  style={{ marginTop: "5%" }} >
-                            <Grid item xs={12} >
-                                <div className="párrafo-ligas" >
-                                    <h2 className="section-title"> ¡Sigue subiendo y apoyando! </h2>
-                                    <p className="parrafo-home" >
-                                        No te conformes con tu nivel actual, sigue escalando en la tabla de clasificaciones, 
-                                        ya puedes subir imágenes o tips al sitio para que sean evaluados, 
-                                        si llegas a la liga de Plata podrás subir palabras para que los administradores 
-                                        consideren si puedan ser etiquetadas por los demás, en la liga de Oro ya podrás hacerlo con las imágenes para el juego Ahorcado, 
-                                        para obtener más puntaje y subir de ligas tienes las siguientes opciones:
-                                    </p>
-                                    <ul className="ul-home" style={{ marginLeft: "10%" }} >
-                                        <li className="li-home" > <span > Desempeñándote en los juegos de la plataforma, etiquetando imágenes/palabras o en el Ahorcado. </span> </li>
-                                        <li className="li-home" > <span > Modificando el contenido de tu perfil desde la liga de plata. </span> </li>
-                                        <li className="li-home" > <span > Subiendo contenido al sitio E-ncendio. </span> </li>
-                                        <li className="li-home" > <span > Subiendo en el ranking de los participantes de E-ncendio, donde los 3 primeros lugares tendrán FirePoints al final del día que servirán para comprar artículos en Tienda. </span> </li>
-                                    </ul>
-                                </div>
-                            </Grid>
-                            {/* <Grid item xs={5} >
-                                <Doughnut data={dataDoughnut} options={optionsDoughnut} />
-                            </Grid> */}
                         </Grid>
 
                         {/* tarjetas */}
@@ -448,6 +412,51 @@ const Home = () => {
                             </Card>
                           
                         </Grid>
+
+                        <Grid container  style={{ marginTop: "3%" }} >
+                            <Grid item xs={12} >
+                                <div className="párrafo-ligas" >
+                                    <h2 className="section-title"> E-ncendio y su objetivo </h2>
+                                    <p className="parrafo-home" >
+                                    Deseamos obtener la percepción de la ciudadanía sobre el impacto ecológico de
+                                    los incendios mediante una plataforma web interactiva, divertida, intuitiva y simple. Es importante
+                                    recalcar que también:
+                                    </p>
+                                    <ul className="ul-home" style={{ marginLeft: "10%" }} >
+                                        <li className="li-home" > <span > Buscamos enseñarle a la comunidad sobre los incendios. </span> </li>
+                                        <li className="li-home" > <span > Queremos dimensionar el alcance del conocimiento de las personas. </span> </li>
+                                        <li className="li-home" > <span > Necesitamos de un alto compromiso y colaboración de cada usuario. </span> </li>
+                                        <li className="li-home" > <span > Deseamos que en primera instancia se desempeñen en los juegos. </span> </li>
+                                    </ul>
+                                </div>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container  style={{ marginTop: "5%", marginBottom: "3%" }} >
+                            <Grid item xs={12} >
+                                <div className="párrafo-ligas" >
+                                    <h2 className="section-title"> ¡Sigue subiendo y apoyando! </h2>
+                                    <p className="parrafo-home" >
+                                        No te conformes con tu nivel actual, sigue escalando en la tabla de clasificaciones, 
+                                        ya puedes subir imágenes o tips al sitio para que sean evaluados, 
+                                        si llegas a la liga de Plata podrás subir palabras para que los administradores 
+                                        consideren si puedan ser etiquetadas por los demás, en la liga de Oro ya podrás hacerlo con las imágenes para el juego Ahorcado, 
+                                        para obtener más puntaje y subir de ligas tienes las siguientes opciones:
+                                    </p>
+                                    <ul className="ul-home" style={{ marginLeft: "10%" }} >
+                                        <li className="li-home" > <span > Desempeñándote en los juegos de la plataforma, etiquetando imágenes/palabras o en el Ahorcado. </span> </li>
+                                        <li className="li-home" > <span > Modificando el contenido de tu perfil desde la liga de plata. </span> </li>
+                                        <li className="li-home" > <span > Subiendo contenido al sitio E-ncendio. </span> </li>
+                                        <li className="li-home" > <span > Subiendo en el ranking de los participantes de E-ncendio, donde los 3 primeros lugares tendrán FirePoints al final del día que servirán para comprar artículos en Tienda. </span> </li>
+                                    </ul>
+                                </div>
+                            </Grid>
+                            {/* <Grid item xs={5} >
+                                <Doughnut data={dataDoughnut} options={optionsDoughnut} />
+                            </Grid> */}
+                        </Grid>
+
+                        
                         {/* Gráficas */}
                         {/* Barras */}
                         {/* <Grid item xs={7} className="mt-5 mr-5" style={{ height: "30vh" }} >
@@ -519,6 +528,7 @@ const Home = () => {
                         </Grid>
                         
                     </Grid>
+                    </>
             }
         </div>
         

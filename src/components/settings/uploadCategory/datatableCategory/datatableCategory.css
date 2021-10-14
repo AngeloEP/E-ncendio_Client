@@ -1,0 +1,34 @@
+.div-uploadCategory-update {
+    text-align: center;
+    width: 90%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 5%;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.div-category-update {
+    width: 80%;
+}
+
+.category-update {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.div-isVisible {
+    width: 67%;
+    margin-top: 1em;
+}
+
+.select-isVisible {
+    width: 15em;
+}
+
+@media only screen and (max-width: 1376px) {
+    .category-update {
+        left: 15%;
+    }    
+}

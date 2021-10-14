@@ -61,7 +61,7 @@
 }
 
 .city-input {
-    min-width: 130px;
+    min-width: 160px !important;
     margin-top: 1em !important;
 }
 

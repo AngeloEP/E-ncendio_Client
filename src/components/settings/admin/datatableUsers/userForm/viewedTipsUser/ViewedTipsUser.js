@@ -8,6 +8,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 import Paper from '@material-ui/core/Paper';
 
+import uploadImage from '../../../../../../assets/img/upload_image.jpg';
+
 const ViewedTipsUser = ({
     usuario,
     tipsVistos,
@@ -15,7 +17,7 @@ const ViewedTipsUser = ({
     cargandoResetearTipsVistos,
     cargandoTipsVistosUsuarioDesdeAdmin,
 }) => {
-
+    
     return (
         <div className="cards-tag-tips" >
             <div className="div-reset-tag-tips" >
@@ -62,6 +64,7 @@ const ViewedTipsUser = ({
                                     <div key={index} className="col-sm-3 col-md-4" >
                                         
                                         <div className="card text-white tarjeta-tag-tips" >
+                                        <img className="card-img-top imagen-tarjeta-etiquetada" src={tipVisto.tip_id.urlFile !== "" ? tipVisto.urlFile : uploadImage} alt="" />
                                             <Paper className="card-img-top palabra-tarjeta-vista" elevation={10} variant="outlined"  >
                                                 {tipVisto.tip_id.text}
                                             </Paper>

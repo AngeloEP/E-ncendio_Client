@@ -39,6 +39,8 @@ import {
     ELIMINAR_TIPS_VISTOS_ERROR,
     ELIMINAR_RECOMPENSAS_ETIQUETAS,
     ELIMINAR_RECOMPENSAS_ETIQUETAS_TAREA,
+    ELIMINAR_PORCENTAJE_ETIQUETA_IMAGEN,
+    ELIMINAR_PORCENTAJE_ETIQUETA_PALABRA,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -46,6 +48,8 @@ const TagState = props => {
     const initialState = {
         recompensas: null,
         recompensasTareas: null,
+        porcentajeEtiquetaImagen: null,
+        porcentajeEtiquetaPalabra: null,
         imagenesEtiquetadas: [],
         palabrasEtiquetadas: [],
         ahorcadosEtiquetados: [],
@@ -436,12 +440,43 @@ const TagState = props => {
         }
     }
 
+    const borrarPorcentajeImagen = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_PORCENTAJE_ETIQUETA_IMAGEN,
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar el porcentaje de etiquetado!',
+            })
+        }
+    }
+
+    const borrarPorcentajePalabra = async () => {
+        try {
+            dispatch({
+                type: ELIMINAR_PORCENTAJE_ETIQUETA_PALABRA,
+            })
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'Ocurrió un error al intentar eliminar el porcentaje de etiquetado!',
+            })
+        }
+    }
 
     return (
         <tagContext.Provider
             value={{
                 recompensas: state.recompensas,
                 recompensasTareas: state.recompensasTareas,
+                porcentajeEtiquetaImagen: state.porcentajeEtiquetaImagen,
+                porcentajeEtiquetaPalabra: state.porcentajeEtiquetaPalabra,
                 imagenesEtiquetadas: state.imagenesEtiquetadas,
                 palabrasEtiquetadas: state.palabrasEtiquetadas,
                 ahorcadosEtiquetados: state.ahorcadosEtiquetados,
@@ -468,6 +503,8 @@ const TagState = props => {
                 eliminarTipsVistosPorUsuario,
                 borrarRecompensasEtiquetas,
                 borrarRecompensasEtiquetasTareas,
+                borrarPorcentajeImagen,
+                borrarPorcentajePalabra,
             }}
         >
             {props.children}

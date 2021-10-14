@@ -51,15 +51,15 @@
 .paper {
     position: relative !important;
     text-align: center !important;
-    min-width: 400px;
-    min-height: 250px;
-    margin-top: -10%;
+    min-width: 300px;
+    min-height: 400px;
+    margin-top: 0%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border: 2px solid !important;
     border-radius: 25 !important;
-    font-size: 50px !important;
+    font-size: 70px !important;
     font-family: 'Times New Roman', Times, serif;
     border-color: red !important;
     color: rgb(75, 70, 70) !important;
@@ -177,6 +177,12 @@
     font-size: medium;
 }
 
+.text-tagWords {
+    text-align: center;
+    font-size: x-large;
+    margin-top: 1em;
+}
+
 @media only screen and (max-width: 1376px){
     .rowTitle {
         position: relative;
@@ -202,11 +208,10 @@
     }
 
     .paper {
-        min-width: 300px;
-        min-height: 150px;
+        min-width: 200px !important;
+        min-height: 300px !important;
         border-radius: 25 !important;
-        font-size: 35px !important;
-        font-family: 'Times New Roman', Times, serif;
+        font-size: 55px !important;
     }
     
     .center {
@@ -253,7 +258,7 @@
     
     .botonSiguiente {
         display: inline-block;
-        padding: 15px 25px;
+        padding: 10px 25px;
         font-size: 25px;
         border-radius: 10px;
         box-shadow: 7px 6px 28px 2px rgba(0, 0, 0, 0.24);

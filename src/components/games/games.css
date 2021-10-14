@@ -99,22 +99,42 @@
 }
 
 .lockGame {
+    padding: 10px;
     background-color: gray !important;
     color: white;
+    border-radius: 20px !important;
     position: relative;
     pointer-events: none !important;
 }
   
 .lockGame:before {
     content: "\1F512";
-    transform: scale(1.7);
+    transform: scale(2);
     display: block;
     position: absolute;
     top: 0px;
-    left: 70%;
+    left: 80%;
     width: 50px !important;
     height: 47px !important;
     border-radius: 35px 35px 0 0;
+}
+
+.juegitos .tiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+  
+.juegitos:hover .tiptext {
+    visibility: visible;
 }
 
 .text-games {
@@ -122,6 +142,67 @@
     font-size: larger;
     position: relative;
 }
+
+.tablita {
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    border: 0px solid black!important;
+}
+
+.tablita tr, .tablita td, .tablita th {border: 0!important;}
+.tablita tr td:nth-child(2), 
+.tablita tr th:nth-child(2) {border-left: 0px solid black!important;}
+
+.buttonOpenGame {
+    cursor: pointer;
+}
+
+.buttonOpenGame:hover {
+    color: #D40;
+    transition: 0.2s;
+    transform: scale(1.1);
+}
+
+.arrowItem {
+    width: 100px;
+    height: 60px;
+    margin: 10px;
+    position: relative;
+  }
+  
+  .buttonArrow {
+    border: 1px solid white;
+    background: white;
+    width: 100%;
+    padding: 15px;
+    border-radius: 3px;
+    color: #319795;
+    pointer-events: none;
+    transition: background 0.5s ease;
+  }
+  
+  .buttonArrow svg {
+    color: #319795;
+    font-size: 70px;
+    margin-left: 10px;
+  }
+  
+  .arrow1 {
+    animation: slide1 1s ease-in-out infinite;
+    margin-left: 9px;
+  }
+
+  @keyframes slide1 {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+  
+    50% {
+      transform: translate(10px, 0);
+    }
+  }
 
 @media only screen and (max-width: 1376px){
     .games-title{

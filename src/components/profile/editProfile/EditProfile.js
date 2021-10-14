@@ -108,6 +108,13 @@ const EditProfile = ( props ) => {
     const { firstname, lastname, gender, city, age, phone, frame, nickname } = perfilUsuario
     const [ image, setImage ] = useState(null)
     const [ pathImage, setPathImage ] = useState( perfilUsuario && perfilUsuario.urlFile!=="undefined" ? perfilUsuario.urlFile : ProfileDefault )
+    const [allCities, ] = useState(
+        ["Gran Santiago", "Gran Concepción", "Gran Valparaíso", "Gran La Serena", "Gran Temuco", "Antofagasta", "Gran Iquique", "Gran Puerto Montt",
+        "Gran Talca", "Arica", "Gran Rancagua", "Gran Chillán", "Los Ángeles", "Calama", "Colina", "Valdivia", "Gran Quillota", "Osorno", "Copiapó", "Curicó",
+        "Punta Arenas", "Melipilla", "Gran San Antonio", "Lampa", "Ovalle", "Buin", "Los Andes-Calle Larga-San Esteban", "Linares", "Peñaflor", "Villarrica", "San Felipe", "Paine",
+        "Talagante", "San Fernando", "Limache-Olmué","Rengo", "Coyhaique", "Vallenar", "San Carlos", "Angol", "San Vicente de Tagua Tagua", "Cauquenes"
+        ]
+    )
 
     const onChange = e => {
         guardarPerfilUsuario({
@@ -398,19 +405,28 @@ const EditProfile = ( props ) => {
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <label className="mt-4" >Ciudad / comuna</label>
+                                            <label className="mt-4" > Ciudad </label>
                                         </div>
                                         <div className="col-md-6">
-                                            <TextField
-                                                className="city-input"
-                                                variant="outlined"
-                                                fullWidth
-                                                id="city"
-                                                label="Ciudad / Comuna"
-                                                value={city}
-                                                name='city'
-                                                onChange={onChange}
-                                            />
+                                            <FormControl variant="outlined" className="city-input" >
+                                                <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
+                                                <Select
+                                                    labelId="demo-simple-select-outlined-label"
+                                                    id="city"
+                                                    name="city"
+                                                    value={city}
+                                                    fullWidth
+                                                    onChange={onChange}
+                                                    label="Ciudad"
+                                                >
+                                                <MenuItem value="">
+                                                    <em>Ninguno</em>
+                                                </MenuItem>
+                                                { allCities.map( (city) =>
+                                                    <MenuItem value={city}> {city} </MenuItem>
+                                                )}
+                                                </Select>
+                                            </FormControl>
                                         </div>
                                     </div>
                                 </Tab>

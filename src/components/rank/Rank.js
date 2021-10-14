@@ -99,7 +99,8 @@ const Rank = () => {
     if (query === "" && filterLeague === "" && filterAge === "" && filterPoints === "") {
         filtrado = 0
     } else { filtrado = 1 }
-    // const columns = datos[0] && Object.keys(datos[0])
+
+    
     return (
         <div className="w-75 mr-auto ml-auto" > {/* sm, md, lg, xl, xxl */  }
             <h1 className="games-title" > Tabla de Clasificaciones </h1>
@@ -114,7 +115,6 @@ const Rank = () => {
                     <Grid item xs={3} container spacing={1} alignItems="flex-end">
                         <Grid item>
                             <AccountCircle />
-                            {/* <img src={AgeIcon} alt="Edad" className="age-icon" /> */}
                         </Grid>
                         <Grid item>
                             <TextField
@@ -125,26 +125,6 @@ const Rank = () => {
                             />
                         </Grid>
                     </Grid>
-                    {/* <input type="text" value={query}  /> */}
-                    {/* { columns &&
-                        columns && columns.map((column) => (
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={searchColumns.includes(column)}
-                                    onChange={(e) => {
-                                        const checked = searchColumns.includes(column);
-                                        setSearchColumns((prev) =>
-                                            checked
-                                                ? prev.filter((sc) => sc !=== column)
-                                                : [...prev, column]
-                                        );
-                                    }}
-                                />
-                                {column}
-                            </label>
-                        ))
-                    } */}
                     <Grid item xs={2} >
                         <FormControl variant="outlined" id="select-league" >
                             <InputLabel id="demo-simple-select-outlined-label"> Liga </InputLabel>

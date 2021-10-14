@@ -16,6 +16,8 @@ import { Col} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import ButtonBootstrap from 'react-bootstrap/Button';
 
+import uploadImage from '../../../../../../assets/img/upload_image.jpg';
+
 const UploadTipsUser = ({
     tips,
     funcionHabilitarInhabilitar,
@@ -44,6 +46,7 @@ const UploadTipsUser = ({
             textUpdate: tipSelected.Texto,
             points: tipSelected.Puntos,
         })
+        setPathImageUpdate(tipSelected.Imagen)
         setShow(true)
     };
 
@@ -53,6 +56,7 @@ const UploadTipsUser = ({
         points: 0,
     })
     const { id_tip_selected, textUpdate, points } = fieldsTipUpdate;
+    const [ pathImageUpdate, setPathImageUpdate ] = useState(null)
 
     const onChangeUpdate = e => {
         setFieldsTipUpdate({
@@ -63,7 +67,6 @@ const UploadTipsUser = ({
 
     const onSubmitUpdate = e => {
         e.preventDefault()
-        // Validar que no hayan campos vacíos
         if (points === 0 ||
             points === "" ) {
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
@@ -72,7 +75,6 @@ const UploadTipsUser = ({
         
         funcionModificarDificultadYPuntos( id_tip_selected, { points} )
     }
-
     return (
         <div className="cards-tips" >
             <div className="row">
@@ -85,6 +87,7 @@ const UploadTipsUser = ({
                                 <div key={index} className="col-sm-3 col-md-4" >
                                     
                                     <div className="card text-white tarjeta-tips" >
+                                        <img className="card-img-top imagen-tarjeta" src={tip.Imagen !== "" ? tip.Imagen : uploadImage} alt="" />
                                         <Paper className="card-img-top tip-tarjeta" elevation={10} variant="outlined"  >
                                             {tip.Texto}
                                         </Paper>
@@ -214,12 +217,8 @@ const UploadTipsUser = ({
                                     <Grid container spacing={5} >
 
                                         <Grid item xs={4} >
-                                            <div className="col tip" >
-                                                <Col>
-                                                    <Paper className="paper-tip" elevation={10} variant="outlined"  >
-                                                        {textUpdate}
-                                                    </Paper>
-                                                </Col>
+                                            <div className="div-image-update" >
+                                                <img className="img-fluid img-thumbnail image-upload-update" src={pathImageUpdate !== "" ? pathImageUpdate : uploadImage} alt="" />
                                             </div>
                                         </Grid>
                                         <Grid item xs={8} >
@@ -234,7 +233,13 @@ const UploadTipsUser = ({
                                                     label="Contenido del tip"
                                                 />
                                             </div>
-
+                                            <div className="col tip-modal-user" >
+                                                <Col>
+                                                    <Paper className="paper-tip" elevation={10} variant="outlined"  >
+                                                        {textUpdate}
+                                                    </Paper>
+                                                </Col>
+                                            </div>
                                             <div className="div-points-update" >
                                                 <TextField
                                                     style={{ width: "60%" }}

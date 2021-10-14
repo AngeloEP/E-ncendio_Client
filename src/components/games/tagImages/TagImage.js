@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, Fragment } from 'react';
 import useInterval from "../useInterval";
 import useState from 'react-usestateref';
-
+import { useDisclosure } from "@chakra-ui/react"
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
 import imageContext from '../../../context/images/imageContext';
@@ -29,6 +29,18 @@ import Typography from '@material-ui/core/Typography';
 import "./tagImage.css";
 import RewardNotification from '../../common/fire/RewardNotification';
 
+import uploadImage from '../../../assets/img/upload_image.jpg';
+
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+  } from "@chakra-ui/react";
+
 import infoIcon from '../../../assets/info.svg';
 
 const TagImage = ( props ) => {
@@ -55,17 +67,19 @@ const TagImage = ( props ) => {
 
     // Extraer la información del context de niveles
     const categoriesContext = useContext(categoryContext)
-    const { categorias, obtenerCategorias } = categoriesContext
+    const { categoriasVisibles, obtenerCategoriasVisibles } = categoriesContext
 
     // Extraer la información del context de etiquetar
     const tagsContext = useContext(tagContext)
     const {
         recompensas,
         recompensasTareas,
+        porcentajeEtiquetaImagen,
         etiquetarImagen,
         verTip,
         borrarRecompensasEtiquetas,
         borrarRecompensasEtiquetasTareas,
+        borrarPorcentajeImagen,
     } = tagsContext
 
     let imagenActual = JSON.parse(localStorage.getItem("imagenActual"))
@@ -93,9 +107,10 @@ const TagImage = ( props ) => {
                 <div className="notification-image">
                     <img src={infoIcon} alt="" />
                 </div>
-                <div>
-                    <p className="notification-title"> Aprendiendo con E-ncendio </p>
-                    <p className="notification-message">
+                <div className="body-container-notify">
+                    <h5 className="notification-title"> Aprendiendo con E-ncendio </h5>
+                    <img  src={tips[tipActual].urlFile !== "" ? tips[tipActual].urlFile : uploadImage} alt="Snow"  />
+                    <p>
                         {tips[tipActual].text}
                     </p>
                 </div>
@@ -131,7 +146,7 @@ const TagImage = ( props ) => {
         obtenerPerfil()
 
         // Traer las categorías posibles /api/categories
-        obtenerCategorias()
+        obtenerCategoriasVisibles()
 
         // Traer las imágenes del nivel correspondiente /api/league/{id}/images 
         obtenerImagenes()
@@ -141,7 +156,13 @@ const TagImage = ( props ) => {
         // eslint-disable-next-line
     }, [])
     const [ isWinner, setIsWinner ] = useState(false)
+    const [ isSkip, setIsSkip ] = useState(false)
     const [ points, setPoints ] = useState(0)
+
+    const { onClose } = useDisclosure()
+    const borrarPorcentaje = () => {
+        borrarPorcentajeImagen()
+    }
 
     const [ checked, setChecked ] = useState({
         prevencion: false,
@@ -194,6 +215,7 @@ const TagImage = ( props ) => {
         setChecked({ ...checked, checkboxes });        
     }
 
+
     // const Checksito = ({ state, label, name, disable }) => {
     //     return (
     //     <FormControlLabel
@@ -229,6 +251,50 @@ const TagImage = ( props ) => {
     //     </Row>,
     // ]
 
+    const skipGame = () => {
+        setIsSkip(true)
+        // Agregar atributo a Level, señalando el puntaje al siguiente nivel
+        let addPoints = -15;
+        setPoints(addPoints)
+        setUserPoints( prevTime => prevTime + addPoints)
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
+        perfil.score = perfil.score + addPoints;
+        if ( perfil.score <= perfil.league_id.pointsPreviousLeague ) {
+            perfil.dropLeague = true;
+            perfil.league_id = perfil.league_id.league
+            obtenerPerfil()
+        }
+        actualizarPerfil(perfil)
+        setTimeout(() => {
+            setIsSkip(false)
+        }, 2000);
+        
+        setNewContent(true);
+        setChecked({
+            prevencion: false,
+            mitigacion: false,
+            riesgo: false,
+            combate: false,
+            impacto: false,
+            recuperacion: false,
+            amenaza: false,
+    
+            selected: null
+        })
+        imagenes.push(imagenes[imagenActual])
+
+        // Avanzar a la siguiente imagen
+        setTimeout(() => {
+            localStorage.setItem( 'imagenActual', imagenActual + 1 );
+            setTimeout(() => {
+                setNewContent(false)
+            }, 1000);
+        }, 1000);
+    }
+
     const onRender = () => {
         if ( checked.selected == null ) {
             mostrarAlerta('Debes seleccionar una Categoría', 'alerta-error')
@@ -236,7 +302,7 @@ const TagImage = ( props ) => {
         }
 
         let categoriaSeleccionada = transformSelected(checked.selected)
-        categoriaSeleccionada = categorias.find(e => e.name === categoriaSeleccionada);
+        categoriaSeleccionada = categoriasVisibles.find(e => e.name === categoriaSeleccionada);
         etiquetarImagen(imagenes[imagenActual]._id, categoriaSeleccionada._id)
         setIsWinner(true)
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
@@ -246,15 +312,15 @@ const TagImage = ( props ) => {
         let addPoints = 0;
         switch (perfil.league_id.league) {
             case "Bronce":
-                addPoints = 35;
+                addPoints = +35;
                 break;
 
             case "Plata":
-                addPoints = 20;
+                addPoints = +20;
                 break;
 
             case "Oro":
-                addPoints = 10;
+                addPoints = +10;
                 break;
         
             default:
@@ -268,12 +334,11 @@ const TagImage = ( props ) => {
         setUserLeague( perfil.league_id.league )
         perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-            // console.log("Subir de nivel")
             perfil.league_id = perfil.league_id.league
+            obtenerPerfil()
         }
         actualizarPerfil(perfil)
         setTimeout(() => {
-            // console.log(perfil)
             setIsWinner(false)
         }, 2000);
         // return
@@ -378,9 +443,15 @@ const TagImage = ( props ) => {
         setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
         setUserLeague( perfil.league_id.league )
     }
+    if (perfil!= null && perfil.league_id.league !== userLeagueRef.current) {
+        setUserPoints( perfil.score )
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
+    }
     let colorProgress = labelProgressRef.current < 50 ? "success" : labelProgressRef.current < 80 ? "warning" : "danger";
 
-    // console.log(tips)
 
     return (
         <Container fluid className="backgroundGif" >
@@ -388,23 +459,24 @@ const TagImage = ( props ) => {
                 <Row className="rowTitle" >
                     <Col >
                         <Typography variant="h4" className="levelTitle" >
-                            { perfil ? `Nivel ${perfil.level_image_id.level}` : null}
+                            {/* { perfil ? `Nivel ${perfil.level_image_id.level}` : null} */}
+                            Etiquetar imágenes
                         </Typography>
                     </Col>
                     <Col >
                     {perfil != null
                     ?
                         <Fragment>
-                            <p className="progressTitle" > {userLeagueRef.current} </p>
+                            <p className="progressTitle" > {perfil.league_id.league} </p>
                             <OverlayTrigger
                                 placement="bottom"
-                                overlay={<Tooltip className="mt-3" id="button-tooltip-1" > Puntos: {nowProgressRef.current} </Tooltip>}
+                                overlay={<Tooltip className="" id="button-tooltip-1" > Puntos: {nowProgressRef.current} </Tooltip>}
                             >
                                 <ProgressBar max={maxProgressRef.current} className="userProgress" variant={colorProgress} animated striped  now={nowProgressRef.current}  
                                             label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgressRef.current}% </span>)}
                                 />
                             </OverlayTrigger>
-                            <p className={isWinner === true | tipReceive === true ? "final-text winner" : "final-text"} > +{points} puntos </p>
+                            <p className={isWinner === true | tipReceive === true ? "final-text winner" : isSkip === true ? "final-text gameover" : "final-text"} > {isWinner === true | tipReceive === true ? "+" : ""}{points} puntos </p>
                         </Fragment>
                     : null
                     }
@@ -431,99 +503,90 @@ const TagImage = ( props ) => {
                 : null
             }
 
+            <div className="text-tagImages" >
+                ¡Sólo debes seleccionar una categoría que este relacionada a la imagen, si saltas perderás puntos!
+            </div>
+
+            <>
+                <Modal
+                    closeOnOverlayClick={false}
+                    isOpen={porcentajeEtiquetaImagen !== null && porcentajeEtiquetaImagen!== undefined ? true : false} 
+                    onClose={() => {onClose(); borrarPorcentaje();}}
+                    isCentered
+                    >
+                    <ModalOverlay />
+                    <ModalContent>
+                    <ModalHeader> ¡Dato importante! </ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody pb={6}>
+                        El {porcentajeEtiquetaImagen}% de las personas que etiquetaron esta imagen pensaron lo mismo que tú
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button onClick={() => {onClose(); borrarPorcentaje();}}> Ok </Button>
+                    </ModalFooter>
+                    </ModalContent>
+                </Modal>
+            </>
+
             { imagenes.length !== 0
                 ?
                     newContent === false
                     ?
                         <>
-                            <div className="center">
-                                <div className="row">
-                                    <div className="col categoritas" style={{ marginRight: "-10%" }}>
-                                        <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck}
-                                            title="Superficie con peligro de provocar un incendio."
-                                            placement="left"
-                                        />
-                                    </div>
-                                    <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                        <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck}
-                                            title="Se aprecian medidas para evitar un incendio."
-                                            placement="top"
-                                        />
-                                    </div>
-                                    <div className="col categoritas" >
-                                        <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck}
-                                            title="Terreno que pasa por período de transformación para recuperarse de un incendio."
-                                            placement="right"
-                                        />
-                                    </div>
+                            <div className="row mainDiv-tagImages" >
+                                <div className="col" >
+                                    <Image
+                                        className="imagen"
+                                        src={imagenes[imagenActual].imageUrl} rounded
+                                    />
                                 </div>
-                                <div className="row">
-                                    <div className="col categoritas" style={{ marginTop: "-4%" }} >
-                                        <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck}
-                                            title="Se pueden ver técnicas para buscar reducir al máximo los efectos potenciales de un incendio."
-                                            placement="left"
-                                        />
-                                    </div>
-                                    <div className="col div-imagen" >
-                                        { imagenes.length === 0
-                                            ? null
-                                            :
-                                            <Col>
-                                                <Image
-                                                    className="imagen"
-                                                    src={imagenes[imagenActual].imageUrl} rounded
-                                                />
-                                            </Col>
-                                        }
-                                    </div>
-                                    <div className="col categoritas" style={{ marginTop: "-4%" }} >
-                                        <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck}
-                                            title="Estado preocupante o amenazante en el cual el incendio llegue a ser muy grave y casi incontrolable."
-                                            placement="right"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col categoritas" style={{ marginRight: "-10%", marginTop: "-4%" }}>
-                                        <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck}
-                                            title="Consecuencias post-incendio del terreno."
-                                            placement="left"
-                                        />
-                                    </div>
-                                    <div className="col categoritas">
-                                    </div>
-                                    <div className="col categoritas" style={{ marginLeft: "-8%", marginTop: "-4%" }}>
-                                        <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck}
-                                            title="Se trata de contener al incendio, para detener su avance."
-                                            placement="right"
-                                        />
-                                    </div>
+                                <div className="col" >
+                                        <>
+                                            <div className="row">
+                                                {categoriasVisibles.length !== 0
+                                                ?
+                                                    categoriasVisibles.map((categoria, index) =>
+                                                        <div key={index} className="col-sm-6 col-md-6" >
+                                                            <Fire name={categoria.name.charAt(0).toLowerCase() + categoria.name.slice(1)} value={categoria.name} selected={checked[categoria.name.charAt(0).toLowerCase() + categoria.name.slice(1)]} onCheck={onCheck}
+                                                                title=""
+                                                                placement="left"
+                                                            />
+                                                        </div>
+                                                    )
+                                                :
+                                                    <div className="text-center position-relative" style={{ top: "50%" }} >
+                                                        <ClipLoader
+                                                            color={"#000"}
+                                                            loading={true}
+                                                            size={70}
+                                                        />
+                                                    </div>
+                                                }
+                                            </div>
+                                        </>
                                 </div>
                             </div>
-
-                            <div className="bottomCenter-images" >
-                                <Row style={{ marginLeft: "0px", marginRight: "0px" }} >
-                                    {/* <Col >
-                                        <Button variant="secondary"> Anterior </Button>{' '}
-                                    </Col> */}
-
-                                    <Col xs={11} >
-                                        <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
-                                    </Col>
-                                    <Col xs={1} >
-                                        <OverlayTrigger
-                                            key={9}
-                                            placement={"top"}
-                                            overlay={
-                                        <Tooltip className="tooltipTagImage" id="help-icon-tooltip-1" > Debe seleccionar la categoría que considere que se asocie más a la imagen
-                                        </Tooltip>
-                                        }
-                                        >
-                                            <HelpIcon className="help-icon-tagImage" color="primary" />
-                                        </OverlayTrigger>
-                                    </Col>
-                                </Row>
-                            </div>
+                            <Row className="bottomCenter-images" >
+                                <Col xs={5} >
+                                    <Button className="botonSaltar" variant="danger" onClick={ () => skipGame() } > Saltar </Button>{' '}
+                                </Col>
+                                <Col xs={5} >
+                                    <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
+                                </Col>
+                                <Col xs={2} >
+                                    <OverlayTrigger
+                                        key={9}
+                                        placement={"top"}
+                                        overlay={
+                                    <Tooltip className="tooltipTagImage" id="help-icon-tooltip-1" > Debe seleccionar la categoría que considere que se asocie más a la imagen
+                                    </Tooltip>
+                                    }
+                                    >
+                                        <HelpIcon className="help-icon-tagImage" color="primary" />
+                                    </OverlayTrigger>
+                                </Col>
+                            </Row>
                         </>
                     :
                         <div className="text-center position-relative" style={{ top: "50%" }} >

@@ -17,7 +17,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 import ButtonBootstrap from 'react-bootstrap/Button';
-
+import uploadImage from '../../../../assets/img/upload_image.jpg';
 
 import './datatableTips.css';
 
@@ -53,6 +53,7 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
     
     const handleClose = () => {
         setShow(false)
+        setImageUpdate(null)
     };
     
     const handleShow = (tip_id) => {
@@ -61,6 +62,7 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
             id_tip_selected: tip_id,
             textUpdate: tipSelected.Texto,
         })
+        setPathImageUpdate(tipSelected.Imagen)
         setShow(true)
     };
 
@@ -70,6 +72,8 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
     })
 
     const { id_tip_selected, textUpdate } = fieldsTipUpdate;
+    const [ imageUpdate, setImageUpdate ] = useState(null)
+    const [ pathImageUpdate, setPathImageUpdate ] = useState(null)
 
     const onChangeUpdate = e => {
         setFieldsTipUpdate({
@@ -78,19 +82,38 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
         })
     }
 
+    const onFileChangeUpdate = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const fileUpdate = e.target.files[0]
+            if (fileUpdate.type.includes("image")) {
+                const readerUpdate = new FileReader()
+                readerUpdate.readAsDataURL(fileUpdate)
+
+                readerUpdate.onload = function load() {
+                    setPathImageUpdate(readerUpdate.result)
+                }
+                setImageUpdate(fileUpdate)
+            } else {
+                mostrarAlerta("Debe seleccionar un archivo de tipo imagen, se admiten extensiones: jpeg, jpg, png y gif", "alerta-error")
+            }
+        }
+    }
+
     const onSubmitUpdate = e => {
         e.preventDefault()
-        // Validar que no hayan campos vacíos
         if (textUpdate.trim() === '' ) {
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
                 return
         }
-        let text = textUpdate;
-        modificarTip( id_tip_selected, { text } )
+        const formData = new FormData();
+        formData.append('image', imageUpdate);
+        formData.append('text', textUpdate);
+        modificarTip( id_tip_selected, formData )
 
         setTimeout(() => {
             handleClose()
         }, 2000);
+        document.getElementById("imageUpdateTip").value = "";
     }
 
     return (
@@ -129,7 +152,7 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
 
                                                     { column === "Texto"
                                                         ?
-                                                            <td style={{ width: "7%" }} >
+                                                            <td style={{ width: "9%" }} >
                                                                 <div className="col tip-update" >
                                                                     <Col>
                                                                         <Paper className="paper-tip-update" elevation={10} variant="outlined"  >
@@ -139,27 +162,34 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
                                                                 </div>
                                                             </td>
                                                         :
-                                                            column === "Estado"
+                                                            column === "Imagen"
                                                             ?
-                                                                row[column] === true
-                                                                ?
-                                                                    <td style={{ width: "2%" }} >
-                                                                        <div className="alert alert-success" role="alert" >
-                                                                            <strong> Habilitado </strong>
-                                                                        </div>
-                                                                    </td> 
-                                                                :
-                                                                    <td style={{ width: "2%" }} >
-                                                                        <div className="alert alert-warning" role="alert" >
-                                                                            <strong> Inhabilitado </strong>
-                                                                        </div>
-                                                                    </td> 
+                                                                <td style={{ width: "7%" }} > <img className="img-fluid img-thumbnail image-user"
+                                                                    src={ row[column] !== "" ? row[column] : uploadImage } alt=""
+                                                                />
+                                                                </td>
                                                             :
-                                                                column === "_id"
+                                                                column === "Estado"
                                                                 ?
-                                                                    <td style={{ width: "5%" }} > {index+1} </td> 
+                                                                    row[column] === true
+                                                                    ?
+                                                                        <td style={{ width: "2%" }} >
+                                                                            <div className="alert alert-success" role="alert" >
+                                                                                <strong> Habilitado </strong>
+                                                                            </div>
+                                                                        </td> 
+                                                                    :
+                                                                        <td style={{ width: "2%" }} >
+                                                                            <div className="alert alert-warning" role="alert" >
+                                                                                <strong> Inhabilitado </strong>
+                                                                            </div>
+                                                                        </td> 
                                                                 :
-                                                                    <td style={{ width: "5%" }} > {row[column]} </td> 
+                                                                    column === "_id"
+                                                                    ?
+                                                                        <td style={{ width: "5%" }} > {index+1} </td> 
+                                                                    :
+                                                                        <td style={{ width: "5%" }} > {row[column]} </td> 
                                                     }
                                                 </Fragment>
                                             )
@@ -251,12 +281,20 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
                                     <Grid container spacing={5} >
 
                                         <Grid item xs={4} >
-                                            <div className="col tip-update" >
-                                                <Col>
-                                                    <Paper className="paper-tip-update" elevation={10} variant="outlined"  >
-                                                        {textUpdate}
-                                                    </Paper>
-                                                </Col>
+                                            <div className="div-image-update" >
+                                                <input
+                                                    accept="image/*"
+                                                    id="imageUpdateTip"
+                                                    type="file"
+                                                    onChange={onFileChangeUpdate}
+                                                    style={{ display: "none" }}
+                                                    />
+                                                <img className="img-fluid img-thumbnail image-upload-update" src={pathImageUpdate !== "" ? pathImageUpdate : uploadImage} alt="" />
+                                                <label htmlFor="imageUpdateTip" className="label-upload-image-update" >
+                                                    <Button  variant="contained" style={{ backgroundColor: "greenyellow" }}  component="span">
+                                                        Agregar imagen
+                                                    </Button>
+                                                </label>
                                             </div>
                                         </Grid>
                                         <Grid item xs={8} >
@@ -271,6 +309,13 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
                                                     autoFocus
                                                     onChange={onChangeUpdate}
                                                 />
+                                            </div>
+                                            <div className="col tip-updateModal" >
+                                                <Col>
+                                                    <Paper className="paper-tip-update" elevation={10} variant="outlined"  >
+                                                        {textUpdate}
+                                                    </Paper>
+                                                </Col>
                                             </div>
                                         </Grid>
                                     </Grid>

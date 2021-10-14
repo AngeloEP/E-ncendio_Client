@@ -52,20 +52,12 @@
     border-radius: 15px;
 }
 
-.div-imagen {
-    position: relative;
-    margin-left: -12%;
-    margin-bottom: 10%;
-    min-width: 35% !important;
-    max-width: 35% !important;
-}
-
 .imagen {
     position: relative;
     min-width: 100% !important;
     max-width: 100% !important;
-    min-height: 300px !important;
-    max-height: 300px !important;
+    min-height: 500px !important;
+    max-height: 500px !important;
     /* max-width: 300px; */
     /* max-height: 150px; */
 }
@@ -81,11 +73,8 @@
 }
 
 .bottomCenter-images {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    margin-top: -4%;
+    display: inline-flex;
+    margin-left: 35%;
 }
 
 .backgroundGif {
@@ -119,13 +108,6 @@
     text-transform: capitalize;
     margin-right: auto;
     margin-left: auto;
-}
-
-.categoritas {
-    margin-top: 3%;
-    margin-bottom: 3%;
-    margin-left: 3%;
-    margin-right: 3%;
 }
 
 .botonCategoría { /* es de WhatshotIcon */
@@ -170,6 +152,31 @@
     box-shadow: 7px 6px 28px 8px rgba(0, 0, 0, 0.24); 
     transform: translateY(4px); 
 }
+
+.botonSaltar {
+    display: table-cell;
+    padding: 10px 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    font-size: 25px;
+    border-radius: 10px;
+    margin-left: 10% !important;
+    margin-bottom: 1% !important;
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 7px 6px 28px 2px rgba(0, 0, 0, 0.24);
+}
+
+.botonSaltar:hover {
+    transition: 0.4s ;
+    background-color: #f7f7f7; /* Red */
+    border: 1px solid #ff0004;
+    color: #000;
+}
+
+
 
 .topRow {
     margin-bottom: 7%;
@@ -229,11 +236,56 @@
 	cursor: pointer;
 }
 
+.Toastify__toast-container {
+    min-width: 550px;
+    min-height: 300px;
+    max-width: 550px;
+    max-height: 300px;
+}
+
 .tooltipTagImage {
     font-size: medium;
 }
 
 /* END NOTIFICATION */
+
+.text-tagImages {
+    text-align: center;
+    font-size: x-large;
+    margin-top: 1em;
+}
+
+.mainDiv-tagImages {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 5%;
+    /* background-color: black; */
+    color: white;
+}
+
+.body-container-notify {
+    min-width: 500px !important;
+    min-height: 300px !important;
+    max-width: 500px !important;
+    max-height: 300px !important;
+    position: relative;
+}
+
+.body-container-notify img {
+    margin-top: 2.7em;
+    width: 100%;
+}
+.body-container-notify p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+}
 
 @media only screen and (max-width: 1376px){
     .rowTitle {
@@ -250,17 +302,12 @@
         height: 12%;
         background-color: #e6e8ed;
     }
-    
-    .div-imagen {
-        margin-left: -12%;
-        min-width: 37% !important;
-        max-width: 37% !important;
-    }
 
     .imagen {
         min-width: 100% !important;
         max-width: 100% !important;
-        min-height: 180px !important;
+        min-height: 300px !important;
+        max-height: 400px !important;
         /* max-height: 150px; */
     }
     
@@ -312,7 +359,7 @@
     
     .botonSiguiente {
         display: inline-block;
-        padding: 15px 25px;
+        padding: 10px 15px;
         font-size: 25px;
         border-radius: 10px;
         box-shadow: 7px 6px 28px 2px rgba(0, 0, 0, 0.24);
@@ -332,10 +379,23 @@
     .topRow {
         margin-bottom: 7%;
     }
-}
 
-@media only screen and (min-width: 1377px) and (max-width: 1612px){
-    .center {
-        margin-right: 10% !important;
+    .Toastify__toast-container {
+        min-width: 450px;
+        min-height: 250px;
+        max-width: 450px;
+        max-height: 250px;
+    }
+    
+    .body-container-notify {
+        min-width: 400px !important;
+        min-height: 250px !important;
+        max-width: 400px !important;
+        max-height: 250px !important;
+        position: relative;
+    }
+
+    .body-container-notify img {
+        margin-top: 2.6em;
     }
 }

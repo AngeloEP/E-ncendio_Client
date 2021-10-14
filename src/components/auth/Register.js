@@ -71,6 +71,13 @@ const Register = (props) => {
 
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
+    const [allCities, ] = useState(
+        ["Gran Santiago", "Gran Concepción", "Gran Valparaíso", "Gran La Serena", "Gran Temuco", "Antofagasta", "Gran Iquique", "Gran Puerto Montt",
+        "Gran Talca", "Arica", "Gran Rancagua", "Gran Chillán", "Los Ángeles", "Calama", "Colina", "Valdivia", "Gran Quillota", "Osorno", "Copiapó", "Curicó",
+        "Punta Arenas", "Melipilla", "Gran San Antonio", "Lampa", "Ovalle", "Buin", "Los Andes-Calle Larga-San Esteban", "Linares", "Peñaflor", "Villarrica", "San Felipe", "Paine",
+        "Talagante", "San Fernando", "Limache-Olmué","Rengo", "Coyhaique", "Vallenar", "San Carlos", "Angol", "San Vicente de Tagua Tagua", "Cauquenes"
+        ]
+    )
 
     // if (geometry.length === 0) {
     //     navigator.geolocation.getCurrentPosition(
@@ -274,15 +281,25 @@ const Register = (props) => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="city"
-                            label="Ciudad o Comuna"
-                            value={city}
-                            name='city'
-                            onChange={onChange}
-                        />
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
+                            <Select
+                                labelId="demo-simple-select-outlined-label"
+                                id="city"
+                                name="city"
+                                value={city}
+                                fullWidth
+                                onChange={onChange}
+                                label="Ciudad"
+                            >
+                            <MenuItem value="">
+                                <em>Ninguno</em>
+                            </MenuItem>
+                            { allCities.map( (city) =>
+                                <MenuItem value={city}> {city} </MenuItem>
+                            )}
+                            </Select>
+                        </FormControl>
                     </Grid>
                     <Grid item xs={6}>
                         <input

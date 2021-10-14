@@ -8,6 +8,7 @@ const Fire = (props) => {
         value,
         selected,
         onCheck,
+        pEvents,
         // title,
         // placement
     } = props
@@ -19,7 +20,7 @@ const Fire = (props) => {
         //                 </span>}
         //         placement={placement}
         //     >
-            <div className="fire" onClick={() => onCheck(name, value)} >
+            <div className="fire" style={{ pointerEvents: pEvents }} onClick={() => onCheck(name, value)} >
                 
                 <div className="fire-left">
                     <div className="main-fire"></div>
@@ -36,7 +37,7 @@ const Fire = (props) => {
                 <div className="fire-bottom">
                     <div className="main-fire"></div>
                 </div>
-                <button className={ selected ? "title-pressed" : "title" }  >
+                <button style={{ pointerEvents: pEvents }} className={ selected ? "title-pressed" : "title" }  >
                     <h5 >
                         {value}
                     </h5>

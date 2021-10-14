@@ -35,6 +35,8 @@ import RewardNotification from '../../common/fire/RewardNotification';
 import Typography from '@material-ui/core/Typography';
 import HelpIcon from '@material-ui/icons/Help';
 
+import uploadImage from '../../../assets/img/upload_image.jpg';
+
 const FourImagesOneWord = ( props ) => {
     // Extraer los valores del context
     const alertaContext = useContext(AlertaContext)
@@ -83,7 +85,7 @@ const FourImagesOneWord = ( props ) => {
     const [ , setNowProgress, nowProgressRef] = useState(0)
     const [ , setMaxProgress, maxProgressRef] = useState(0)
     const [ , setLabelProgress, labelProgressRef] = useState(0)
-    const [ , setUserLeague, userLeagueRef] = useState('')
+    const [ , setUserLeague, ] = useState('')
 
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
@@ -93,14 +95,16 @@ const FourImagesOneWord = ( props ) => {
     )
 
     const CustomToast = ({closedToast}) => {
+        console.log(tips[tipActual])
         return (
             <div className={`notification-container`}>
                 <div className="notification-image">
                     <img src={infoIcon} alt="" />
                 </div>
-                <div>
-                    <p className="notification-title"> Aprendiendo con E-ncendio </p>
-                    <p className="notification-message">
+                <div className="body-container-notify">
+                    <h5 className="notification-title"> Aprendiendo con E-ncendio </h5>
+                    <img  src={tips[tipActual].urlFile !== "" ? tips[tipActual].urlFile : uploadImage} alt="Snow"  />
+                    <p>
                         {tips[tipActual].text}
                     </p>
                 </div>
@@ -282,8 +286,8 @@ const FourImagesOneWord = ( props ) => {
         setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
         setUserLeague( perfil.league_id.league )
         perfil.score = userPointsRef.current;
-        if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-            // console.log("Subir de nivel")
+        if ( perfil.score <= perfil.league_id.pointsNextLeague ) {
+            perfil.dropLeague = true;
             perfil.league_id = perfil.league_id.league
         }
         actualizarPerfil(perfil)
@@ -354,17 +358,18 @@ const FourImagesOneWord = ( props ) => {
                             <Row className="rowTitle4" >
                                 <Col className="align-self-center" >
                                     <Typography component="span" variant="h4" className="levelTitle4" >
-                                        { perfil ? `Nivel ${perfil.level_image_id.level}` : null}
+                                        {/* { perfil ? `Nivel ${perfil.level_image_id.level}` : null} */}
+                                        El Ahorcado
                                     </Typography>
                                 </Col>
                                 <Col >
                                 {perfil
                                 ?
                                     <Fragment>
-                                        <p className="progressTitle4" > {userLeagueRef.current} </p>
+                                        <p className="progressTitle4" > {perfil.league_id.league} </p>
                                         <OverlayTrigger
                                             placement="bottom"
-                                            overlay={<Tooltip className="mt-3" id="button-tooltip-1" > Puntos: {nowProgressRef.current} </Tooltip>}
+                                            overlay={<Tooltip className="" id="button-tooltip-1" > Puntos: {nowProgressRef.current} </Tooltip>}
                                         >
                                             <ProgressBar max={maxProgressRef.current} className="userProgress4" variant={colorProgress} animated striped  now={nowProgressRef.current}  
                                                         label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgressRef.current}% </span>)}
@@ -431,7 +436,7 @@ const FourImagesOneWord = ( props ) => {
                                                     placement={"top"}
                                                     overlay={
                                                 <Tooltip className="tooltipHangmanGame" id="help-icon-tooltip-1" >
-                                                    Necesita completar la palabra que se encuentra asociada a las 4 imágenes, ¡antes de perder sus oportunidades!.
+                                                    Necesita completar la palabra que se encuentra asociada a las 4 imágenes, ¡antes de perder sus oportunidades!, si te equivocas perderás puntos.
                                                 </Tooltip>
                                                 }
                                                 >

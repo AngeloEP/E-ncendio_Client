@@ -16,7 +16,7 @@
 
 .tip {
     position: relative;
-    margin-left: -5%;
+    margin-left: 0.5em;
     margin-top: 5%;
     margin-bottom: 3%;
 }
@@ -24,7 +24,7 @@
 .paper-tip {
     position: relative !important;
     text-align: left !important;
-    min-width: 100%;
+    max-width: 85%;
     margin-top: 10%;
     overflow-wrap: break-word;
     min-height: fit-content;
@@ -67,7 +67,7 @@
 }
 
 .textfield-text {
-    width: 60%;
+    width: 70%;
 }
 
 .submit-tip {
@@ -76,10 +76,10 @@
 
 .div-datatable-tips {
     text-align: center;
-    width: 80%;
+    width: 90%;
     margin-top: 5em;
     margin-bottom: 4em;
-    margin-left: 10%;
+    margin-left: 5%;
     background-color: white;
     border-radius: 12px;
 }
@@ -129,7 +129,7 @@
 
     .div-text {
         margin-top: 1em;
-        margin-left: 5%;
+        margin-left: 15%;
 
     }
     
@@ -138,6 +138,6 @@
     }
 
     .textfield-text {
-        width: 50%;
+        width: 90%;
     }
 }

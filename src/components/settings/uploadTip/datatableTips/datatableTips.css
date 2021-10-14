@@ -9,11 +9,17 @@
 }
 
 .div-tip-update {
-    width: 80%;
+    width: 100%;
 }
 
 .tip-update {
     position: relative;
+    width: 100%;
+}
+
+.tip-updateModal {
+    width: 70%;
+    margin-left: 15%;
 }
 
 .paper-tip-update {

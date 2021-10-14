@@ -1,0 +1,71 @@
+.div-uploadCategory {
+    position: relative;
+    text-align: center;
+    width: 90%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 5%;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.category {
+    position: relative;
+    margin-left: -5%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+.div-name {
+    margin-top: 1em;
+    margin-left: -6em;
+}
+
+.textfield-name {
+    width: 60%;
+}
+
+.submit-category {
+    width: 20%;
+}
+
+.div-datatable-categories {
+    text-align: center;
+    width: 80%;
+    margin-top: 5em;
+    margin-bottom: 4em;
+    margin-left: 10%;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.tooltipUploadCategory {
+    font-size: medium;
+}
+
+@media only screen and (max-width: 1376px){
+    .tip-upload {
+        min-width: 200px;
+        max-width: 300px;
+        min-height: 150px;
+        max-height: 250px;
+    }
+
+    .label-upload-tip { /* Agregar tip */
+        margin-left: 100%;
+    }
+
+    .div-name {
+        margin-top: 1em;
+        margin-left: 5%;
+
+    }
+    
+    .submit-category {
+        width: 15%;
+    }
+
+    .textfield-name {
+        width: 50%;
+    }
+}

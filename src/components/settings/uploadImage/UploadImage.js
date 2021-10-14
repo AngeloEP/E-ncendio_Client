@@ -87,7 +87,6 @@ const UploadImage = () => {
             return
         }
         
-        console.log("formulario correcto")
         const formData = new FormData();
         formData.append('image', image);
         guardarImagen(formData)

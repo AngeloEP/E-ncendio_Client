@@ -20,6 +20,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import DatatableTips from './datatableTips/DatatableTips';
 
 import RewardNotification from '../../common/fire/RewardNotification';
+import uploadImage from '../../../assets/img/upload_image.jpg';
 
 const UploadTip = () => {
 
@@ -75,25 +76,48 @@ const UploadTip = () => {
         })
     }
 
+    const [ image, setImage ] = useState(null)
+    const [ pathImage, setPathImage ] = useState(uploadImage)
+
+    const onFileChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0]
+            if (file.type.includes("image")) {
+                const reader = new FileReader()
+                reader.readAsDataURL(file)
+                
+                reader.onload = function load() {
+                    setPathImage(reader.result)
+                }
+                setImage(file)
+            } else {
+                mostrarAlerta("Debe seleccionar un archivo de tipo imagen, se admiten extensiones: jpeg, jpg, png y gif", "alerta-error")
+            }
+        }
+    }
+
     const onDelete = (id_tip) => {
-        // console.log(id_tip)
         eliminarTip(id_tip)
     }
 
     const onSubmit = e => {
         e.preventDefault()
-        // Validar que no hayan campos vacíos
         if (text.trim() === ''  ) {
                 mostrarAlerta("Todos los campos son obligatorios", 'alerta-error')
                 return
         }
 
-        guardarTip({ text })
+        const formData = new FormData();
+        formData.append('image', image);
+        formData.append('text', text);
+        guardarTip(formData)
 
-        // Resetear campos
         setFieldsTip({
             text: "Ejemplo",
         })
+        setImage(null);
+        setPathImage(uploadImage);
+        document.getElementById("contained-button-fileImageTip").value = "";
     }
 
     return (
@@ -125,12 +149,21 @@ const UploadTip = () => {
                         <Grid container spacing={5} >
 
                             <Grid item xs={4} >
-                                <div className="col tip" >
-                                    <Col>
-                                        <Paper className="paper-tip" elevation={10} variant="outlined"  >
-                                            {text}
-                                        </Paper>
-                                    </Col>
+                                <div className="div-image" >
+                                    <input
+                                        accept="image/*"
+                                        id="contained-button-fileImageTip"
+                                        multiple
+                                        type="file"
+                                        onChange={onFileChange}
+                                        style={{ display: "none" }}
+                                        />
+                                    <img className="img-fluid img-thumbnail image-upload" src={pathImage} alt="" />
+                                    <label htmlFor="contained-button-fileImageTip" className="label-upload-image" >
+                                        <Button  variant="contained" style={{ backgroundColor: "greenyellow", height: "85%" }}  component="span">
+                                            Agregar imagen
+                                        </Button>
+                                    </label>
                                 </div>
                             </Grid>
                             <Grid item xs={8} >
@@ -145,6 +178,13 @@ const UploadTip = () => {
                                         autoFocus
                                         onChange={onChange}
                                     />
+                                </div>
+                                <div className="col tip" >
+                                    <Col>
+                                        <Paper className="paper-tip" elevation={10} variant="outlined"  >
+                                            {text}
+                                        </Paper>
+                                    </Col>
                                 </div>
                             </Grid>
                             <Grid item xs={12} style={{ marginBottom: "2%" }} >
@@ -188,7 +228,7 @@ const UploadTip = () => {
                                             placement={"top"}
                                             overlay={
                                         <Tooltip className="tooltipUploadTip" id="help-icon-tooltip-1" >
-                                            Aquí debe escribir un consejo/información/tip sobre los incendios para darle a conocer un dato curioso o llamativo.
+                                            Aquí debe escribir un consejo/información/tip sobre los incendios para darle a conocer un dato curioso o llamativo, además de adjuntar una imagen que represente el contenido.
                                         </Tooltip>
                                         }
                                         >
@@ -203,13 +243,13 @@ const UploadTip = () => {
                 </Grid>
                 
             </Container>
-            <div className="div-datatable-tips" >
-                <DatatableTips
-                    tips={tips}
-                    deleteFunction={onDelete}
-                    loadingDelete={cargandoEliminarTip}
-                />
-            </div>
+                <div className="div-datatable-tips" >
+                    <DatatableTips
+                        tips={tips}
+                        deleteFunction={onDelete}
+                        loadingDelete={cargandoEliminarTip}
+                    />
+                </div>
         </Fragment>
     );
 }

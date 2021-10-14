@@ -15,6 +15,9 @@ import {
     OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA,
     OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA_CARGANDO,
     OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA_ERROR,
+    OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES,
+    OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_CARGANDO,
+    OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -24,22 +27,24 @@ const AnalyticsState = props => {
         distribucionCategoriasPalabras: [],
         distribucionCategoriasPorImagen: [],
         distribucionCategoriasPorPalabra: [],
+        distribucionUsoFuncionalidades: [],
         cargandoDistribucionCategorias: false,
         cargandoDistribucionCategoriasPalabras: false,
         cargandoDistribucionCategoriasPorImagen: false,
         cargandoDistribucionCategoriasPorPalabra: false,
+        cargandoDistribucionUsoFuncionalidades: false,
         errores: [],
     }
 
     const [ state, dispatch ] = useReducer(analyticsReducer, initialState)
 
-    const traerDistribucionDeCategorias = async () => {
+    const traerDistribucionDeCategorias = async (datos) => {
         try {
             dispatch({
                 type: OBTENER_DISTRIBUCION_CATEGORIAS_IMAGENES_CARGANDO,
             })
-
-            const respuesta = await clienteAxios.get('/api/tag-images/distribution')
+            
+            const respuesta = await clienteAxios.post('/api/tag-images/distribution', datos)
             dispatch({
                 type: OBTENER_DISTRIBUCION_CATEGORIAS_IMAGENES,
                 payload: respuesta.data
@@ -58,13 +63,13 @@ const AnalyticsState = props => {
         }
     }
 
-    const traerDistribucionDeCategoriasPorImagen = async (category) => {
+    const traerDistribucionDeCategoriasPorImagen = async (category, datos) => {
         try {
             dispatch({
                 type: OBTENER_DISTRIBUCION_CATEGORIAS_POR_IMAGEN_CARGANDO,
             })
 
-            const respuesta = await clienteAxios.get(`/api/tag-images/category/${category}`)
+            const respuesta = await clienteAxios.post(`/api/tag-images/category/${category}`, datos)
 
             dispatch({
                 type: OBTENER_DISTRIBUCION_CATEGORIAS_POR_IMAGEN,
@@ -84,13 +89,13 @@ const AnalyticsState = props => {
         }
     }
 
-    const traerDistribucionDeCategoriasPalabras = async () => {
+    const traerDistribucionDeCategoriasPalabras = async (datos) => {
         try {
             dispatch({
                 type: OBTENER_DISTRIBUCION_CATEGORIAS_PALABRAS_CARGANDO,
             })
 
-            const respuesta = await clienteAxios.get('/api/tag-words/distribution')
+            const respuesta = await clienteAxios.post('/api/tag-words/distribution', datos)
             dispatch({
                 type: OBTENER_DISTRIBUCION_CATEGORIAS_PALABRAS,
                 payload: respuesta.data
@@ -109,13 +114,13 @@ const AnalyticsState = props => {
         }
     }
 
-    const traerDistribucionDeCategoriasPorPalabra = async (category) => {
+    const traerDistribucionDeCategoriasPorPalabra = async (category, datos) => {
         try {
             dispatch({
                 type: OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA_CARGANDO,
             })
 
-            const respuesta = await clienteAxios.get(`/api/tag-words/category/${category}`)
+            const respuesta = await clienteAxios.post(`/api/tag-words/category/${category}`, datos)
 
             dispatch({
                 type: OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA,
@@ -135,6 +140,31 @@ const AnalyticsState = props => {
         }
     }
 
+    const traerDistribucionDeUsoDeFuncionalidades = async (datos) => {
+        try {
+            dispatch({
+                type: OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_CARGANDO,
+            })
+
+            const respuesta = await clienteAxios.post('/api/profiles/funcionalitiesDistribution', datos)
+            dispatch({
+                type: OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES,
+                payload: respuesta.data.distribucionFuncionalidades
+            })
+            
+        } catch (error) {
+            console.log(error)
+            const alerta = {
+                msg: error.response.data.msg,
+                categoria: 'alerta-error'
+            }
+            dispatch({
+                type: OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR,
+                payload: alerta
+            })
+        }
+    }
+
     return (
         <analyticsContext.Provider
             value={{
@@ -146,10 +176,13 @@ const AnalyticsState = props => {
                 distribucionCategoriasPorPalabra: state.distribucionCategoriasPorPalabra,
                 cargandoDistribucionCategoriasPalabras: state.cargandoDistribucionCategoriasPalabras,
                 cargandoDistribucionCategoriasPorPalabra: state.cargandoDistribucionCategoriasPorPalabra,
+                distribucionUsoFuncionalidades: state.distribucionUsoFuncionalidades,
+                cargandoDistribucionUsoFuncionalidades: state.cargandoDistribucionUsoFuncionalidades,
                 traerDistribucionDeCategorias,
                 traerDistribucionDeCategoriasPorImagen,
                 traerDistribucionDeCategoriasPalabras,
                 traerDistribucionDeCategoriasPorPalabra,
+                traerDistribucionDeUsoDeFuncionalidades,
             }}
         >
             {props.children}

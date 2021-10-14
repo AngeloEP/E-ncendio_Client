@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, Fragment } from 'react';
 import useState from 'react-usestateref';
 import useInterval from "../useInterval";
+import { useDisclosure } from "@chakra-ui/react"
 
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
@@ -33,6 +34,18 @@ import RewardNotification from '../../common/fire/RewardNotification';
 import infoIcon from '../../../assets/info.svg';
 import HelpIcon from '@material-ui/icons/Help';
 
+import uploadImage from '../../../assets/img/upload_image.jpg';
+
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+  } from "@chakra-ui/react";
+
 const AssociateWords = ( props ) => {
 
     // Extraer los valores del context
@@ -57,17 +70,19 @@ const AssociateWords = ( props ) => {
 
     // Extraer la información del context de niveles
     const categoriesContext = useContext(categoryContext)
-    const { categorias, obtenerCategorias } = categoriesContext
+    const { categoriasVisibles, obtenerCategoriasVisibles } = categoriesContext
 
     // Extraer la información del context de etiquetar
     const tagsContext = useContext(tagContext)
     const {
         recompensas,
         recompensasTareas,
+        porcentajeEtiquetaPalabra,
         etiquetarPalabra,
         verTip,
         borrarRecompensasEtiquetas,
         borrarRecompensasEtiquetasTareas,
+        borrarPorcentajePalabra,
     } = tagsContext
 
     let palabraActual = JSON.parse(localStorage.getItem("palabraActual"))
@@ -94,9 +109,10 @@ const AssociateWords = ( props ) => {
                 <div className="notification-image">
                     <img src={infoIcon} alt="" />
                 </div>
-                <div>
-                    <p className="notification-title"> Aprendiendo con E-ncendio </p>
-                    <p className="notification-message">
+                <div className="body-container-notify">
+                    <h5 className="notification-title"> Aprendiendo con E-ncendio </h5>
+                    <img  src={tips[tipActual].urlFile !== "" ? tips[tipActual].urlFile : uploadImage} alt="Snow"  />
+                    <p>
                         {tips[tipActual].text}
                     </p>
                 </div>
@@ -123,7 +139,7 @@ const AssociateWords = ( props ) => {
         obtenerPerfil()
 
         // Traer las categorías posibles /api/categories
-        obtenerCategorias()
+        obtenerCategoriasVisibles()
 
         // Traer las Palabras del nivel correspondiente /api/league/{id}/words 
         obtenerPalabras()
@@ -135,7 +151,10 @@ const AssociateWords = ( props ) => {
     }, [])
 
     const [ isWinner, setIsWinner ] = useState(false)
+    const [ isSkip, setIsSkip ] = useState(false)
     const [ points, setPoints ] = useState(0)
+
+    const { onClose } = useDisclosure()
 
     const [ checked, setChecked ] = useState({
         prevencion: false,
@@ -148,7 +167,6 @@ const AssociateWords = ( props ) => {
 
         selected: null
     })
-
     const transformSelected = (selectedCategory) => {
         switch (selectedCategory) {
             case 'prevencion':
@@ -187,6 +205,49 @@ const AssociateWords = ( props ) => {
         setChecked({ ...checked, checkboxes });        
     }
 
+    const skipGame = () => {
+        setIsSkip(true)
+        let addPoints = -15;
+        setPoints(addPoints)
+        setUserPoints( prevTime => prevTime + addPoints)
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
+        perfil.score = perfil.score + addPoints;
+        if ( perfil.score <= perfil.league_id.pointsPreviousLeague ) {
+            perfil.dropLeague = true;
+            perfil.league_id = perfil.league_id.league
+            obtenerPerfil()
+        }
+        actualizarPerfil(perfil)
+        setTimeout(() => {
+            setIsSkip(false)
+        }, 2000);
+        
+        setNewContent(true);
+        setChecked({
+            prevencion: false,
+            mitigacion: false,
+            riesgo: false,
+            combate: false,
+            impacto: false,
+            recuperacion: false,
+            amenaza: false,
+    
+            selected: null
+        })
+        palabras.push(palabras[palabraActual])
+
+        // Avanzar a la siguiente palabra
+        setTimeout(() => {
+            localStorage.setItem( 'palabraActual', palabraActual + 1 );
+            setTimeout(() => {
+                setNewContent(false)
+            }, 1000);
+        }, 1000);
+    }
+
     const onRender = () => {
         if ( checked.selected == null ) {
             mostrarAlerta('Debes seleccionar una Categoría', 'alerta-error')
@@ -194,7 +255,7 @@ const AssociateWords = ( props ) => {
         }
 
         let categoriaSeleccionada = transformSelected(checked.selected)
-        categoriaSeleccionada = categorias.find(e => e.name === categoriaSeleccionada);
+        categoriaSeleccionada = categoriasVisibles.find(e => e.name === categoriaSeleccionada);
         etiquetarPalabra(palabras[palabraActual]._id, categoriaSeleccionada._id)
         setIsWinner(true)
         // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
@@ -210,12 +271,10 @@ const AssociateWords = ( props ) => {
         setUserLeague( perfil.league_id.league )
         perfil.score = perfil.score + addPoints;
         if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-            // console.log("Subir de nivel")
             perfil.league_id = perfil.league_id.league
         }
         actualizarPerfil(perfil)
         setTimeout(() => {
-            // console.log(perfil)
             setIsWinner(false)
         }, 2000);
         
@@ -234,7 +293,6 @@ const AssociateWords = ( props ) => {
         
         // Avanzar a la siguiente Palabra
         if ( palabraActual < largoPalabras - 1 ) {
-            // console.log("aun quedan Palabras")
             setTimeout(() => {
                 localStorage.setItem( 'palabraActual', palabraActual + 1 );
                 setTimeout(() => {
@@ -244,7 +302,6 @@ const AssociateWords = ( props ) => {
         } else {
             // Revisar si sube de nivel de Palabras? /api/user/{id}/level-word
 
-            // console.log("Ya se acabaron las Palabras")
 
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -315,6 +372,13 @@ const AssociateWords = ( props ) => {
         setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
         setUserLeague( perfil.league_id.league )
     }
+    if (perfil!= null && perfil.league_id.league !== userLeagueRef.current) {
+        setUserPoints( perfil.score )
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
+    }
     let colorProgress = labelProgressRef.current < 50 ? "success" : labelProgressRef.current < 80 ? "warning" : "danger";
     return (
         <Container fluid className="backgroundGif" >
@@ -326,23 +390,24 @@ const AssociateWords = ( props ) => {
                         <Row className="rowTitle" >
                             <Col >
                                 <Typography variant="h4" className="levelTitle" >
-                                    { perfil ? `Nivel ${perfil.level_word_id.level}` : null}
+                                    {/* { perfil ? `Nivel ${perfil.level_word_id.level}` : null} */}
+                                    Etiquetar palabras
                                 </Typography>
                             </Col>
                             <Col >
                             {perfil
                             ?
                                 <Fragment>
-                                    <p className="progressTitle" > {userLeagueRef.current} </p>
+                                    <p className="progressTitle" > {perfil.league_id.league} </p>
                                     <OverlayTrigger
                                         placement="bottom"
-                                        overlay={<Tooltip className="mt-3" id="button-tooltip-1" > Puntos: {nowProgressRef.current} </Tooltip>}
+                                        overlay={<Tooltip className="" id="button-tooltip-1" > Puntos: {nowProgressRef.current} </Tooltip>}
                                     >
                                         <ProgressBar max={maxProgressRef.current} className="userProgress" variant={colorProgress} animated striped  now={nowProgressRef.current}  
                                                     label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgressRef.current}% </span>)}
                                         />
                                     </OverlayTrigger>
-                                    <p className={isWinner === true | tipReceive === true ? "final-text winner" : "final-text"} > +{points} puntos </p>
+                                    <p className={isWinner === true | tipReceive === true ? "final-text winner" : isSkip === true ? "final-text gameover" : "final-text"} > {isWinner === true | tipReceive === true ? "+" : ""}{points} puntos </p>
                                 </Fragment>
                             : null
                             }
@@ -369,95 +434,175 @@ const AssociateWords = ( props ) => {
                         : null
                     }
 
+                    <div className="text-tagWords" >
+                        ¡Sólo debes seleccionar una categoría que este relacionada a la palabra, si saltas perderás puntos!
+                    </div>
+
+                    <>
+                        <Modal
+                            closeOnOverlayClick={false}
+                            isOpen={porcentajeEtiquetaPalabra !== null && porcentajeEtiquetaPalabra!== undefined ? true : false} 
+                            onClose={() => {onClose(); borrarPorcentajePalabra();}}
+                            isCentered
+                            >
+                            <ModalOverlay />
+                            <ModalContent>
+                            <ModalHeader> ¡Dato importante! </ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody pb={6}>
+                                El {porcentajeEtiquetaPalabra}% de las personas que etiquetaron esta palabra pensaron lo mismo que tú
+                            </ModalBody>
+
+                            <ModalFooter>
+                                <Button onClick={() => {onClose(); borrarPorcentajePalabra();}}> Ok </Button>
+                            </ModalFooter>
+                            </ModalContent>
+                        </Modal>
+                    </>
+
                     { palabras.length !== 0
                         ?
                             newContent === false
                             ?
-                                <div>
-                                    <div className="center">
-                                        <div className="row">
-                                            <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                                <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck}
-                                                    title="Superficie con peligro de provocar un incendio."
-                                                    placement="left"
-                                                />
-                                            </div>
-                                            <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                                <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck}
-                                                    title="Se aprecian medidas para evitar un incendio."
-                                                    placement="top"
-                                                />
-                                            </div>
-                                            <div className="col categoritas" >
-                                                <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck}
-                                                    title="Terreno que pasa por período de transformación para recuperarse de un incendio."
-                                                    placement="right"
-                                                />
-                                            </div>
+                                <>
+                                    <div className="row mainDiv-tagImages" >
+                                        <div className="col" >
+                                            <Paper className="paper" elevation={10} variant="outlined"  >
+                                                {palabras[palabraActual].name}
+                                            </Paper>
                                         </div>
-                                        <div className="row">
-                                            <div className="col categoritas" style={{ marginRight: "-4%" }} >
-                                                <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck}
-                                                    title="Se pueden ver técnicas para buscar reducir al máximo los efectos potenciales de un incendio."
-                                                    placement="left"
-                                                />
-                                            </div>
-                                            <div className="col palabra" >
-                                                { palabras.length === 0
-                                                ? null
-                                                :
-                                                    <Col>
-                                                        <Paper className="paper" elevation={10} variant="outlined"  >
-                                                            {palabras[palabraActual].name}
-                                                        </Paper>
-                                                    </Col>
-                                                }
-                                            </div>
-                                            <div className="col categoritas" style={{ marginLeft: "-1%" }} >
-                                                <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck}
-                                                    title="Estado preocupante o amenazante en el cual el incendio llegue a ser muy grave y casi incontrolable."
-                                                    placement="right"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                                <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck}
-                                                    title="Consecuencias post-incendio del terreno."
-                                                    placement="left"
-                                                />
-                                            </div>
-                                            <div className="col categoritas">
-                                            </div>
-                                            <div className="col categoritas" style={{ marginLeft: "-10%" }} >
-                                                <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck}
-                                                    title="Se trata de contener al incendio, para detener su avance."
-                                                    placement="right"
-                                                />
-                                            </div>
+                                        <div className="col" >
+                                                <>
+                                                    <div className="row">
+                                                        {categoriasVisibles.length !== 0
+                                                        ?
+                                                            categoriasVisibles.map((categoria, index) =>
+                                                                <div key={index} className="col-sm-6 col-md-6" >
+                                                                    <Fire name={categoria.name.charAt(0).toLowerCase() + categoria.name.slice(1)} value={categoria.name} selected={checked[categoria.name.charAt(0).toLowerCase() + categoria.name.slice(1)]} onCheck={onCheck}
+                                                                        title=""
+                                                                        placement="left"
+                                                                    />
+                                                                </div>
+                                                            )
+                                                        :
+                                                            <div className="text-center position-relative" style={{ top: "50%" }} >
+                                                                <ClipLoader
+                                                                    color={"#000"}
+                                                                    loading={true}
+                                                                    size={70}
+                                                                />
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </>
                                         </div>
                                     </div>
+                                    <Row className="bottomCenter-images" >
+                                        <Col xs={5} >
+                                            <Button className="botonSaltar" variant="danger" onClick={ () => skipGame() } > Saltar </Button>{' '}
+                                        </Col>
+                                        <Col xs={5} >
+                                            <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
+                                        </Col>
+                                        <Col xs={2} >
+                                            <OverlayTrigger
+                                                key={9}
+                                                placement={"top"}
+                                                overlay={
+                                            <Tooltip className="tooltipTagImage" id="help-icon-tooltip-1" > Debe seleccionar la categoría que considere que se asocie más a la imagen
+                                            </Tooltip>
+                                            }
+                                            >
+                                                <HelpIcon className="help-icon-tagImage" color="primary" />
+                                            </OverlayTrigger>
+                                        </Col>
+                                    </Row>
+                                </>
+                                // <div>
+                                //     <div className="center">
+                                //         <div className="row">
+                                //             <div className="col categoritas" style={{ marginRight: "-10%" }} >
+                                //                 <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck}
+                                //                     title="Superficie con peligro de provocar un incendio."
+                                //                     placement="left"
+                                //                 />
+                                //             </div>
+                                //             <div className="col categoritas" style={{ marginRight: "-10%" }} >
+                                //                 <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck}
+                                //                     title="Se aprecian medidas para evitar un incendio."
+                                //                     placement="top"
+                                //                 />
+                                //             </div>
+                                //             <div className="col categoritas" >
+                                //                 <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck}
+                                //                     title="Terreno que pasa por período de transformación para recuperarse de un incendio."
+                                //                     placement="right"
+                                //                 />
+                                //             </div>
+                                //         </div>
+                                //         <div className="row">
+                                //             <div className="col categoritas" style={{ marginRight: "-4%" }} >
+                                //                 <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck}
+                                //                     title="Se pueden ver técnicas para buscar reducir al máximo los efectos potenciales de un incendio."
+                                //                     placement="left"
+                                //                 />
+                                //             </div>
+                                //             <div className="col palabra" >
+                                //                 { palabras.length === 0
+                                //                 ? null
+                                //                 :
+                                //                     <Col>
+                                //                         <Paper className="paper" elevation={10} variant="outlined"  >
+                                //                             {palabras[palabraActual].name}
+                                //                         </Paper>
+                                //                     </Col>
+                                //                 }
+                                //             </div>
+                                //             <div className="col categoritas" style={{ marginLeft: "-1%" }} >
+                                //                 <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck}
+                                //                     title="Estado preocupante o amenazante en el cual el incendio llegue a ser muy grave y casi incontrolable."
+                                //                     placement="right"
+                                //                 />
+                                //             </div>
+                                //         </div>
+                                //         <div className="row">
+                                //             <div className="col categoritas" style={{ marginRight: "-10%" }} >
+                                //                 <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck}
+                                //                     title="Consecuencias post-incendio del terreno."
+                                //                     placement="left"
+                                //                 />
+                                //             </div>
+                                //             <div className="col categoritas">
+                                //             </div>
+                                //             <div className="col categoritas" style={{ marginLeft: "-10%" }} >
+                                //                 <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck}
+                                //                     title="Se trata de contener al incendio, para detener su avance."
+                                //                     placement="right"
+                                //                 />
+                                //             </div>
+                                //         </div>
+                                //     </div>
                     
-                                    <div className="bottomCenter" >
-                                        <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
-                                            <Col xs={11} >
-                                                <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
-                                            </Col>
-                                            <Col xs={1} >
-                                                <OverlayTrigger
-                                                    key={9}
-                                                    placement={"top"}
-                                                    overlay={
-                                                <Tooltip className="tooltipTagWord" id="help-icon-tooltip-1" > Selecciona la categoría que represente mejor al texto mostrado.
-                                                </Tooltip>
-                                                }
-                                                >
-                                                    <HelpIcon className="help-icon-tagImage" color="primary" />
-                                                </OverlayTrigger>
-                                            </Col>
-                                        </Row>
-                                    </div>
-                                </div>
+                                //     <div className="bottomCenter" >
+                                //         <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
+                                //             <Col xs={11} >
+                                //                 <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
+                                //             </Col>
+                                //             <Col xs={1} >
+                                //                 <OverlayTrigger
+                                //                     key={9}
+                                //                     placement={"top"}
+                                //                     overlay={
+                                //                 <Tooltip className="tooltipTagWord" id="help-icon-tooltip-1" > Selecciona la categoría que represente mejor al texto mostrado.
+                                //                 </Tooltip>
+                                //                 }
+                                //                 >
+                                //                     <HelpIcon className="help-icon-tagImage" color="primary" />
+                                //                 </OverlayTrigger>
+                                //             </Col>
+                                //         </Row>
+                                //     </div>
+                                // </div>
                             :
                                 <div className="text-center position-relative" style={{ top: "50%" }} >
                                     <ClipLoader
