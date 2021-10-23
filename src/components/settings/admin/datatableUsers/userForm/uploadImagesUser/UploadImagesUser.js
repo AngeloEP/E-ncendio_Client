@@ -255,7 +255,7 @@ const UploadImagesUser = ({ usuario,
                                                         onChange={onChangeUpdate}
                                                         label="Dificultad"
                                                     >
-                                                    <MenuItem value="">
+                                                    <MenuItem value="Ninguna">
                                                         <em> Ninguna </em>
                                                     </MenuItem>
                                                     <MenuItem value={'Easy'}> Fácil </MenuItem>

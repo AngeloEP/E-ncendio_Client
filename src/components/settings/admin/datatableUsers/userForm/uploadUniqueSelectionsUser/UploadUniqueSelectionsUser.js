@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import './uploadHangmansUser.css';
+import './uploadUniqueSelectionsUser.css';
 
 import AlertaContext from '../../../../../../context/alertas/alertaContext';
 
@@ -19,17 +19,16 @@ import Modal from 'react-bootstrap/Modal';
 import ButtonBootstrap from 'react-bootstrap/Button';
 
 
-const UploadHangmansUser = ({ usuario,
-    ahorcados,
+const UploadUniqueSelectionsUser = ({
+    seleccionesUnicas,
     funcionHabilitarInhabilitar,
     funcionEliminar,
     funcionModificarDificultadYPuntos,
-    cargandoHabilitarInhabilitarAhorcado,
-    cargandoEliminarAhorcadoPorAdmin,
-    cargandoAhorcadosUsuarioDesdeAdmin,
-    cargandoModificarDificultadPuntosAhorcadoPorAdmin,
+    cargandoHabilitarInhabilitarSeleccionUnica,
+    cargandoEliminarSeleccionUnicaPorAdmin,
+    cargandoSeleccionesUnicasUsuarioDesdeAdmin,
+    cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin,
 }) => {
-    // Extraer los valores del context
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta } = alertaContext
 
@@ -39,41 +38,39 @@ const UploadHangmansUser = ({ usuario,
             setShow(false)
     };
 
-    const handleShow = (hangman_id) => {
-        const hangmanSelected = ahorcados.find(hangman => hangman._id === hangman_id);
-        setFieldsHangmanUpdate({
-            id_hangman_selected: hangman_id,
-            associatedWord: hangmanSelected.Palabra,
-            difficulty: hangmanSelected.Dificultad,
-            points: hangmanSelected.Puntos,
+    const handleShow = (uniqueSelection_id) => {
+        const uniqueSelectionSelected = seleccionesUnicas.find(uniqueSelection => uniqueSelection._id === uniqueSelection_id);
+        setFieldsUniqueSelectionUpdate({
+            id_uniqueSelection_selected: uniqueSelection_id,
+            keyWord: uniqueSelectionSelected.Palabra,
+            difficulty: uniqueSelectionSelected.Dificultad,
+            points: uniqueSelectionSelected.Puntos,
         })
-        setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen1]);
-        setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen2]);
-        setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen3]);
-        setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen4]);
+        setPathImagesUpdate(prevProps => [...prevProps, uniqueSelectionSelected.Imagen1]);
+        setPathImagesUpdate(prevProps => [...prevProps, uniqueSelectionSelected.Imagen2]);
+        setPathImagesUpdate(prevProps => [...prevProps, uniqueSelectionSelected.Imagen3]);
         setShow(true)
     };
 
-    const [ fieldsHangmanUpdate, setFieldsHangmanUpdate ] = useState({
-        id_hangman_selected: "",
-        associatedWord: "",
+    const [ fieldsUniqueSelectionUpdate, setFieldsUniqueSelectionUpdate ] = useState({
+        id_uniqueSelection_selected: "",
+        keyWord: "",
         difficulty: "",
         points: 0,
     })
-    const { id_hangman_selected, associatedWord, difficulty, points } = fieldsHangmanUpdate;
+    const { id_uniqueSelection_selected, keyWord, difficulty, points } = fieldsUniqueSelectionUpdate;
     const [ pathImagesUpdate, setPathImagesUpdate ] = useState([])
 
     const onChangeUpdate = e => {
-        setFieldsHangmanUpdate({
-            ...fieldsHangmanUpdate,
+        setFieldsUniqueSelectionUpdate({
+            ...fieldsUniqueSelectionUpdate,
             [e.target.name]: e.target.value
         })
     }
 
     const onSubmitUpdate = e => {
         e.preventDefault()
-        // Validar que no hayan campos vacíos
-        if (associatedWord.trim() === '' ||
+        if (keyWord.trim() === '' ||
             difficulty.trim() === '' ||
             points === 0 ||
             points === "" ) {
@@ -81,53 +78,47 @@ const UploadHangmansUser = ({ usuario,
                 return
         }
         
-        funcionModificarDificultadYPuntos( id_hangman_selected, { associatedWord, difficulty, points } )
+        funcionModificarDificultadYPuntos( id_uniqueSelection_selected, { keyWord, difficulty, points } )
     }
 
     return (
-        <div className="cards-hangmans" >
+        <div className="cards-uniqueSelections" >
             <div className="row">
-                { cargandoAhorcadosUsuarioDesdeAdmin === false
+                { cargandoSeleccionesUnicasUsuarioDesdeAdmin === false
                     ?
-                        ahorcados.length !== 0
+                        seleccionesUnicas.length !== 0
                         ?
-                            ahorcados.map((ahorcado, index) =>
+                            seleccionesUnicas.map((seleccionUnica, index) =>
 
                                 <div key={index} className="col-sm-6 col-md-6" >
                                     
-                                    <div className="card text-white tarjeta-hangman" >
-                                        {/* <img className="card-img-top imagenes-tarjeta" src={ahorcado.Imagen1} alt="Card image cap" /> */}
+                                    <div className="card text-white tarjeta-uniqueSelection" >
                                         <div className="fila">
                                             <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen1} alt="" />
+                                                <img className="imagenes-tarjeta-uniqueSelections" src={seleccionUnica.Imagen1} alt="" />
                                             </div>
                                             <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen2} alt="" />
+                                                <img className="imagenes-tarjeta-uniqueSelections" src={seleccionUnica.Imagen2} alt="" />
                                             </div>
                                         </div>
-                                        <div className="fila">
-                                            <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen3} alt="" />
-                                            </div>
-                                            <div className="columna">
-                                                <img className="imagenes-tarjeta" src={ahorcado.Imagen4} alt="" />
-                                            </div>
+                                        <div className="fila ml-2 mr-2">
+                                                <img className="imagenes-tarjeta-uniqueSelections" src={seleccionUnica.Imagen3} alt="" />
                                         </div>
                                         <div className="card-body text-center">
-                                            <h5 className="card-title titulo-nombre-card-hangman"> Palabra </h5>
-                                            <p className="card-text nombre-card-hangman"> {ahorcado.Palabra} </p>
-                                            <h5 className="card-title titulo-fecha-card-hangman"> Subido el </h5>
-                                            <p className="card-text fecha-card-hangman"> {ahorcado.Creadoel} </p>
+                                            <h5 className="card-title titulo-nombre-card-uniqueSelection"> Palabra </h5>
+                                            <p className="card-text nombre-card-uniqueSelection"> {seleccionUnica.Palabra} </p>
+                                            <h5 className="card-title titulo-fecha-card-uniqueSelection"> Subido el </h5>
+                                            <p className="card-text fecha-card-uniqueSelection"> {seleccionUnica.Creadoel} </p>
                                             <Button
                                                 type="submit"
                                                 variant="contained"
                                                 color="secondary"
                                                 style={{height: "15%", width: "45%", marginLeft: "2%" }}
-                                                disabled={cargandoEliminarAhorcadoPorAdmin}
-                                                onClick={() => funcionEliminar(ahorcado._id)}
+                                                disabled={cargandoEliminarSeleccionUnicaPorAdmin}
+                                                onClick={() => funcionEliminar(seleccionUnica._id)}
                                             >
                                                 {
-                                                    cargandoEliminarAhorcadoPorAdmin
+                                                    cargandoEliminarSeleccionUnicaPorAdmin
                                                     ?
                                                     <Grid container
                                                         direction="row"
@@ -153,18 +144,18 @@ const UploadHangmansUser = ({ usuario,
                                             <Button
                                                 type="submit"
                                                 variant="contained"
-                                                style={ahorcado.Habilitada ?
+                                                style={seleccionUnica.Habilitada ?
                                                         { backgroundColor: "#ffc107",
                                                         borderColor: "#ffc107", height: "15%", width: "45%", marginLeft: "2%" }
                                                         :
                                                         { color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745",
                                                             height: "15%", width: "45%", marginLeft: "2%" }
                                                     }
-                                                disabled={cargandoHabilitarInhabilitarAhorcado}
-                                                onClick={() => funcionHabilitarInhabilitar(ahorcado._id, !ahorcado.Habilitada)}
+                                                disabled={cargandoHabilitarInhabilitarSeleccionUnica}
+                                                onClick={() => funcionHabilitarInhabilitar(seleccionUnica._id, !seleccionUnica.Habilitada)}
                                             >
                                                 {
-                                                    cargandoHabilitarInhabilitarAhorcado
+                                                    cargandoHabilitarInhabilitarSeleccionUnica
                                                     ?
                                                     <Grid container
                                                         direction="row"
@@ -184,7 +175,7 @@ const UploadHangmansUser = ({ usuario,
                                                     </Grid>
                                                         
                                                     :
-                                                        ahorcado.Habilitada ? "Inhabilitar" : "Habilitar"
+                                                        seleccionUnica.Habilitada ? "Inhabilitar" : "Habilitar"
                                                 }
                                             </Button>
                                             <Button
@@ -193,7 +184,7 @@ const UploadHangmansUser = ({ usuario,
                                                 variant="contained"
                                                 color="primary"
                                                 style={{ backgroundColor: "#1976d2", color: "#fff", height: "15%", width: "100%" }}
-                                                onClick={() => handleShow(ahorcado._id)}
+                                                onClick={() => handleShow(seleccionUnica._id)}
                                             >
                                                 {
                                                     "Modificar dificultad y puntos"
@@ -205,7 +196,7 @@ const UploadHangmansUser = ({ usuario,
                             )
                         :
                         <div className="text-center ml-auto mr-auto" >
-                            No hay ahorcados
+                            No hay Selecciones Unicas
                         </div>
                     :
                         <div className="text-center ml-auto mr-auto" >
@@ -229,12 +220,12 @@ const UploadHangmansUser = ({ usuario,
                     style={{ backgroundColor: "black" }}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Ahorcado  </Modal.Title>
+                        <Modal.Title> Modificar Selección Única  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
-                        <Container className="div-uploadHangman-update" >
+                        <Container className="div-uploadUniqueSelection-update" >
                             <Grid container component="main" >
                                 <Grid item xs={12} sm={8} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
@@ -242,19 +233,14 @@ const UploadHangmansUser = ({ usuario,
                                         <Grid item xs={6} >
                                             <div className="fila-update">
                                                 <div className="columna-update">
-                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[0]} alt="" />
+                                                    <img className="imagenes-tarjeta-uniqueSelections-update" src={pathImagesUpdate[0]} alt="" />
                                                 </div>
                                                 <div className="columna-update">
-                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[1]} alt="" />
+                                                    <img className="imagenes-tarjeta-uniqueSelections-update" src={pathImagesUpdate[1]} alt="" />
                                                 </div>
                                             </div>
-                                            <div className="fila-update">
-                                                <div className="columna-update">
-                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[2]} alt="" />
-                                                </div>
-                                                <div className="columna-update">
-                                                    <img className="imagenes-tarjeta-update" src={pathImagesUpdate[3]} alt="" />
-                                                </div>
+                                            <div className="fila-update ml-2 mr-2">
+                                                    <img className="imagenes-tarjeta-uniqueSelections-update" src={pathImagesUpdate[2]} alt="" />
                                             </div>
                                         </Grid>
                                         <Grid item xs={6} >
@@ -263,16 +249,16 @@ const UploadHangmansUser = ({ usuario,
                                                 <div className="div-filename-update" >                        
                                                     <TextField
                                                         style={{ width: "60%" }}
-                                                        value={associatedWord}
-                                                        name="filename"
+                                                        value={keyWord}
+                                                        name="keyWord"
                                                         variant="outlined"
-                                                        id="filename"
-                                                        label="Palabra de asociación"
+                                                        id="keyWord"
+                                                        label="Palabra clave"
                                                         autoFocus
                                                     />
                                                 </div>
 
-                                                <div className="div-difficulty-hangman" >                        
+                                                <div className="div-difficulty-uniqueSelection" >                        
                                                     <FormControl variant="outlined" >
                                                         <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
                                                         <Select
@@ -299,7 +285,7 @@ const UploadHangmansUser = ({ usuario,
                                                         style={{ width: "60%" }}
                                                         variant="outlined"
                                                         id="points"
-                                                        label="Ingrese una cantidad de puntos asociada a este ahorcado"
+                                                        label="Ingrese una cantidad de puntos asociada a esta S. Única"
                                                         name='points'
                                                         type='number'
                                                         value={points}
@@ -326,10 +312,10 @@ const UploadHangmansUser = ({ usuario,
                             variant="contained"
                             style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
                             startIcon={<EditIcon />}
-                            disabled={cargandoModificarDificultadPuntosAhorcadoPorAdmin}
+                            disabled={cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin}
                         >
                             {
-                                cargandoModificarDificultadPuntosAhorcadoPorAdmin
+                                cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin
                                 ?
                                 <Grid container
                                     direction="row"
@@ -360,4 +346,4 @@ const UploadHangmansUser = ({ usuario,
     );
 }
  
-export default UploadHangmansUser;
+export default UploadUniqueSelectionsUser;

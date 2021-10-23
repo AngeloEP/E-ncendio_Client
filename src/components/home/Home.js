@@ -369,7 +369,7 @@ const Home = () => {
                                 <Card.Text className="card-text" >
                                     Puedes colaborar jugando en uno de los 3 tipos de juegos, <a href="/games/images"> etiquetando imágenes </a>, 
                                     <a href="/games/words"> etiquetando palabras </a> desde la liga de <span style={{ color: "#8A9597" }} > Plata </span> o descubriendo la palabra incógnita en 
-                                    <a href="/games/four-images-one-word"> 4 imágenes y 1 palabra </a> a partir de la liga de <span style={{ color: "#FFBF00" }} > Oro </span>.
+                                    <a href="/games/four-images-one-word"> 4 imágenes y 1 palabra </a> o <a href="/games/unique-selection"> Selección Única </a> a partir de la liga de <span style={{ color: "#FFBF00" }} > Oro </span>.
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -387,7 +387,7 @@ const Home = () => {
                                 <Card.Text className="card-text" >
                                     Puedes aportar tu granito de arena y colaborar con el objetivo de E-ncendio 
                                     subiendo imágenes, agregar palabras desde la liga de <span style={{ color: "#8A9597" }} > Plata </span> y también subir contenido para el juego
-                                    de 4 palabras y 1 imagen o los tips de información desde la liga de <span style={{ color: "#FFBF00" }} > Oro </span>,
+                                    de 4 palabras y 1 imagen o el juego de Selección Única o incluso los tips de información desde la liga de <span style={{ color: "#FFBF00" }} > Oro </span>,
                                     cada uno de estos serán evaluadas por los administradores para ver si cumplen con los requisitos.
                                 </Card.Text>
                                 </Card.Body>

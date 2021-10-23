@@ -42,6 +42,18 @@ import {
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO,
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_CARGANDO,
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_ERROR,
+    OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN,
+    OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN_ERROR,
+    OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN_CARGANDO,
+    HABILITAR_INHABILITAR_SELECCION_UNICA,
+    HABILITAR_INHABILITAR_SELECCION_UNICA_CARGANDO,
+    HABILITAR_INHABILITAR_SELECCION_UNICA_ERROR,
+    ELIMINAR_SELECCION_UNICA_DESDE_ADMIN,
+    ELIMINAR_SELECCION_UNICA_DESDE_ADMIN_CARGANDO,
+    ELIMINAR_SELECCION_UNICA_DESDE_ADMIN_ERROR,
+    MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA,
+    MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA_CARGANDO,
+    MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA_ERROR,
     OBTENER_TIPS_POR_USUARIO_ADMIN,
     OBTENER_TIPS_POR_USUARIO_ADMIN_ERROR,
     OBTENER_TIPS_POR_USUARIO_ADMIN_CARGANDO,
@@ -64,6 +76,10 @@ const usuariosReducer = (state, action) => {
                 distribucion: action.payload,
             }
         
+        case OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN_ERROR:
+        case HABILITAR_INHABILITAR_SELECCION_UNICA_ERROR:
+        case ELIMINAR_SELECCION_UNICA_DESDE_ADMIN_ERROR:
+        case MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA_ERROR:
         case MODIFICAR_DIFICULTAD_PUNTOS_TIP_ERROR:
         case HABILITAR_INHABILITAR_TIP_ERROR:
         case ELIMINAR_TIP_DESDE_ADMIN_ERROR:
@@ -150,6 +166,19 @@ const usuariosReducer = (state, action) => {
                 cargandoAhorcadosUsuarioDesdeAdmin: false,
             }
 
+        case OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN_CARGANDO:
+            return {
+                ...state,
+                cargandoSeleccionesUnicasUsuarioDesdeAdmin: true,
+            }
+
+        case OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN:
+            return {
+                ...state,
+                seleccionesUnicasPorUsuario: action.payload,
+                cargandoSeleccionesUnicasUsuarioDesdeAdmin: false,
+            }
+
         case OBTENER_TIPS_POR_USUARIO_ADMIN_CARGANDO:
             return {
                 ...state,
@@ -208,6 +237,20 @@ const usuariosReducer = (state, action) => {
                 cargandoHabilitarInhabilitarAhorcado: false
             }
 
+        case HABILITAR_INHABILITAR_SELECCION_UNICA_CARGANDO:
+            return {
+                ...state,
+                cargandoHabilitarInhabilitarSeleccionUnica: true
+            }
+
+        case HABILITAR_INHABILITAR_SELECCION_UNICA:
+            return {
+                ...state,
+                seleccionesUnicasPorUsuario: state.seleccionesUnicasPorUsuario.map(seleccionUnica => seleccionUnica._id ===
+                    action.payload[0]._id ? action.payload[0] : seleccionUnica ),
+                cargandoHabilitarInhabilitarSeleccionUnica: false
+            }
+
         case HABILITAR_INHABILITAR_TIP_CARGANDO:
             return {
                 ...state,
@@ -250,6 +293,21 @@ const usuariosReducer = (state, action) => {
                     ahorcado => ahorcado._id !== action.payload
                     ),
                 cargandoEliminarAhorcadoPorAdmin: false
+            }
+
+        case ELIMINAR_SELECCION_UNICA_DESDE_ADMIN_CARGANDO:
+            return {
+                ...state,
+                cargandoEliminarSeleccionUnicaPorAdmin: true
+            }
+
+        case ELIMINAR_SELECCION_UNICA_DESDE_ADMIN:
+            return {
+                ...state,
+                seleccionesUnicasPorUsuario: state.seleccionesUnicasPorUsuario.filter(
+                    seleccionUnica => seleccionUnica._id !== action.payload
+                    ),
+                cargandoEliminarSeleccionUnicaPorAdmin: false
             }
 
         case ELIMINAR_TIP_DESDE_ADMIN_CARGANDO:
@@ -322,6 +380,20 @@ const usuariosReducer = (state, action) => {
                 ahorcadosPorUsuario: state.ahorcadosPorUsuario.map(ahorcado => ahorcado._id ===
                     action.payload[0]._id ? action.payload[0] : ahorcado ),
                 cargandoModificarDificultadPuntosAhorcadoPorAdmin: false
+            }
+
+        case MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA_CARGANDO:
+            return {
+                ...state,
+                cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin: true
+            }
+
+        case MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA:
+            return {
+                ...state,
+                seleccionesUnicasPorUsuario: state.seleccionesUnicasPorUsuario.map(seleccionUnica => seleccionUnica._id ===
+                    action.payload[0]._id ? action.payload[0] : seleccionUnica ),
+                cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin: false
             }
 
         case MODIFICAR_DIFICULTAD_PUNTOS_TIP_CARGANDO:

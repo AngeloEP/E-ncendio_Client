@@ -15,6 +15,7 @@ import Help from './components/help/Help';
 import TagImage from './components/games/tagImages/TagImage';
 import AssociateWord from './components/games/associateWords/AssociateWord';
 import FourImagesOneWord from './components/games/fourImagesOneWord/FourImagesOneWord';
+import UniqueSelection from './components/games/uniqueSelection/UniqueSelection';
 import FooterPage from './components/footer/FooterPage';
 import Settings from './components/settings/Settings';
 import ResetPassword from './components/auth/resetPassword/ResetPassword';
@@ -24,6 +25,7 @@ import AlertaState from './context/alertas/alertaState';
 import AuthState from './context/autentificacion/authState';
 import ImageState from './context/images/imageState';
 import FourImagesOneWordState from './context/fourImagesOneWord/fourImagesOneWordState';
+import UniqueSelectionState from './context/uniqueSelection/uniqueSelectionState';
 import WordState from './context/words/wordState';
 import TipState from './context/tips/tipState';
 import ProfileState from './context/profile/profileState';
@@ -75,54 +77,57 @@ function App() {
                               <UsuariosState>
                                 <ContactFormState>
                                   <FourImagesOneWordState>
-                                    <ResetPasswordState>
-                                      <DailyTasksState>
-                                        <StoreState>
-                                          <AnalyticsState>
-                                            <ChakraProvider>
-                                          
-                                            <Router>
+                                    <UniqueSelectionState>
+                                      <ResetPasswordState>
+                                        <DailyTasksState>
+                                          <StoreState>
+                                            <AnalyticsState>
+                                              <ChakraProvider>
+                                            
+                                              <Router>
 
-                                              <Navigation />
-                                              <Route path="/" render={({location}) => (
-                                                <TransitionGroup>
-                                                  <CSSTransition
-                                                    key={location.key}
-                                                    timeout={200}
-                                                    classNames="fade"
-                                                  >
-                                                <Switch location={location} >
-                                                
-                                                  <Route exact path='/login' component={Login} /> 
-                                                  <Route exact path='/reset-password' component={ResetPassword} /> 
-                                                  <Route exact path="/register" component={Register} />
-                                                    <RutaPrivada exact path="/home" component={Home} />
-                                                    <RutaPrivada exact path="/profile" component={Profile} />
-                                                    <RutaPrivada exact path="/profile/edit" component={EditProfile} />
-                                                    <RutaPrivada exact path="/rank" component={Rank} />
-                                                    <RutaPrivada exact path="/about" component={About} />
-                                                    <RutaPrivada exact path="/games" component={Games} />
-                                                    <RutaPrivada exact path="/store" component={Store} />
-                                                    <RutaPrivada exact path="/help" component={Help} />
-                                                    <RutaPrivada exact path="/analytics" component={Analytic} />
-                                                    <RutaPrivada exact path="/games/images" component={TagImage} />
-                                                    <RutaPrivada exact path="/games/words" component={AssociateWord} />
-                                                    <RutaPrivada exact path="/games/four-images-one-word" component={FourImagesOneWord} />  
-                                                    <RutaPrivada exact path="/settings" component={Settings} />  
-                                                  <Redirect from="/" to="/login"/>
+                                                <Navigation />
+                                                <Route path="/" render={({location}) => (
+                                                  <TransitionGroup>
+                                                    <CSSTransition
+                                                      key={location.key}
+                                                      timeout={200}
+                                                      classNames="fade"
+                                                    >
+                                                  <Switch location={location} >
+                                                  
+                                                    <Route exact path='/login' component={Login} /> 
+                                                    <Route exact path='/reset-password' component={ResetPassword} /> 
+                                                    <Route exact path="/register" component={Register} />
+                                                      <RutaPrivada exact path="/home" component={Home} />
+                                                      <RutaPrivada exact path="/profile" component={Profile} />
+                                                      <RutaPrivada exact path="/profile/edit" component={EditProfile} />
+                                                      <RutaPrivada exact path="/rank" component={Rank} />
+                                                      <RutaPrivada exact path="/about" component={About} />
+                                                      <RutaPrivada exact path="/games" component={Games} />
+                                                      <RutaPrivada exact path="/store" component={Store} />
+                                                      <RutaPrivada exact path="/help" component={Help} />
+                                                      <RutaPrivada exact path="/analytics" component={Analytic} />
+                                                      <RutaPrivada exact path="/games/images" component={TagImage} />
+                                                      <RutaPrivada exact path="/games/words" component={AssociateWord} />
+                                                      <RutaPrivada exact path="/games/four-images-one-word" component={FourImagesOneWord} />  
+                                                      <RutaPrivada exact path="/games/unique-selection" component={UniqueSelection} />  
+                                                      <RutaPrivada exact path="/settings" component={Settings} />  
+                                                    <Redirect from="/" to="/login"/>
 
-                                                </Switch>
-                                                </CSSTransition>
-                                                </TransitionGroup>
-                                              )}/>
-                                              <FooterPage/>
-                                            </Router>
+                                                  </Switch>
+                                                  </CSSTransition>
+                                                  </TransitionGroup>
+                                                )}/>
+                                                <FooterPage/>
+                                              </Router>
 
-                                            </ChakraProvider>
-                                          </AnalyticsState>
-                                        </StoreState>
-                                      </DailyTasksState>
-                                    </ResetPasswordState>
+                                              </ChakraProvider>
+                                            </AnalyticsState>
+                                          </StoreState>
+                                        </DailyTasksState>
+                                      </ResetPasswordState>
+                                    </UniqueSelectionState>
                                   </FourImagesOneWordState>
                                 </ContactFormState>
                               </UsuariosState>

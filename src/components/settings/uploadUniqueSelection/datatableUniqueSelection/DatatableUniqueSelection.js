@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
 import AlertaContext from '../../../../context/alertas/alertaContext';
 import AuthContext from '../../../../context/autentificacion/authContext';
-import FourImagesOneWordContext from '../../../../context/fourImagesOneWord/fourImagesOneWordContext';
+import UniqueSelectionContext from '../../../../context/uniqueSelection/uniqueSelectionContext';
 
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -17,31 +17,32 @@ import Modal from 'react-bootstrap/Modal';
 import ButtonBootstrap from 'react-bootstrap/Button';
 
 
-import './datatableFourImagesOneWord.css';
+import './datatableUniqueSelection.css';
 
-const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete }) => {
-    // Extraer los valores del context
+const DatatableUniqueSelection = ({ uniqueSelections, deleteFunction, loadingDelete }) => {
     const alertaContext = useContext(AlertaContext)
     const { alerta, mostrarAlerta } = alertaContext
 
-    // Extraer informacion del context auth
     const authContext = useContext(AuthContext)
     const { mensaje } = authContext
 
-    const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
-    const { cargandoModificarAhorcado, traerAhorcadosPorUsuario, modificarAhorcado } = fourImagesOneWordContext
+    const uniqueSelectionContext = useContext(UniqueSelectionContext)
+    const {
+        cargandoModificarSeleccionUnica,
+        traerSeleccionesUnicasPorUsuario,
+        modificarSeleccionUnica,
+    } = uniqueSelectionContext
 
     useEffect(() => {
-        // Ir a buscar las imágenes subidas por el usuario
-        traerAhorcadosPorUsuario();
+        traerSeleccionesUnicasPorUsuario();
 
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
         // eslint-disable-next-line
-    }, [ mensaje, cargandoModificarAhorcado ] )
+    }, [ mensaje, cargandoModificarSeleccionUnica ] )
     
-    const columns = hangmans[0] && Object.keys(hangmans[0])
+    const columns = uniqueSelections[0] && Object.keys(uniqueSelections[0])
     
     const [show, setShow] = useState(false);
     
@@ -51,34 +52,32 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
         setSelectedFilesUpdate([])
     };
 
-    const handleShow = (hangman_id) => {
-        const hangmanSelected = hangmans.find(hangman => hangman._id === hangman_id);
-        setFieldsHangmanUpdate({
-            id_hangman_selected: hangman_id,
-            associatedWordUpdate: hangmanSelected.Palabra,
+    const handleShow = (uniqueSelection_id) => {
+        const uniqueSelectionSelected = uniqueSelections.find(uniqueSelection => uniqueSelection._id === uniqueSelection_id);
+        setFieldsUniqueSelectionUpdate({
+            id_uniqueSelection_selected: uniqueSelection_id,
+            keyWordUpdate: uniqueSelectionSelected.Palabra,
         })
-        // setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen1]);
-        // setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen2]);
-        // setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen3]);
-        // setPathImagesUpdate(prevProps => [...prevProps, hangmanSelected.Imagen4]);
         setShow(true)
     };
 
-    const [ fieldsHangmanUpdate, setFieldsHangmanUpdate ] = useState({
-        id_hangman_selected: "",
-        associatedWordUpdate: "",
+    const [ fieldsUniqueSelectionUpdate, setFieldsUniqueSelectionUpdate ] = useState({
+        id_uniqueSelection_selected: "",
+        keyWordUpdate: "",
     })
-    const { id_hangman_selected, associatedWordUpdate } = fieldsHangmanUpdate;
+    const { id_uniqueSelection_selected, keyWordUpdate } = fieldsUniqueSelectionUpdate;
     // const [ imageUpdate, setImageUpdate ] = useState(null)
     // const [ pathImageUpdate, setPathImageUpdate ] = useState(null)
 
-    // const [ associatedWordUpdate, setAssociateWordUpdate ] = useState("")
+    // const [ keyWordUpdate, setAssociateWordUpdate ] = useState("")
     const [ pathImagesUpdate, setPathImagesUpdate ] = useState([])
     const [ selectedFilesUpdate, setSelectedFilesUpdate ] = useState([]);
       
     const handleImageChange = (e) => {
 		if (e.target.files) {
-			setSelectedFilesUpdate((prevImages) => prevImages.concat(e.target.files));
+            for (let file of e.target.files) {
+                setSelectedFilesUpdate((prevImages) => prevImages.concat(file));
+            }
             Array.from(e.target.files).map((file) => {
                 if (file.type.includes("image")) {
                     const reader = new FileReader()
@@ -99,7 +98,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
     const resetImagesSelected = () => {
         setPathImagesUpdate([])
         setSelectedFilesUpdate([])
-        document.getElementById("fileUpdate").value = "";
+        document.getElementById("fileUpdateUniqueSelection").value = "";
     }
 
     const renderPhotos = (source) => {
@@ -110,21 +109,21 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
 
     const onSubmitUpdate = e => {
         e.preventDefault()
-        if ( associatedWordUpdate === "" ) {
-            mostrarAlerta("Debe asignar una palabra a las 4 imágenes", 'alerta-error')
+        if ( keyWordUpdate === "" ) {
+            mostrarAlerta("Debe asignar una palabra clave para el juego", 'alerta-error')
             return
         }
-        if (/\s/.test(associatedWordUpdate)) {
+        if (/\s/.test(keyWordUpdate)) {
             mostrarAlerta("Debe asignar UNA sola palabra SIN espacios ", 'alerta-error')
             return
         }
         let formData = new FormData();
 
         if (selectedFilesUpdate.length === 0) {
-            // console.log("No adjunto ninguna imagen")
+            console.log("No adjunto ninguna imagen")
         } else{
-            if (selectedFilesUpdate.length !== 4) {
-                mostrarAlerta("Debe adjuntar solo 4 imágenes", 'alerta-error')
+            if (selectedFilesUpdate.length !== 3) {
+                mostrarAlerta("Debe adjuntar solo 3 imágenes", 'alerta-error')
                 return
             } else {
                 for (let index = 0; index < selectedFilesUpdate.length; index++) {
@@ -134,34 +133,33 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
 
         }
 
-        formData.append('associatedWord', associatedWordUpdate.toLowerCase());
-        modificarAhorcado( id_hangman_selected, formData)
+        formData.append('keyWord', keyWordUpdate);
+        modificarSeleccionUnica( id_uniqueSelection_selected, formData)
         
         setTimeout(() => {
             handleClose()
         }, 2000);
 
-        // Resetear campos
-        setFieldsHangmanUpdate({
-            id_hangman_selected: "",
-            associatedWordUpdate: "",
+        setFieldsUniqueSelectionUpdate({
+            id_uniqueSelection_selected: "",
+            keyWordUpdate: "",
         });
         setSelectedFilesUpdate([]);
         setPathImagesUpdate([]);
-        document.getElementById("fileUpdate").value = "";
+        document.getElementById("fileUpdateUniqueSelection").value = "";
     }
 
     return (
         <Fragment>
             <Table responsive striped bordered hover  >
             {
-                hangmans.length !== 0
+                uniqueSelections.length !== 0
                 ?
                     <Fragment>
                         <thead>
                             <tr>
                                 <Fragment>
-                                    { hangmans[0] && columns.map((heading, headingIndex) =>
+                                    { uniqueSelections[0] && columns.map((heading, headingIndex) =>
                                         <Fragment key={headingIndex} >
                                             { heading === "_id"
                                                 ?
@@ -178,16 +176,16 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
                         </thead>
                         <tbody>
                             {
-                                hangmans.map((row, index) =>
+                                uniqueSelections.map((row, index) =>
                                     <tr key={index+1} >
                                         {
                                             columns.map((column, colIndex) =>
                                                 
                                                 <Fragment key={colIndex+1} >
 
-                                                    { column === "Imagen1" | column === "Imagen2" | column === "Imagen3" | column === "Imagen4"
+                                                    { column === "Imagen1" | column === "Imagen2" | column === "Imagen3" 
                                                         ?
-                                                            <td style={{ width: "7%" }} > <img className="img-fluid img-thumbnail images-hangman" src={row[column]} alt="" /> </td>
+                                                            <td style={{ width: "7%" }} > <img className="img-fluid img-thumbnail images-uniqueSelection" src={row[column]} alt="" /> </td>
                                                         :
                                                             column === "Estado"
                                                             ?
@@ -255,7 +253,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
                                                 startIcon={<EditIcon />}
                                                 onClick={() => handleShow(row["_id"])}
                                             >
-                                                ACTUALIZAR AHORCADO
+                                                ACTUALIZAR S. Única
                                             </Button>
                                         </td>
                                     </tr>
@@ -289,12 +287,11 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Ahorcado  </Modal.Title>
+                        <Modal.Title> Modificar Selección Única  </Modal.Title>
                     </Modal.Header>
-
-                                    <form  onSubmit={onSubmitUpdate}  >
+                        <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
-                        <Container className="div-uploadHangman-update" >
+                        <Container className="div-uploadUniqueSelection-update" >
                             <Grid container component="main" >
                                 <Grid item xs={12} sm={8} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
@@ -302,11 +299,11 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
 
                                         <Grid item xs={12} >
                                             <div>
-                                                <input type="file" id="fileUpdate" multiple onChange={handleImageChange} />
+                                                <input type="file" id="fileUpdateUniqueSelection" multiple onChange={handleImageChange} />
                                                 <div className="label-holder">
                                                     <div className="row" >
-                                                        <label htmlFor="fileUpdate" className="label">
-                                                            <i className="material-icons" >Agregar 4 imágenes</i>
+                                                        <label htmlFor="fileUpdateUniqueSelection" className="label">
+                                                            <i className="material-icons" >Agregar 3 imágenes</i>
                                                         </label>
                                                         <Button
                                                             className="buttonResetImages"
@@ -320,15 +317,15 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
                                             </div>
                                         </Grid>
                                         <Grid item xs={8} style={{ marginBottom: "2%" }} >
-                                            <div className="div-associateWord" >                        
+                                            <div className="div-keyWord" >                        
                                                 <TextField
-                                                    className="textfield-associateWord"
-                                                    value={associatedWordUpdate}
-                                                    name="associateWord"
+                                                    className="textfield-keyWord"
+                                                    value={keyWordUpdate}
+                                                    name="keyWord"
                                                     variant="outlined"
-                                                    id="associateWord"
-                                                    label="Palabra asociada"
-                                                    onChange={e => setFieldsHangmanUpdate({...fieldsHangmanUpdate, associatedWordUpdate: e.target.value})}
+                                                    id="keyWord"
+                                                    label="Palabra clave"
+                                                    onChange={e => setFieldsUniqueSelectionUpdate({...fieldsUniqueSelectionUpdate, keyWordUpdate: e.target.value})}
                                                     autoFocus
                                                 />
                                             </div>
@@ -349,10 +346,10 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
                             variant="contained"
                             style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
                             startIcon={<EditIcon />}
-                            disabled={cargandoModificarAhorcado}
+                            disabled={cargandoModificarSeleccionUnica}
                         >
                             {
-                                cargandoModificarAhorcado
+                                cargandoModificarSeleccionUnica
                                 ?
                                 <Grid container
                                     direction="row"
@@ -383,4 +380,4 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
     );
 }
  
-export default DatatableFourImagesOneWord;
+export default DatatableUniqueSelection;

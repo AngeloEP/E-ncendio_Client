@@ -29,6 +29,14 @@ import {
     ELIMINAR_ETIQUETAS_AHORCADOS,
     ELIMINAR_ETIQUETAS_AHORCADOS_CARGANDO,
     ELIMINAR_ETIQUETAS_AHORCADOS_ERROR,
+    ETIQUETAR_SELECCION_UNICA,
+    ETIQUETAR_SELECCION_UNICA_ERROR,
+    OBTENER_SELECCIONES_UNICAS_ETIQUETADAS,
+    OBTENER_SELECCIONES_UNICAS_ETIQUETADAS_CARGANDO,
+    OBTENER_SELECCIONES_UNICAS_ETIQUETADAS_ERROR,
+    ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS,
+    ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS_CARGANDO,
+    ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS_ERROR,
     VER_TIP,
     VER_TIP_ERROR,
     OBTENER_TIPS_VISTOS,
@@ -63,6 +71,9 @@ const TagState = props => {
         cargandoResetearEtiquetasImagenes: false,
         cargandoResetearEtiquetasAhorcados: false,
         cargandoResetearTipsVistos: false,
+        seleccionesUnicasEtiquetadas: [],
+        cargandoSeleccionesUnicasEtiquetadasUsuarioDesdeAdmin: false,
+        cargandoResetearEtiquetasSeleccionesUnicas: false,
     }
 
     const [ state, dispatch ] = useReducer(tagReducer, initialState)
@@ -110,6 +121,22 @@ const TagState = props => {
             // console.log(error)
             dispatch({
                 type: ETIQUETAR_AHORCADO_ERROR,
+                payload: error
+            })
+        }
+    }
+
+    const etiquetarSeleccionUnica = async ( uniqueSelection_id, keyWord ) => {
+        try {
+            const respuesta = await clienteAxios.post(`/api/tag-uniqueSelections/${uniqueSelection_id}/word/${keyWord}`)
+            dispatch({
+                type: ETIQUETAR_SELECCION_UNICA,
+                payload: respuesta.data
+            })
+        } catch (error) {
+            console.log(error)
+            dispatch({
+                type: ETIQUETAR_SELECCION_UNICA_ERROR,
                 payload: error
             })
         }
@@ -183,6 +210,25 @@ const TagState = props => {
             // console.log(error)
             dispatch({
                 type: OBTENER_AHORCADOS_ETIQUETADOS_ERROR,
+                payload: error
+            })
+        }
+    }
+
+    const obtenerSeleccionesUnicasEtiquetadasPorUsuario = async ( user_id ) => {
+        try {
+            dispatch({
+                type: OBTENER_SELECCIONES_UNICAS_ETIQUETADAS_CARGANDO,
+            })
+            const respuesta = await clienteAxios.get(`/api/tag-uniqueSelections/user/${user_id}`)
+            dispatch({
+                type: OBTENER_SELECCIONES_UNICAS_ETIQUETADAS,
+                payload: respuesta.data.asociacionesSeleccionesUnicas
+            })
+        } catch (error) {
+            console.log(error)
+            dispatch({
+                type: OBTENER_SELECCIONES_UNICAS_ETIQUETADAS_ERROR,
                 payload: error
             })
         }
@@ -324,7 +370,6 @@ const TagState = props => {
             }).then(async (result) =>  {
                 if (result.isConfirmed) {
                     const respuesta = await clienteAxios.delete(`/api/tag-hangmans/user/${user_id}`)
-                    console.log(respuesta.data)
                     Swal.fire({
                         icon: 'success',
                         title: 'Reseteo de etiquetas exitosa',
@@ -349,6 +394,55 @@ const TagState = props => {
             // console.log(error)
             dispatch({
                 type: ELIMINAR_ETIQUETAS_AHORCADOS_ERROR,
+                payload: error
+            })
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo eliminar las etiquetas, inténtelo nuevamente!',
+            })
+        }
+    }
+
+    const eliminarSeleccionesUnicasEtiquetadasPorUsuario = async ( user_id ) => {
+        try {
+            dispatch({
+                type: ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS_CARGANDO,
+                payload: true
+            })
+            Swal.fire({
+                title: 'Confirme su decisión',
+                showDenyButton: true,
+                confirmButtonText: `Eliminar`,
+                denyButtonText: `Cancelar`,
+                allowOutsideClick: false
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    const respuesta = await clienteAxios.delete(`/api/tag-uniqueSelections/user/${user_id}`)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Reseteo de etiquetas exitosa',
+                        text: respuesta.data,
+                    })
+                    
+                    setTimeout(() => {
+                        dispatch({
+                            type: ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS,
+                        })
+                    }, 1000);
+                }
+                else if (result.isDenied) {
+                    Swal.fire('No se eliminaron las etiquetas', '', 'info')
+                    dispatch({
+                        type: ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS_ERROR,
+                    })
+                }
+            })
+
+        } catch (error) {
+            // console.log(error)
+            dispatch({
+                type: ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS_ERROR,
                 payload: error
             })
             Swal.fire({
@@ -489,6 +583,9 @@ const TagState = props => {
                 tipsVistos: state.tipsVistos,
                 cargandoTipsVistosUsuarioDesdeAdmin: state.cargandoTipsVistosUsuarioDesdeAdmin,
                 cargandoResetearTipsVistos: state.cargandoResetearTipsVistos,
+                seleccionesUnicasEtiquetadas: state.seleccionesUnicasEtiquetadas,
+                cargandoSeleccionesUnicasEtiquetadasUsuarioDesdeAdmin: state.cargandoSeleccionesUnicasEtiquetadasUsuarioDesdeAdmin,
+                cargandoResetearEtiquetasSeleccionesUnicas: state.cargandoResetearEtiquetasSeleccionesUnicas,
                 etiquetarImagen,
                 etiquetarPalabra,
                 obtenerImagenesEtiquetadasPorUsuario,
@@ -498,6 +595,9 @@ const TagState = props => {
                 etiquetarAhorcado,
                 obtenerAhorcadosEtiquetadosPorUsuario,
                 eliminarAhorcadosEtiquetadosPorUsuario,
+                etiquetarSeleccionUnica,
+                obtenerSeleccionesUnicasEtiquetadasPorUsuario,
+                eliminarSeleccionesUnicasEtiquetadasPorUsuario,
                 verTip,
                 obtenerTipsVistosPorUsuario,
                 eliminarTipsVistosPorUsuario,

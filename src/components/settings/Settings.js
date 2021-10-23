@@ -18,8 +18,10 @@ import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import PeopleIcon from '@material-ui/icons/People';
 import InfoIcon from '@material-ui/icons/Info';
 import CategoryIcon from '@material-ui/icons/Category';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 import './settings.css';
+import UploadUniqueSelection from './uploadUniqueSelection/UploadUniqueSelection';
 
 
 const Settings = () => {
@@ -111,6 +113,17 @@ const Settings = () => {
                                     }
                                 />
                                 <BottomNavigationAction
+                                    label="Subir selección única"
+                                    icon={<PageviewIcon/>}
+                                    disabled={
+                                        perfil.league_id.league === "Oro"
+                                        ?
+                                            false
+                                        :
+                                            true
+                                    }
+                                />
+                                <BottomNavigationAction
                                     label="Subir tip"
                                     icon={<InfoIcon/>}
                                     disabled={false}
@@ -146,13 +159,17 @@ const Settings = () => {
                                             :
                                                 navigation === 4
                                                 ?
-                                                    <UploadTip />
+                                                    <UploadUniqueSelection />
                                                 :
                                                     navigation === 5
                                                     ?
-                                                        <UploadCategory />
+                                                        <UploadTip />
                                                     :
-                                                        null  
+                                                        navigation === 6
+                                                        ?
+                                                            <UploadCategory />
+                                                        :
+                                                            null  
                             }
                         </div>
                     </>

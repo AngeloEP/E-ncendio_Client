@@ -18,7 +18,8 @@ const FooterPage = ({ location }) => {
                 location.pathname !== "/reset-password" &&
                 location.pathname !== "/games/images" &&
                 location.pathname !== "/games/words" &&
-                location.pathname !== "/games/four-images-one-word"
+                location.pathname !== "/games/four-images-one-word" &&
+                location.pathname !== "/games/unique-selection"
             ? 
                 <div className="footer-clean">
                     <footer>

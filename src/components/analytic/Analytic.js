@@ -87,44 +87,52 @@ const Analytic = () => {
             "Etiquetar Imágenes",
             "Etiquetar Palabras",
             "Ahorcados Completados",
+            "S. Únicas Completadas",
             "Ver Tips",
             "Editar Perfil",
             "Subir Imagen",
             "Subir Palabra",
             "Subir Ahorcado",
+            "Subir S. Única",
             "Subir Tip",
         )
         dataFuncionalidades.push(
             ((distribucionUsoFuncionalidades[0].totalImageTagCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
             ((distribucionUsoFuncionalidades[0].totalWordTagCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
             ((distribucionUsoFuncionalidades[0].totalHangmanTagCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
+            ((distribucionUsoFuncionalidades[0].totalUniqueSelectionTagCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
             ((distribucionUsoFuncionalidades[0].totalTipTagCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
             ((distribucionUsoFuncionalidades[0].totalEditProfileCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
             ((distribucionUsoFuncionalidades[0].totalUploadImageCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
             ((distribucionUsoFuncionalidades[0].totalUploadWordCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
             ((distribucionUsoFuncionalidades[0].totalUploadHangmanCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
+            ((distribucionUsoFuncionalidades[0].totalUploadUniqueSelectionCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
             ((distribucionUsoFuncionalidades[0].totalUploadTipCount/distribucionUsoFuncionalidades[0].total)*100).toFixed(1),
         )
         backgroundColors.push(
             '#F70202',
             '#FE9F02',
             '#FBEC00',
+            '#959595',
             '#B2FF00',
             '#01CE20',
             '#00FFD4',
             '#00B6FF',
             '#0059FF',
+            '#9B00FF',
             '#CD02FF'
         )
         borderColors.push(
             '#B60101',
             '#D28400',
             '#D9CC01',
+            '#747474',
             '#90CE01',
             '#01C41F',
             '#00D1AD',
             '#00A3E4',
             '#0046CA',
+            '#8700DE',
             '#9601BB'
         )
         dataDoughnut = {

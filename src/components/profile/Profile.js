@@ -42,12 +42,10 @@ const Profile = ( props ) => {
 
     const usuariosContext = useContext(UsuariosContext)
     const { 
-        imagenesPorUsuario,
-        palabrasPorUsuario,
-        ahorcadosPorUsuario,
         obtenerImagenesUsuarioAdmin,
         obtenerPalabrasUsuarioAdmin,
         obtenerAhorcadosUsuarioAdmin,
+        obtenerSeleccionesUnicasUsuarioAdmin,
     } = usuariosContext
 
     useEffect(() => {
@@ -55,6 +53,7 @@ const Profile = ( props ) => {
             obtenerImagenesUsuarioAdmin(usuario._id)
             obtenerPalabrasUsuarioAdmin(usuario._id)
             obtenerAhorcadosUsuarioAdmin(usuario._id)
+            obtenerSeleccionesUnicasUsuarioAdmin(usuario._id)
         }
         // eslint-disable-next-line
     }, [usuario])
@@ -175,13 +174,16 @@ const Profile = ( props ) => {
                             <div className="profile-work">
                                 <p>Imágenes</p>
                                 <div href="!#">Etiquetadas: {perfil.imageTagCount} </div>
-                                <div href="!#">Subidas: {imagenesPorUsuario.length} </div>
+                                <div href="!#">Subidas: {perfil.uploadImageCount} </div>
                                 <p>Palabras</p>
                                 <div href="!#">Etiquetadas: {perfil.wordTagCount} </div>
-                                <div href="!#">Subidas: {palabrasPorUsuario.length} </div>
+                                <div href="!#">Subidas: {perfil.uploadWordCount} </div>
                                 <p>Ahorcados</p>
                                 <div href="!#">Completados: {perfil.hangmanTagCount} </div>
-                                <div href="!#">Subidos: {ahorcadosPorUsuario.length} </div>
+                                <div href="!#">Subidos: {perfil.uploadHangmanCount} </div>
+                                <p>Selecciones Únicas</p>
+                                <div href="!#">Completadas: {perfil.uniqueSelectionTagCount} </div>
+                                <div href="!#">Subidas: {perfil.uploadUniqueSelectionCount} </div>
                             </div>
                         </div>
                         <div className="col-md-8 tab-content profile-tab">

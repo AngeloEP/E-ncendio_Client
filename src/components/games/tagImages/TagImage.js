@@ -151,6 +151,10 @@ const TagImage = ( props ) => {
         // Traer las imágenes del nivel correspondiente /api/league/{id}/images 
         obtenerImagenes()
 
+        if ( imagenActual > 0 && imagenes.length === 0 ) {
+            localStorage.setItem( 'imagenActual', 0 );
+        }
+
         // Traer los tips disponibles
         obtenerTips()
         // eslint-disable-next-line

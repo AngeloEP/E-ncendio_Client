@@ -49,6 +49,18 @@ import {
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO,
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_CARGANDO,
     MODIFICAR_DIFICULTAD_PUNTOS_AHORCADO_ERROR,
+    OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN,
+    OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN_ERROR,
+    OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN_CARGANDO,
+    HABILITAR_INHABILITAR_SELECCION_UNICA,
+    HABILITAR_INHABILITAR_SELECCION_UNICA_CARGANDO,
+    HABILITAR_INHABILITAR_SELECCION_UNICA_ERROR,
+    ELIMINAR_SELECCION_UNICA_DESDE_ADMIN,
+    ELIMINAR_SELECCION_UNICA_DESDE_ADMIN_CARGANDO,
+    ELIMINAR_SELECCION_UNICA_DESDE_ADMIN_ERROR,
+    MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA,
+    MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA_CARGANDO,
+    MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA_ERROR,
     OBTENER_TIPS_POR_USUARIO_ADMIN,
     OBTENER_TIPS_POR_USUARIO_ADMIN_ERROR,
     OBTENER_TIPS_POR_USUARIO_ADMIN_CARGANDO,
@@ -86,6 +98,11 @@ const UsuariosState = props => {
         cargandoHabilitarInhabilitarAhorcado: false,
         cargandoEliminarAhorcadoPorAdmin: false,
         cargandoModificarDificultadPuntosAhorcadoPorAdmin: false,
+        seleccionesUnicasPorUsuario: [],
+        cargandoSeleccionesUnicasUsuarioDesdeAdmin: false,
+        cargandoHabilitarInhabilitarSeleccionUnica: false,
+        cargandoEliminarSeleccionUnicaPorAdmin: false,
+        cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin: false,
         tipsPorUsuario: [],
         cargandoTipsUsuarioDesdeAdmin: false,
         cargandoHabilitarInhabilitarTip: false,
@@ -755,6 +772,205 @@ const UsuariosState = props => {
         }
     }
     // ** //
+
+    // *Selecciones únicas* //
+    const obtenerSeleccionesUnicasUsuarioAdmin = async (user_id) => {
+        try {
+            dispatch({
+                type: OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN_CARGANDO,
+            })
+            const respuesta = await clienteAxios.get(`/api/usuarios/${user_id}/uniqueSelections`)
+            dispatch({
+                type: OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN,
+                payload: respuesta.data.seleccionesUnicas
+            })
+        } catch (error) {
+            // console.log(error)
+            dispatch({
+                type: OBTENER_SELECCIONES_UNICAS_POR_USUARIO_ADMIN_ERROR,
+                payload: error
+            })
+        }
+    }
+
+    const habilitarInhabilitarSeleccionUnicaPorUsuario = async ( uniqueSelection_id, datos ) => {
+        try {
+            dispatch({
+                type: HABILITAR_INHABILITAR_SELECCION_UNICA_CARGANDO,
+                payload: true
+            })
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger ml-4'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Confirme su decisión',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: `Modificar`,
+                cancelButtonText: 'Cancelar',
+                allowOutsideClick: false,
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    const respuesta = await clienteAxios.put(`/api/uniqueSelections/user/uniqueSelection/isEnabled/${uniqueSelection_id}`, datos)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Modificación exitosa',
+                        text: "La propiedad se cambió exitosamente",
+                    })
+                    
+                    setTimeout(() => {
+                        dispatch({
+                            type: HABILITAR_INHABILITAR_SELECCION_UNICA,
+                            payload: respuesta.data.seleccionUnicaAntigua
+                        })
+                    }, 1000);
+                }
+                else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('No se modificó el contenido', '', 'info')
+                    dispatch({
+                        type: HABILITAR_INHABILITAR_SELECCION_UNICA_ERROR,
+                    })
+                }
+            })
+
+        } catch (error) {
+            console.log(error)
+            dispatch({
+                type: HABILITAR_INHABILITAR_SELECCION_UNICA_ERROR,
+                payload: error
+            })
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo modificar la propiedad, inténtelo nuevamente!',
+            })
+        }
+    }
+
+    const eliminarSeleccionUnicaPorUsuarioDesdeAdmin = async ( uniqueSelection_id ) => {
+        try {
+            dispatch({
+                type: ELIMINAR_SELECCION_UNICA_DESDE_ADMIN_CARGANDO,
+                payload: true
+            })
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger ml-4'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Al eliminarla, también eliminará sus asociaciones a este contenido',
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: `Eliminar`,
+                allowOutsideClick: false,
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    await clienteAxios.delete(`/api/uniqueSelections/user/uniqueSelection/${uniqueSelection_id}`)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Proceso exitoso',
+                        text: "La Selección Única se eliminó exitosamente",
+                    })
+                    
+                    setTimeout(() => {
+                        dispatch({
+                            type: ELIMINAR_SELECCION_UNICA_DESDE_ADMIN,
+                            payload: uniqueSelection_id
+                        })
+                    }, 1000);
+                }
+                else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('No se eliminó la selección única', '', 'info')
+                    dispatch({
+                        type: ELIMINAR_SELECCION_UNICA_DESDE_ADMIN_ERROR,
+                    })
+                }
+            })
+
+        } catch (error) {
+            console.log(error)
+            dispatch({
+                type: ELIMINAR_SELECCION_UNICA_DESDE_ADMIN_ERROR,
+                payload: error
+            })
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo eliminar la selección única, inténtelo nuevamente!',
+            })
+        }
+    }
+
+    const modificarDificultadYPuntosSeleccionUnica = async (uniqueSelection_id, data) => {
+        try {
+            dispatch({
+                type: MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA_CARGANDO,
+                payload: true
+            })
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger ml-4'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: '¡Modificará los atributos dificultad y puntos asociados!',
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: `Modificar`,
+                allowOutsideClick: false,
+            }).then(async (result) =>  {
+                if (result.isConfirmed) {
+                    const respuesta = await clienteAxios.put(`/api/uniqueSelections/user/uniqueSelection/difficultyAndPoints/${uniqueSelection_id}`, data)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Proceso exitoso',
+                        text: "La Selección Única se modificó exitosamente",
+                    })
+                    
+                    setTimeout(() => {
+                        dispatch({
+                            type: MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA,
+                            payload: respuesta.data.seleccionUnicaNueva
+                        })
+                    }, 1000);
+                }
+                else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('No se modificó la selección única', '', 'info')
+                    dispatch({
+                        type: MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA_ERROR,
+                    })
+                }
+            })
+
+        } catch (error) {
+            console.log(error)
+            dispatch({
+                type: MODIFICAR_DIFICULTAD_PUNTOS_SELECCION_UNICA_ERROR,
+                payload: error
+            })
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos',
+                text: 'No se pudo modificar la selección única, inténtelo nuevamente!',
+            })
+        }
+    }
+    // ** //
+
     // TIPS
     const obtenerTipsUsuarioAdmin = async (user_id) => {
         try {
@@ -976,6 +1192,11 @@ const UsuariosState = props => {
                 cargandoHabilitarInhabilitarAhorcado: state.cargandoHabilitarInhabilitarAhorcado,
                 cargandoEliminarAhorcadoPorAdmin: state.cargandoEliminarAhorcadoPorAdmin,
                 cargandoModificarDificultadPuntosAhorcadoPorAdmin: state.cargandoModificarDificultadPuntosAhorcadoPorAdmin,
+                seleccionesUnicasPorUsuario: state.seleccionesUnicasPorUsuario,
+                cargandoSeleccionesUnicasUsuarioDesdeAdmin: state.cargandoSeleccionesUnicasUsuarioDesdeAdmin,
+                cargandoHabilitarInhabilitarSeleccionUnica: state.cargandoHabilitarInhabilitarSeleccionUnica,
+                cargandoEliminarSeleccionUnicaPorAdmin: state.cargandoEliminarSeleccionUnicaPorAdmin,
+                cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin: state.cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin,
                 tipsPorUsuario: state.tipsPorUsuario,
                 cargandoTipsUsuarioDesdeAdmin: state.cargandoTipsUsuarioDesdeAdmin,
                 cargandoHabilitarInhabilitarTip: state.cargandoHabilitarInhabilitarTip,
@@ -996,6 +1217,10 @@ const UsuariosState = props => {
                 habilitarInhabilitarAhorcadoPorUsuario,
                 eliminarAhorcadoPorUsuarioDesdeAdmin,
                 modificarDificultadYPuntosAhorcado,
+                obtenerSeleccionesUnicasUsuarioAdmin,
+                habilitarInhabilitarSeleccionUnicaPorUsuario,
+                eliminarSeleccionUnicaPorUsuarioDesdeAdmin,
+                modificarDificultadYPuntosSeleccionUnica,
                 obtenerTipsUsuarioAdmin,
                 habilitarInhabilitarTipPorUsuario,
                 eliminarTipPorUsuarioDesdeAdmin,

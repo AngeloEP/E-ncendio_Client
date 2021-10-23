@@ -35,6 +35,14 @@ import {
     ELIMINAR_RECOMPENSAS_ETIQUETAS_TAREA,
     ELIMINAR_PORCENTAJE_ETIQUETA_IMAGEN,
     ELIMINAR_PORCENTAJE_ETIQUETA_PALABRA,
+    ETIQUETAR_SELECCION_UNICA,
+    ETIQUETAR_SELECCION_UNICA_ERROR,
+    OBTENER_SELECCIONES_UNICAS_ETIQUETADAS,
+    OBTENER_SELECCIONES_UNICAS_ETIQUETADAS_CARGANDO,
+    OBTENER_SELECCIONES_UNICAS_ETIQUETADAS_ERROR,
+    ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS,
+    ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS_CARGANDO,
+    ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS_ERROR,
 } from '../../types';
 
 const tagReducer = (state, action) => {
@@ -42,6 +50,7 @@ const tagReducer = (state, action) => {
         case ETIQUETAR_PALABRA:
         case ETIQUETAR_IMAGEN:
         case ETIQUETAR_AHORCADO:
+        case ETIQUETAR_SELECCION_UNICA:
         case VER_TIP:
             return {
                 ...state,
@@ -51,6 +60,9 @@ const tagReducer = (state, action) => {
                 porcentajeEtiquetaPalabra: action.payload.tagDistribution,
             }
 
+        case ETIQUETAR_SELECCION_UNICA_ERROR:
+        case OBTENER_SELECCIONES_UNICAS_ETIQUETADAS_ERROR:
+        case ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS_ERROR:
         case ELIMINAR_ETIQUETAS_AHORCADOS_ERROR:
         case ELIMINAR_ETIQUETAS_IMAGENES_ERROR:
         case ELIMINAR_ETIQUETAS_PALABRAS_ERROR:
@@ -115,6 +127,19 @@ const tagReducer = (state, action) => {
                 cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin: true,
             }
 
+        case OBTENER_SELECCIONES_UNICAS_ETIQUETADAS:
+            return {
+                ...state,
+                seleccionesUnicasEtiquetadas: action.payload,
+                cargandoSeleccionesUnicasEtiquetadasUsuarioDesdeAdmin: false,
+            }
+
+        case OBTENER_SELECCIONES_UNICAS_ETIQUETADAS_CARGANDO:
+            return {
+                ...state,
+                cargandoSeleccionesUnicasEtiquetadasUsuarioDesdeAdmin: true,
+            }
+
         case OBTENER_TIPS_VISTOS:
             return {
                 ...state,
@@ -165,6 +190,19 @@ const tagReducer = (state, action) => {
             return {
                 ...state,
                 cargandoResetearEtiquetasAhorcados: action.payload
+            }
+
+        case ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS:
+            return {
+                ...state,
+                seleccionesUnicasEtiquetadas: [],
+                cargandoResetearEtiquetasSeleccionesUnicas: false,
+            }
+
+        case ELIMINAR_ETIQUETAS_SELECCIONES_UNICAS_CARGANDO:
+            return {
+                ...state,
+                cargandoResetearEtiquetasSeleccionesUnicas: action.payload
             }
 
         case ELIMINAR_TIPS_VISTOS:

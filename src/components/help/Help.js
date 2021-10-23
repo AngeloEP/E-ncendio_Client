@@ -10,6 +10,7 @@ import Table from 'react-bootstrap/Table';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { green } from '@material-ui/core/colors';
 import LockIcon from '@material-ui/icons/Lock';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 import settingIcon from '../../assets/vectorial graphics/gear2.svg';
 import rankingIcon from '../../assets/vectorial graphics/flame.svg';
@@ -189,6 +190,18 @@ const Help = () => {
                             <td> <LockIcon color="secondary" /> </td>
                             <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
                         </tr>
+                        <tr>
+                            <td> Completar Selección Única </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                        </tr>
+                        <tr>
+                            <td> Subir una Selección Única </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <LockIcon color="secondary" /> </td>
+                            <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
+                        </tr>
                     </tbody>
                 </Table>
 
@@ -249,6 +262,19 @@ const Help = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+                            data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
+                            <div className="features-item">
+                                <div className="features-icon">
+                                    <h2>04</h2>
+                                    <PageviewIcon />
+                                    <h4> Completar Selección Única </h4>
+                                    <p>
+                                        Debes elegir la imagen más asociada a la palabra clave mostrada.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -293,6 +319,17 @@ const Help = () => {
                                     </h4>
                                     <p>
                                         Deben ser 4 imágenes con alguna relación con incedios y la palabra estar efectivamente plasmada en cada una de ellas. 
+                                    </p>
+                                </div>
+                            </li>
+                            <li data-scroll-reveal="enter right move 30px over 0.6s after 0.5s">
+                                <PageviewIcon className="miniImage-upload-help" />
+                                <div className="">
+                                    <h4>
+                                        Subir selección única
+                                    </h4>
+                                    <p>
+                                        Deben ser 3 imágenes en donde sólo una de ellas se relaciona fuertemente con la palabra clave ingresada. 
                                     </p>
                                 </div>
                             </li>

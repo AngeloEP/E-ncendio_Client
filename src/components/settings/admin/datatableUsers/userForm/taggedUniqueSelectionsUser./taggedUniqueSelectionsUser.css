@@ -1,0 +1,45 @@
+.cards-tag-uniqueSelections {
+    margin-top: 2%;
+}
+
+.div-reset-tag-uniqueSelections {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.tarjeta-tag-uniqueSelection {
+    background-color: rgb(228, 226, 226);
+    border-radius: 15px;
+}
+
+.titulo-nombre-card-tag-uniqueSelection {
+    color: white;
+    background-color: black;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nombre-card-tag-uniqueSelection {
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(206, 237, 255);
+    color: rgb(21, 62, 117);
+}
+/*  */
+.titulo-fecha-card-tag-uniqueSelection {
+    color: white;
+    background-color: black;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fecha-card-tag-uniqueSelection {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(206, 237, 255);
+    color: rgb(21, 62, 117);
+}

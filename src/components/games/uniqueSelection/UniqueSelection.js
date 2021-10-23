@@ -2,15 +2,7 @@ import React, { useEffect, useContext, Fragment } from 'react';
 import useState from 'react-usestateref';
 import useInterval from "../useInterval";
 
-import './fourImagesOneWord.css';
-
-import step0 from "../../../assets/img/hangman/0.jpg";
-import step1 from "../../../assets/img/hangman/1.jpg";
-import step2 from "../../../assets/img/hangman/2.jpg";
-import step3 from "../../../assets/img/hangman/3.jpg";
-import step4 from "../../../assets/img/hangman/4.jpg";
-import step5 from "../../../assets/img/hangman/5.jpg";
-import step6 from "../../../assets/img/hangman/6.jpg";
+import './uniqueSelection.css';
 
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
@@ -18,12 +10,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import AlertaContext from '../../../context/alertas/alertaContext';
 import AuthContext from '../../../context/autentificacion/authContext';
-import FourImagesOneWordContext from '../../../context/fourImagesOneWord/fourImagesOneWordContext';
+import UniqueSelectionContext from '../../../context/uniqueSelection/uniqueSelectionContext';
 import profileContext from '../../../context/profile/profileContext';
 import tagContext from '../../../context/tag/tagContext';
 import TipContext from '../../../context/tips/tipContext';
 
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -38,50 +30,42 @@ import HelpIcon from '@material-ui/icons/Help';
 import uploadImage from '../../../assets/img/upload_image.jpg';
 
 const FourImagesOneWord = ( props ) => {
-    // Extraer los valores del context
     const alertaContext = useContext(AlertaContext)
-    const { alerta } = alertaContext
+    const { alerta, mostrarAlerta } = alertaContext
 
-    // Extraer la información de autentificación del usuario
     const authContext = useContext(AuthContext)
     const { usuarioAutenticado} = authContext
 
-    // Extraer la información de el context de Palabras
-    const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
-    const { ahorcados, largoAhorcados, obtenerAhorcados  } = fourImagesOneWordContext
+    const uniqueSelectionContext = useContext(UniqueSelectionContext)
+    const {
+        seleccionesUnicas,
+        largoSeleccionesUnicas,
+        obtenerSeleccionesUnicas
+    } = uniqueSelectionContext
 
-    // Extraer la información del context de perfiles
     const profilesContext = useContext(profileContext)
     const { perfil, obtenerPerfil, actualizarPerfil } = profilesContext
 
-    // Extraer la información de el context de los tips
     const tipContext = useContext(TipContext)
     const { tips, largoTips, obtenerTips  } = tipContext
 
-    // Extraer la información del context de etiquetar
     const tagsContext = useContext(tagContext)
     const {
         recompensas,
         recompensasTareas,
-        etiquetarAhorcado,
+        etiquetarSeleccionUnica,
         verTip,
         borrarRecompensasEtiquetas,
         borrarRecompensasEtiquetasTareas,
     } = tagsContext
 
-    let ahorcadoActual = JSON.parse(localStorage.getItem("ahorcadoActual"))
-    const [answer, setAnswer, answerRef] = useState( "" )
-    if (ahorcados.length > 0 && answerRef.current !== ahorcados[ahorcadoActual].associatedWord ) {
-        setAnswer(ahorcados[ahorcadoActual].associatedWord)
-    }
+    let seleccionUnicaActual = JSON.parse(localStorage.getItem("seleccionUnicaActual"))
     let tipActual = 0 
     if (tips.length > 0) {
         tipActual = Math.floor(Math.random() * (largoTips));
     }
 
-    const [winnerWord, setWinnerWord, winnerWordRef] = useState(false)
 
-    // top profile info
     const [ , setNowProgress, nowProgressRef] = useState(0)
     const [ , setMaxProgress, maxProgressRef] = useState(0)
     const [ , setLabelProgress, labelProgressRef] = useState(0)
@@ -89,7 +73,6 @@ const FourImagesOneWord = ( props ) => {
 
     const [ newContent, setNewContent ] = useState(false)
     const [ tipReceive, setTipReceive ] = useState(false)
-    const [  , setPoints, pointsRef ] = useState(0)
     const [  , setUserPoints, userPointsRef ] = useState(
         perfil != null ? perfil.score : 0
     )
@@ -123,135 +106,93 @@ const FourImagesOneWord = ( props ) => {
     }
 
     useEffect(() => {
-        // Traer el perfil del usuario score, etc. /api/user/{id}/profile
         usuarioAutenticado()
-        // Para mostrar su nivel y con progress bar indicarle lo que le 
-        // falta para subir al otro nivel del jugador
         obtenerPerfil()
 
-        // Traer las imágenes y palabra del nivel correspondiente /api/league/{id}/words 
-        obtenerAhorcados()
-
-        if ( ahorcadoActual > 0 && ahorcados.length === 0 ) {
-            localStorage.setItem( 'ahorcadoActual', 0 );
+        obtenerSeleccionesUnicas()
+        
+        if ( seleccionUnicaActual > 0 && seleccionesUnicas.length === 0 ) {
+            localStorage.setItem( 'seleccionUnicaActual', 0 );
         }
 
-        // Traer los tips disponibles
         obtenerTips()
         // eslint-disable-next-line
     }, [])
 
-    const [ maxWrong, ] = useState(6)
-    const [ mistake, setMistake] = useState(0)
-    const [ num, setNum] = useState(0)
-    const [ guessed, setGuessed] = useState("")
-    const [ images, ] = useState([
-        step0, step1, step2, step3, step4, step5, step6
-    ])
+    const [ isSkip, setIsSkip ] = useState(false)
+    const [ isWinner, setIsWinner ] = useState(false)
+    const [ points, setPoints ] = useState(0)
+    const [ , setImageSelection, imageSelectionRef] = useState("")
 
-    const styles = {
-        transition: 'all 1s ease-out'
-    };
-    const [ opacity,  ] = useState(1)
-    const [ scale,  ] = useState(1)
-
-    const handleGuess = e => {
-        let letter = e.target.value;
-        let acierto = answerRef.current.search(letter) === -1 ? 1 : 0;
-        setGuessed(`${guessed}${letter}`)
-        setMistake(mistake + acierto)
-        setNum(num + acierto)
-    }
-
-    const guessedWord = () => {
-        return answerRef.current.toString().split("").map(letter => (guessed.toString().search(letter) !== -1 ? letter : " _ "));
-    }
-
-    const generateButtons = () => {
-        return "abcdefghijklmnopqrstuvwxyz".split("").map(letter => (
-            <button
-                className='btn btn-lg btn-primary m-2'
-                key={letter}
-                value={letter}
-                onClick={(e) => handleGuess(e)}
-                disabled={guessed.toString().search(letter) === -1 ? false : true}
-            >
-                {letter}
-            </button>
-        ));
-    }
-
-    // const resetButton = () => {
-    //     setMistake(0)
-    //     setGuessed("")
-    //     setAnswer(ahorcados[ahorcadoActual].associatedWord)
-    // }
-
-    const winnerMessage = () => {
-        return (
-            <div className="row text-center justify-content-center" style={{...styles, opacity: opacity, transform: 'scale(' + scale + ')'}}>
-                <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">Lo lograste!</h4>
-                    <p>Has completado el ahorcado de manera exitosa con {mistake} errores.</p>
-                    <hr/>
-                    <p class="mb-0">Recuerda que tu participación es importante para los propósitos de E-ncendio.</p>
-                </div>
-            </div>
-        )
-    }
-
-    const gameoverMessage = () => {
-        return (
-            <div className="row text-center justify-content-center" style={{...styles, opacity: opacity, transform: 'scale(' + scale + ')'}}>
-                <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">Has perdido</h4>
-                    <p>Te has equivocado en el ahorcado {mistake} veces y perdiste esta vez, pero no te preocupes, puedes volver a intentarlo!.</p>
-                    <hr/>
-                    <p class="mb-0">Recuerda que tu participación es importante para los propósitos de E-ncendio.</p>
-                </div>
-            </div>
-        )
-    }
-
-    const gameOver = mistake >= maxWrong;
-    const isWinner = answer ? guessedWord().join("") === answer : false;
-    let gameStat = winnerWordRef.current ? winnerMessage() : gameOver ? gameoverMessage() : generateButtons();
-
-    const winnerFunction = (addPoints) => {
-        // console.log("Ganó")
-        etiquetarAhorcado(ahorcados[ahorcadoActual]._id, ahorcados[ahorcadoActual].associatedWord)
-        // Calcular y sumar puntos ganados al perfil /api/profile/{profile_id}
-        // Revisar si sube de nivel de perfil, misma función de API
+    const skipGame = () => {
+        setIsSkip(true)
         // Agregar atributo a Level, señalando el puntaje al siguiente nivel
-        
+        let addPoints = -15;
+        setPoints(addPoints)
         setUserPoints( prevTime => prevTime + addPoints)
         setNowProgress( userPointsRef.current )
         setMaxProgress( perfil.league_id.pointsNextLeague )
         setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
         setUserLeague( perfil.league_id.league )
-        perfil.score = userPointsRef.current;
-        if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
-            // console.log("Subir de nivel")
+        perfil.score = perfil.score + addPoints;
+        if ( perfil.score <= perfil.league_id.pointsPreviousLeague ) {
+            perfil.dropLeague = true;
             perfil.league_id = perfil.league_id.league
+            obtenerPerfil()
         }
         actualizarPerfil(perfil)
-
+        setTimeout(() => {
+            setIsSkip(false)
+        }, 2000);
+        
         setNewContent(true);
-        // Avanzar al siguiente ahorcado
-        setWinnerWord(false)
-        if ( ahorcadoActual < largoAhorcados - 1 ) {
-            // console.log("aun quedan ahorcados")
+        seleccionesUnicas.push(seleccionesUnicas[seleccionUnicaActual])
+
+        // Avanzar a la siguiente imagen
+        setTimeout(() => {
+            localStorage.setItem( 'seleccionUnicaActual', seleccionUnicaActual + 1 );
             setTimeout(() => {
-                localStorage.setItem( 'ahorcadoActual', ahorcadoActual + 1 );
-                setAnswer("")
+                setNewContent(false)
+            }, 1000);
+        }, 1000);
+    }
+
+    const onRender = () => {
+        if ( imageSelectionRef.current === "" ) {
+            mostrarAlerta('Debes seleccionar una imagen', 'alerta-error')
+            return
+        }
+        etiquetarSeleccionUnica(seleccionesUnicas[seleccionUnicaActual]._id, seleccionesUnicas[seleccionUnicaActual].keyWord)
+        setIsWinner(true)
+
+        let addPoints = 15;
+        setPoints(addPoints)
+        setUserPoints( prevTime => prevTime + addPoints)
+        setNowProgress( userPointsRef.current )
+        setMaxProgress( perfil.league_id.pointsNextLeague )
+        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
+        setUserLeague( perfil.league_id.league )
+        perfil.score = perfil.score + addPoints;
+        if ( perfil.score >= perfil.league_id.pointsNextLeague ) {
+            perfil.league_id = perfil.league_id.league
+            obtenerPerfil()
+        }
+        actualizarPerfil(perfil)
+        setTimeout(() => {
+            setIsWinner(false)
+        }, 2000);
+        
+        setNewContent(true);
+        // Avanzar a la siguiente S. Única
+        if ( seleccionUnicaActual < largoSeleccionesUnicas - 1 ) {
+            // console.log("aun quedan SU")
+            setTimeout(() => {
+                localStorage.setItem( 'seleccionUnicaActual', seleccionUnicaActual + 1 );
                 setTimeout(() => {
                     setNewContent(false)
                 }, 1000);
             }, 1000);
         } else {
-            // Revisar si sube de nivel de ahorcados? /api/user/{id}/level-image
-
-            // console.log("Ya se acabaron las ahorcados")
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                   confirmButton: 'btn btn-success',
@@ -269,7 +210,7 @@ const FourImagesOneWord = ( props ) => {
                     Swal.fire({
                         icon: 'success',
                         title: 'Acaba de finalizar el juego',
-                        text: "No se encuentran más ahorcados disponibles",
+                        text: "No se encuentran más S. Únicas disponibles",
                     })
                     
                     setTimeout(() => {
@@ -277,48 +218,10 @@ const FourImagesOneWord = ( props ) => {
                     }, 3000);
                 }
             })
+
         }
     }
 
-    const gameoverFunction = (addPoints) => {
-        // console.log("Perdió")
-        
-        setUserPoints( prevTime => prevTime + addPoints)
-        setNowProgress( userPointsRef.current )
-        setMaxProgress( perfil.league_id.pointsNextLeague )
-        setLabelProgress( ((nowProgressRef.current / maxProgressRef.current) * 100).toPrecision(3) )
-        setUserLeague( perfil.league_id.league )
-        perfil.score = userPointsRef.current;
-        if ( perfil.score <= perfil.league_id.pointsNextLeague ) {
-            perfil.dropLeague = true;
-            perfil.league_id = perfil.league_id.league
-        }
-        actualizarPerfil(perfil)
-    }
-
-    if ( ahorcados.length !== 0 && answerRef.current !== "" && isWinner && guessed !== "" ) {
-        // console.log("ganando")
-        // gameStat = winnerMessage();
-        let addPoints = 15;
-        setPoints(addPoints)
-        setWinnerWord(true)
-        setTimeout(() => {
-            winnerFunction(addPoints)
-            setMistake(0)
-        }, 6000);
-        setGuessed("")
-    }
-
-    if ( ahorcados.length !== 0 && answerRef.current !== "" && gameOver && guessed !== "" ) {
-        // gameStat = gameoverMessage();
-        let addPoints = -15;
-        setPoints(addPoints)
-        setTimeout(() => {
-            gameoverFunction(addPoints)
-            setMistake(0)
-        }, 6000);
-        setGuessed("")
-    }
 
     useInterval(() => {
         notify()
@@ -362,7 +265,7 @@ const FourImagesOneWord = ( props ) => {
                                 <Col className="align-self-center" >
                                     <Typography component="span" variant="h4" className="levelTitle4" >
                                         {/* { perfil ? `Nivel ${perfil.level_image_id.level}` : null} */}
-                                        El Ahorcado
+                                        Selección Única
                                     </Typography>
                                 </Col>
                                 <Col >
@@ -378,7 +281,7 @@ const FourImagesOneWord = ( props ) => {
                                                         label={(<span style={{ color: 'black', position: "absolute", right: "50%", left: "45%" }} > {labelProgressRef.current}% </span>)}
                                             />
                                         </OverlayTrigger>
-                                        <p className={winnerWordRef.current === true | tipReceive === true ? "final-text winner" : gameOver ? "final-text gameover" : "final-text"} > {winnerWordRef.current | tipReceive ? "+" : gameOver ? "" : ""}{pointsRef.current} puntos </p>
+                                        <p className={isWinner === true | tipReceive === true ? "final-text winner" : isSkip === true ? "final-text gameover" : "final-text"} > {isWinner === true | tipReceive === true ? "+" : ""}{points} puntos </p>            
                                     </Fragment>
                                 : null
                                 }
@@ -406,51 +309,60 @@ const FourImagesOneWord = ( props ) => {
                             : null
                         }
 
+                        <div className="text-tagImages" >
+                            ¡Sólo debes seleccionar una imagen que este relacionada a la palabra clave, si saltas perderás puntos!
+                        </div>
+
                         {
-                            ahorcados.length !== 0 && answerRef.current !== ""
+                            seleccionesUnicas.length !== 0 
                             ?
                                 newContent === false
                                 ?
-                                    <div className="Hangman container">
-                                        {/* <h1 className='text-center'> El Ahorcado </h1> */}
-                                        <Row className="four-images" >
-                                            <img src={ ahorcados[ahorcadoActual].imageUrl_1 } alt="" className="imagesToTag" />
-                                            <img src={ ahorcados[ahorcadoActual].imageUrl_2 } alt="" className="imagesToTag" />
-                                            <img src={ ahorcados[ahorcadoActual].imageUrl_3 } alt="" className="imagesToTag" />
-                                            <img src={ ahorcados[ahorcadoActual].imageUrl_4 } alt="" className="imagesToTag" />
+                                    <div className="UniqueSelection container">
+                                        <Row className="three-images" >
+                                                <label className="mr-1" >
+                                                    <input type="radio" name="imageSelectionRef" value="small"/>
+                                                    <img alt="" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_1 } onClick={ () => {setImageSelection("small")} } />
+                                                </label>
+
+                                                <label className="mr-1" >
+                                                    <input type="radio" name="imageSelectionRef" value="big" />
+                                                    <img alt="" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_2 } onClick={ () => {setImageSelection("big")} } />
+                                                </label>
+
+                                                <label>
+                                                    <input type="radio" name="imageSelectionRef" value="large" />
+                                                    <img alt="" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_3 } onClick={ () => {setImageSelection("large")} } />
+                                                </label>
                                         </Row>
-                                        <div className="text-center d-flex">
-                                            <Col>
-                                                <img className="mistake-images" src={images[mistake]} alt=""/>
+                                        <Row className="div-keyWord mb-5" >
+                                            <div className="col" >
+                                                <p> Palabra clave </p>
+                                                <div className="wrap keyWord-game" >
+                                                    <span class="burn" > {seleccionesUnicas[seleccionUnicaActual].keyWord} </span>
+                                                </div>
+                                            </div>
+                                        </Row>
+                                        <Row className="bottomCenter-images" >
+                                            <Col xs={5} >
+                                                <Button className="botonSaltar" variant="danger" onClick={ () => skipGame() } > Saltar </Button>{' '}
                                             </Col>
-                                            <Col className="align-self-center"  >
-                                                <div className="float-center wrongs"> <span className="font-weight-bold" >Errores</span> : {mistake} de {maxWrong} </div>
-                                                <p className="gameStat" > Adivina la palabra oculta: </p>
-                                                <p className="gameStat" >
-                                                    {!winnerWord && answerRef.current
-                                                        ? guessedWord()
-                                                        : answerRef.current
-                                                    }
-                                                </p>
+                                            <Col xs={5} >
+                                                <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
                                             </Col>
-                                            <Col>
+                                            <Col xs={2} >
                                                 <OverlayTrigger
                                                     key={9}
                                                     placement={"top"}
                                                     overlay={
-                                                <Tooltip className="tooltipHangmanGame" id="help-icon-tooltip-1" >
-                                                    Necesita completar la palabra que se encuentra asociada a las 4 imágenes, ¡antes de perder sus oportunidades!, si te equivocas perderás puntos.
+                                                <Tooltip className="tooltipTagImage" id="help-icon-tooltip-1" > Debe seleccionar la imagen que más se relacione con la palabra clave.
                                                 </Tooltip>
                                                 }
                                                 >
-                                                    <HelpIcon style={{ marginTop: "35%" }} className="help-icon-tagImage" color="primary" />
+                                                    <HelpIcon className="help-icon-tagImage" color="primary" />
                                                 </OverlayTrigger>
                                             </Col>
-                                        </div>
-                                        <div className="text-center">
-                                            <p className="gameStat" >{gameStat}</p>
-                                            {/* <button className='btn btn-info' onClick={() => resetButton()}> Reiniciar </button> */}
-                                        </div>
+                                        </Row>
                                     </div>
                                 :
                                     <div className="text-center position-relative" style={{ top: "50%" }} >
@@ -463,7 +375,7 @@ const FourImagesOneWord = ( props ) => {
                             :
                                 <div className="container" >
                                     <div className="no-images" >
-                                        <span className="spansito-no-images" > Aún no existen ahorcados habilitados </span>
+                                        <span className="spansito-no-images" > Aún no existen Selecciones Únicas habilitadas </span>
                                     </div>
                                 </div>
                         }

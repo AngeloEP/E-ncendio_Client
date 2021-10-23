@@ -66,10 +66,10 @@
 }
 
 .imagesToTag {
-    min-width: 200px;
-    max-width: 200px;
-    min-height: 200px;
-    max-height: 200px;
+    min-width: 270px;
+    max-width: 270px;
+    min-height: 270px;
+    max-height: 270px;
 }
 
 .final-text {
@@ -140,10 +140,10 @@
     }
 
     .imagesToTag {
-        min-width: 160px;
-        max-width: 160px;
-        min-height: 160px;
-        max-height: 160px;
+        min-width: 250px;
+        max-width: 250px;
+        min-height: 250px;
+        max-height: 250px;
     }
 
     .final-text {

@@ -144,6 +144,10 @@ const AssociateWords = ( props ) => {
         // Traer las Palabras del nivel correspondiente /api/league/{id}/words 
         obtenerPalabras()
 
+        if ( palabraActual > 0 && palabras.length === 0 ) {
+            localStorage.setItem( 'palabraActual', 0 );
+        }
+
         // Traer los tips disponibles
         obtenerTips()
 

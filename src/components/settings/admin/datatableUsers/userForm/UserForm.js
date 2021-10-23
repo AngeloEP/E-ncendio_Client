@@ -31,6 +31,7 @@ import SpellcheckIcon from '@material-ui/icons/Spellcheck';
 import PublishIcon from '@material-ui/icons/Publish';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import InfoIcon from '@material-ui/icons/Info';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 import './userForm.css';
 import UploadImagesUser from './uploadImagesUser/UploadImagesUser';
@@ -39,8 +40,10 @@ import TaggedImagesUser from './taggedImagesUser/TaggedImagesUser';
 import TaggedWordsUser from './taggedWordsUser/TaggedWordsUser';
 import TaggedHangmansUser from './taggedHangmansUser/TaggedHangmansUser';
 import UploadHangmansUser from './uploadHangmansUser/UploadHangmansUser';
+import UploadUniqueSelectionsUser from './uploadUniqueSelectionsUser/UploadUniqueSelectionsUser';
 import UploadTipsUser from './uploadTipsUser/UploadTipsUser';
 import ViewedTipsUser from './viewedTipsUser/ViewedTipsUser';
+import TaggedUniqueSelectionsUser from './taggedUniqueSelectionsUser./TaggedUniqueSelectionsUser';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -115,6 +118,16 @@ const UserForm = ({ usuario, handleClose }) => {
         cargandoEliminarAhorcadoPorAdmin,
         cargandoModificarDificultadPuntosAhorcadoPorAdmin,
 
+        seleccionesUnicasPorUsuario,
+        obtenerSeleccionesUnicasUsuarioAdmin,
+        habilitarInhabilitarSeleccionUnicaPorUsuario,
+        eliminarSeleccionUnicaPorUsuarioDesdeAdmin,
+        modificarDificultadYPuntosSeleccionUnica,
+        cargandoSeleccionesUnicasUsuarioDesdeAdmin,
+        cargandoHabilitarInhabilitarSeleccionUnica,
+        cargandoEliminarSeleccionUnicaPorAdmin,
+        cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin,
+
         tipsPorUsuario,
         obtenerTipsUsuarioAdmin,
         habilitarInhabilitarTipPorUsuario,
@@ -157,6 +170,12 @@ const UserForm = ({ usuario, handleClose }) => {
         obtenerAhorcadosEtiquetadosPorUsuario,
         eliminarAhorcadosEtiquetadosPorUsuario,
 
+        seleccionesUnicasEtiquetadas,
+        cargandoSeleccionesUnicasEtiquetadasUsuarioDesdeAdmin,
+        cargandoResetearEtiquetasSeleccionesUnicas,
+        obtenerSeleccionesUnicasEtiquetadasPorUsuario,
+        eliminarSeleccionesUnicasEtiquetadasPorUsuario,
+
         tipsVistos,
         cargandoTipsVistosUsuarioDesdeAdmin,
         cargandoResetearTipsVistos,
@@ -181,10 +200,13 @@ const UserForm = ({ usuario, handleClose }) => {
         obtenerImagenesUsuarioAdmin(usuario._id)
         obtenerPalabrasUsuarioAdmin(usuario._id)
         obtenerAhorcadosUsuarioAdmin(usuario._id)
+        obtenerSeleccionesUnicasUsuarioAdmin(usuario._id)
         obtenerTipsUsuarioAdmin(usuario._id)
         obtenerImagenesEtiquetadasPorUsuario(usuario._id)
         obtenerPalabrasEtiquetadasPorUsuario(usuario._id)
         obtenerAhorcadosEtiquetadosPorUsuario(usuario._id)
+        obtenerAhorcadosEtiquetadosPorUsuario(usuario._id)
+        obtenerSeleccionesUnicasEtiquetadasPorUsuario(usuario._id)
         obtenerTipsVistosPorUsuario(usuario._id)
 
         if (mensaje) {
@@ -221,6 +243,10 @@ const UserForm = ({ usuario, handleClose }) => {
         eliminarAhorcadosEtiquetadosPorUsuario(user_id)
     }
 
+    const resetearEtiquetasSeleccionesUnicas = (user_id) => {
+        eliminarSeleccionesUnicasEtiquetadasPorUsuario(user_id)
+    }
+
     const resetearTipsVistos = (user_id) => {
         eliminarTipsVistosPorUsuario(user_id)
     }
@@ -237,6 +263,10 @@ const UserForm = ({ usuario, handleClose }) => {
         habilitarInhabilitarAhorcadoPorUsuario(hangman_id, {isEnabled})
     }
 
+    const modificarPropiedadHabilitarSeleccionUnica = (uniqueSelection_id, isEnabled) => {
+        habilitarInhabilitarSeleccionUnicaPorUsuario(uniqueSelection_id, {isEnabled})
+    }
+
     const modificarPropiedadHabilitarTip = (tip_id, isEnabled) => {
         habilitarInhabilitarTipPorUsuario(tip_id, {isEnabled})
     }
@@ -251,6 +281,10 @@ const UserForm = ({ usuario, handleClose }) => {
 
     const eliminarAhorcadoDesdeAdmin = (hangman_id) => {
         eliminarAhorcadoPorUsuarioDesdeAdmin(hangman_id)
+    }
+
+    const eliminarSeleccionUnicaDesdeAdmin = (uniqueSelection_id) => {
+        eliminarSeleccionUnicaPorUsuarioDesdeAdmin(uniqueSelection_id)
     }
 
     const eliminarTipDesdeAdmin = (tip_id) => {
@@ -399,6 +433,12 @@ const UserForm = ({ usuario, handleClose }) => {
                                                 {ahorcadosPorUsuario.length}
                                             </div>
                                         </div>
+                                        <div className="uniqueSelections-upload" >
+                                            S. Únicas Subidas
+                                            <div className="num-uniqueSelections-upload" >
+                                                {seleccionesUnicasPorUsuario.length}
+                                            </div>
+                                        </div>
                                         <div className="tips-upload" >
                                             Tips Subidos
                                             <div className="num-tips-upload" >
@@ -421,6 +461,12 @@ const UserForm = ({ usuario, handleClose }) => {
                                             Ahorcados Completados
                                             <div className="num-tag-hangmans" >
                                                 {ahorcadosEtiquetados.length}
+                                            </div>
+                                        </div>
+                                        <div className="tag-uniqueSelections" >
+                                            S. Únicas Completadas
+                                            <div className="num-tag-uniqueSelections" >
+                                                {seleccionesUnicasEtiquetadas.length}
                                             </div>
                                         </div>
                                         <div className="tag-tips" >
@@ -446,11 +492,13 @@ const UserForm = ({ usuario, handleClose }) => {
                                         <Tab label="Imágenes Subidas" icon={<PublishIcon />} {...a11yProps(0)} />
                                         <Tab label="Palabras Subidas" icon={<PublishIcon />} {...a11yProps(1)} />
                                         <Tab label="Ahorcados Subidos" icon={<PublishIcon />} {...a11yProps(2)} />
-                                        <Tab label="Tips Subidos" icon={<PublishIcon />} {...a11yProps(3)} />
-                                        <Tab label="Imágenes Asociadas" icon={<ImageIcon />} {...a11yProps(4)} />
-                                        <Tab label="Palabras Asociadas" icon={<SpellcheckIcon />} {...a11yProps(5)} />
-                                        <Tab label="Ahorcados Completados" icon={<ImageSearchIcon />} {...a11yProps(6)} />
-                                        <Tab label="Tips Vistos" icon={<InfoIcon />} {...a11yProps(7)} />
+                                        <Tab label="S. Únicas Subidas" icon={<PublishIcon />} {...a11yProps(3)} />
+                                        <Tab label="Tips Subidos" icon={<PublishIcon />} {...a11yProps(4)} />
+                                        <Tab label="Imágenes Asociadas" icon={<ImageIcon />} {...a11yProps(5)} />
+                                        <Tab label="Palabras Asociadas" icon={<SpellcheckIcon />} {...a11yProps(6)} />
+                                        <Tab label="Ahorcados Completados" icon={<ImageSearchIcon />} {...a11yProps(7)} />
+                                        <Tab label="S. Únicas Completadas" icon={<PageviewIcon />} {...a11yProps(8)} />
+                                        <Tab label="Tips Vistos" icon={<InfoIcon />} {...a11yProps(9)} />
                                     </Tabs>
                                 </AppBar>
                                 <SwipeableViews
@@ -498,6 +546,19 @@ const UserForm = ({ usuario, handleClose }) => {
                                         />
                                     </TabPanel>
                                     <TabPanel value={value} index={3} dir={theme.direction}>
+                                        <UploadUniqueSelectionsUser
+                                            usuario={usuario}
+                                            seleccionesUnicas={seleccionesUnicasPorUsuario}
+                                            funcionHabilitarInhabilitar={modificarPropiedadHabilitarSeleccionUnica}
+                                            cargandoHabilitarInhabilitarSeleccionUnica={cargandoHabilitarInhabilitarSeleccionUnica}
+                                            funcionEliminar={eliminarSeleccionUnicaDesdeAdmin}
+                                            cargandoEliminarSeleccionUnicaPorAdmin={cargandoEliminarSeleccionUnicaPorAdmin}
+                                            cargandoSeleccionesUnicasUsuarioDesdeAdmin={cargandoSeleccionesUnicasUsuarioDesdeAdmin}
+                                            funcionModificarDificultadYPuntos={modificarDificultadYPuntosSeleccionUnica}
+                                            cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin={cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin}
+                                        />
+                                    </TabPanel>
+                                    <TabPanel value={value} index={4} dir={theme.direction}>
                                         <UploadTipsUser
                                             usuario={usuario}
                                             tips={tipsPorUsuario}
@@ -510,7 +571,7 @@ const UserForm = ({ usuario, handleClose }) => {
                                             cargandoModificarDificultadPuntosTipPorAdmin={cargandoModificarDificultadPuntosTipPorAdmin}
                                         />
                                     </TabPanel>
-                                    <TabPanel value={value} index={4} dir={theme.direction}>
+                                    <TabPanel value={value} index={5} dir={theme.direction}>
                                         <TaggedImagesUser
                                             usuario={usuario}
                                             imagenesEtiquetadas={imagenesEtiquetadas}
@@ -519,7 +580,7 @@ const UserForm = ({ usuario, handleClose }) => {
                                             cargandoImagenesEtiquetadasUsuarioDesdeAdmin={cargandoImagenesEtiquetadasUsuarioDesdeAdmin}
                                         />
                                     </TabPanel>
-                                    <TabPanel value={value} index={5} dir={theme.direction}>
+                                    <TabPanel value={value} index={6} dir={theme.direction}>
                                         <TaggedWordsUser
                                             usuario={usuario}
                                             palabrasEtiquetadas={palabrasEtiquetadas}
@@ -528,7 +589,7 @@ const UserForm = ({ usuario, handleClose }) => {
                                             cargandoPalabrasEtiquetadasUsuarioDesdeAdmin={cargandoPalabrasEtiquetadasUsuarioDesdeAdmin}
                                         />
                                     </TabPanel>
-                                    <TabPanel value={value} index={6} dir={theme.direction}>
+                                    <TabPanel value={value} index={7} dir={theme.direction}>
                                         <TaggedHangmansUser
                                             usuario={usuario}
                                             ahorcadosEtiquetados={ahorcadosEtiquetados}
@@ -537,7 +598,16 @@ const UserForm = ({ usuario, handleClose }) => {
                                             cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin={cargandoAhorcadosEtiquetadosUsuarioDesdeAdmin}
                                         />
                                     </TabPanel>
-                                    <TabPanel value={value} index={7} dir={theme.direction}>
+                                    <TabPanel value={value} index={8} dir={theme.direction}>
+                                        <TaggedUniqueSelectionsUser
+                                            usuario={usuario}
+                                            seleccionesUnicasEtiquetadas={seleccionesUnicasEtiquetadas}
+                                            funcionResetear={resetearEtiquetasSeleccionesUnicas}
+                                            cargandoResetearEtiquetasSeleccionesUnicas={cargandoResetearEtiquetasSeleccionesUnicas}
+                                            cargandoSeleccionesUnicasEtiquetadasUsuarioDesdeAdmin={cargandoSeleccionesUnicasEtiquetadasUsuarioDesdeAdmin}
+                                        />
+                                    </TabPanel>
+                                    <TabPanel value={value} index={9} dir={theme.direction}>
                                         <ViewedTipsUser
                                             usuario={usuario}
                                             tipsVistos={tipsVistos}

@@ -16,6 +16,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import ImageIcon from '@material-ui/icons/Image';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import SpellcheckIcon from '@material-ui/icons/Spellcheck';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 import ArrowRight from '@material-ui/icons/ArrowRight';
 
@@ -61,6 +62,7 @@ const Games = ({ history }) => {
         localStorage.setItem( 'imagenActual', 0 );
         localStorage.setItem( 'palabraActual', 0 );
         localStorage.setItem( 'ahorcadoActual', 0 );
+        localStorage.setItem( 'seleccionUnicaActual', 0 );
         history.push(route)
     }
 
@@ -78,13 +80,13 @@ const Games = ({ history }) => {
                 Se encuentran disponibles los juegos:
                                     {perfil.league_id.league === "Bronce"
                                     ?
-                                        <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes</span> <span> , sube a la liga de Plata para etiquetar palabras y a la liga de Oro para poder completar Ahorcados </span> </>
+                                        <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes</span> <span> , sube a la liga de Plata para etiquetar palabras y a la liga de Oro para poder completar Ahorcados o jugar Selección Única </span> </>
                                     :
                                         perfil.league_id.league === "Plata"
                                         ?
-                                            <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes y Etiquetar palabras </span> <span> , sube a Oro para desbloquear el último </span> </>
+                                            <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes y Etiquetar palabras </span> <span> , sube a Oro para desbloquear los últimos </span> </>
                                         :
-                                            <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes, Etiquetar palabras y El Ahorcado </span> <span> </span> </>
+                                            <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes, Etiquetar palabras, El Ahorcado y Selección Única </span> <span> </span> </>
                                     }
                             </div>
                             : null
@@ -152,6 +154,24 @@ const Games = ({ history }) => {
                                         null
                                 }
                             </th>
+                            <th scope="col" className="juegitos" >
+                                <div
+                                    className={perfil.league_id.league !== "Oro"
+                                        ?
+                                            "lockGame"
+                                        :
+                                            "buttonOpenGame"}
+                                    onClick={() => OnClick('/games/unique-selection')}
+                                >
+                                    Selección Única <PageviewIcon style={{ fontSize: 60 }} /> 
+                                </div>
+                                {perfil.league_id.league !== "Oro"
+                                    ?
+                                        <span className="tiptext">Debes llegar a la liga de Oro</span>
+                                    :
+                                        null
+                                }
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -166,7 +186,10 @@ const Games = ({ history }) => {
                                 Selecciona la categoría más coherente para la palabra que estas visualizando.
                             </td>
                             <td>
-                                Debes construir la palabra que esta relacionada a las 4 imágenes antes de que pierdas tus oportunidades
+                                Debes construir la palabra que esta relacionada a las 4 imágenes antes de que pierdas tus oportunidades.
+                            </td>
+                            <td>
+                                Debes elegir una sola imagen que esté más asociada a la palabra clave que se muestra. 
                             </td>
                         </tr>
                     </tbody>
