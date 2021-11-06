@@ -39,7 +39,6 @@ const FourImagesOneWord = ( props ) => {
     const uniqueSelectionContext = useContext(UniqueSelectionContext)
     const {
         seleccionesUnicas,
-        largoSeleccionesUnicas,
         obtenerSeleccionesUnicas
     } = uniqueSelectionContext
 
@@ -184,7 +183,7 @@ const FourImagesOneWord = ( props ) => {
         
         setNewContent(true);
         // Avanzar a la siguiente S. Única
-        if ( seleccionUnicaActual < largoSeleccionesUnicas - 1 ) {
+        if ( seleccionUnicaActual < seleccionesUnicas.length - 1 ) {
             // console.log("aun quedan SU")
             setTimeout(() => {
                 localStorage.setItem( 'seleccionUnicaActual', seleccionUnicaActual + 1 );
@@ -310,7 +309,7 @@ const FourImagesOneWord = ( props ) => {
                         }
 
                         <div className="text-tagImages" >
-                            ¡Sólo debes seleccionar una imagen que este relacionada a la palabra clave, si saltas perderás puntos!
+                            ¡Sólo debes seleccionar una imagen que este relacionada a la palabra clave!. ¡si saltas perderás puntos!
                         </div>
 
                         {
@@ -339,7 +338,7 @@ const FourImagesOneWord = ( props ) => {
                                             <div className="col" >
                                                 <p> Palabra clave </p>
                                                 <div className="wrap keyWord-game" >
-                                                    <span class="burn" > {seleccionesUnicas[seleccionUnicaActual].keyWord} </span>
+                                                    <span className="burn" > {seleccionesUnicas[seleccionUnicaActual].keyWord} </span>
                                                 </div>
                                             </div>
                                         </Row>

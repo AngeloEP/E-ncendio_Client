@@ -27,6 +27,10 @@
     width: 15em;
 }
 
+.div-datatable-categories div {
+    max-height: 700px !important;
+}
+
 @media only screen and (max-width: 1376px) {
     .category-update {
         left: 15%;

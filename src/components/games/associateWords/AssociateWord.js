@@ -58,7 +58,7 @@ const AssociateWords = ( props ) => {
 
     // Extraer la información de el context de Palabras
     const wordsContext = useContext(wordContext)
-    const { palabras, largoPalabras, obtenerPalabras  } = wordsContext
+    const { palabras, obtenerPalabras  } = wordsContext
 
     // Extraer la información del context de perfiles
     const profilesContext = useContext(profileContext)
@@ -296,7 +296,7 @@ const AssociateWords = ( props ) => {
         })
         
         // Avanzar a la siguiente Palabra
-        if ( palabraActual < largoPalabras - 1 ) {
+        if ( palabraActual < palabras.length - 1 ) {
             setTimeout(() => {
                 localStorage.setItem( 'palabraActual', palabraActual + 1 );
                 setTimeout(() => {
@@ -439,7 +439,7 @@ const AssociateWords = ( props ) => {
                     }
 
                     <div className="text-tagWords" >
-                        ¡Sólo debes seleccionar una categoría que este relacionada a la palabra, si saltas perderás puntos!
+                        ¡Sólo debes seleccionar una categoría que este relacionada a la palabra!. ¡si saltas perderás puntos!
                     </div>
 
                     <>

@@ -105,7 +105,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
 
     return (
         <Fragment>
-            <Table responsive striped bordered hover  >
+            <Table responsive striped bordered hover className="tableImagesContent"  >
             {
                 images.length !== 0
                 ?

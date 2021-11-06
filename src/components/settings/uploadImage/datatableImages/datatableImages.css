@@ -66,3 +66,7 @@
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
+.div-datatable-images div {
+    max-height: 700px !important;
+}

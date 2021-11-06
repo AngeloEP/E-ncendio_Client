@@ -217,13 +217,13 @@ const Navigation =  ({ location, history })  => {
                             <div className={isOpen ? "closeIconTasks" : "triangle-left" } onClick={() => onOpen()} ></div>
                             {/* <FaTasks className="testcss" /> */}
                             <Button className={isOpen ? "button-tasks-close" : "button-tasks" } onClick={() => onOpen()} leftIcon={<FaTasks className="icon-button-tasks" />} colorScheme="teal" variant="solid">
-                                Ver tareas
+                                Ver desafíos
                             </Button>
                             <Drawer onClose={onClose} isOpen={isOpen} size="xs">
                                 <DrawerOverlay />
                                 <DrawerContent>
                                     <DrawerCloseButton />
-                                    <DrawerHeader> Estas son tus tareas hoy </DrawerHeader>
+                                    <DrawerHeader> Estos son tus desafíos del día de hoy. </DrawerHeader>
                                     <DrawerBody>
                                         { tareasDiarias.length > 0
                                         ?
@@ -231,7 +231,7 @@ const Navigation =  ({ location, history })  => {
                                                 <Fragment key={index} >
                                                     <div>
                                                         <Badge ml="1" fontSize="0.8em" colorScheme={tarea.isClaimed ? "green" : "red" } >
-                                                            {tarea.isClaimed ? "Listo" : "pendiente" }
+                                                            {tarea.isClaimed ? "Listo" : "Incompleto" }
                                                         </Badge>
                                                         {tarea.message} ({tarea.newCount}/{tarea.total})
                                                         <br/><br/><br/>

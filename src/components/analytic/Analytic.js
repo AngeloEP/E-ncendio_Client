@@ -369,27 +369,12 @@ const Analytic = () => {
                                                             <h5 className="card-title titulo-distribucion-card-analytic-image"> Distribución </h5>
                                                             <div className="card-text distribucion-card-analytic-image"> 
                                                                 <div className="row mb-2 justify-content-between" >
-                                                                    <Tooltip label="Impacto" >
-                                                                        <span className='boxDist red'>    <span> {imagen.impacto} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Riesgo" >
-                                                                        <span className='boxDist green'>  <span> {imagen.riesgo} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Recuperación" >
-                                                                        <span className='boxDist blue'>   <span> {imagen.recuperacion} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Prevención" >
-                                                                        <span className='boxDist orange'> <span> {imagen.prevencion} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Combate" >
-                                                                        <span className='boxDist yellow'> <span> {imagen.combate} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Mitigación" >
-                                                                        <span className='boxDist purple'> <span> {imagen.mitigacion} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Amenaza" >
-                                                                        <span className='boxDist aqua'>   <span> {imagen.amenaza} </span> </span> 
-                                                                    </Tooltip>
+                                                                    {imagen.categories.map((imagensita, indexImg) =>
+                                                                        <Tooltip label={imagensita.name} key={indexImg} >
+                                                                            <span className='boxDist blue'>    <span> {imagensita.count} </span> </span> 
+                                                                        </Tooltip>
+                                                                    )}
+                                                                    {/* classNames: green, red, orange, yellow, purple, aqua */}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -538,27 +523,13 @@ const Analytic = () => {
                                                             <h5 className="card-title titulo-distribucion-card-analytic-image"> Distribución </h5>
                                                             <div className="card-text distribucion-card-analytic-image"> 
                                                                 <div className="row mb-2 justify-content-between" >
-                                                                    <Tooltip label="Impacto" >
-                                                                        <span className='boxDist red'>    <span> {palabra.impacto} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Riesgo" >
-                                                                        <span className='boxDist green'>  <span> {palabra.riesgo} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Recuperación" >
-                                                                        <span className='boxDist blue'>   <span> {palabra.recuperacion} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Prevención" >
-                                                                        <span className='boxDist orange'> <span> {palabra.prevencion} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Combate" >
-                                                                        <span className='boxDist yellow'> <span> {palabra.combate} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Mitigación" >
-                                                                        <span className='boxDist purple'> <span> {palabra.mitigacion} </span> </span> 
-                                                                    </Tooltip>
-                                                                    <Tooltip label="Amenaza" >
-                                                                        <span className='boxDist aqua'>   <span> {palabra.amenaza} </span> </span> 
-                                                                    </Tooltip>
+                                                                    {palabra.categories.map((palabrita, indexPal) =>
+                                                                               
+                                                                        <Tooltip label={palabrita.name} key={indexPal} >
+                                                                            <span className='boxDist blue'>    <span> {palabrita.count} </span> </span> 
+                                                                        </Tooltip>
+                                                                    )}
+                                                                    {/* classNames: green, red, orange, yellow, purple, aqua */}
                                                                 </div>
                                                             </div>
                                                         </div>

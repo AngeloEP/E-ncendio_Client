@@ -48,7 +48,7 @@ const FourImagesOneWord = ( props ) => {
 
     // Extraer la información de el context de Palabras
     const fourImagesOneWordContext = useContext(FourImagesOneWordContext)
-    const { ahorcados, largoAhorcados, obtenerAhorcados  } = fourImagesOneWordContext
+    const { ahorcados, obtenerAhorcados  } = fourImagesOneWordContext
 
     // Extraer la información del context de perfiles
     const profilesContext = useContext(profileContext)
@@ -190,11 +190,11 @@ const FourImagesOneWord = ( props ) => {
     const winnerMessage = () => {
         return (
             <div className="row text-center justify-content-center" style={{...styles, opacity: opacity, transform: 'scale(' + scale + ')'}}>
-                <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">Lo lograste!</h4>
+                <div className="alert alert-success" role="alert">
+                    <h4 className="alert-heading">Lo lograste!</h4>
                     <p>Has completado el ahorcado de manera exitosa con {mistake} errores.</p>
                     <hr/>
-                    <p class="mb-0">Recuerda que tu participación es importante para los propósitos de E-ncendio.</p>
+                    <p className="mb-0">Recuerda que tu participación es importante para los propósitos de E-ncendio.</p>
                 </div>
             </div>
         )
@@ -203,11 +203,11 @@ const FourImagesOneWord = ( props ) => {
     const gameoverMessage = () => {
         return (
             <div className="row text-center justify-content-center" style={{...styles, opacity: opacity, transform: 'scale(' + scale + ')'}}>
-                <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">Has perdido</h4>
+                <div className="alert alert-danger" role="alert">
+                    <h4 className="alert-heading">Has perdido</h4>
                     <p>Te has equivocado en el ahorcado {mistake} veces y perdiste esta vez, pero no te preocupes, puedes volver a intentarlo!.</p>
                     <hr/>
-                    <p class="mb-0">Recuerda que tu participación es importante para los propósitos de E-ncendio.</p>
+                    <p className="mb-0">Recuerda que tu participación es importante para los propósitos de E-ncendio.</p>
                 </div>
             </div>
         )
@@ -239,7 +239,7 @@ const FourImagesOneWord = ( props ) => {
         setNewContent(true);
         // Avanzar al siguiente ahorcado
         setWinnerWord(false)
-        if ( ahorcadoActual < largoAhorcados - 1 ) {
+        if ( ahorcadoActual < ahorcados.length - 1 ) {
             // console.log("aun quedan ahorcados")
             setTimeout(() => {
                 localStorage.setItem( 'ahorcadoActual', ahorcadoActual + 1 );

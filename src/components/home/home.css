@@ -16,11 +16,17 @@
 }
 
 .card-title {
+    color: black;
+    font-weight: 900;
     font-size: large;
 }
 
 .card-text {
     font-size: medium;
+}
+
+.texto-tarjeta-home {
+    text-align: justify;
 }
 
 .carousel-title {

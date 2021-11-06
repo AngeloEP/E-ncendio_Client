@@ -55,7 +55,7 @@ const TagImage = ( props ) => {
 
     // Extraer la información de el context de imagenes
     const imagesContext = useContext(imageContext)
-    const { imagenes, largoImagenes, obtenerImagenes  } = imagesContext
+    const { imagenes, obtenerImagenes  } = imagesContext
 
     // Extraer la información de el context de los tips
     const tipContext = useContext(TipContext)
@@ -361,7 +361,7 @@ const TagImage = ( props ) => {
             selected: null
         })
         // Avanzar a la siguiente imagen
-        if ( imagenActual < largoImagenes - 1 ) {
+        if ( imagenActual < imagenes.length - 1 ) {
             // console.log("aun quedan imágenes")
             setTimeout(() => {
                 localStorage.setItem( 'imagenActual', imagenActual + 1 );
@@ -508,7 +508,7 @@ const TagImage = ( props ) => {
             }
 
             <div className="text-tagImages" >
-                ¡Sólo debes seleccionar una categoría que este relacionada a la imagen, si saltas perderás puntos!
+                ¡Sólo debes seleccionar una categoría que este relacionada a la imagen!. ¡si saltas perderás puntos!
             </div>
 
             <>

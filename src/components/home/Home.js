@@ -334,7 +334,7 @@ const Home = () => {
                                 </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Edita tu perfil </Card.Title>
-                                <Card.Text className="card-text" >
+                                <Card.Text className="card-text texto-tarjeta-home" >
                                     Puedes ajustar tus configuraciones del perfil de la manera que gustes desde que te encuentres en la liga de <span style={{ color: "gray" }} > Plata </span>.
                                 </Card.Text>
                                 </Card.Body>
@@ -349,9 +349,10 @@ const Home = () => {
                                 <img className="rankImageCard" src={rankingIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/rank"> Ranking </a> </Card.Header>
                                 <Card.Body>
-                                <Card.Title className="card-title" > Rivaliza con los demás </Card.Title>
-                                <Card.Text className="card-text" >
-                                    Logra la mejor posición del ranking de jugadores.
+                                <Card.Title className="card-title" > Alcanza la más alta posición </Card.Title>
+                                <Card.Text className="card-text texto-tarjeta-home" >
+                                    Logra la mejor posición del ranking de jugadores de E-ncendio para ir obteniendo Fire points
+                                     y así poder comprar objetos en la tienda de la aplicación.
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -366,10 +367,17 @@ const Home = () => {
                                 <Card.Header className="card-header" > <a className="nav-link" href="/games"> Juegos </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Interactúa en los juegos </Card.Title>
-                                <Card.Text className="card-text" >
-                                    Puedes colaborar jugando en uno de los 3 tipos de juegos, <a href="/games/images"> etiquetando imágenes </a>, 
-                                    <a href="/games/words"> etiquetando palabras </a> desde la liga de <span style={{ color: "#8A9597" }} > Plata </span> o descubriendo la palabra incógnita en 
-                                    <a href="/games/four-images-one-word"> 4 imágenes y 1 palabra </a> o <a href="/games/unique-selection"> Selección Única </a> a partir de la liga de <span style={{ color: "#FFBF00" }} > Oro </span>.
+                                <Card.Text as="div" className="card-text texto-tarjeta-home" >
+                                    Puedes colaborar jugando en uno de los 4 tipos de juegos:
+                                    <ul>
+                                        <li> <a href="/games/images"> Etiquetando imágenes</a>. </li>
+                                        <li> <a href="/games/words"> Etiquetando palabras </a> desde la liga de <span style={{ color: "#8A9597" }} > Plata</span>. </li>
+                                        <li> Descubriendo la palabra incógnita en <a href="/games/four-images-one-word"> 4 imágenes y 1 palabra. </a> a partir de la liga de <span style={{ color: "#FFBF00" }} > Oro</span>.
+                                        </li>
+                                        <li>
+                                            Escogiendo la imagen más relacionada a la palabra clave en <a href="/games/unique-selection"> Selección Única </a> a partir de la liga de <span style={{ color: "#FFBF00" }} > Oro</span>.
+                                        </li>
+                                    </ul>
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -384,7 +392,7 @@ const Home = () => {
                                 <Card.Header className="card-header" > <a className="nav-link" href="/settings"> Contenido </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Sube tu propio contenido </Card.Title>
-                                <Card.Text className="card-text" >
+                                <Card.Text className="card-text texto-tarjeta-home" >
                                     Puedes aportar tu granito de arena y colaborar con el objetivo de E-ncendio 
                                     subiendo imágenes, agregar palabras desde la liga de <span style={{ color: "#8A9597" }} > Plata </span> y también subir contenido para el juego
                                     de 4 palabras y 1 imagen o el juego de Selección Única o incluso los tips de información desde la liga de <span style={{ color: "#FFBF00" }} > Oro </span>,
@@ -403,7 +411,7 @@ const Home = () => {
                                 <Card.Header className="card-header" > <a className="nav-link" href="/store"> Tienda </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Comprar atículos en Tienda </Card.Title>
-                                <Card.Text className="card-text" >
+                                <Card.Text className="card-text texto-tarjeta-home" >
                                     A medida que cumplas con tus tareas diarias obtendrás FirePoints, al igual que consiguiendo logros
                                     o quedando entre los 3 primeros lugares del Ranking cada día. Estos FirePoints le permitirán comprar
                                     ciertos artículos en Tienda.
@@ -503,7 +511,7 @@ const Home = () => {
                                 <Card.Header className="card-header" > <a className="nav-link" href="/about"> Conócenos </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Averigua quienes somos </Card.Title>
-                                <Card.Text className="card-text" >
+                                <Card.Text className="card-text texto-tarjeta-home" >
                                     Podrás saber quienes están detrás del proyecto E-ncendio y del porqué de este.
                                 </Card.Text>
                                 </Card.Body>
@@ -519,7 +527,7 @@ const Home = () => {
                                 <Card.Header className="card-header" > <a className="nav-link" href="/help"> Ayuda </a> </Card.Header>
                                 <Card.Body>
                                 <Card.Title className="card-title" > Conoce el funcionamiento básico de la Aplicación </Card.Title>
-                                <Card.Text className="card-text" >
+                                <Card.Text className="card-text texto-tarjeta-home" >
                                     Si tienes dudas de como jugar, cómo ganar puntos y de qué manera poder editar tu Perfil puedes ir a "Ayuda".
                                 </Card.Text>
                                 </Card.Body>

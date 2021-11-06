@@ -80,13 +80,13 @@ const Games = ({ history }) => {
                 Se encuentran disponibles los juegos:
                                     {perfil.league_id.league === "Bronce"
                                     ?
-                                        <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes</span> <span> , sube a la liga de Plata para etiquetar palabras y a la liga de Oro para poder completar Ahorcados o jugar Selección Única </span> </>
+                                        <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes</span> <span> , sube a la liga de Plata para etiquetar palabras y a la liga de Oro para poder completar Ahorcados o jugar Selección Única. </span> </>
                                     :
                                         perfil.league_id.league === "Plata"
                                         ?
-                                            <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes y Etiquetar palabras </span> <span> , sube a Oro para desbloquear los últimos </span> </>
+                                            <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes y Etiquetar palabras </span> <span> , sube a Oro para desbloquear los últimos. </span> </>
                                         :
-                                            <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes, Etiquetar palabras, El Ahorcado y Selección Única </span> <span> </span> </>
+                                            <><span style={{ fontWeight:"bold" }} > Etiquetar imágenes, Etiquetar palabras, El Ahorcado y Selección Única. </span> <span> </span> </>
                                     }
                             </div>
                             : null
@@ -186,10 +186,10 @@ const Games = ({ history }) => {
                                 Selecciona la categoría más coherente para la palabra que estas visualizando.
                             </td>
                             <td>
-                                Debes construir la palabra que esta relacionada a las 4 imágenes antes de que pierdas tus oportunidades.
+                                Construye la palabra que esta relacionada a las 4 imágenes antes de que pierdas tus oportunidades.
                             </td>
                             <td>
-                                Debes elegir una sola imagen que esté más asociada a la palabra clave que se muestra. 
+                                Analiza y escoge la imagen que esté más asociada a la palabra clave que se muestra. 
                             </td>
                         </tr>
                     </tbody>
