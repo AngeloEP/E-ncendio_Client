@@ -166,19 +166,6 @@
     border-radius: 5px;
 }
 
-.turquoiseToPinkFrame {
-    border: 8px solid;
-    border-width: 20%;
-      border-image: repeating-radial-gradient(
-              circle at 10px,
-              turquoise,
-              pink 3px,
-              greenyellow 5px,
-              pink 2px
-    )
-    1;
-  }
-
 @media only screen and (max-width: 1376px){
     .title-store{
         font-size: 25px;
