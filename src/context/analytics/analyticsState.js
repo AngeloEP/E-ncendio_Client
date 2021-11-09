@@ -18,6 +18,9 @@ import {
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES,
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_CARGANDO,
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR,
+    OBTENER_CSV,
+    OBTENER_CSV_CARGANDO,
+    OBTENER_CSV_ERROR,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -28,11 +31,13 @@ const AnalyticsState = props => {
         distribucionCategoriasPorImagen: [],
         distribucionCategoriasPorPalabra: [],
         distribucionUsoFuncionalidades: [],
+        dataPrimerCSV: [],
         cargandoDistribucionCategorias: false,
         cargandoDistribucionCategoriasPalabras: false,
         cargandoDistribucionCategoriasPorImagen: false,
         cargandoDistribucionCategoriasPorPalabra: false,
         cargandoDistribucionUsoFuncionalidades: false,
+        cargandoPrimerCSV: false,
         errores: [],
     }
 
@@ -165,6 +170,31 @@ const AnalyticsState = props => {
         }
     }
 
+    const obtenerCSV = async () => {
+        try {
+            dispatch({
+                type: OBTENER_CSV_CARGANDO,
+            })
+
+            const respuesta = await clienteAxios.get('/api/usuarios/getCSV')
+            dispatch({
+                type: OBTENER_CSV,
+                payload: respuesta.data
+            })
+            
+        } catch (error) {
+            console.log(error)
+            const alerta = {
+                msg: error.response.data.msg,
+                categoria: 'alerta-error'
+            }
+            dispatch({
+                type: OBTENER_CSV_ERROR,
+                payload: alerta
+            })
+        }
+    }
+
     return (
         <analyticsContext.Provider
             value={{
@@ -178,11 +208,13 @@ const AnalyticsState = props => {
                 cargandoDistribucionCategoriasPorPalabra: state.cargandoDistribucionCategoriasPorPalabra,
                 distribucionUsoFuncionalidades: state.distribucionUsoFuncionalidades,
                 cargandoDistribucionUsoFuncionalidades: state.cargandoDistribucionUsoFuncionalidades,
+                dataPrimerCSV: state.dataPrimerCSV,
                 traerDistribucionDeCategorias,
                 traerDistribucionDeCategoriasPorImagen,
                 traerDistribucionDeCategoriasPalabras,
                 traerDistribucionDeCategoriasPorPalabra,
                 traerDistribucionDeUsoDeFuncionalidades,
+                obtenerCSV,
             }}
         >
             {props.children}

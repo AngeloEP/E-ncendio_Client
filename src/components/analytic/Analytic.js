@@ -23,6 +23,8 @@ import { Tooltip } from "@chakra-ui/react";
 
 import ClipLoader from "react-spinners/ClipLoader";
 
+import { CSVLink } from 'react-csv';
+
 const Analytic = () => {
 
     const authContext = useContext(AuthContext)
@@ -50,6 +52,9 @@ const Analytic = () => {
         distribucionUsoFuncionalidades,
         cargandoDistribucionUsoFuncionalidades,
         traerDistribucionDeUsoDeFuncionalidades,
+
+        dataPrimerCSV,
+        obtenerCSV,
     } = analyticsContext
 
     const [ queryImages, guardarQueryImages, queryImagesRef ] = useState({
@@ -73,6 +78,7 @@ const Analytic = () => {
         traerDistribucionDeCategorias(queryImagesRef.current)
         traerDistribucionDeCategoriasPalabras(queryWordsRef.current)
         traerDistribucionDeUsoDeFuncionalidades(queryDistributionFuncionalitiesRef.current)
+        obtenerCSV()
         // eslint-disable-next-line
     }, [])
 
@@ -230,6 +236,35 @@ const Analytic = () => {
             isFireRelatedDistributionFuncionalities: e === "Si"? true : false
         })
         traerDistribucionDeUsoDeFuncionalidades( queryDistributionFuncionalitiesRef.current )
+    }
+
+    // const descargarPrimerCSV = () => {
+    //     const headers = [
+    //         {label: "Nombre", key: "name"},
+    //         {label: "Visible", key: "isVisible"}
+    //     ];
+        
+    //     const csvReport = {
+    //         filename: 'Report.csv',
+    //         headers: headers,
+    //         data: dataPrimerCSV
+    //     };
+    // }
+    
+    let headers = []
+    let csvReport = []
+    if (dataPrimerCSV.length !== 0 ) {
+        
+        headers = [
+            {label: "Nombre", key: "name"},
+            {label: "Visible", key: "isVisible"}
+        ];
+        
+        csvReport = {
+            filename: 'Report.csv',
+            headers: headers,
+            data: dataPrimerCSV.data
+        };
     }
 
     return (
@@ -630,6 +665,17 @@ const Analytic = () => {
                             />
                             
                         </div>
+                    }
+                </div>
+
+                <div className="text-center" >
+                    {/* <Button onClick={() => descargarPrimerCSV()} colorScheme="blue"> CSV </Button> */}
+                    {dataPrimerCSV.length !== 0
+                    ?
+                        <>
+                            <CSVLink {...csvReport} > Exportar </CSVLink>
+                        </>
+                        :   null
                     }
                 </div>
             </>

@@ -14,10 +14,14 @@ import {
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES,
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_CARGANDO,
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR,
+    OBTENER_CSV,
+    OBTENER_CSV_CARGANDO,
+    OBTENER_CSV_ERROR,
 } from '../../types';
 
 const analyticsReducer = (state, action) => {
     switch (action.type) {
+        case OBTENER_CSV_ERROR:
         case OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR:
         case OBTENER_DISTRIBUCION_CATEGORIAS_PALABRAS_ERROR:
         case OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA_ERROR:
@@ -31,6 +35,7 @@ const analyticsReducer = (state, action) => {
                 cargandoDistribucionCategoriasPorImagen: false,
                 cargandoDistribucionCategoriasPorPalabra: false,
                 cargandoDistribucionUsoFuncionalidades: false,
+                cargandoPrimerCSV: false,
             }
 
         case OBTENER_DISTRIBUCION_CATEGORIAS_IMAGENES:
@@ -96,6 +101,18 @@ const analyticsReducer = (state, action) => {
             return {
                 ...state,
                 cargandoDistribucionUsoFuncionalidades: true
+            }
+
+        case OBTENER_CSV_CARGANDO:
+            return {
+                ...state,
+                cargandoPrimerCSV: true
+            }
+
+        case OBTENER_CSV:
+            return {
+                ...state,
+                dataPrimerCSV: action.payload
             }
 
         default:
