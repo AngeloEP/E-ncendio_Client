@@ -215,7 +215,7 @@ const Login = ( props ) => {
               color="primary"
               disabled={loadingLogin}
               // className={classes.submit}
-              className="btn-blue mt-2"
+              className="loadingLogin btn-blue mt-2"
             >
               {
                 loadingLogin
@@ -226,12 +226,12 @@ const Login = ( props ) => {
                     alignItems="center"
                     spacing={1}
                   >
-                    <Grid item xs={3} style={{ color: "#000" }} >
+                    <Grid item xs={10} sm style={{ color: "#fff" }} >
                       Cargando...
                     </Grid>
-                    <Grid item xs={3} >
+                    <Grid item xs={2} sm >
                       <ClipLoader
-                        color={"#000"}
+                        color={"#fff"}
                         loading={true}
                         size={20}
                       />

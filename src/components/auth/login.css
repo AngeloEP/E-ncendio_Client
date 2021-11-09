@@ -29,8 +29,8 @@
 }
 
 .loadingLogin {
-    width: 5px;
-    height: 5px;
+    width: fit-content;
+    height: fit-content;
 }
 
 .divlogin {
@@ -161,7 +161,7 @@
     }
     
     .main-login {
-        height: 100vh;
+        height: 100%;
     }
     
     .form {
@@ -169,8 +169,10 @@
     }
     
     .loadingLogin {
-        width: 5px;
-        height: 5px;
+        width: 100% !important;
+        height: 50px !important;
+        font-size: small !important;
+        margin-bottom: 5% !important;
     }
     
     .divlogin {
