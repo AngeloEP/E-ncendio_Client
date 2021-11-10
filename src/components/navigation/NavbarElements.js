@@ -111,7 +111,7 @@ export const NavBtn = styled.nav`
     width: 29%;
   }
   @media screen and (max-width: 875px) {
-    display: none;
+    /* display: none; */
   }
 `;
 
@@ -133,7 +133,7 @@ export const ExitBtn = styled.button`
   }
   
   @media screen and (max-width: 875px) {
-    display: none;
+    display: flex !important;
   }
 `;
 
@@ -144,4 +144,7 @@ export const PNav = styled.p`
   margin-top: 0.5rem;
   margin-left: 0rem;
   margin-right: .5rem;
+  @media screen and (max-width: 875px) {
+    display: none !important;
+  }
 `; 

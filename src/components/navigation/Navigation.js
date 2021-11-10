@@ -186,7 +186,7 @@ const Navigation =  ({ location, history })  => {
                                 </div>
                             : null
                             }
-                            <FirePoints firePoints={perfil.firePoints} />
+                                <FirePoints firePoints={perfil.firePoints} className="userPoints" />
                             <span className="badge badge-pill badge-light align-middle">
                                 <img src={
                                         perfil.league_id.league === "Bronce" ? BronceBadge

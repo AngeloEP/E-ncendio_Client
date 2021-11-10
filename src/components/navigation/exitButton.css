@@ -52,4 +52,24 @@
         transform: rotate(360deg);
     }
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    #botonSalir {
+        margin-right: 45% !important;        
+    }
+
+    .spinner {
+        border: 6px solid rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        border-top-color: #fff;
+        left: 37%;
+        top: 65%;
+        margin: auto;
+        width: 22px;
+        height: 22px;
+        transition: opacity 250ms;
+        animation: rotate-spinner 1s linear;
+        animation-iteration-count: infinite;
+    }
+}
   
