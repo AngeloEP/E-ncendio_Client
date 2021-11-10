@@ -60,7 +60,7 @@
 }
 
 .submit-image {
-    width: 20%;
+    width: 50%;
     margin-left: 10% !important;
 }
 
@@ -84,6 +84,10 @@
     max-height: 280px;
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+.divHelpIconUploadImage {
+    text-align: left;
 }
 
 .tooltipUploadImage {
@@ -135,7 +139,11 @@
     }
     
     .submit-image {
-        width: 15%;
+        width: 45%;
+    }
+
+    .divHelpIconUploadImage {
+        text-align: left;
     }
 
     .textfield-filename {
@@ -156,5 +164,82 @@
         max-height: 140px;
         margin-top: 0.5em;
         margin-bottom: 0.5em;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .div-uploadImage {
+        width: 100% !important;
+        margin-top: 2em !important;
+        margin-bottom: 0em !important;
+        margin-left: 0% !important;
+    }
+    
+    .div-image {
+        width: 150px !important;
+    }
+    
+    .image-upload {
+        position: relative;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 150px !important;
+        max-height: 150px !important;
+        margin-top: 1em;
+        margin-bottom: .5em;
+    }
+    
+    .label-upload-image {
+        min-width: fit-content;
+        min-height: fit-content;
+        margin-left: -5% !important;
+        margin-bottom: .5em;
+    }
+    
+    
+    .div-filename {
+        margin-top: 3em !important;
+        margin-left: 4em !important;
+        min-height: fit-content !important;
+    }
+
+    .div-filename label {
+        margin-top: -6% !important;
+    }
+    
+    .textfield-filename {
+        min-width: 100% !important;
+        min-height: max-content !important;
+    }
+    
+    .submit-image {
+        width: 100%;
+        height: fit-content !important;
+        margin-top: 10% !important;
+    }
+    
+    .div-datatable-images {
+        width: 90%;
+        margin-top: 3em;
+        margin-bottom: 3em;
+        margin-left: 5%;
+        font-size: smaller !important;
+    }
+    
+    .image-user {
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 120px;
+        max-width: 120px;
+        min-height: 130px;
+        max-height: 130px;
+    }
+    
+    .divHelpIconUploadImage {
+        text-align: center;
+    }
+    
+    .tooltipUploadImage {
+        font-size: smaller;
     }
 }

@@ -79,7 +79,7 @@ const Admin = () => {
                         onPageChange={page => setCurrentPage(page)}
                     />
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-6 divFilterName ">
                     <Search
                         onSearch={value => {
                             setSearch(value);

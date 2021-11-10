@@ -55,7 +55,7 @@ const Settings = () => {
                                 { new Date().getDate() + '-' + new Date().toLocaleDateString(undefined, { month: 'long'}) + '-' + new Date().getFullYear() }
                             </span>
                         </div>
-                        <div className="text-center ml-auto mr-auto" >
+                        <div className="text-center ml-auto mr-auto availableContentText" >
                             { perfil.league_id.league === "Bronce"
                                 ?
                                     "Puede subir imágenes al sitio"
@@ -67,7 +67,7 @@ const Settings = () => {
                                         "¡Ahora ya puede subir el contenido que desee al sitio para ser evaluado!"
                             }
                         </div>
-                        <div className=" buttonsNavigation" >
+                        <div className="buttonsNavigation" >
                             <BottomNavigation
                                 value={navigation}
                                 onChange={(event, newValue) => {

@@ -113,3 +113,24 @@
         font-size: 31px;
     }
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .nav-settings {
+        margin-top: none;
+        margin-bottom: none;
+        margin-left: none;
+        margin-right: none;
+        align-items: none;
+        width: 100%;
+    }
+
+    .buttonsNavigation {
+        display: grid;
+        width: 100%;
+        overflow-y: auto !important;
+    }
+
+    .availableContentText {
+        font-size: smaller;
+    }
+}

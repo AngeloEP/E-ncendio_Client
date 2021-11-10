@@ -13,3 +13,29 @@
     align-items: center;
     justify-content: center;
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .pagination-users{
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+        display: flex;
+        align-items: center;
+        justify-content: right;
+    }
+
+    .divFilterName {
+        text-align: -webkit-center;
+    }
+
+    .divFilterName input {
+        width: fit-content !important;
+    }
+
+    .div-datatable-users {
+        text-align: center;
+        width: 90%;
+        margin-top: 3em;
+        margin-bottom: 3em;
+        margin-left: 5%;
+    }
+}

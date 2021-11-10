@@ -160,7 +160,7 @@ const UploadImage = () => {
                             </Grid>
                             <Grid item xs={12} style={{ marginBottom: "2%" }} >
                                 <div className="row" >
-                                    <Col xs={11} >
+                                    <Col >
                                         <Button
                                             type="submit"
                                             variant="contained"
@@ -193,7 +193,7 @@ const UploadImage = () => {
                                             }
                                         </Button>
                                     </Col>
-                                    <Col xs={1} >
+                                    <Col className="divHelpIconUploadImage" >
                                         <OverlayTrigger
                                             key={9}
                                             placement={"top"}
