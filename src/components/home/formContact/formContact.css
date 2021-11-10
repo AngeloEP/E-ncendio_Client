@@ -43,7 +43,7 @@
 
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .emailContact {
-        left: 10%;
+        left: 5%;
         width: 90% !important;
     }
     
@@ -52,30 +52,35 @@
     }
 
     .subjectContact {
-        left: 10%;
+        left: 5%;
         width: 90% !important;
     }
 
     .subjectContact label {
         font-size: small !important;
-        margin-left: -7%;
     }
     
     .messageContact {
-        left: -40% !important;
+        left: -15%;
     }
 
     .messageContact textarea {
-        width: 90% !important;
+        width: 80% !important;
         font-size: smaller;
+        text-align: left;
     }
     
     .buttonContact {
-        margin-left: 10%;
+        /* margin-left: 10%; */
     }
 
     .formularioContacto {
-        position: inherit;
+        position: relative !important;
         margin-bottom: 25%;
     }
+
+    .formularioContacto  { display: table;      }
+    .formularioContacto p     { display: table-row;  }
+    .formularioContacto label { display: table-cell; }
+    .formularioContacto input { display: table-cell; }
 }

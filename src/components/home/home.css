@@ -387,7 +387,7 @@ h2.section-title::after {
     .li-home {
         padding-left: 0.2em;
         grid-template-columns: 10px auto;
-        justify-content: start !important;
+        justify-content: flex-start !important;
         font-size: smaller;
     }
     
@@ -396,8 +396,9 @@ h2.section-title::after {
     }
     
     .li-home span {
-        margin-left:0.5em;
-        padding-top: 5%;
+        margin-left: 0.5em;
+        width: 100%;
+        text-align: justify;
     }
     
     .reward-modal {
