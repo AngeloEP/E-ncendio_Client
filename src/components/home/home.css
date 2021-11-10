@@ -291,3 +291,188 @@ h2.section-title::after {
         margin-bottom: 0%;
     }
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .slides-carousel {
+        width: 100%;
+        height: 350px !important;
+    }
+
+    .card-other {
+        margin-top: 1.5em;
+        width: 40%;
+        margin: 0;
+        margin-right: 5%;
+    }
+    
+    .card-header {
+        font-size: medium;
+    }
+    
+    .card-title {
+        font-weight: 900;
+        font-size: smaller;
+    }
+    
+    .card-text {
+        font-size: small;
+    }
+    
+    .texto-tarjeta-home {
+        text-align: justify;
+        word-wrap: break-word !important;
+        white-space: pre-line;
+    }
+    
+    .carousel-caption1 {
+        bottom: 45% !important;
+        width: fit-content;
+        left: 55% !important;
+    }
+    
+    .carousel-caption2 {
+        bottom: 40% !important;
+    }
+    
+    .carousel-caption3 {
+        width: fit-content;
+        bottom: 40% !important;
+        left: 10% !important;
+    }
+    
+    .párrafo-ligas {
+        text-align: center;
+        height: 100%;
+    }
+    
+    .section-title{
+        position: relative;
+        font-size: larger;
+        font-weight: 700;
+        text-transform: uppercase;
+        top: 2% !important;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+    
+    .about-home-title {
+        font-size: larger;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    
+    h2.section-title::after {
+        content: "";
+        width: 40%;
+        height: 5%;
+        bottom: 0;
+        left: 30%;
+    }
+    
+    .parrafo-home {
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: medium;
+        text-align: justify;
+    }
+    
+    .ul-home {
+        position: relative;
+        margin-top: 4% !important;
+        margin-left: 0% !important;
+        padding-left: .5em;
+        list-style-type: none;
+    }
+    .li-home {
+        padding-left: 0.2em;
+        display: flex;
+        grid-template-columns: 10px auto;
+        justify-content: start;
+        font-size: medium;
+    }
+    
+    .li-home::before {
+        content: '▶';
+    }
+    
+    .li-home span {
+        display:block;
+        margin-left:0.5em;
+    }
+    
+    .reward-modal {
+        background-color: #e2ddd8;
+        padding: 0.125em;
+        font-size: 4em;
+        text-align: center;
+        white-space: nowrap;
+        transform: rotate(-10deg);
+        position: fixed;
+        top: 40%;
+        left: -5%;
+        right: -5%;
+        z-index: 100;
+        margin-top: 0;
+    }
+    
+    .profileImageCard {
+        width: 30% !important;
+        height: 20% !important;
+    }
+    
+    .rankImageCard {
+        width: 40% !important;
+        height: 23% !important;
+        transform: scale(1.3);
+        margin-left: 35%;
+    }
+    
+    .gamesImageCard {
+        width: 40% !important;
+        height: 20% !important;
+        transform: scale(1.5);
+    }
+    
+    .contentImageCard {
+        width: 40% !important;
+        height: 22.5% !important;
+    }
+    
+    .aboutImageCard {
+        width: 40% !important;
+        height: 20% !important;
+        transform: scale(1.15);
+    }
+    
+    .helpImageCard {
+        width: 40% !important;
+        height: 20% !important;
+        transform: scale(1.4);
+        margin-left: 40%;
+    }
+    
+    .buyImageCard {
+        width: 60% !important;
+        height: 20% !important;
+        transform: scale(1.6);
+        margin-left: 25%;
+    }
+    
+    .contactUsHome {
+        position: relative;
+        width: 100%;
+        height: 70%;
+        /* margin-left: 10%; */
+    }
+
+    .text-about {
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+        text-align: justify;
+        font-size: medium;
+    }
+
+    .formContact {
+        margin-top: 0%;
+    }
+}

@@ -1,18 +1,26 @@
 .emailContact {
     left: 50%;
+    position: relative;
 }
 
 .subjectContact {
     left: 50%;
+    position: relative;
 }
 
 .messageContact {
     margin-left: 50%;
+    position: relative;
     min-width: 100%;
 }
 
 .buttonContact {
+    position: relative;
     margin-left: 50%;
+}
+
+.formularioContacto {
+
 }
 
 @media only screen and (max-width: 1376px){
@@ -30,5 +38,28 @@
     
     .buttonContact {
         margin-left: 50%;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .emailContact {
+        left: 10%;
+    }
+    
+    .subjectContact {
+        left: 10%;
+    }
+    
+    .messageContact {
+        left: -40% !important;
+    }
+    
+    .buttonContact {
+        margin-left: 10%;
+    }
+
+    .formularioContacto {
+        position: inherit;
+        margin-bottom: 25%;
     }
 }

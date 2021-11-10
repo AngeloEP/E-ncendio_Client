@@ -361,7 +361,7 @@ const Home = () => {
                                 bg="light"
                                 key="3"
                                 text="dark"
-                                className="card-first"
+                                className="card-other"
                             >
                                 <img className="gamesImageCard" src={gamesIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/games"> Juegos </a> </Card.Header>
@@ -484,7 +484,7 @@ const Home = () => {
                             <h2 className="about-home-title" > Contáctanos </h2>
                         </Grid>
                         <Grid container direction="row" justify="center" alignItems="center" className="mt-2" >
-                            <Typography variant="subtitle1" gutterBottom>
+                            <Typography variant="subtitle1" className="text-about" gutterBottom>
                                 Si tienes alguna observación sobre algún problema que se te presentó en la Aplicación, no dudes
                                 en decirnos, ¡recibirás recompensas!, contáctanos aquí:
                             </Typography>
@@ -494,7 +494,7 @@ const Home = () => {
                                 <Image className="contactUsHome" src={contacUs} />
                             </Grid>
 
-                            <Grid item xs={6} className={classes.formContact} >    
+                            <Grid item xs={6} className="formContact" >    
                                 <FormContact />
                             </Grid>
                             

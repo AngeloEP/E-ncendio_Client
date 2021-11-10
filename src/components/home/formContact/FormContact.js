@@ -67,7 +67,7 @@ const FormContact = () => {
     }
     
     return (
-        <form id="contact-form" onSubmit={handleSubmit}>
+        <form id="contact-form" onSubmit={handleSubmit} className="formularioContacto" >
             { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
             <div className="col-md-4 col-lg-5 col-xl-7">
                 <div className="form-group">
