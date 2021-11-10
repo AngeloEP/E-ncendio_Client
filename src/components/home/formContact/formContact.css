@@ -23,24 +23,6 @@
 
 }
 
-@media only screen and (max-width: 1376px){
-    .emailContact {
-        left: 50%;
-    }
-    
-    .subjectContact {
-        left: 50%;
-    }
-    
-    .messageContact {
-        left: 50%;
-    }
-    
-    .buttonContact {
-        margin-left: 50%;
-    }
-}
-
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .emailContact {
         left: 5%;
@@ -61,7 +43,8 @@
     }
     
     .messageContact {
-        left: -15%;
+        left: 0;
+        margin-left: 5% !important;
     }
 
     .messageContact textarea {
@@ -71,16 +54,11 @@
     }
     
     .buttonContact {
-        /* margin-left: 10%; */
+        margin-left: 5% !important;
     }
 
     .formularioContacto {
         position: relative !important;
         margin-bottom: 25%;
     }
-
-    .formularioContacto  { display: table;      }
-    .formularioContacto p     { display: table-row;  }
-    .formularioContacto label { display: table-cell; }
-    .formularioContacto input { display: table-cell; }
 }
