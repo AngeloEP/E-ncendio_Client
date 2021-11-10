@@ -11,6 +11,10 @@
     transition: all 0.7s;
 }
 
+.objectiveTextGames {
+    font-size: 1.5em;
+}
+
 .image-backdrop:hover {
     position: absolute; 
     opacity: 1;
@@ -66,36 +70,6 @@
     background: #fdfdfd;
     padding: 0 10px;
     text-transform: uppercase;
-}
-
-.floatingButtonsGames {
-    position: relative;
-    margin-bottom: 20% !important;
-}
-
-.floatingButtonsGames li:nth-child(2) { /* Iz */
-    margin-left: -300% !important;
-}
-
-.floatingButtonsGames li:nth-child(3) { /* central */
-    margin-left: 0% !important;
-}
-
-.floatingButtonsGames li:nth-child(4) { /* Dr */
-    margin-left: 300% !important;
-    margin-top: -170% !important;
-}
-
-.floatingButtonsGames li:nth-child(2):hover {
-    color: #D40;
-}
-
-.floatingButtonsGames li:nth-child(3):hover {
-    color: #D40;
-}
-
-.floatingButtonsGames li:nth-child(4):hover {
-    color: #D40;
 }
 
 .lockGame {
@@ -208,4 +182,47 @@
         font-size: 31px;
         margin-bottom: 0%;
     }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .text-games {
+        font-size: medium;
+    }
+
+    .tablita {
+        display: inline-grid;
+        width: 100%;
+        text-align: justify;
+        font-size: small;
+    }
+
+    .arrowItem {
+        width: 10% !important;
+        height: 35px;
+        margin-bottom: 5%;
+      }
+      
+      .buttonArrow {
+        width: 50% !important;
+        padding: 0px;
+        border-radius: 3px;
+      }
+      
+      .buttonArrow svg {
+        font-size: 50px;
+        margin-left: 0px;
+      }
+      
+      .arrow1 {
+        animation: slide1 1s ease-in-out infinite;
+        margin-left: 9px;
+      }
+
+      .objectiveTextGames {
+          font-size: 1em;
+      }
+
+      .imageSelectGame {
+          font-size: 45px !important;
+      }
 }

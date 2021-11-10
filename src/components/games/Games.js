@@ -115,7 +115,7 @@ const Games = ({ history }) => {
                                     className="buttonOpenGame"
                                     onClick={() => OnClick('/games/images')}
                                 >
-                                    Etiquetar imágenes <ImageIcon style={{ fontSize: 60 }} />
+                                    Etiquetar imágenes <ImageIcon className="imageSelectGame"  />
                                 </div>
                             </th>
                             <th scope="col" className="juegitos" >
@@ -127,7 +127,7 @@ const Games = ({ history }) => {
                                         "buttonOpenGame"}
                                     onClick={() => OnClick('/games/words')}
                                 >
-                                    Etiquetar palabras <SpellcheckIcon style={{ fontSize: 60 }} />
+                                    Etiquetar palabras <SpellcheckIcon className="imageSelectGame" />
                                 </div>
                                 {perfil.league_id.league === "Bronce"
                                     ?
@@ -145,7 +145,7 @@ const Games = ({ history }) => {
                                             "buttonOpenGame"}
                                     onClick={() => OnClick('/games/four-images-one-word')}
                                 >
-                                    El Ahorcado <ImageSearchIcon style={{ fontSize: 60 }} /> 
+                                    El Ahorcado <ImageSearchIcon className="imageSelectGame" /> 
                                 </div>
                                 {perfil.league_id.league !== "Oro"
                                     ?
@@ -163,7 +163,7 @@ const Games = ({ history }) => {
                                             "buttonOpenGame"}
                                     onClick={() => OnClick('/games/unique-selection')}
                                 >
-                                    Selección Única <PageviewIcon style={{ fontSize: 60 }} /> 
+                                    Selección Única <PageviewIcon className="imageSelectGame" /> 
                                 </div>
                                 {perfil.league_id.league !== "Oro"
                                     ?
@@ -176,7 +176,7 @@ const Games = ({ history }) => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td style={{ fontSize:"1.5em" }} >
+                            <td className="objectiveTextGames" >
                                 Objetivo
                             </td>
                             <td>
