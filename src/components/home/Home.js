@@ -332,7 +332,7 @@ const Home = () => {
                                 <Card.Header className="card-header" >
                                     <a className="nav-link" href="/profile"> Perfil </a> 
                                 </Card.Header>
-                                <Card.Body>
+                                <Card.Body className="cardBody" >
                                 <Card.Title className="card-title" > Edita tu perfil </Card.Title>
                                 <Card.Text className="card-text texto-tarjeta-home" >
                                     Puedes ajustar tus configuraciones del perfil de la manera que gustes desde que te encuentres en la liga de <span style={{ color: "gray" }} > Plata </span>.
@@ -348,7 +348,7 @@ const Home = () => {
                             >
                                 <img className="rankImageCard" src={rankingIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/rank"> Ranking </a> </Card.Header>
-                                <Card.Body>
+                                <Card.Body className="cardBody" >
                                 <Card.Title className="card-title" > Alcanza la más alta posición </Card.Title>
                                 <Card.Text className="card-text texto-tarjeta-home" >
                                     Logra la mejor posición del ranking de jugadores de E-ncendio para ir obteniendo Fire points
@@ -365,7 +365,7 @@ const Home = () => {
                             >
                                 <img className="gamesImageCard" src={gamesIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/games"> Juegos </a> </Card.Header>
-                                <Card.Body>
+                                <Card.Body className="cardBody" >
                                 <Card.Title className="card-title" > Interactúa en los juegos </Card.Title>
                                 <Card.Text as="div" className="card-text texto-tarjeta-home" >
                                     Puedes colaborar jugando en uno de los 4 tipos de juegos:
@@ -390,7 +390,7 @@ const Home = () => {
                             >
                                 <img className="contentImageCard" src={contentIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/settings"> Contenido </a> </Card.Header>
-                                <Card.Body>
+                                <Card.Body className="cardBody" >
                                 <Card.Title className="card-title" > Sube tu propio contenido </Card.Title>
                                 <Card.Text className="card-text texto-tarjeta-home" >
                                     Puedes aportar tu granito de arena y colaborar con el objetivo de E-ncendio 
@@ -409,7 +409,7 @@ const Home = () => {
                             >
                                 <img className="buyImageCard" src={buyIcon} alt="" />
                                 <Card.Header className="card-header" > <a className="nav-link" href="/store"> Tienda </a> </Card.Header>
-                                <Card.Body>
+                                <Card.Body className="cardBody" >
                                 <Card.Title className="card-title" > Comprar atículos en Tienda </Card.Title>
                                 <Card.Text className="card-text texto-tarjeta-home" >
                                     A medida que cumplas con tus tareas diarias obtendrás FirePoints, al igual que consiguiendo logros
