@@ -466,7 +466,8 @@ h6 {
     }
 
     .profile-tab nav {
-        font-size: 10px;
+        /* font-size: 2.3vw; */
+        font-size: calc(1vw + .7vh);
     }
 
     #informacionPersonal {
