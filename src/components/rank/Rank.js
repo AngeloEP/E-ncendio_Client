@@ -102,7 +102,7 @@ const Rank = () => {
 
     
     return (
-        <div className="w-75 mr-auto ml-auto" > {/* sm, md, lg, xl, xxl */  }
+        <div className="mainDivRank mr-auto ml-auto" > {/* sm, md, lg, xl, xxl */  }
             <h1 className="games-title" > Tabla de Clasificaciones </h1>
             <div className="author" >
                 <span>

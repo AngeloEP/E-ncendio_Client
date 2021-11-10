@@ -1,3 +1,7 @@
+.mainDivRank {
+    width: 75%;
+}
+
 .title-div {
     text-align: center;
     margin-top: 3em;
@@ -176,5 +180,9 @@
         margin-bottom: 5em;
         border-radius: 5px;
         width: 100%;
+    }
+
+    .mainDivRank {
+        width: 90%;
     }
 }
