@@ -11,6 +11,10 @@
     transition: all 0.7s;
 }
 
+.imageSelectGame {
+    font-size: 60px !important;
+}
+
 .objectiveTextGames {
     font-size: 1.5em;
 }
@@ -194,6 +198,7 @@
         width: 100%;
         text-align: justify;
         font-size: small;
+        border-collapse: collapse; 
     }
 
     .arrowItem {
@@ -225,4 +230,40 @@
       .imageSelectGame {
           font-size: 45px !important;
       }
+
+      /* .tablita table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+
+    .tablita thead tr { 
+		position: absolute;
+	}
+
+    .tablita thead{ 
+        display: list-item;
+	}
+	
+	.tablita tr { border: 1px solid #ccc; }
+	
+	.tablita td { 
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	.tablita td:before { 
+		position: absolute;
+		top: 0px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	} */
+
+    .tablita {
+        overflow-x: auto !important;
+    }
+
+    .juegitos {
+    }
 }
