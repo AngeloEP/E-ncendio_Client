@@ -418,6 +418,9 @@ const Home = () => {
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
+                            <div className="card-other" >
+                                {/* NADA */}
+                            </div>
                           
                         </Grid>
 

@@ -44,14 +44,30 @@
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .emailContact {
         left: 10%;
+        width: 90% !important;
     }
     
+    .emailContact label {
+        font-size: small;
+    }
+
     .subjectContact {
         left: 10%;
+        width: 90% !important;
+    }
+
+    .subjectContact label {
+        font-size: small !important;
+        margin-left: -7%;
     }
     
     .messageContact {
         left: -40% !important;
+    }
+
+    .messageContact textarea {
+        width: 90% !important;
+        font-size: smaller;
     }
     
     .buttonContact {
