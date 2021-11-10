@@ -205,7 +205,7 @@ const EditProfile = ( props ) => {
                             <div className="container emp-profile">
                     <div className="row">
                         <div className="col-md-4">
-                            <div className="profile-img">
+                            <div className="profile-img-update">
                             <img className="img-fluid img-thumbnail image_user" src={ pathImage } alt="" />
                                     <div className="m-b-25">
                                         <input
@@ -275,7 +275,7 @@ const EditProfile = ( props ) => {
                                 </h6>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-4 divUpdateBtn">
                             <button className="update-btn" type="submit" >
                                 {
                                     cargandoModificacionUsuario
@@ -316,18 +316,26 @@ const EditProfile = ( props ) => {
                     <div className="row">
                         <div className="col-md-4">
                             <div className="profile-work">
-                                <p>Imágenes</p>
-                                <div href="!#">Etiquetadas: {perfil.imageTagCount} </div>
-                                <div href="!#">Subidas: {perfil.uploadImageCount} </div>
-                                <p>Palabras</p>
-                                <div href="!#">Etiquetadas: {perfil.wordTagCount} </div>
-                                <div href="!#">Subidas: {perfil.uploadWordCount} </div>
-                                <p>Ahorcados</p>
-                                <div href="!#">Completados: {perfil.hangmanTagCount} </div>
-                                <div href="!#">Subidos: {perfil.uploadHangmanCount} </div>
-                                <p>Selecciones Únicas</p>
-                                <div href="!#">Completadas: {perfil.uniqueSelectionTagCount} </div>
-                                <div href="!#">Subidas: {perfil.uploadUniqueSelectionCount} </div>
+                                <div>
+                                    <p>Imágenes</p>
+                                    <div href="!#">Etiquetadas: {perfil.imageTagCount} </div>
+                                    <div href="!#">Subidas: {perfil.uploadImageCount} </div>
+                                </div>
+                                <div>
+                                    <p>Palabras</p>
+                                    <div href="!#">Etiquetadas: {perfil.wordTagCount} </div>
+                                    <div href="!#">Subidas: {perfil.uploadWordCount} </div>
+                                </div>
+                                <div>
+                                    <p>Ahorcados</p>
+                                    <div href="!#">Completados: {perfil.hangmanTagCount} </div>
+                                    <div href="!#">Subidos: {perfil.uploadHangmanCount} </div>
+                                </div>
+                                <div>
+                                    <p>Selecciones Únicas</p>
+                                    <div href="!#">Completadas: {perfil.uniqueSelectionTagCount} </div>
+                                    <div href="!#">Subidas: {perfil.uploadUniqueSelectionCount} </div>
+                                </div>
                             </div>
                         </div>
                         <div className="col-md-8 tab-content profile-tab">

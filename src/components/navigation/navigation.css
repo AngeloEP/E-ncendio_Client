@@ -80,13 +80,14 @@
         display: none;
     }
 
-    .badge {
-        display: none;
-    }
-
     .fire-points {
         display: none !important;
     }
+
+    .infoUserAndExitButton .badge {
+        display: none;
+    }
+
     .infoUserAndExitButton {
         justify-content: space-evenly;
     }
