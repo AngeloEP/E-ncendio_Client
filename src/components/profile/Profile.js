@@ -159,7 +159,7 @@ const Profile = ( props ) => {
                                 }
                             >
                                 <div className="row">
-                                    <div className="col-sm-6 col-log-12 col-xl-8">
+                                    <div className="col-sm-6 col-log-12 col-xl-8 textBtnProfile">
                                             Editar Perfil
                                     </div>
                                     <div className="col-sm-6 col-log-12 col-xl-4">
@@ -196,7 +196,7 @@ const Profile = ( props ) => {
                         </div>
                         <div className="col-md-8 tab-content profile-tab">
                             <Tabs defaultActiveKey="about" id="uncontrolled-tab-example" className="mb-3">
-                                <Tab eventKey="about" title="Información personal">
+                                <Tab id="informacionPersonal" eventKey="about" title="Información personal">
                                     <div className="row">
                                         <div className="col-md-6">
                                             <label>Email</label>
