@@ -125,3 +125,56 @@
         align-items: center;
     }
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .filters-rank {
+        margin-top: 2em !important;
+    }
+
+    .nameFilter {
+        min-width: 60% !important;
+        justify-content: space-evenly;
+    }
+
+    .accountIcon {
+        text-align: left;
+    }
+
+    #starIcon {
+        margin-top: 0px;
+    }
+
+    #ageIcon {
+        position: relative;
+    }
+
+    .gridAgeFilter {
+        min-width: 50% !important;
+        justify-content: space-evenly;
+    }
+
+    #select-league {
+        position: relative;
+        margin-top: 30%;
+    }
+
+    .gridLeagueFilter {
+        min-width: 40% !important;
+    }
+
+    .gridPointsFilter {
+        justify-content: space-evenly;
+        min-width: 50% !important;
+    }
+
+    .gridPointsFilter MuiTextField-root  {
+        margin-left: 50%;
+    }
+
+    .table-rank {
+        margin-top: 1.5em;
+        margin-bottom: 5em;
+        border-radius: 5px;
+        width: 100%;
+    }
+}

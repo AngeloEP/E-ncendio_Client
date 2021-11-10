@@ -112,9 +112,9 @@ const Rank = () => {
 
             <div className="filters-rank" >
                 <Grid container direction="row" justify="center" alignItems="center" spacing={3} >
-                    <Grid item xs={3} container spacing={1} alignItems="flex-end">
+                    <Grid item xs={3} container spacing={1} alignItems="flex-end" className="nameFilter">
                         <Grid item>
-                            <AccountCircle />
+                            <AccountCircle className="accountIcon" />
                         </Grid>
                         <Grid item>
                             <TextField
@@ -125,7 +125,7 @@ const Rank = () => {
                             />
                         </Grid>
                     </Grid>
-                    <Grid item xs={2} >
+                    <Grid item xs={2} className="gridLeagueFilter" >
                         <FormControl variant="outlined" id="select-league" >
                             <InputLabel id="demo-simple-select-outlined-label"> Liga </InputLabel>
                             <Select
@@ -155,7 +155,7 @@ const Rank = () => {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid item xs={3} container spacing={1} >
+                    <Grid item xs={3} container spacing={1} className="gridAgeFilter" >
                         <Grid item>
                             <img src={AgeIcon} alt="Edad" id="ageIcon" />
                         </Grid>
@@ -169,7 +169,7 @@ const Rank = () => {
                             />
                         </Grid>
                     </Grid>
-                    <Grid item xs={3} container spacing={1} >
+                    <Grid item xs={3} container spacing={1} className="gridPointsFilter" >
                         <Grid item id="starIcon" >
                             <StarsIcon />
                         </Grid>
