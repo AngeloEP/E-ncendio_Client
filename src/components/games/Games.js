@@ -94,7 +94,6 @@ const Games = ({ history }) => {
             <Grid container alignItems='center' justify="center" className="horizontalScrollTable"
                 style={{
                     display: 'flex',
-                    height: "50.5vh"
                 }}
             >
                 {

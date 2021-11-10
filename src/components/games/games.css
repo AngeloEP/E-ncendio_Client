@@ -123,6 +123,7 @@
 
 .tablita {
     width: 90%;
+    margin-bottom: 15em;
     text-align: center;
     border: 0px solid black!important;
 }
@@ -193,14 +194,6 @@
         font-size: medium;
     }
 
-    .tablita {
-        display: inline-grid;
-        width: 100%;
-        text-align: justify;
-        font-size: small;
-        border-collapse: collapse; 
-    }
-
     .arrowItem {
         width: 10% !important;
         height: 35px;
@@ -231,9 +224,19 @@
           font-size: 45px !important;
       }
 
-    .tablita {
+      .tablita {
+          position: relative;
+        width: 100%;
+        display: inline-grid;
+        text-align: justify;
+        font-size: small;
         margin-top: 4em;
+        margin-bottom: 2em !important;
         overflow-x: auto !important;
+    }
+
+    .tablita tr {
+        min-height: fit-content !important;
     }
 
     .juegitos {
