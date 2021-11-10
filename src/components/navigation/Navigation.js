@@ -171,7 +171,7 @@ const Navigation =  ({ location, history })  => {
                         </NavLink>
                     </NavMenu>
                     
-                    <NavBtn  >
+                    <NavBtn className="infoUserAndExitButton"  >
                         { usuario ? <PNav > Hola <span style={{ fontWeight: 900 }} > {usuario.firstname} </span> </PNav> : null }
                         {perfil != null
                         ?
