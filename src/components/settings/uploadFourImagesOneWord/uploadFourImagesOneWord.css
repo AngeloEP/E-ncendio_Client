@@ -215,7 +215,7 @@
     }
     
     .imagesSelected {
-        width: 25%;
+        width: 50% !important;
         height: 200px !important;
         padding: 0.4rem !important;
     }
