@@ -47,7 +47,7 @@
 #fileUniqueSelection[type="file"] {
 	display: none;
 }
-.label-holder {
+.label-holderUploadUniqueSelection {
 	width: 100%;
 	height: 50px;
     margin-top: 3em;
@@ -55,7 +55,7 @@
     place-items: center;
   
 }
-.label{
+.labelUploadUniqueSelection{
     height: 50px;
     width: auto;
     padding: 10px;
@@ -67,7 +67,7 @@
     cursor: pointer;
 }
 
-.label:hover {
+.labelUploadUniqueSelection:hover {
     transition: 0.1s ;
     border: 2px solid #4CAF50;
 }
@@ -123,5 +123,81 @@
 
     .textfield-keyWord {
         width: 50%;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .div-uniqueSelection {
+        width: 100%;
+        margin-top: 3em;
+        margin-bottom: 3em;
+    }
+
+    .div-keyWord {
+        margin-top: 10% !important;
+    }
+    
+    .textfield-keyWord {
+        width: 100%;
+    }
+    
+    .div-submit-imagesAndKeyWord {
+        margin-top: 25% !important;
+    }
+    
+    .submit-imagesAndKeyWord {
+        width: 70%;
+    }
+    
+    .label-holderUploadUniqueSelection {
+        width: 100% !important;
+        display: inline;
+        margin-top: 2em !important;
+        font-size: small !important;
+
+    }
+    .labelUploadUniqueSelection {
+        width: fit-content !important;
+        height: fit-content !important;
+    }
+
+    .labelUploadUniqueSelection i {
+        font-size: medium;
+    }
+    
+    .buttonResetImages {
+        width: fit-content !important;
+        height: fit-content !important;
+        font-size: small !important;
+    }
+    
+    .result{
+        min-height: 100%;
+        max-height: auto;
+        width: 100%;
+    }
+    
+    .imagesSelected {
+        width: 25%;
+        height: 200px !important;
+        padding: 0.4rem !important;
+    }
+
+    .div-submit-imagesAndKeyWord {
+        margin-top: 0% !important;
+    }
+
+    .submit-imagesAndKeyWord {
+        width: fit-content !important;
+        height: fit-content !important;
+        font-size: small !important;
+    }
+
+    .divHelpIconUploadUniqueSelection {
+        text-align: center;
+    }
+    
+    .tooltipUploadUniqueSelection {
+        font-size: smaller;
     }
 }

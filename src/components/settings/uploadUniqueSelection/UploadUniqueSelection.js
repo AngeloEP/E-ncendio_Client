@@ -155,7 +155,7 @@ const UploadUniqueSelection = () => {
             }
 
             <Container className="div-uniqueSelection" >
-                <Grid container component="main" >
+                <Grid container component="main" className="justify-content-center" >
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
                         { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         <form  onSubmit={onSubmit}  >
@@ -164,9 +164,9 @@ const UploadUniqueSelection = () => {
                             <Grid item xs={12} >
                                 <div>
                                     <input type="file" id="fileUniqueSelection" multiple onChange={handleImageChange} />
-                                    <div className="label-holder">
-                                        <div className="row" >
-                                            <label htmlFor="fileUniqueSelection" className="label">
+                                    <div className="label-holderUploadUniqueSelection">
+                                        <div className="row justify-content-center" >
+                                            <label htmlFor="fileUniqueSelection" className="labelUploadUniqueSelection">
                                                 <i className="material-icons" >Agregar 3 imágenes</i>
                                             </label>
                                             <Button
@@ -180,7 +180,7 @@ const UploadUniqueSelection = () => {
                                     <div className="result">{renderPhotos(pathImages)}</div>
                                 </div>
                             </Grid>
-                            <Grid item xs={8} style={{ marginBottom: "2%" }} >
+                            <Grid item xs={6} style={{ marginBottom: "2%" }} >
                                 <div className="div-keyWord" >                        
                                     <TextField
                                         className="textfield-keyWord"
@@ -194,9 +194,9 @@ const UploadUniqueSelection = () => {
                                     />
                                 </div>
                             </Grid>
-                            <Grid item xs={4} style={{  }} >
+                            <Grid item xs={6} style={{  }} >
                                 <div className="row" >
-                                    <Col xs={9}>
+                                    <Col >
                                         <div className="div-submit-imagesAndKeyWord" >
                                             <Button
                                                 type="submit"
@@ -230,7 +230,7 @@ const UploadUniqueSelection = () => {
                                             </Button>
                                         </div>
                                     </Col>
-                                    <Col xs={3}>
+                                    <Col className="divHelpIconUploadUniqueSelection" >
                                         <OverlayTrigger
                                             key={9}
                                             placement={"top"}

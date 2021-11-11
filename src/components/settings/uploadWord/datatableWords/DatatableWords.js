@@ -126,9 +126,9 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                                                     { column === "Palabra"
                                                         ?
                                                             <td style={{ width: "7%" }} >
-                                                                <div className="col palabra-update" >
+                                                                <div className="col datatablePalabra-update" >
                                                                     <Col>
-                                                                        <Paper className="paper-update" elevation={10} variant="outlined"  >
+                                                                        <Paper className="datatablePaper-update" elevation={10} variant="outlined"  >
                                                                             {row[column]}
                                                                         </Paper>
                                                                     </Col>

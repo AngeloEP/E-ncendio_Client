@@ -42,7 +42,7 @@
 
 .div-submit-imageAndWord {
     position: relative;
-    margin-top: 25% !important;
+    margin-top: 10% !important;
 }
 
 .submit-imageAndWord {
@@ -62,7 +62,7 @@
 #file[type="file"] {
 	display: none;
 }
-.label-holder {
+.label-holderUploadHangman {
 	width: 100%;
 	height: 50px;
     margin-top: 3em;
@@ -70,7 +70,7 @@
     place-items: center;
   
 }
-.label{
+.labelUploadHangman{
     height: 50px;
     width: auto;
     padding: 10px;
@@ -82,7 +82,7 @@
     cursor: pointer;
 }
 
-.label:hover {
+.labelUploadHangman:hover {
     transition: 0.1s ;
     border: 2px solid #4CAF50;
 }
@@ -152,5 +152,89 @@
 
     .textfield-associateWord {
         width: 50%;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .div-uploadFourImagesOneWord {
+        width: 100%;
+        margin-top: 3em;
+        margin-bottom: 3em;
+    }
+
+    .div-associateWord {
+        margin-top: 10% !important;
+    }
+    
+    .textfield-associateWord {
+        width: 100%;
+    }
+    
+    .div-submit-imageAndWord {
+        margin-top: 25% !important;
+    }
+    
+    .submit-imageAndWord {
+        width: 70%;
+    }
+    
+    .div-datatable-fourImagesOneWord {
+        width: 90%;
+        margin-top: 3em;
+        margin-bottom: 3em;
+        margin-left: 5%;
+        font-size: smaller;
+    }
+    
+    .label-holderUploadHangman {
+        width: 100% !important;
+        display: inline;
+        margin-top: 2em !important;
+        font-size: small !important;
+
+    }
+    .labelUploadHangman {
+        width: fit-content !important;
+        height: fit-content !important;
+    }
+
+    .labelUploadHangman i {
+        font-size: medium;
+    }
+    
+    .buttonResetImages {
+        width: fit-content !important;
+        height: fit-content !important;
+        font-size: small !important;
+    }
+    
+    .result{
+        min-height: 100%;
+        max-height: auto;
+        width: 100%;
+    }
+    
+    .imagesSelected {
+        width: 25%;
+        height: 200px !important;
+        padding: 0.4rem !important;
+    }
+
+    .div-submit-imageAndWord {
+        margin-top: 15% !important;
+    }
+
+    .submit-imageAndWord {
+        width: fit-content !important;
+        height: fit-content !important;
+        font-size: small !important;
+    }
+
+    .divHelpIconUploadHangman {
+        text-align: center;
+    }
+    
+    .tooltipUploadHangman {
+        font-size: smaller;
     }
 }

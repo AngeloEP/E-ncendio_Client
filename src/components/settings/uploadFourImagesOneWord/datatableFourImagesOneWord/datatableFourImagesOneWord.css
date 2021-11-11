@@ -69,3 +69,14 @@
 .div-datatable-fourImagesOneWord div {
     max-height: 700px !important;
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .images-hangman {
+        min-width: 120px;
+        max-width: 120px;
+        min-height: 120px;
+        max-height: 120px;
+        margin-top: 0em;
+        margin-bottom: 0em;
+    }
+}

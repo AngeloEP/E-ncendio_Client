@@ -112,8 +112,8 @@ const UploadWord = () => {
                 : null
             }
 
-            <Container className="div-uploadWord" >
-                <Grid container component="main" >
+            <Container className="div-uploadWord"  >
+                <Grid container component="main" className="justify-content-center" >
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
                         { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         <form  onSubmit={onSubmit}  >
@@ -129,9 +129,9 @@ const UploadWord = () => {
                                 </div>
                             </Grid>
                             <Grid item xs={8} >
-                                <div className="div-filename" >                        
+                                <div className="div-nameWord" >                        
                                     <TextField
-                                        className="textfield-filename"
+                                        className="textfield-nameWord"
                                         value={name}
                                         name="name"
                                         variant="outlined"
@@ -143,8 +143,8 @@ const UploadWord = () => {
                                 </div>
                             </Grid>
                             <Grid item xs={12} style={{ marginBottom: "2%" }} >
-                                <div className="row" >
-                                    <Col xs={11} >
+                                <div className="row w-100 mr-auto ml-auto" >
+                                    <Col >
                                         <Button
                                             type="submit"
                                             variant="contained"
@@ -177,7 +177,7 @@ const UploadWord = () => {
                                             }
                                         </Button>
                                     </Col>
-                                    <Col xs={1} >
+                                    <Col className="divHelpIconUploadWord" >
                                         <OverlayTrigger
                                             key={9}
                                             placement={"top"}
