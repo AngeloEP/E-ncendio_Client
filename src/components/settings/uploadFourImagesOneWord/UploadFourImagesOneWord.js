@@ -160,7 +160,7 @@ const UploadFourImagesOneWord = () => {
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
                         { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         <form  onSubmit={onSubmit}  >
-                        <Grid container spacing={5} >
+                        <Grid container spacing={0} >
 
                             <Grid item xs={12} >
                                 <div className="">

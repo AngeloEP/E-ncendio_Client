@@ -142,14 +142,14 @@ const UploadTip = () => {
             }
 
             <Container className="div-uploadTip" >
-                <Grid container component="main" >
+                <Grid container component="main" className="justify-content-center" >
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
                         { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         <form  onSubmit={onSubmit}  >
-                        <Grid container spacing={5} >
+                        <Grid container spacing={0} >
 
                             <Grid item xs={4} >
-                                <div className="div-image" >
+                                <div className="div-imageTipUpload" >
                                     <input
                                         accept="image/*"
                                         id="contained-button-fileImageTip"
@@ -158,8 +158,8 @@ const UploadTip = () => {
                                         onChange={onFileChange}
                                         style={{ display: "none" }}
                                         />
-                                    <img className="img-fluid img-thumbnail image-upload" src={pathImage} alt="" />
-                                    <label htmlFor="contained-button-fileImageTip" className="label-upload-image" >
+                                    <img className="img-fluid img-thumbnail image-uploadTip" src={pathImage} alt="" />
+                                    <label htmlFor="contained-button-fileImageTip" className="label-upload-image-tip" >
                                         <Button  variant="contained" style={{ backgroundColor: "greenyellow", height: "85%" }}  component="span">
                                             Agregar imagen
                                         </Button>
@@ -189,7 +189,7 @@ const UploadTip = () => {
                             </Grid>
                             <Grid item xs={12} style={{ marginBottom: "2%" }} >
                                 <div className="row">
-                                    <Col xs={11}>
+                                    <Col >
                                         <Button
                                             type="submit"
                                             variant="contained"
@@ -222,7 +222,7 @@ const UploadTip = () => {
                                             }
                                         </Button>
                                     </Col>
-                                    <Col xs={1}>
+                                    <Col className="divHelpIconUploadTip" >
                                         <OverlayTrigger
                                             key={9}
                                             placement={"top"}

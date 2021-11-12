@@ -71,7 +71,8 @@
 }
 
 .submit-tip {
-    width: 20%;
+    margin-top: 5% !important;
+    width: fit-content !important;
 }
 
 .div-datatable-tips {
@@ -139,5 +140,101 @@
 
     .textfield-text {
         width: 90%;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .div-uploadTip {
+        width: 100% !important;
+        margin-top: 2em !important;
+        margin-bottom: 0em !important;
+        margin-left: 0% !important;
+    }
+    
+    .div-imageTipUpload {
+        min-width: 150px !important;
+    }
+    
+    .image-uploadTip {
+        position: relative;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 150px !important;
+        max-height: 150px !important;
+        margin-top: 1em;
+        margin-bottom: .5em;
+    }
+    
+    .label-upload-image-tip {
+        min-width: max-content;
+        min-height: fit-content;
+        margin-left: -5% !important;
+        margin-bottom: .5em;
+    }
+    
+    
+    .div-text {
+        margin-left: 2em;
+        margin-top: 3em !important;
+        min-height: fit-content !important;
+    }
+
+    .div-text label {
+        margin-top: 0% !important;
+    }
+    
+    .textfield-text {
+        min-width: 50% !important;
+        min-height: fit-content !important;
+    }
+
+    .tip {
+        margin-left: 1em;
+        margin-top: 5%;
+        margin-bottom: 3%;
+    }
+    
+    .paper-tip {
+        text-align: justify !important;
+        max-width: 100%;
+        margin-top: 10%;
+        min-height: fit-content;
+        display: flex;
+        padding: 2px;
+        border-radius: 5px !important;
+        font-size: medium !important;
+    }
+    
+    .submit-tip {
+        width: 100%;
+        height: fit-content !important;
+        margin-top: 35% !important;
+    }
+    
+    .div-datatable-tips {
+        width: 90%;
+        margin-top: 3em;
+        margin-bottom: 3em;
+        margin-left: 5%;
+        font-size: smaller !important;
+    }
+    
+    .image-user {
+        margin-left: auto;
+        margin-right: auto;
+        vertical-align: middle;
+        min-width: 120px;
+        max-width: 120px;
+        min-height: 120px;
+        max-height: 120px;
+    }
+    
+    .divHelpIconUploadTip {
+        margin-top: 10%;
+        text-align: center;
+    }
+    
+    .tooltipUploadTip {
+        font-size: smaller;
     }
 }

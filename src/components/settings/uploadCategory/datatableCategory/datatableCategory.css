@@ -36,3 +36,15 @@
         left: 15%;
     }    
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .category-update {
+        left: 0%;
+        margin-top: 0%;
+    }
+
+    .category-update .fire {
+        left: 0;
+        top: -3vw;
+    }
+}

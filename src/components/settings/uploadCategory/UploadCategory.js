@@ -94,14 +94,14 @@ const UploadCategory = () => {
         <Fragment>
 
             <Container className="div-uploadCategory" >
-                <Grid container component="main" >
+                <Grid container component="main" className="justify-content-center" >
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
                         { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         <form  onSubmit={onSubmit}  >
-                        <Grid container spacing={5} >
+                        <Grid container  >
 
                             <Grid item xs={4} >
-                                <div className="col category" >
+                                <div className="col categoryUpload" >
                                     <Col>
                                         <Fire
                                             pEvents={"none"}
@@ -131,7 +131,7 @@ const UploadCategory = () => {
                             </Grid>
                             <Grid item xs={12} style={{ marginBottom: "2%" }} >
                                 <div className="row">
-                                    <Col xs={11}>
+                                    <Col >
                                         <Button
                                             type="submit"
                                             variant="contained"
@@ -164,7 +164,7 @@ const UploadCategory = () => {
                                             }
                                         </Button>
                                     </Col>
-                                    <Col xs={1}>
+                                    <Col className="divHelpIconUploadCategory" >
                                         <OverlayTrigger
                                             key={9}
                                             placement={"top"}

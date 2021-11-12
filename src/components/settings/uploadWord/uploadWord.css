@@ -240,7 +240,7 @@
     }
     
     .submit-word {
-        width: 100%;
+        width: fit-content;
         height: fit-content !important;
         margin-top: 10% !important;
     }

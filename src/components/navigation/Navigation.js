@@ -215,7 +215,6 @@ const Navigation =  ({ location, history })  => {
                         </ExitBtn>
                         <div>
                             <div className={isOpen ? "closeIconTasks" : "triangle-left" } onClick={() => onOpen()} ></div>
-                            {/* <FaTasks className="testcss" /> */}
                             <Button className={isOpen ? "button-tasks-close" : "button-tasks" } onClick={() => onOpen()} leftIcon={<FaTasks className="icon-button-tasks" />} colorScheme="teal" variant="solid">
                                 Ver desafíos
                             </Button>
