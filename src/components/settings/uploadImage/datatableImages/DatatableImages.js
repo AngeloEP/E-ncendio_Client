@@ -241,18 +241,18 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Imagen  </Modal.Title>
+                        <Modal.Title className="titleModal-uploadImage" > Modificar Imagen  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
                         <Container className="div-uploadImage-update" >
-                            <Grid container component="main" >
+                            <Grid container component="main" className="justify-content-center" >
                                 <Grid item xs={12} sm={8} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-                                    <Grid container spacing={5} >
+                                    <Grid container xs={12} spacing={0} >
 
-                                        <Grid item xs={4} >
+                                        <Grid item xs={6} >
                                             <div className="div-image-update" >
                                                 <input
                                                     accept="image/*"
@@ -269,10 +269,10 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                                                 </label>
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} >
+                                        <Grid item xs={6} >
                                             <div className="div-filename-update" >                        
                                                 <TextField
-                                                    style={{ width: "60%" }}
+                                                    className="filenameImageUpdate"
                                                     value={ imageUpdate ? imageUpdate.name.split(".")[0] : nameUpdate }
                                                     disabled
                                                     name="filename"
@@ -291,13 +291,13 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-uploadImage" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-uploadImage"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarImagen}
                         >

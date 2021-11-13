@@ -104,7 +104,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
 
     const renderPhotos = (source) => {
         return source.map((photo) => {
-			return <img className="imagesSelected" src={photo} alt="" key={photo} />;
+			return <img className="imagesSelectedModify" src={photo} alt="" key={photo} />;
 		});
 	};
 
@@ -289,27 +289,27 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Ahorcado  </Modal.Title>
+                        <Modal.Title className="titleModal-uploadHangman" > Modificar Ahorcado  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
                         <Container className="div-uploadHangman-update" >
-                            <Grid container component="main" >
-                                <Grid item xs={12} sm={8} md={12} elevation={6}>
+                            <Grid component="main" className="justify-content-center" >
+                                <Grid item elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-                                    <Grid container spacing={5} >
+                                    <Grid  spacing={0} >
 
                                         <Grid item xs={12} >
-                                            <div>
+                                            <div className="buttonsModifyHangman" >
                                                 <input type="file" id="fileUpdate" multiple onChange={handleImageChange} />
-                                                <div className="label-holder">
+                                                <div className="label-holderDatatableModifyHangman">
                                                     <div className="row" >
-                                                        <label htmlFor="fileUpdate" className="label">
+                                                        <label htmlFor="fileUpdate" className="labelDatatableModifyHangman">
                                                             <i className="material-icons" >Agregar 4 imágenes</i>
                                                         </label>
                                                         <Button
-                                                            className="buttonResetImages"
+                                                            className="buttonResetImagesModifyHangman"
                                                             variant="contained"
                                                             color="secondary"
                                                             onClick={() => resetImagesSelected()}
@@ -341,13 +341,13 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-uploadHangman" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-uploadHangman"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarAhorcado}
                         >

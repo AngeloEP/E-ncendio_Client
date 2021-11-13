@@ -119,7 +119,7 @@ const UploadImage = () => {
             }
 
             <Container className="div-uploadImage" >
-                <Grid container component="main" >
+                <Grid container component="main" className="justify-content-center" >
                     <Grid item xs={12} sm={8} md={12} elevation={6}>
                         { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         <form  onSubmit={onSubmit}  >

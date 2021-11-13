@@ -269,19 +269,19 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Tip  </Modal.Title>
+                        <Modal.Title className="titleModal-uploadTip" > Modificar Tip  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
                         <Container className="div-uploadTip-update" >
-                            <Grid container component="main" >
+                            <Grid container component="main" className="justify-content-center" >
                                 <Grid item xs={12} sm={8} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-                                    <Grid container spacing={5} >
+                                    <Grid container spacing={0} >
 
-                                        <Grid item xs={4} >
-                                            <div className="div-image-update" >
+                                        <Grid item xs={6} >
+                                            <div className="div-imageTip-update" >
                                                 <input
                                                     accept="image/*"
                                                     id="imageUpdateTip"
@@ -289,18 +289,18 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
                                                     onChange={onFileChangeUpdate}
                                                     style={{ display: "none" }}
                                                     />
-                                                <img className="img-fluid img-thumbnail image-upload-update" src={pathImageUpdate !== "" ? pathImageUpdate : uploadImage} alt="" />
-                                                <label htmlFor="imageUpdateTip" className="label-upload-image-update" >
+                                                <img className="img-fluid img-thumbnail imageTip-upload-update" src={pathImageUpdate !== "" ? pathImageUpdate : uploadImage} alt="" />
+                                                <label htmlFor="imageUpdateTip" className="label-upload-imageTip-update" >
                                                     <Button  variant="contained" style={{ backgroundColor: "greenyellow" }}  component="span">
                                                         Agregar imagen
                                                     </Button>
                                                 </label>
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} >
+                                        <Grid item xs={6} >
                                             <div className="div-tip-update" >                        
                                                 <TextField
-                                                    style={{ width: "60%" }}
+                                                    className="tipImageUpdate"
                                                     value={textUpdate}
                                                     name="textUpdate"
                                                     variant="outlined"
@@ -311,11 +311,9 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
                                                 />
                                             </div>
                                             <div className="col tip-updateModal" >
-                                                <Col>
                                                     <Paper className="paper-tip-update" elevation={10} variant="outlined"  >
                                                         {textUpdate}
                                                     </Paper>
-                                                </Col>
                                             </div>
                                         </Grid>
                                     </Grid>
@@ -326,13 +324,13 @@ const DatatableTips = ({ tips, deleteFunction, loadingDelete }) => {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-uploadTip" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-uploadTip"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarTip}
                         >

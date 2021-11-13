@@ -31,6 +31,13 @@
     max-height: 700px !important;
 }
 
+.submitButtonModal-uploadCategory {
+    background-color: yellow !important;
+    height: 10% !important;
+    width: 25% !important;
+    margin-left: 2% !important;
+}
+
 @media only screen and (max-width: 1376px) {
     .category-update {
         left: 15%;
@@ -44,7 +51,47 @@
     }
 
     .category-update .fire {
-        left: 0;
+        left: 0 !important;
+        right: 0 !important;
         top: -3vw;
+    }
+
+    .div-uploadCategory-update {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        border-radius: 13px;
+    }
+    
+    .div-category-update {
+        width: 90%;
+        margin-left: 1em;
+    }
+    
+    .categoryNameUpdate {
+        width: 100% !important;
+    }
+    
+    .div-isVisible {
+        width: 100%;
+        margin-top: 1em;
+    }
+    
+    .select-isVisible {
+        width: 10em;
+    }
+
+    .titleModal-uploadCategory {
+        font-size: large;
+    }
+
+    .closeButtonModal-uploadCategory {
+        font-size: small;
+    }
+
+    .submitButtonModal-uploadCategory {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: small !important;
     }
 }

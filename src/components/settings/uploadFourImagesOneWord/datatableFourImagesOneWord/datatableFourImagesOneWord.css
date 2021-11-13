@@ -48,6 +48,31 @@
     border-radius: 12px;
 }
 
+.label-holderDatatableModifyHangman {
+	width: 100%;
+	height: 50px;
+    margin-top: 3em;
+    display: grid;
+    place-items: center;
+  
+}
+.labelDatatableModifyHangman{
+    height: 50px;
+    width: auto;
+    padding: 10px;
+    background-color:greenyellow;
+    color: black;
+    display: grid;
+    place-items: center;
+    font-size: 2.5rem ;
+    cursor: pointer;
+}
+
+.labelDatatableModifyHangman:hover {
+    transition: 0.1s ;
+    border: 2px solid #4CAF50;
+}
+
 .hangman-user-update {
     min-width: 200px;
     max-width: 200px;
@@ -55,6 +80,13 @@
     max-height: 280px;
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+.imagesSelectedModify {
+    width: 25%;
+    height: 200px;
+    object-fit: inherit;
+    padding: 0.75rem;
 }
 
 .images-hangman {
@@ -70,6 +102,18 @@
     max-height: 700px !important;
 }
 
+.submitButtonModal-uploadHangman {
+    background-color: yellow !important;
+    height: 10% !important;
+    width: 25% !important;
+    margin-left: 2% !important;
+}
+
+.buttonResetImagesModifyHangman {
+    margin-left: 10px !important;
+    height: 50px;
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .images-hangman {
         min-width: 120px;
@@ -78,5 +122,66 @@
         max-height: 120px;
         margin-top: 0em;
         margin-bottom: 0em;
+    }
+
+    .div-uploadHangman-update {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        border-radius: 13px;
+    }
+
+    .label-holderDatatableModifyHangman {
+        width: 100% !important;
+        display: inline;
+        margin-top: 1em !important;
+        font-size: small !important;
+
+    }
+    .labelDatatableModifyHangman {
+        width: fit-content !important;
+        height: fit-content !important;
+    }
+
+    .labelDatatableModifyHangman i {
+        font-size: small;
+    }
+
+    .label-upload-image-update {
+        width: max-content;
+        height: fit-content;
+        margin-left: 0%;
+        margin-bottom: 0em;
+    } 
+
+    .buttonResetImagesModifyHangman {
+        width: fit-content !important;
+        height: fit-content !important;
+        font-size: smaller !important;
+        font-weight: 700 !important;
+    }
+
+    .buttonsModifyHangman {
+        display: inline-table;
+    }
+    
+    .imagesSelectedModify {
+        width: 50% !important;
+        height: 170px !important;
+        padding: 0.2rem !important;
+    }
+
+    .titleModal-uploadHangman {
+        font-size: large;
+    }
+
+    .closeButtonModal-uploadHangman {
+        font-size: small;
+    }
+
+    .submitButtonModal-uploadHangman {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: small !important;
     }
 }

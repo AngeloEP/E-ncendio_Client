@@ -126,9 +126,9 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                                                     { column === "Palabra"
                                                         ?
                                                             <td style={{ width: "7%" }} >
-                                                                <div className="col datatablePalabra-update" >
+                                                                <div className="col palabra-datatableUpdate" >
                                                                     <Col>
-                                                                        <Paper className="datatablePaper-update" elevation={10} variant="outlined"  >
+                                                                        <Paper className="paper-datatableUpdate" elevation={10} variant="outlined"  >
                                                                             {row[column]}
                                                                         </Paper>
                                                                     </Col>
@@ -235,30 +235,30 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Palabra  </Modal.Title>
+                        <Modal.Title className="titleModal-uploadWord" > Modificar Palabra  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
                         <Container className="div-uploadWord-update" >
-                            <Grid container component="main" >
+                            <Grid container component="main" className="justify-content-center" >
                                 <Grid item xs={12} sm={8} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                                     <Grid container spacing={5} >
 
-                                        <Grid item xs={4} >
-                                            <div className="col palabra" >
+                                        <Grid item xs={6} >
+                                            <div className="col palabra-datatableUpdate" >
                                                 <Col>
-                                                    <Paper className="paper" elevation={10} variant="outlined"  >
+                                                    <Paper className="paper-datatableUpdate" elevation={10} variant="outlined"  >
                                                         {nameUpdate}
                                                     </Paper>
                                                 </Col>
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} >
+                                        <Grid item xs={6} >
                                             <div className="div-name-update" >                        
                                                 <TextField
-                                                    style={{ width: "60%" }}
+                                                    className="nameWordUpdate"
                                                     value={nameUpdate}
                                                     name="nameUpdate"
                                                     variant="outlined"
@@ -277,13 +277,13 @@ const DatatableWords = ({ words, deleteFunction, loadingDelete }) => {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-uploadWord" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-uploadWord"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarPalabra}
                         >

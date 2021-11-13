@@ -103,7 +103,7 @@ const DatatableUniqueSelection = ({ uniqueSelections, deleteFunction, loadingDel
 
     const renderPhotos = (source) => {
         return source.map((photo) => {
-			return <img className="imagesSelected" src={photo} alt="" key={photo} />;
+			return <img className="imagesSelectedModifyUniqueSelection" src={photo} alt="" key={photo} />;
 		});
 	};
 
@@ -287,26 +287,26 @@ const DatatableUniqueSelection = ({ uniqueSelections, deleteFunction, loadingDel
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Selección Única  </Modal.Title>
+                        <Modal.Title className="titleModal-uploadUniqueSelection" > Modificar Selección Única  </Modal.Title>
                     </Modal.Header>
                         <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
                         <Container className="div-uploadUniqueSelection-update" >
-                            <Grid container component="main" >
-                                <Grid item xs={12} sm={8} md={12} elevation={6}>
+                            <Grid  component="main" className="justify-content-center" >
+                                <Grid item elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-                                    <Grid container spacing={5} >
+                                    <Grid  spacing={0} >
 
                                         <Grid item xs={12} >
-                                            <div>
+                                            <div className="buttonsModifyUniqueSelection" >
                                                 <input type="file" id="fileUpdateUniqueSelection" multiple onChange={handleImageChange} />
-                                                <div className="label-holder">
+                                                <div className="label-holderDatatableModifyUniqueSelection">
                                                     <div className="row" >
-                                                        <label htmlFor="fileUpdateUniqueSelection" className="label">
+                                                        <label htmlFor="fileUpdateUniqueSelection" className="labelDatatableModifyUniqueSelection">
                                                             <i className="material-icons" >Agregar 3 imágenes</i>
                                                         </label>
                                                         <Button
-                                                            className="buttonResetImages"
+                                                            className="buttonResetImagesModifyUniqueSelection"
                                                             variant="contained"
                                                             color="secondary"
                                                             onClick={() => resetImagesSelected()}
@@ -338,13 +338,13 @@ const DatatableUniqueSelection = ({ uniqueSelections, deleteFunction, loadingDel
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-uploadUniqueSelection" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-uploadUniqueSelection"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarSeleccionUnica}
                         >

@@ -221,16 +221,16 @@ const DatatableTips = ({ categorias }) => {
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Categoría  </Modal.Title>
+                        <Modal.Title className="titleModal-uploadCategory" > Modificar Categoría  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
                         <Container className="div-uploadCategory-update" >
-                            <Grid container component="main" >
-                                <Grid item xs={12} sm={8} md={12} elevation={6}>
+                            <Grid  component="main"  className="justify-content-center" >
+                                <Grid item elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-                                    <Grid container spacing={5} >
+                                    <Grid container spacing={0} >
 
                                         <Grid item xs={4} >
                                             <div className="col category-update" >
@@ -250,7 +250,7 @@ const DatatableTips = ({ categorias }) => {
                                         <Grid item xs={8} >
                                             <div className="div-category-update" >                        
                                                 <TextField
-                                                    style={{ width: "60%" }}
+                                                    className="categoryNameUpdate"
                                                     value={nameUpdate}
                                                     name="nameUpdate"
                                                     variant="outlined"
@@ -289,13 +289,13 @@ const DatatableTips = ({ categorias }) => {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-uploadCategory" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-uploadCategory"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarCategoria}
                         >

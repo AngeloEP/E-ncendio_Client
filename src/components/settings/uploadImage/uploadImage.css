@@ -198,13 +198,15 @@
     
     
     .div-filename {
+        width: 80%;
         margin-top: 3em !important;
         margin-left: 4em !important;
         min-height: fit-content !important;
     }
 
     .div-filename label {
-        margin-top: -6% !important;
+        margin-top: -4% !important;
+        font-size: small;
     }
     
     .textfield-filename {

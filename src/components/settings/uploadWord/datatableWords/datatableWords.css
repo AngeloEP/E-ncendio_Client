@@ -12,7 +12,7 @@
     width: 10%;
 }
 
-.paper-update {
+.paper-datatableUpdate {
     position: relative !important;
     text-align: center !important;
     min-width: 120px;
@@ -54,6 +54,10 @@
     margin-left: 2em;
 }
 
+.nameWordUpdate {
+    width: 70% !important;
+}
+
 .div-difficulty-update {
     margin-top: 2em;
     margin-left: -7.7em;
@@ -91,11 +95,11 @@
     max-height: 700px !important;
 }
 
-.datatablePaper-update {
+.paper-datatableUpdate {
     position: relative !important;
     text-align: center !important;
     min-width: 120px;
-    min-height: 110px;
+    min-height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -106,9 +110,16 @@
     color: rgb(75, 70, 70) !important;
 }
 
-.datatablePaper-update:hover {
+.paper-datatableUpdate:hover {
     transition: 0.5s;
     border-color: blue !important;
+}
+
+.submitButtonModal-uploadWord {
+    background-color: yellow !important;
+    height: 10% !important;
+    width: 25% !important;
+    margin-left: 2% !important;
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px){
@@ -125,19 +136,50 @@
         margin-bottom: 0em;
     }
 
-    .datatablePalabra-update {
+    .palabra-update {
         min-width: 140px !important;
         max-width: 140px !important;
         min-height: 100px !important;
         max-height: 100px !important;
         display: table;
     }
+    
+    .div-uploadWord-update {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        border-radius: 13px;
+    } 
 
-    .datatablePaper-update {
+    .paper-datatableUpdate {
         min-width: 100px;
         min-height: 100px;
         font-size: medium !important;
-        color: rgb(75, 70, 70) !important;
+        color: black !important;
     }
     
+    .div-name-update {
+        width: 90% !important;
+        margin-top: 0em;
+        margin-left: 0em;
+        margin-right: 0em;
+    }
+
+    .nameWordUpdate {
+        width: 100% !important;
+    }
+
+    .titleModal-uploadWord {
+        font-size: large;
+    }
+
+    .closeButtonModal-uploadWord {
+        font-size: small;
+    }
+
+    .submitButtonModal-uploadWord {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: small !important;
+    }
 }

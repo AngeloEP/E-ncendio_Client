@@ -8,8 +8,32 @@
     border-radius: 16px;
 }
 
+.div-imageTip-update {
+    width: 10%;
+}
+
+.imageTip-upload-update {
+    min-width: 400px;
+    max-width: 200px;
+    min-height: 220px;
+    max-height: 280px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.label-upload-imageTip-update {
+    width: 11em;
+    height: 2em;
+    margin-left: 270%;
+    margin-bottom: 1em;
+}
+
 .div-tip-update {
     width: 100%;
+}
+
+.tipImageUpdate {
+    width: 80%;
 }
 
 .tip-update {
@@ -33,6 +57,7 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 5%;
+    padding: 2px;
     border: 2px solid !important;
     border-radius: 25 !important;
     border-color: #5bc0de !important;
@@ -67,4 +92,81 @@
 
 .div-datatable-tips div {
     max-height: 700px !important;
+}
+
+.submitButtonModal-uploadTip {
+    background-color: yellow !important;
+    height: 10% !important;
+    width: 25% !important;
+    margin-left: 2% !important;
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .div-uploadTip-update {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        border-radius: 13px;
+    }
+
+    .imageTip-upload-update {
+        position: relative;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 160px;
+        max-height: 160px;
+    }
+    
+    .div-imageTip-update {
+        width: 100% !important;
+        margin-top: 0em;
+        margin-left: 0em;
+    }
+
+    .label-upload-imageTip-update {
+        width: max-content;
+        height: fit-content;
+        margin-left: 0%;
+        margin-bottom: 0em;
+    }
+
+    .label-upload-imageTip-update span {
+        font-size: smaller !important;
+    }
+
+    .div-tip-update {
+        width: 90%;
+        margin-left: 1em;
+    }
+
+    .tipImageUpdate {
+        width: 100% !important;
+    }
+
+    .tip-updateModal {
+        width: 100%;
+        margin-left: 0%;
+    }
+
+    .paper-tip-update {
+        min-width: 100% !important;
+        font-size: small !important;
+        margin-top: 15%;
+        padding: 2px;
+        color: black !important;
+    }
+
+    .titleModal-uploadTip {
+        font-size: large;
+    }
+
+    .closeButtonModal-uploadTip {
+        font-size: small;
+    }
+
+    .submitButtonModal-uploadTip {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: small !important;
+    }
 }
