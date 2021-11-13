@@ -42,7 +42,7 @@
 
 .div-submit-imageAndWord {
     position: relative;
-    margin-top: 10% !important;
+    margin-top: 15% !important;
 }
 
 .submit-imageAndWord {
@@ -167,15 +167,22 @@
     }
     
     .textfield-associateWord {
-        width: 100%;
+        width: fit-content;
+    }
+
+    .textfield-associateWord label {
+        font-size: small !important;
     }
     
     .div-submit-imageAndWord {
         margin-top: 25% !important;
+        width: fit-content;
+        height: fit-content;
     }
     
     .submit-imageAndWord {
-        width: 70%;
+        width: fit-content;
+        height: fit-content;
     }
     
     .div-datatable-fourImagesOneWord {

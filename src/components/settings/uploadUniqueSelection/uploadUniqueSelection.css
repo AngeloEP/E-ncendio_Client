@@ -140,6 +140,10 @@
     .textfield-keyWord {
         width: 100%;
     }
+
+    .textfield-keyWord label {
+        font-size: small !important;
+    }
     
     .div-submit-imagesAndKeyWord {
         margin-top: 25% !important;

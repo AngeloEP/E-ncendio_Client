@@ -196,7 +196,7 @@ const UploadFourImagesOneWord = () => {
                                 </div>
                             </Grid>
                             <Grid item xs={6} style={{  }} >
-                                <div className="row" >
+                                <div className="row d-inline-block" >
                                     <Col >
                                         <div className="div-submit-imageAndWord" >
                                             <Button

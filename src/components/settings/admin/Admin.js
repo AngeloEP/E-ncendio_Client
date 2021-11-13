@@ -71,7 +71,7 @@ const Admin = () => {
     return (
         <Fragment>
             <div className="row w-100">
-                <div className="col-md-6 pagination-users">
+                <div className="col-lg-6 col col-md-6 pagination-users">
                     <Pagination
                         total={totalItems}
                         itemsPerPage={ITEMS_PER_PAGE}

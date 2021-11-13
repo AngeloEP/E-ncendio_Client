@@ -65,7 +65,7 @@ const Store = () => {
                             <Fragment>
                                 <div className="row ml-4 mr-0">
                                     {marcos.map((marco, indexFrame) =>
-                                        <div key={indexFrame} className="col-sm-4 col-md-4 col-lg-3" >         
+                                        <div key={indexFrame} className="col-4 col-sm-4 col-md-4 col-lg-3" >         
                                             <div className="card-store text-white tarjeta-store" >
                                                 <div
                                                     className={`div-imageUser-store ${marco.nameCss}`}
@@ -83,10 +83,9 @@ const Store = () => {
                                                     <Button
                                                         type="submit"
                                                         variant="contained"
-                                                        style={ marcosUsuario.some(item => item.name === marco.name)
-                                                            ? {height: "15%", width: "65%", marginTop: "5%", color: "#fff", backgroundColor: "#8BA1B1", borderColor: "#8BA1B1" }
-                                                            :
-                                                            {height: "15%", width: "65%", marginTop: "5%", color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745" }
+                                                        className={ marcosUsuario.some(item => item.name === marco.name)
+                                                            ? "buttonBuy alreadyBuy"
+                                                            : "buttonBuy clickToBuy"
                                                         }
                                                         disabled={cargandoComprarMarco | marcosUsuario.some(item => item.name === marco.name) ? true : false}
                                                         onClick={() => comprarMarco(marco._id)}
@@ -143,7 +142,7 @@ const Store = () => {
                                 <Fragment>
                                     <div className="row ml-4 mr-0">
                                         {apodos.map((apodo, indexNickname) =>
-                                            <div key={indexNickname} className="col-sm-3 col-md-2 col-lg-3" >         
+                                            <div key={indexNickname} className="col-4 col-sm-3 col-md-2 col-lg-3" >         
                                                 <div className="card-store text-white tarjeta-store" >
                                                     <div className="div-nickname" >
                                                         <h2 className="nickname"> {apodo.name} </h2>
@@ -154,10 +153,9 @@ const Store = () => {
                                                         <Button
                                                             type="submit"
                                                             variant="contained"
-                                                            style={ apodosUsuario.some(item => item.name === apodo.name)
-                                                                ? {height: "15%", width: "65%", marginTop: "5%", color: "#fff", backgroundColor: "#8BA1B1", borderColor: "#8BA1B1" }
-                                                                :
-                                                                {height: "15%", width: "65%", marginTop: "5%", color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745" }
+                                                            className={ apodosUsuario.some(item => item.name === apodo.name)
+                                                                ? "buttonBuy alreadyBuy"
+                                                                : "buttonBuy clickToBuy"
                                                             }
                                                             disabled={cargandoComprarApodo | apodosUsuario.some(item => item.name === apodo.name) ? true : false}
                                                             onClick={() => comprarApodo(apodo._id)}

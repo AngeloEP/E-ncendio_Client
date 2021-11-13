@@ -166,6 +166,23 @@
     border-radius: 5px;
 }
 
+.buttonBuy {
+    height: 15%;
+    width: 65%;
+    margin-top: 5%;
+    color: white !important;
+}
+
+.clickToBuy {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+}
+
+.alreadyBuy {
+    background-color: #8BA1B1 !important;
+    border-color: #8BA1B1 !important;
+}
+
 @media only screen and (max-width: 1376px){
     .title-store{
         font-size: 25px;
@@ -204,5 +221,91 @@
     .costo-card-frame {
         max-width: 60%;
         font-size: medium;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .title-frame-section-store {
+        font-size: large;
+        font-weight: 700;
+        margin-top: 1%;
+        margin-bottom: 2%;
+        margin-left: 5%;
+        padding-bottom: 7px;
+    }
+    
+    .title-frame-section-store::after {
+        width: 30%;
+        height: 5%;
+        bottom: 0;
+        left: 0%;
+    }
+
+    .div-imageUser-store {
+        width: 90%;
+        height: fit-content;
+    }
+    
+    .card-store {
+        margin-bottom: 15%;
+    }
+    
+    .titulo-nombre-card-frame {
+        max-width: 90%;
+        font-size: medium;
+    }
+    
+    .nombre-card-frame {
+        max-width: 90%;
+        font-size: small;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .titulo-costo-card-frame {
+        margin-top: 15%;
+        font-size: medium;
+        max-width: 90%;
+    }
+    
+    .costo-card-frame {
+        max-width: 90%;
+        font-size: small;
+    }
+
+    .buttonBuy {
+        height: fit-content;
+        width: fit-content;
+        margin-top: 15% !important;
+        font-size: x-small !important;
+    }
+
+    .title-nickname-section-store {
+        font-size: large;
+        font-weight: 700;
+        margin-top: 1%;
+        margin-bottom: 2%;
+        margin-left: 5%;
+        padding-bottom: 7px;
+    }
+    
+    .title-nickname-section-store::after {
+        width: 30%;
+        height: 5%;
+        bottom: 0;
+        left: 0%;
+    }
+
+    .div-nickname {
+        width: fit-content;
+        height: fit-content;
+        font-size: larger;
+        display: inline;
+    }
+    
+    .nickname {
+        font-size: large;
+        font-weight: 900;
+        line-height: normal;
     }
 }

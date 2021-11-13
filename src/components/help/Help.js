@@ -45,7 +45,7 @@ const Help = () => {
                 </div>
 
                 <div className="row tm-content-box">
-                    <div className="col-lg-12 col-xl-12">
+                    <div className="col-12 col-lg-12 col-xl-12">
                         <div className="tm-intro-text-container">
                             <h2 className="tm-text-primary mb-4 tm-section-title"> ¿Cómo puedo ganar puntos? </h2>
                             {/* <p className="mb-4 tm-intro-text">
@@ -56,10 +56,10 @@ const Help = () => {
                 </div>
 
                 <div className="row tm-content-box">
-                    <div className="col-lg-1">
+                    <div className="col-1 col-lg-1">
                         <img className="tm-icon" src={gamesIcon} alt="" />
                     </div>
-                    <div className="col-lg-5">
+                    <div className="col-5 col-lg-5">
                         <div className="tm-intro-text-container">
                             <h2 className="tm-text-primary mb-4"> Jugando </h2>
                             <p className="mb-4 tm-intro-text">
@@ -68,10 +68,10 @@ const Help = () => {
                         </div>
                     </div>
                     
-                    <div className="col-lg-1">
+                    <div className="col-1 col-lg-1">
                         <img className="tm-icon" src={settingIcon} alt="" />
                     </div>
-                    <div className="col-lg-5">
+                    <div className="col-5 col-lg-5">
                         <div className="tm-intro-text-container">
                             <h2 className="tm-text-primary mb-4"> Editando tu perfil </h2>
                             <p className="mb-4 tm-intro-text">
@@ -83,10 +83,10 @@ const Help = () => {
                 </div>
 
                 <div className="row tm-content-box">
-                    <div className="col-lg-1">
+                    <div className="col-1 col-lg-1">
                         <img className="tm-icon" src={contentIcon} alt="" />
                     </div>
-                    <div className="col-lg-5">
+                    <div className="col-5 col-lg-5">
                         <div className="tm-intro-text-container">
                             <h2 className="tm-text-primary mb-4"> Subiendo contenido </h2>
                             <p className="mb-4 tm-intro-text">
@@ -98,10 +98,10 @@ const Help = () => {
                             </div> */}
                         </div>
                     </div>
-                    <div className="col-lg-1">
+                    <div className="col-1 col-lg-1">
                         <img className="tm-icon" src={rankingIcon} alt="" />
                     </div>
-                    <div className="col-lg-5">
+                    <div className="col-5 col-lg-5">
                         <div className="tm-intro-text-container">
                         <h2 className="tm-text-primary mb-4"> Mejores Participantes </h2>
                             <p className="mb-4 tm-intro-text">
@@ -114,7 +114,7 @@ const Help = () => {
                 <h2 className="tm-text-primary mb-4 mt-4 tm-section-title">
                     Acciones disponibles por liga
                 </h2>
-                <Table striped bordered hover responsive className="text-center" >
+                <Table striped bordered hover responsive className="text-center tableActionsHelp" >
                     <thead>
                         <tr>
                             <th className="text-white bg-primary" > Acción/Liga </th>
@@ -123,7 +123,7 @@ const Help = () => {
                             <th className="text-black bg-warning" > Oro </th>
                         </tr>
                     </thead>
-                    <tbody style={{ fontSize: "large" }} >
+                    <tbody className="bodyTableActionsHelp" >
                         <tr>
                             <td> Etiquetar imagen </td>
                             <td> <CheckCircleOutlineIcon style={{ color: green[500] }} /> </td>
@@ -220,7 +220,7 @@ const Help = () => {
 
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+                        <div className="col-6 col-lg-4 col-md-4 col-sm-4 col-xs-4"
                             data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
                             <div className="features-item">
                                 <div className="features-icon">
@@ -236,7 +236,7 @@ const Help = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+                        <div className="col-6 col-lg-4 col-md-4 col-sm-4 col-xs-4"
                             data-scroll-reveal="enter bottom move 30px over 0.6s after 0.4s">
                             <div className="features-item">
                                 <div className="features-icon">
@@ -249,7 +249,7 @@ const Help = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+                        <div className="col-6 col-lg-4 col-md-4 col-sm-4 col-xs-4"
                             data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
                             <div className="features-item">
                                 <div className="features-icon">
@@ -262,7 +262,7 @@ const Help = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+                        <div className="col-6 col-lg-4 col-md-4 col-sm-4 col-xs-4"
                             data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
                             <div className="features-item">
                                 <div className="features-icon">
@@ -292,11 +292,11 @@ const Help = () => {
                 </div>
 
                 <div className="row">
-                    <div className="left-image col-lg-5 col-md-12 col-sm-12 mobile-bottom-fix-big"
+                    <div className="left-image col-5 col-lg-5 col-md-5 col-sm-5 mobile-bottom-fix-big"
                         data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
                         <img src={UploadContent} className="image-upload-help rounded img-fluid d-block mx-auto" alt="" />
                     </div>
-                    <div className="right-text offset-lg-1 col-lg-6 col-md-12 col-sm-12 mobile-bottom-fix">
+                    <div className="right-text offset-lg-1 col-lg-6 col-md-6 col-sm-6 mobile-bottom-fix">
                         <ul>
                             <li data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
                                 <ImageIcon className="miniImage-upload-help" />
