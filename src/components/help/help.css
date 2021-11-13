@@ -270,6 +270,7 @@ a:focus {
         min-width: 1.5vw !important;
         height: 1vh !important;
         align-self: center !important;
+        margin-left: 100% ;
     }
 
     .tm-text-primary {
