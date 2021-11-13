@@ -321,6 +321,8 @@ a:focus {
       
     #upload-content .left-image {
         align-self: center;
+        margin-left: auto;
+        margin-right: auto;
     }
       
     #upload-content .right-text ul {
