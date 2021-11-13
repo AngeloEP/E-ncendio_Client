@@ -53,7 +53,7 @@ const Help = () => {
                 </div>
 
                 <div className="row tm-content-box">
-                    <div className="col-1 col-lg-1">
+                    <div className="col-1 col-lg-1 align-self-center">
                         <img className="tm-icon" src={gamesIcon} alt="" />
                     </div>
                     <div className="col-5 col-lg-5">
@@ -65,7 +65,7 @@ const Help = () => {
                         </div>
                     </div>
                     
-                    <div className="col-1 col-lg-1">
+                    <div className="col-1 col-lg-1 align-self-center">
                         <img className="tm-icon" src={settingIcon} alt="" />
                     </div>
                     <div className="col-5 col-lg-5">
@@ -80,7 +80,7 @@ const Help = () => {
                 </div>
 
                 <div className="row tm-content-box">
-                    <div className="col-1 col-lg-1">
+                    <div className="col-1 col-lg-1 align-self-center">
                         <img className="tm-icon" src={contentIcon} alt="" />
                     </div>
                     <div className="col-5 col-lg-5">
@@ -91,7 +91,7 @@ const Help = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="col-1 col-lg-1">
+                    <div className="col-1 col-lg-1 align-self-center">
                         <img className="tm-icon" src={rankingIcon} alt="" />
                     </div>
                     <div className="col-5 col-lg-5">

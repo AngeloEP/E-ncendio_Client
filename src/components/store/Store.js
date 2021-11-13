@@ -142,7 +142,7 @@ const Store = () => {
                                 <Fragment>
                                     <div className="row ml-4 mr-0">
                                         {apodos.map((apodo, indexNickname) =>
-                                            <div key={indexNickname} className="col-4 col-sm-3 col-md-2 col-lg-3" >         
+                                            <div key={indexNickname} className="col-4 col-sm-4 col-md-4 col-lg-3" >         
                                                 <div className="card-store text-white tarjeta-store" >
                                                     <div className="div-nickname" >
                                                         <h2 className="nickname"> {apodo.name} </h2>
