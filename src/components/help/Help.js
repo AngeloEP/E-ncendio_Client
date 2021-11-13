@@ -48,9 +48,6 @@ const Help = () => {
                     <div className="col-12 col-lg-12 col-xl-12">
                         <div className="tm-intro-text-container">
                             <h2 className="tm-text-primary mb-4 tm-section-title"> ¿Cómo puedo ganar puntos? </h2>
-                            {/* <p className="mb-4 tm-intro-text">
-                                This is Infinite Loop, free Bootstrap 4.0 HTML template with a parallax effect. This layout is what you can modify and use for your websites. Please spread a word to your friends about our website. Thank you for supporting us. If you have any question, you can contact us or chat with us on our <a href="https://fb.com/tooplate">Tooplate Facebook page</a>.
-                            </p> */}
                         </div>
                     </div>
                 </div>
@@ -92,10 +89,6 @@ const Help = () => {
                             <p className="mb-4 tm-intro-text">
                                 Escogiendo el contenido adecuado y subirlo al sitio.¡Ojo que, no estará habilitado inmediatamente en el juego!
                             </p>
-                            
-                            {/* <div className="tm-continue">
-                                <a href="#testimonials" className="tm-intro-text tm-btn-primary">Learn More</a>
-                            </div> */}
                         </div>
                     </div>
                     <div className="col-1 col-lg-1">
@@ -216,7 +209,6 @@ const Help = () => {
                         </div>
                     </div>
                 </div>
-                {/* */} 
 
                 <div className="container">
                     <div className="row">
@@ -230,9 +222,6 @@ const Help = () => {
                                     <p>
                                         Debes seleccionar la categoría que se relaciona más a la imagen.
                                     </p>
-                                    {/* <a href="#testimonials" className="main-button">
-                                        Read More
-                                    </a> */}
                                 </div>
                             </div>
                         </div>
@@ -277,26 +266,24 @@ const Help = () => {
                         </div>
                     </div>
                 </div>
-
-                {/*  */}
             </div>
 
             {/* Que tipo de contenido debo subir */}
             <div className="container" id="upload-content">
-                <div className="row tm-content-box">
-                    <div className="col-lg-12 col-xl-12">
+                <div className="row tm-content-box ml-0 mr-0">
+                    <div className="col-12 col-lg-12 col-xl-12">
                         <div className="tm-intro-text-container">
                             <h2 className="tm-text-primary mb-4 tm-section-title"> ¿Qué tipo de contenido debo subir? </h2>
                         </div>
                     </div>
                 </div>
 
-                <div className="row">
+                <div className="row ml-0 mr-0">
                     <div className="left-image col-5 col-lg-5 col-md-5 col-sm-5 mobile-bottom-fix-big"
                         data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
                         <img src={UploadContent} className="image-upload-help rounded img-fluid d-block mx-auto" alt="" />
                     </div>
-                    <div className="right-text offset-lg-1 col-lg-6 col-md-6 col-sm-6 mobile-bottom-fix">
+                    <div className="right-text offset-lg-1 col-6 col-lg-6 col-md-6 col-sm-6 mobile-bottom-fix">
                         <ul>
                             <li data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
                                 <ImageIcon className="miniImage-upload-help" />

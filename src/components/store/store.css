@@ -251,12 +251,12 @@
     }
     
     .titulo-nombre-card-frame {
-        max-width: 90%;
+        max-width: fit-content;
         font-size: medium;
     }
     
     .nombre-card-frame {
-        max-width: 90%;
+        max-width: fit-content;
         font-size: small;
         margin-left: auto;
         margin-right: auto;
@@ -265,17 +265,17 @@
     .titulo-costo-card-frame {
         margin-top: 15%;
         font-size: medium;
-        max-width: 90%;
+        max-width: fit-content;
     }
     
     .costo-card-frame {
-        max-width: 90%;
+        max-width: fit-content;
         font-size: small;
     }
 
     .buttonBuy {
-        height: fit-content;
-        width: fit-content;
+        height: 100% !important;
+        width: 100% !important;
         margin-top: 15% !important;
         font-size: x-small !important;
     }

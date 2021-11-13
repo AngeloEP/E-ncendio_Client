@@ -266,7 +266,7 @@ a:focus {
     }
 
     .tm-icon {
-        transform: scale(3);
+        transform: scale(5) !important;
         width: 100% !important;
         height: 100% !important;
         margin-left: auto;
@@ -328,6 +328,7 @@ a:focus {
     #upload-content .right-text ul {
         padding: 0;
         margin: 0;
+        width: fit-content;
     }
       
     #upload-content .right-text ul li {
@@ -350,15 +351,17 @@ a:focus {
     }
     
     .miniImage-upload-help {
-        width: 20% !important;
+        width: 15% !important;
         height: 7% !important;
         margin-right: auto;
+        margin-left: auto;
     }
     
     #upload-content .right-text p {
         font-size: smaller;
         line-height: 1.4;
         text-align: justify;
+        padding: 5px;
     }
       
     #upload-content .right-text h4 {
