@@ -319,12 +319,12 @@ const FourImagesOneWord = ( props ) => {
                                 ?
                                     <div className="UniqueSelection container">
                                         <Row className="three-images" >
-                                                <label className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 labelAnotherImageUS" >
+                                                <label className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 " >
                                                     <input type="radio" name="imageSelectionRef" value="small"/>
                                                     <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_1 } onClick={ () => {setImageSelection("small")} } />
                                                 </label>
 
-                                                <label className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 labelAnotherImageUS" >
+                                                <label className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 " >
                                                     <input type="radio" name="imageSelectionRef" value="big" />
                                                     <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_2 } onClick={ () => {setImageSelection("big")} } />
                                                 </label>

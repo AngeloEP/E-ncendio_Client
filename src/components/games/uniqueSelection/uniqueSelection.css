@@ -158,9 +158,15 @@
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px){
+  .UniqueSelection {
+    width: 100% !important;
+  }
+
   .three-images {
     width: 100% !important;
     margin-top: 5%;
+    margin-left: 0px;
+    margin-right: 0px;
   }
 
   .imagesUniqueSelectionGame {
@@ -177,7 +183,7 @@
 
   .div-keyWord {
     margin-left: 0% !important;
-    margin-right: 10% !important;
+    margin-right: 0% !important;
   }
   
   .div-keyWord div p {
