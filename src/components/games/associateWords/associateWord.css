@@ -281,8 +281,26 @@
     }
 }
 
-@media only screen and (min-width: 1377px) and (max-width: 1612px){
-    .center {
-        margin-right: 10% !important;
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .text-tagWords {
+        text-align: center;
+        font-size: medium;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .paper {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+        
+    }
+
+    .fireTagWords .fire {
+        width: 27px;
+        height: 27px;
+        top: 0;
+        left: -3vw;
     }
 }

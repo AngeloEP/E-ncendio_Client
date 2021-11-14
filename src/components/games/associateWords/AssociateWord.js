@@ -481,7 +481,7 @@ const AssociateWords = ( props ) => {
                                                         {categoriasVisibles.length !== 0
                                                         ?
                                                             categoriasVisibles.map((categoria, index) =>
-                                                                <div key={index} className="col-sm-6 col-md-6" >
+                                                                <div key={index} className="col-4 col-sm-4 col-md-6 col-lg-6 fireTagWords" >
                                                                     <Fire name={categoria.name.charAt(0).toLowerCase() + categoria.name.slice(1)} value={categoria.name} selected={checked[categoria.name.charAt(0).toLowerCase() + categoria.name.slice(1)]} onCheck={onCheck}
                                                                         title=""
                                                                         placement="left"
@@ -522,91 +522,6 @@ const AssociateWords = ( props ) => {
                                         </Col>
                                     </Row>
                                 </>
-                                // <div>
-                                //     <div className="center">
-                                //         <div className="row">
-                                //             <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                //                 <Fire name="riesgo" value="Riesgo" selected={checked['riesgo']} onCheck={onCheck}
-                                //                     title="Superficie con peligro de provocar un incendio."
-                                //                     placement="left"
-                                //                 />
-                                //             </div>
-                                //             <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                //                 <Fire name="prevencion" value="Prevención" selected={checked['prevencion']} onCheck={onCheck}
-                                //                     title="Se aprecian medidas para evitar un incendio."
-                                //                     placement="top"
-                                //                 />
-                                //             </div>
-                                //             <div className="col categoritas" >
-                                //                 <Fire name="recuperacion" value="Recuperación" selected={checked['recuperacion']} onCheck={onCheck}
-                                //                     title="Terreno que pasa por período de transformación para recuperarse de un incendio."
-                                //                     placement="right"
-                                //                 />
-                                //             </div>
-                                //         </div>
-                                //         <div className="row">
-                                //             <div className="col categoritas" style={{ marginRight: "-4%" }} >
-                                //                 <Fire name="mitigacion" value="Mitigación" selected={checked['mitigacion']} onCheck={onCheck}
-                                //                     title="Se pueden ver técnicas para buscar reducir al máximo los efectos potenciales de un incendio."
-                                //                     placement="left"
-                                //                 />
-                                //             </div>
-                                //             <div className="col palabra" >
-                                //                 { palabras.length === 0
-                                //                 ? null
-                                //                 :
-                                //                     <Col>
-                                //                         <Paper className="paper" elevation={10} variant="outlined"  >
-                                //                             {palabras[palabraActual].name}
-                                //                         </Paper>
-                                //                     </Col>
-                                //                 }
-                                //             </div>
-                                //             <div className="col categoritas" style={{ marginLeft: "-1%" }} >
-                                //                 <Fire name="amenaza" value="Amenaza" selected={checked['amenaza']} onCheck={onCheck}
-                                //                     title="Estado preocupante o amenazante en el cual el incendio llegue a ser muy grave y casi incontrolable."
-                                //                     placement="right"
-                                //                 />
-                                //             </div>
-                                //         </div>
-                                //         <div className="row">
-                                //             <div className="col categoritas" style={{ marginRight: "-10%" }} >
-                                //                 <Fire name="impacto" value="Impacto" selected={checked['impacto']} onCheck={onCheck}
-                                //                     title="Consecuencias post-incendio del terreno."
-                                //                     placement="left"
-                                //                 />
-                                //             </div>
-                                //             <div className="col categoritas">
-                                //             </div>
-                                //             <div className="col categoritas" style={{ marginLeft: "-10%" }} >
-                                //                 <Fire name="combate" value="Combate" selected={checked['combate']} onCheck={onCheck}
-                                //                     title="Se trata de contener al incendio, para detener su avance."
-                                //                     placement="right"
-                                //                 />
-                                //             </div>
-                                //         </div>
-                                //     </div>
-                    
-                                //     <div className="bottomCenter" >
-                                //         <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
-                                //             <Col xs={11} >
-                                //                 <Button className="botonSiguiente" variant="success" onClick={ () => onRender() } > Siguiente </Button>{' '}
-                                //             </Col>
-                                //             <Col xs={1} >
-                                //                 <OverlayTrigger
-                                //                     key={9}
-                                //                     placement={"top"}
-                                //                     overlay={
-                                //                 <Tooltip className="tooltipTagWord" id="help-icon-tooltip-1" > Selecciona la categoría que represente mejor al texto mostrado.
-                                //                 </Tooltip>
-                                //                 }
-                                //                 >
-                                //                     <HelpIcon className="help-icon-tagImage" color="primary" />
-                                //                 </OverlayTrigger>
-                                //             </Col>
-                                //         </Row>
-                                //     </div>
-                                // </div>
                             :
                                 <div className="text-center position-relative" style={{ top: "50%" }} >
                                     <ClipLoader
