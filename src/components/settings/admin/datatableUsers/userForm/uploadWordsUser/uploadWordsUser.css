@@ -177,14 +177,20 @@
         margin-left: 0%;
         margin-right: 0%;
         margin-top: 25%;
-        width: 100% !important;
+        min-width: 100% !important;
+    }
+
+    .palabra-modifyAttributesWord div {
+        padding-left: 0px;
+        padding-right: 0px;
     }
 
     .paper-modifyAttributesWord {
-        font-size: 2.3vw !important;
+        font-size: medium !important;
         width: 100%;
-        min-height: 8rem;
-        max-height: 8rem;
+        min-width: 100%;
+        min-height: 7rem;
+        max-height: 7rem;
     }
     
     .div-filename-modifyAttributesWord {
