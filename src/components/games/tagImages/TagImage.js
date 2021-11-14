@@ -551,7 +551,7 @@ const TagImage = ( props ) => {
                                                 {categoriasVisibles.length !== 0
                                                 ?
                                                     categoriasVisibles.map((categoria, index) =>
-                                                        <div key={index} className="col-sm-6 col-md-6" >
+                                                        <div key={index} className="col-4 col-sm-4 col-md-6 col-lg-6 fireTagImages" >
                                                             <Fire name={categoria.name.charAt(0).toLowerCase() + categoria.name.slice(1)} value={categoria.name} selected={checked[categoria.name.charAt(0).toLowerCase() + categoria.name.slice(1)]} onCheck={onCheck}
                                                                 title=""
                                                                 placement="left"

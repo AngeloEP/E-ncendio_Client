@@ -176,8 +176,6 @@
     color: #000;
 }
 
-
-
 .topRow {
     margin-bottom: 7%;
 }
@@ -397,5 +395,136 @@
 
     .body-container-notify img {
         margin-top: 2.6em;
+    }
+}
+
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .text-tagImages {
+        text-align: center;
+        font-size: medium;
+        margin-top: 1em;
+    }
+
+    .notification-image {
+        float: left;
+        margin-right: 5%;
+    }
+    
+    .notification-image img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .Toastify__toast-container {
+        min-width: 260px !important;
+        max-width: 260px !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+    }
+    
+    .body-container-notify {
+        min-width: 220px !important;
+        max-width: 220px !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+    }
+    
+    .body-container-notify img {
+        margin-top: 1.85em;
+        height: 110px !important;
+    }
+    .body-container-notify p {
+        padding: 2px;
+        text-align: justify;
+        font-size: x-small;
+    }
+
+    .notification-title {
+        font-size: smaller;
+    }
+
+    .topCenter {
+        width: 90% !important;
+        height: fit-content !important;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+    }
+
+    .rowTitle {
+        width: 100%;
+    }
+
+    .levelTitle {
+        margin-top: 0% !important;
+        font-size: medium !important;
+    }
+
+    .progressTitle {
+        margin-bottom: 2px !important;
+        font-size: medium !important;
+        text-decoration: capitalize;
+        text-transform: capitalize;
+    }
+
+    .userProgress {
+        width: 250px !important;
+        height: 15px !important;
+    }
+
+    .imagen {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 300px !important;
+        max-height: 300px !important;
+    }
+
+    .fireTagImages .fire {
+        width: 27px;
+        height: 27px;
+        top: 0;
+        left: -3vw;
+    }
+
+    .mainDiv-tagImages {
+        display: contents;
+    }
+
+    .bottomCenter-images {
+        display: flex;
+        margin-left: 0%;
+        margin-top: 10%;
+        margin-right: 0px !important;
+    }
+
+    .bottomCenter-images div {
+        padding: 5% !important;
+        
+    }
+
+    .botonSaltar {
+        display: table-cell;
+        padding: 5px;
+        font-size: large;
+        border-radius: 7px;
+        margin-bottom: 0% !important;
+        margin-left: 0% !important;
+    }
+
+    .botonSiguiente {
+        display: table-cell;
+        padding: 5px !important;
+        font-size: large !important;
+        border-radius: 7px !important;
+        margin-top: 0% !important;
+        margin-bottom: 0% !important;
+        margin-left: 0% !important;
+    }
+
+    .help-icon-tagImage{
+        font-size: 40px !important;
+        margin-right: 0% !important;
+        margin-left: 0% !important;
     }
 }
