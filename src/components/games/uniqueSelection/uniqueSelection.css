@@ -176,6 +176,8 @@
   }
 
   .div-keyWord {
+    margin-left: 0% !important;
+    margin-right: 10% !important;
   }
   
   .div-keyWord div p {
