@@ -93,10 +93,9 @@ const UploadHangmansUser = ({ usuario,
                         ?
                             ahorcados.map((ahorcado, index) =>
 
-                                <div key={index} className="col-sm-6 col-md-6" >
+                                <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                     
                                     <div className="card text-white tarjeta-hangman" >
-                                        {/* <img className="card-img-top imagenes-tarjeta" src={ahorcado.Imagen1} alt="Card image cap" /> */}
                                         <div className="fila">
                                             <div className="columna">
                                                 <img className="imagenes-tarjeta" src={ahorcado.Imagen1} alt="" />
@@ -122,7 +121,7 @@ const UploadHangmansUser = ({ usuario,
                                                 type="submit"
                                                 variant="contained"
                                                 color="secondary"
-                                                style={{height: "15%", width: "45%", marginLeft: "2%" }}
+                                                className="btnDeleteUserForm"
                                                 disabled={cargandoEliminarAhorcadoPorAdmin}
                                                 onClick={() => funcionEliminar(ahorcado._id)}
                                             >
@@ -153,13 +152,10 @@ const UploadHangmansUser = ({ usuario,
                                             <Button
                                                 type="submit"
                                                 variant="contained"
-                                                style={ahorcado.Habilitada ?
-                                                        { backgroundColor: "#ffc107",
-                                                        borderColor: "#ffc107", height: "15%", width: "45%", marginLeft: "2%" }
-                                                        :
-                                                        { color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745",
-                                                            height: "15%", width: "45%", marginLeft: "2%" }
-                                                    }
+                                                className={ahorcado.Habilitada
+                                                    ? "btnHabInUserForm btnInhabilitar"
+                                                    : "btnHabInUserForm btnHabilitar"
+                                                }
                                                 disabled={cargandoHabilitarInhabilitarAhorcado}
                                                 onClick={() => funcionHabilitarInhabilitar(ahorcado._id, !ahorcado.Habilitada)}
                                             >
@@ -188,11 +184,10 @@ const UploadHangmansUser = ({ usuario,
                                                 }
                                             </Button>
                                             <Button
-                                                className="mt-2"
                                                 type="submit"
                                                 variant="contained"
                                                 color="primary"
-                                                style={{ backgroundColor: "#1976d2", color: "#fff", height: "15%", width: "100%" }}
+                                                className="btnModifyUserForm"
                                                 onClick={() => handleShow(ahorcado._id)}
                                             >
                                                 {
@@ -229,14 +224,14 @@ const UploadHangmansUser = ({ usuario,
                     style={{ backgroundColor: "black" }}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Ahorcado  </Modal.Title>
+                        <Modal.Title className="titleModal-modifyAttributesHangman" > Modificar Dificultad y Puntos  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
-                        <Container className="div-uploadHangman-update" >
-                            <Grid container component="main" >
-                                <Grid item xs={12} sm={8} md={12} elevation={6}>
+                        <Container className="div-modifyAttributesHangman" >
+                            <Grid container component="main" className="justify-content-center" >
+                                <Grid item xs={12} sm={12} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                                     <Grid container spacing={5} >
                                         <Grid item xs={6} >
@@ -259,10 +254,9 @@ const UploadHangmansUser = ({ usuario,
                                         </Grid>
                                         <Grid item xs={6} >
                                             <div>
-                                                
-                                                <div className="div-filename-update" >                        
+                                                <div className="div-filename-modifyAttributesHangman" >                        
                                                     <TextField
-                                                        style={{ width: "60%" }}
+                                                        className="filenameModifyAttributesHangman"
                                                         value={associatedWord}
                                                         name="filename"
                                                         variant="outlined"
@@ -272,12 +266,12 @@ const UploadHangmansUser = ({ usuario,
                                                     />
                                                 </div>
 
-                                                <div className="div-difficulty-hangman" >                        
+                                                <div className="div-difficulty-modifyAttributesHangman" >                        
                                                     <FormControl variant="outlined" >
                                                         <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
                                                         <Select
                                                             labelId="demo-simple-select-outlined-label"
-                                                            style={{ width: "15em" }}
+                                                            className="difficulty-modifyAttributesHangman"
                                                             id="difficulty"
                                                             name="difficulty"
                                                             value={difficulty}
@@ -294,12 +288,12 @@ const UploadHangmansUser = ({ usuario,
                                                     </FormControl>
                                                 </div>
 
-                                                <div className="div-points-update" >
+                                                <div className="div-points-modifyAttributesHangman" >
                                                     <TextField
-                                                        style={{ width: "60%" }}
+                                                        className="points-modifyAttributesHangman"
                                                         variant="outlined"
                                                         id="points"
-                                                        label="Ingrese una cantidad de puntos asociada a este ahorcado"
+                                                        label="Puntos"
                                                         name='points'
                                                         type='number'
                                                         value={points}
@@ -318,13 +312,13 @@ const UploadHangmansUser = ({ usuario,
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-modifyAttributesHangman" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-modifyAttributesHangman"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarDificultadPuntosAhorcadoPorAdmin}
                         >

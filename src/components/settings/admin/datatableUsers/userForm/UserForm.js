@@ -310,25 +310,28 @@ const UserForm = ({ usuario, handleClose }) => {
         <div>
             <Grid container component="main" className="">
                 { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-                <Grid item xs={12} sm={8} md={12} elevation={6} >
+                <Grid item xs={12} sm={12} md={12} elevation={6} >
                         <Grid container spacing={5} >
-                            <form  onSubmit={onSubmitUpdate}  >
-                                <Grid className="ml-2 mt-3" container spacing={7}>
+                            <form className="w-100" onSubmit={onSubmitUpdate}  >
+                                <Grid className="containerInfoUserForm" container spacing={0}>
                                     
-                                    <Grid item xs={12} sm={6}>
-                                        <TextField
-                                            value={firstname}
-                                            name="firstname"
-                                            variant="filled"
-                                            fullWidth
-                                            disabled
-                                            id="firstname"
-                                            label="Nombre"
-                                            autoFocus
-                                            onChange={onChange}
-                                        />
+                                    <Grid item >
+                                        <div className="divFirstnameUserForm" >
+                                            <TextField
+                                                className="firstnameUserForm"
+                                                value={firstname}
+                                                name="firstname"
+                                                variant="filled"
+                                                fullWidth
+                                                disabled
+                                                id="firstname"
+                                                label="Nombre"
+                                                autoFocus
+                                                onChange={onChange}
+                                            />
+                                        </div>
                                     </Grid>
-                                    <Grid item xs={12} sm={6}>
+                                    <Grid item >
                                         <div className="div-isAdmin" > 
                                             <FormControl variant="outlined" className="formControl">
                                                 <InputLabel id="demo-simple-select-outlined-label"> Administrador </InputLabel>
@@ -351,7 +354,7 @@ const UserForm = ({ usuario, handleClose }) => {
                                         </div>
                                     </Grid>
 
-                                    <Grid item xs={12} sm={6}>
+                                    <Grid item  >
                                         <div className="div-isBlocked" > 
                                             <FormControl variant="outlined" className="formControl">
                                                 <InputLabel id="demo-simple-select-outlined-label"> Bloqueado </InputLabel>
@@ -378,7 +381,7 @@ const UserForm = ({ usuario, handleClose }) => {
                                             <Button
                                                     type="submit"
                                                     variant="contained"
-                                                    style={{ backgroundColor: "yellow", height: "50%", width: "20%", marginLeft: "2%", marginBottom: "2%" }}
+                                                    className="btnUserForm"
                                                     startIcon={<EditIcon />}
                                                     disabled={cargandoAdminYBloqueo}
                                                 >
@@ -479,7 +482,7 @@ const UserForm = ({ usuario, handleClose }) => {
                                 </div>
                             </Grid>
                             <Grid item xs={12} sm={12}>
-                                <AppBar position="static" style={{ backgroundColor: "#1976d2", color: "#fff"}}>
+                                <AppBar position="static" className="navAppBarUserForm" >
                                     <Tabs
                                         value={value}
                                         onChange={handleChange}

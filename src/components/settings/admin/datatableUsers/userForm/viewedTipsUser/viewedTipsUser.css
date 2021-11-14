@@ -52,3 +52,42 @@
     transition: 0.5s;
     border-color: blue !important;
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .tarjeta-tag-tips {
+        margin-bottom: 10%;
+    }
+
+    .titulo-fecha-card-tip {
+        max-width: fit-content;
+    }
+    
+    .fecha-card-tip {
+        max-width: fit-content;
+    }
+
+    .titulo-points-card-tip {
+        margin-top: 5%;
+        max-width: fit-content;
+    }
+    
+    .points-card-tip {
+        margin-top: -3%;
+        max-width: fit-content;
+    }
+    
+    .palabra-tarjeta-vista {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0%;
+        padding: 2px;
+        min-height: fit-content !important;
+        font-size: smaller !important;
+    }
+
+    .btnResetTagContent {
+        width: fit-content;
+        height: fit-content;
+        font-size: x-small !important;
+    }
+}

@@ -24,6 +24,7 @@ const ViewedTipsUser = ({
                 <Button
                     variant="contained"
                     color="secondary"
+                    className="btnResetTagContent"
                     startIcon={<DeleteIcon />}
                     onClick={() => funcionResetear(usuario._id)}
                     disabled={cargandoResetearTipsVistos || tipsVistos.length === 0 ? true : false }
@@ -61,7 +62,7 @@ const ViewedTipsUser = ({
                             <>
                                 {tipsVistos.map((tipVisto, index) =>
 
-                                    <div key={index} className="col-sm-3 col-md-4" >
+                                    <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                         
                                         <div className="card text-white tarjeta-tag-tips" >
                                         <img className="card-img-top imagen-tarjeta-etiquetada" src={tipVisto.tip_id.urlFile !== "" ? tipVisto.urlFile : uploadImage} alt="" />

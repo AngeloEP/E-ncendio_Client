@@ -89,7 +89,7 @@ const UploadImagesUser = ({ usuario,
                         ?
                             imagenes.map((imagen, index) =>
 
-                                <div key={index} className="col-sm-3 col-md-4" >
+                                <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                     
                                     <div className="card text-white tarjeta" >
                                         <img className="card-img-top imagen-tarjeta" src={imagen.Imagen} alt="" />
@@ -102,7 +102,7 @@ const UploadImagesUser = ({ usuario,
                                                 type="submit"
                                                 variant="contained"
                                                 color="secondary"
-                                                style={{height: "15%", width: "45%", marginLeft: "2%" }}
+                                                className="btnDeleteUserForm"
                                                 disabled={cargandoEliminarImagenPorAdmin}
                                                 onClick={() => funcionEliminar(imagen._id)}
                                             >
@@ -138,13 +138,10 @@ const UploadImagesUser = ({ usuario,
                                             <Button
                                                 type="submit"
                                                 variant="contained"
-                                                style={imagen.Habilitada ?
-                                                        { backgroundColor: "#ffc107",
-                                                        borderColor: "#ffc107", height: "15%", width: "45%", marginLeft: "2%" }
-                                                        :
-                                                        { color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745",
-                                                            height: "15%", width: "45%", marginLeft: "2%" }
-                                                    }
+                                                className={imagen.Habilitada
+                                                    ? "btnHabInUserForm btnInhabilitar"
+                                                    : "btnHabInUserForm btnHabilitar"
+                                                }
                                                 disabled={cargandoHabilitarInhabilitarImagen}
                                                 onClick={() => funcionHabilitarInhabilitar(imagen._id, !imagen.Habilitada)}
                                             >
@@ -173,11 +170,10 @@ const UploadImagesUser = ({ usuario,
                                                 }
                                             </Button>
                                             <Button
-                                                className="mt-2"
                                                 type="submit"
                                                 variant="contained"
                                                 color="primary"
-                                                style={{ backgroundColor: "#1976d2", color: "#fff", height: "15%", width: "100%" }}
+                                                className="btnModifyUserForm"
                                                 onClick={() => handleShow(imagen._id)}
                                             >
                                                 {
@@ -214,41 +210,41 @@ const UploadImagesUser = ({ usuario,
                     style={{ backgroundColor: "black" }}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Imagen  </Modal.Title>
+                        <Modal.Title className="titleModal-modifyAttributesImage" > Modificar Dificultad y Puntos  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
-                        <Container className="div-uploadImage-update" >
-                            <Grid container component="main" >
-                                <Grid item xs={12} sm={8} md={12} elevation={6}>
+                        <Container className="div-modifyAttributesImage" >
+                            <Grid container component="main" className="justify-content-center" >
+                                <Grid item xs={12} sm={12} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                                     <Grid container spacing={5} >
-                                        <Grid item xs={4} >
-                                            <div className="div-image-update" >
-                                                <img className="img-fluid img-thumbnail image-upload-update" src={pathImageUpdate} alt="" />
+                                        <Grid item xs={6} >
+                                            <div className="div-image-modifyAttributesImage" >
+                                                <img className="img-fluid img-thumbnail image-upload-modifyAttributesImage" src={pathImageUpdate} alt="" />
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} >
-                                            <div className="div-filename-update" >                        
+                                        <Grid item xs={6} >
+                                            <div className="div-filename-modifyAttributesImage" >                        
                                                 <TextField
-                                                    style={{ width: "60%" }}
+                                                    className="filenameModifyAttributesImage"
                                                     value={nameUpdate}
                                                     disabled
                                                     name="filename"
                                                     variant="filled"
                                                     id="filename"
-                                                    label="Nombre de la imagen"
+                                                    label="Nombre imagen"
                                                     autoFocus
                                                 />
                                             </div>
 
-                                            <div className="div-difficulty-update" >                        
+                                            <div className="div-difficulty-modifyAttributesImage" >                        
                                                 <FormControl variant="outlined" >
                                                     <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
                                                     <Select
                                                         labelId="demo-simple-select-outlined-label"
-                                                        style={{ width: "15em" }}
+                                                        className="difficulty-modifyAttributesImage"
                                                         id="difficulty"
                                                         name="difficulty"
                                                         value={difficulty}
@@ -265,12 +261,12 @@ const UploadImagesUser = ({ usuario,
                                                 </FormControl>
                                             </div>
 
-                                            <div className="div-points-update" >
+                                            <div className="div-points-modifyAttributesImage" >
                                                 <TextField
-                                                    style={{ width: "60%" }}
+                                                    className="points-modifyAttributesImage"
                                                     variant="outlined"
                                                     id="points"
-                                                    label="Ingrese una cantidad de puntos asociada a esta imagen"
+                                                    label="Puntos"
                                                     name='points'
                                                     type='number'
                                                     value={points}
@@ -287,13 +283,13 @@ const UploadImagesUser = ({ usuario,
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-modifyAttributesImage" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-modifyAttributesImage"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarDificultadPuntosImagenPorAdmin}
                         >

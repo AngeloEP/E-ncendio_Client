@@ -5,6 +5,7 @@
 .tarjeta-uniqueSelection {
     background-color: rgb(228, 226, 226);
     border-radius: 15px;
+    margin-top: 5%;
 }
 
 .titulo-nombre-card-uniqueSelection {
@@ -85,4 +86,141 @@
     clear: both;
     padding-bottom: 5px;
     display: table;
+}
+
+.submitButtonModal-modifyAttributesUniqueSelection {
+    background-color: yellow !important;
+    height: 10% !important;
+    width: 25% !important;
+    margin-left: 2% !important;
+}
+
+.div-filename-modifyAttributesUniqueSelection {
+    width: fit-content !important;
+    margin-left: 1em;
+}
+
+.filenameModifyAttributesUniqueSelection {
+    width: 100% !important;
+}
+
+.div-difficulty-modifyAttributesUniqueSelection {
+    width: fit-content !important;
+    height: fit-content !important;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.difficulty-modifyAttributesUniqueSelection {
+    width: 100% !important;
+}
+
+.div-points-modifyAttributesUniqueSelection {
+    width: fit-content !important;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.points-modifyAttributesUniqueSelection {
+    width: 100% !important;
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .tarjeta-uniqueSelection {
+        margin-bottom: 10%;
+    }
+
+    .titulo-nombre-card-uniqueSelection {
+        max-width: fit-content;
+    }
+    
+    .nombre-card-uniqueSelection {
+        max-width: fit-content;
+    }
+    
+    .titulo-fecha-card-uniqueSelection {
+        max-width: fit-content;
+        margin-top: 10%;
+    }
+    
+    .fecha-card-uniqueSelection {
+        max-width: fit-content;
+        margin-top: -5%;
+        margin-bottom: 10%;
+    }
+
+    .imagenes-tarjeta-uniqueSelections {
+        width: 100%;
+        min-height: 10rem !important;
+        max-height: 10rem !important;
+    }
+
+    .div-modifyAttributesUniqueSelection {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        border-radius: 13px;
+    }
+
+    .imagenes-tarjeta-uniqueSelections-update {
+        width: 100%;
+        min-height: 10rem !important;
+        max-height: 10rem !important;
+    }
+
+    .palabra-modifyAttributesUniqueSelection {
+        margin-left: 0%;
+        margin-top: 25%;
+    }
+
+    .paper-modifyAttributesUniqueSelection {
+        font-size: medium !important;
+    }
+    
+    .image-upload-modifyAttributesUniqueSelection {
+        position: relative;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 160px;
+        max-height: 160px;
+    }  
+    
+    .div-filename-modifyAttributesUniqueSelection {
+        width: 100% !important;
+        margin-top: 0em;
+        margin-left: 0em;
+    }
+
+    .filenameModifyAttributesUniqueSelection {
+        width: 100% !important;
+    }
+
+    .div-difficulty-modifyAttributesUniqueSelection {
+        margin-left: 0em;
+    }
+
+    .difficulty-modifyAttributesUniqueSelection {
+        font-size: small !important;
+    }
+
+    .div-points-modifyAttributesUniqueSelection {
+        margin-left: 0em;
+    }
+
+    .points-modifyAttributesUniqueSelection {
+    }
+
+    .titleModal-modifyAttributesUniqueSelection {
+        font-size: large;
+    }
+
+    .closeButtonModal-modifyAttributesUniqueSelection {
+        font-size: small;
+    }
+
+    .submitButtonModal-modifyAttributesUniqueSelection {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: small !important;
+    }
 }

@@ -13,6 +13,7 @@ const TaggedUniqueSelectionsUser = ({ usuario, seleccionesUnicasEtiquetadas, fun
                 <Button
                     variant="contained"
                     color="secondary"
+                    className="btnResetTagContent"
                     startIcon={<DeleteIcon />}
                     onClick={() => funcionResetear(usuario._id)}
                     disabled={cargandoResetearEtiquetasSeleccionesUnicas || seleccionesUnicasEtiquetadas.length === 0 ? true : false }
@@ -47,7 +48,7 @@ const TaggedUniqueSelectionsUser = ({ usuario, seleccionesUnicasEtiquetadas, fun
                     ?
                         seleccionesUnicasEtiquetadas.map((seleccionUnicaEtiquetada, index) =>
 
-                            <div key={index} className="col-sm-6 col-md-6" >
+                            <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                 
                                 <div className="card text-white tarjeta-tag-uniqueSelection" >
                                     <div className="fila">
@@ -63,9 +64,9 @@ const TaggedUniqueSelectionsUser = ({ usuario, seleccionesUnicasEtiquetadas, fun
                                     </div>
                                     <div className="card-body text-center">
                                         <h5 className="card-title titulo-nombre-card-uniqueSelection"> Palabra </h5>
-                                        <p className="card-text nombre-card-uniqueSelection"> {seleccionUnicaEtiquetada.uniqueSelection_id.associatedWord} </p>
-                                        <h5 className="card-title titulo-fecha-card-uniqueSelection"> Subido el </h5>
-                                        <p className="card-text fecha-card-uniqueSelection"> {seleccionUnicaEtiquetada.uniqueSelection_id.createdAt} </p>
+                                        <p className="card-text nombre-card-uniqueSelection"> {seleccionUnicaEtiquetada.uniqueSelection_id.keyWord} </p>
+                                        {/* <h5 className="card-title titulo-fecha-card-uniqueSelection"> Subido el </h5>
+                                        <p className="card-text fecha-card-uniqueSelection"> {seleccionUnicaEtiquetada.uniqueSelection_id.createdAt} </p> */}
                                     </div>
                                 </div>
                             </div>

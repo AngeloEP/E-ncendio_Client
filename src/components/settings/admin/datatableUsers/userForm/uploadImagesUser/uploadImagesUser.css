@@ -5,6 +5,7 @@
 .tarjeta {
     background-color: rgb(228, 226, 226);
     border-radius: 15px;
+    margin-bottom: 10%;
 }
 
 .titulo-nombre-card-image {
@@ -35,6 +36,7 @@
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 5%;
     background-color: rgb(206, 237, 255);
     color: rgb(21, 62, 117);
 }
@@ -45,4 +47,182 @@
     max-width: 100% !important;
     min-height: 15rem !important;
     max-height: 15rem !important;
+}
+
+.btnDeleteUserForm {
+    height: fit-content;
+    width: fit-content;
+}
+
+.btnHabInUserForm {
+    height: fit-content;
+    width: fit-content;
+}
+
+.btnHabilitar {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: #fff !important;
+}
+
+.btnInhabilitar {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    
+}
+
+.btnModifyUserForm {
+    height: fit-content;
+    width: fit-content;
+    color: #fff !important;
+    background-color: #1976d2 !important;
+}
+
+.submitButtonModal-modifyAttributesImage {
+    background-color: yellow !important;
+    height: 10% !important;
+    width: 25% !important;
+    margin-left: 2% !important;
+}
+
+.div-filename-modifyAttributesImage {
+    min-width: fit-content !important;
+    margin-left: 1em;
+}
+
+.filenameModifyAttributesImage {
+    width: 100% !important;
+}
+
+.div-difficulty-modifyAttributesImage {
+    width: fit-content !important;
+    height: fit-content !important;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.difficulty-modifyAttributesImage {
+    width: 100% !important;
+}
+
+.div-points-modifyAttributesImage {
+    width: fit-content !important;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.points-modifyAttributesImage {
+    width: 100% !important;
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .tarjeta {
+        margin-bottom: 10%;
+    }
+
+    .titulo-nombre-card-image {
+        max-width: fit-content;
+    }
+    
+    .nombre-card-image {
+        max-width: fit-content;
+    }
+    
+    .titulo-fecha-card-image {
+        max-width: fit-content;
+        margin-top: 10%;
+    }
+    
+    .fecha-card-image {
+        max-width: fit-content;
+        margin-top: -5%;
+        margin-bottom: 10%;
+    }
+    
+    .imagen-tarjeta {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 10rem !important;
+        max-height: 10rem !important;
+    }
+
+    .btnDeleteUserForm {
+        font-size: x-small !important;
+    }
+
+    .btnHabInUserForm {
+        margin-top: 5% !important;
+        font-size: x-small !important;
+    }
+
+    .btnModifyUserForm {
+        margin-top: 5% !important;
+        font-size: x-small !important;
+    }
+
+    .div-modifyAttributesImage {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        border-radius: 13px;
+    }
+    
+    .div-image-modifyAttributesImage {
+        width: 100%;
+    }
+    
+    .image-upload-modifyAttributesImage {
+        position: relative;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 160px;
+        max-height: 160px;
+    }  
+    
+    .div-filename-modifyAttributesImage {
+        width: 100% !important;
+        overflow-x: auto;
+        margin-top: 0em;
+        margin-left: 1em;
+    }
+
+    .filenameModifyAttributesImage {
+        width: 100% !important;
+    }
+
+    .div-difficulty-modifyAttributesImage {
+        width: fit-content !important;
+        height: fit-content !important;
+        margin-top: 1em;
+        margin-left: 1em;
+    }
+
+    .difficulty-modifyAttributesImage {
+        font-size: small !important;
+        width: 100% !important;
+    }
+
+    .div-points-modifyAttributesImage {
+        width: fit-content !important;
+        margin-top: 1em;
+        margin-left: 1em;
+    }
+
+    .points-modifyAttributesImage {
+        width: 100% !important;
+    }
+
+    .titleModal-modifyAttributesImage {
+        font-size: large;
+    }
+
+    .closeButtonModal-modifyAttributesImage {
+        font-size: small;
+    }
+
+    .submitButtonModal-modifyAttributesImage {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: small !important;
+    }
 }

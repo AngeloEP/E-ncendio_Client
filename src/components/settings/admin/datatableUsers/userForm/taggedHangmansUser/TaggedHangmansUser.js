@@ -13,7 +13,7 @@ const TaggedHangmansUser = ({ usuario, ahorcadosEtiquetados, funcionResetear, ca
                 <Button
                     variant="contained"
                     color="secondary"
-                    // style={{ width: "90%" }}
+                    className="btnResetTagContent"
                     startIcon={<DeleteIcon />}
                     onClick={() => funcionResetear(usuario._id)}
                     disabled={cargandoResetearEtiquetasAhorcados || ahorcadosEtiquetados.length === 0 ? true : false }
@@ -48,7 +48,7 @@ const TaggedHangmansUser = ({ usuario, ahorcadosEtiquetados, funcionResetear, ca
                     ?
                         ahorcadosEtiquetados.map((ahorcadoEtiquetado, index) =>
 
-                            <div key={index} className="col-sm-6 col-md-6" >
+                            <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                 
                                 <div className="card text-white tarjeta-tag-hangman" >
                                     <div className="fila">
@@ -70,8 +70,8 @@ const TaggedHangmansUser = ({ usuario, ahorcadosEtiquetados, funcionResetear, ca
                                     <div className="card-body text-center">
                                         <h5 className="card-title titulo-nombre-card-hangman"> Palabra </h5>
                                         <p className="card-text nombre-card-hangman"> {ahorcadoEtiquetado.hangman_id.associatedWord} </p>
-                                        <h5 className="card-title titulo-fecha-card-hangman"> Subido el </h5>
-                                        <p className="card-text fecha-card-hangman"> {ahorcadoEtiquetado.hangman_id.createdAt} </p>
+                                        {/* <h5 className="card-title titulo-fecha-card-hangman"> Subido el </h5>
+                                        <p className="card-text fecha-card-hangman"> {ahorcadoEtiquetado.hangman_id.createdAt} </p> */}
                                     </div>
                                 </div>
                             </div>

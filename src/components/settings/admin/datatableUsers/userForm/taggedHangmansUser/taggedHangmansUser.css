@@ -51,3 +51,17 @@
     min-height: 15rem !important;
     max-height: 15rem !important;
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .tarjeta-tag-hangman {
+        margin-bottom: 10%;
+    }
+
+    .titulo-nombre-card-tag-hangman {
+        max-width: fit-content;
+    }
+    
+    .nombre-card-tag-hangman {
+        max-width: fit-content;
+    }
+}

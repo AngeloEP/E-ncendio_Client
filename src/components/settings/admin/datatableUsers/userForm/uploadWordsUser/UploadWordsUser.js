@@ -89,7 +89,7 @@ const UploadWordsUser = ({ usuario,
                         ?
                             palabras.map((palabra, index) =>
 
-                                <div key={index} className="col-sm-3 col-md-4" >
+                                <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                     
                                     <div className="card text-white tarjeta-words" >
                                         <Paper className="card-img-top palabra-tarjeta" elevation={10} variant="outlined"  >
@@ -104,7 +104,7 @@ const UploadWordsUser = ({ usuario,
                                                 type="submit"
                                                 variant="contained"
                                                 color="secondary"
-                                                style={{height: "15%", width: "45%", marginLeft: "2%" }}
+                                                className="btnDeleteUserForm"
                                                 disabled={cargandoEliminarPalabraPorAdmin}
                                                 onClick={() => funcionEliminar(palabra._id)}
                                             >
@@ -135,13 +135,11 @@ const UploadWordsUser = ({ usuario,
                                             <Button
                                                 type="submit"
                                                 variant="contained"
-                                                style={palabra.Habilitada ?
-                                                        { backgroundColor: "#ffc107",
-                                                        borderColor: "#ffc107", height: "15%", width: "45%", marginLeft: "2%" }
-                                                        :
-                                                        { color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745",
-                                                            height: "15%", width: "45%", marginLeft: "2%" }
-                                                    }
+                                                className={palabra.Habilitada
+                                                    ?" btnHabInUserForm btnInhabilitar"
+                                                    :
+                                                    " btnHabInUserForm btnHabilitar"
+                                                }
                                                 disabled={cargandoHabilitarInhabilitarPalabra}
                                                 onClick={() => funcionHabilitarInhabilitar(palabra._id, !palabra.Habilitada)}
                                             >
@@ -170,11 +168,10 @@ const UploadWordsUser = ({ usuario,
                                                 }
                                             </Button>
                                             <Button
-                                                className="mt-2"
                                                 type="submit"
                                                 variant="contained"
                                                 color="primary"
-                                                style={{ backgroundColor: "#1976d2", color: "#fff", height: "15%", width: "100%" }}
+                                                className="btnModifyUserForm"
                                                 onClick={() => handleShow(palabra._id)}
                                             >
                                                 {
@@ -211,45 +208,45 @@ const UploadWordsUser = ({ usuario,
                     style={{ backgroundColor: "black" }}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Palabra  </Modal.Title>
+                        <Modal.Title className="titleModal-modifyAttributesWord" > Modificar Dificultad y Puntos  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
-                        <Container className="div-uploadWord-update" >
+                        <Container className="div-modifyAttributesWord" >
                             <Grid container component="main" >
-                                <Grid item xs={12} sm={8} md={12} elevation={6}>
+                                <Grid item xs={12} sm={12} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                                     <Grid container spacing={5} >
 
-                                        <Grid item xs={4} >
-                                            <div className="col palabra" >
+                                        <Grid item xs={6} >
+                                            <div className="col palabra-modifyAttributesWord" >
                                                 <Col>
-                                                    <Paper className="paper" elevation={10} variant="outlined"  >
+                                                    <Paper className="paper-modifyAttributesWord" elevation={10} variant="outlined"  >
                                                         {nameUpdate}
                                                     </Paper>
                                                 </Col>
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} >
-                                            <div className="div-name-update" >                        
+                                        <Grid item xs={6} >
+                                            <div className="div-name-modifyAttributesWord" >                        
                                                 <TextField
-                                                    style={{ width: "60%" }}
+                                                    className="filenameModifyAttributesWord"
                                                     value={nameUpdate}
                                                     disabled
                                                     name="nameUpdate"
                                                     variant="filled"
                                                     id="nameUpdate"
-                                                    label="Nombre de la palabra"
+                                                    label="Nombre palabra"
                                                 />
                                             </div>
 
-                                            <div className="div-difficulty-update" >                        
+                                            <div className="div-difficulty-modifyAttributesWord" >                        
                                                 <FormControl variant="outlined" >
                                                     <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
                                                     <Select
                                                         labelId="demo-simple-select-outlined-label"
-                                                        style={{ width: "15em" }}
+                                                        className="difficulty-modifyAttributesWord"
                                                         id="difficulty"
                                                         name="difficulty"
                                                         value={difficulty}
@@ -266,12 +263,12 @@ const UploadWordsUser = ({ usuario,
                                                 </FormControl>
                                             </div>
 
-                                            <div className="div-points-update" >
+                                            <div className="div-points-modifyAttributesWord" >
                                                 <TextField
-                                                    style={{ width: "60%" }}
+                                                    className="points-modifyAttributesWord"
                                                     variant="outlined"
                                                     id="points"
-                                                    label="Ingrese una cantidad de puntos asociada a esta palabra"
+                                                    label="Puntos"
                                                     name='points'
                                                     type='number'
                                                     value={points}
@@ -288,13 +285,13 @@ const UploadWordsUser = ({ usuario,
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-modifyAttributesWord" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-modifyAttributesWord"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarDificultadPuntosPalabraPorAdmin}
                         >
@@ -319,7 +316,7 @@ const UploadWordsUser = ({ usuario,
                                 </Grid>
                                     
                                 :
-                                "Modificar la Palabra"
+                                "Modificar atributos"
                             }
                         </Button>
                     </Modal.Footer>

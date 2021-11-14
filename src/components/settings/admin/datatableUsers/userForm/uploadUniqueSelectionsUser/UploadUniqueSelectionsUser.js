@@ -90,7 +90,7 @@ const UploadUniqueSelectionsUser = ({
                         ?
                             seleccionesUnicas.map((seleccionUnica, index) =>
 
-                                <div key={index} className="col-sm-6 col-md-6" >
+                                <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                     
                                     <div className="card text-white tarjeta-uniqueSelection" >
                                         <div className="fila">
@@ -113,7 +113,7 @@ const UploadUniqueSelectionsUser = ({
                                                 type="submit"
                                                 variant="contained"
                                                 color="secondary"
-                                                style={{height: "15%", width: "45%", marginLeft: "2%" }}
+                                                className="btnDeleteUserForm"
                                                 disabled={cargandoEliminarSeleccionUnicaPorAdmin}
                                                 onClick={() => funcionEliminar(seleccionUnica._id)}
                                             >
@@ -144,13 +144,10 @@ const UploadUniqueSelectionsUser = ({
                                             <Button
                                                 type="submit"
                                                 variant="contained"
-                                                style={seleccionUnica.Habilitada ?
-                                                        { backgroundColor: "#ffc107",
-                                                        borderColor: "#ffc107", height: "15%", width: "45%", marginLeft: "2%" }
-                                                        :
-                                                        { color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745",
-                                                            height: "15%", width: "45%", marginLeft: "2%" }
-                                                    }
+                                                className={seleccionUnica.Habilitada
+                                                    ? "btnHabInUserForm btnInhabilitar"
+                                                    : "btnHabInUserForm btnHabilitar"
+                                                }
                                                 disabled={cargandoHabilitarInhabilitarSeleccionUnica}
                                                 onClick={() => funcionHabilitarInhabilitar(seleccionUnica._id, !seleccionUnica.Habilitada)}
                                             >
@@ -179,11 +176,10 @@ const UploadUniqueSelectionsUser = ({
                                                 }
                                             </Button>
                                             <Button
-                                                className="mt-2"
                                                 type="submit"
                                                 variant="contained"
                                                 color="primary"
-                                                style={{ backgroundColor: "#1976d2", color: "#fff", height: "15%", width: "100%" }}
+                                                className="btnModifyUserForm"
                                                 onClick={() => handleShow(seleccionUnica._id)}
                                             >
                                                 {
@@ -220,14 +216,14 @@ const UploadUniqueSelectionsUser = ({
                     style={{ backgroundColor: "black" }}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Selección Única  </Modal.Title>
+                        <Modal.Title className="titleModal-modifyAttributesHangman" > Modificar Dificultad y Puntos  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
-                        <Container className="div-uploadUniqueSelection-update" >
-                            <Grid container component="main" >
-                                <Grid item xs={12} sm={8} md={12} elevation={6}>
+                        <Container className="div-modifyAttributesHangman" >
+                            <Grid container component="main" className="justify-content-center" >
+                                <Grid item xs={12} sm={12} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                                     <Grid container spacing={5} >
                                         <Grid item xs={6} >
@@ -240,15 +236,15 @@ const UploadUniqueSelectionsUser = ({
                                                 </div>
                                             </div>
                                             <div className="fila-update ml-2 mr-2">
-                                                    <img className="imagenes-tarjeta-uniqueSelections-update" src={pathImagesUpdate[2]} alt="" />
+                                                <img className="imagenes-tarjeta-uniqueSelections-update" src={pathImagesUpdate[2]} alt="" />
                                             </div>
                                         </Grid>
                                         <Grid item xs={6} >
                                             <div>
                                                 
-                                                <div className="div-filename-update" >                        
+                                                <div className="div-filename-modifyAttributesHangman" >                        
                                                     <TextField
-                                                        style={{ width: "60%" }}
+                                                        className="filenameModifyAttributesHangman"
                                                         value={keyWord}
                                                         name="keyWord"
                                                         variant="outlined"
@@ -258,12 +254,12 @@ const UploadUniqueSelectionsUser = ({
                                                     />
                                                 </div>
 
-                                                <div className="div-difficulty-uniqueSelection" >                        
+                                                <div className="div-difficulty-modifyAttributesHangman" >                        
                                                     <FormControl variant="outlined" >
                                                         <InputLabel id="demo-simple-select-outlined-label"> Dificultad </InputLabel>
                                                         <Select
                                                             labelId="demo-simple-select-outlined-label"
-                                                            style={{ width: "15em" }}
+                                                            className="difficulty-modifyAttributesHangman"
                                                             id="difficulty"
                                                             name="difficulty"
                                                             value={difficulty}
@@ -280,12 +276,12 @@ const UploadUniqueSelectionsUser = ({
                                                     </FormControl>
                                                 </div>
 
-                                                <div className="div-points-update" >
+                                                <div className="div-points-modifyAttributesHangman" >
                                                     <TextField
-                                                        style={{ width: "60%" }}
+                                                        className="points-modifyAttributesHangman"
                                                         variant="outlined"
                                                         id="points"
-                                                        label="Ingrese una cantidad de puntos asociada a esta S. Única"
+                                                        label="Puntos"
                                                         name='points'
                                                         type='number'
                                                         value={points}
@@ -304,13 +300,13 @@ const UploadUniqueSelectionsUser = ({
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-modifyAttributesHangman" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-modifyAttributesHangman"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarDificultadPuntosSeleccionUnicaPorAdmin}
                         >

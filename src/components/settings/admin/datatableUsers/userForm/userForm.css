@@ -6,7 +6,15 @@
     min-width: 100%;
 }
 
+.divFirstnameUserForm {
+    margin-top: 2%;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .div-isAdmin {
+    margin-top: 2%;
 }
 
 .select-isAdmin {
@@ -14,6 +22,7 @@
 }
 
 .div-isBlocked {
+    margin-top: 2%;
 }
 
 .select-isBlocked {
@@ -21,9 +30,10 @@
 }
 
 .div-button-edit {
-    margin-left: 40%;
     width: 100%;
+    margin-left: auto;
     margin-right: auto;
+    margin-top: 2%;
 }
 
 .show-details-user {
@@ -109,4 +119,89 @@
 }
 
 .num-tag-tips {
+}
+
+
+.btnUserForm {
+    background-color: yellow !important;
+    height: fit-content !important;
+    width: fit-content !important;
+}
+
+.containerInfoUserForm {
+    display: table !important;
+    justify-content: center;
+    text-align: center;
+}
+
+.navAppBarUserForm {
+    background-color: #1976d2 !important;
+    color: #fff !important;
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .containerInfoUserForm {
+        display: table !important;
+        justify-content: center;
+    }
+
+    .divFirstnameUserForm {
+        text-align: center;
+        margin-top: 5%;
+    }
+
+    .firstnameUserForm {
+        width: fit-content !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .div-isAdmin {
+        margin-top: 5%;
+        text-align: center;
+    }
+
+    .select-isAdmin {
+        min-width: 8em;
+        width: fit-content;
+    }
+
+    .div-isBlocked {
+        margin-top: 5%;
+
+        text-align: center;
+    }
+
+    .select-isBlocked {
+        min-width: 10em;
+        width: fit-content;
+    }
+
+    .div-button-edit {
+        width: fit-content !important;
+        height: fit-content !important;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5%;
+    }
+
+    .div-button-edit span {
+        font-size: smaller;
+    }
+
+    .show-details-user {
+        width: 100%;
+        height: 115px !important;
+        margin-left: 0%;
+        font-size: small;
+        overflow-x: scroll;
+    }
+
+    .details {
+        display: inline;
+    }
+
+    .navAppBarUserForm button span {
+        font-size: smaller !important;
+    }
 }

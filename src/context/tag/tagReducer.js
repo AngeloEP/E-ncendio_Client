@@ -86,6 +86,7 @@ const tagReducer = (state, action) => {
                 cargandoResetearEtiquetasPalabras: false,
                 cargandoResetearEtiquetasAhorcados: false,
                 cargandoResetearTipsVistos: false,
+                cargandoResetearEtiquetasSeleccionesUnicas: false,
             }
     
         case OBTENER_IMAGENES_ETIQUETADAS:

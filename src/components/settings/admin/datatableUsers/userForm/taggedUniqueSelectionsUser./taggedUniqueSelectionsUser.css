@@ -43,3 +43,24 @@
     background-color: rgb(206, 237, 255);
     color: rgb(21, 62, 117);
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .tarjeta-tag-uniqueSelection {
+        margin-bottom: 10%;
+    }
+
+    .titulo-nombre-card-tag-uniqueSelections {
+        max-width: fit-content;
+    }
+    
+    .nombre-card-tag-uniqueSelections {
+        max-width: fit-content;
+    }
+    
+    .imagenes-tarjeta-uniqueSelections {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 10rem !important;
+        max-height: 10rem !important;
+    }
+}

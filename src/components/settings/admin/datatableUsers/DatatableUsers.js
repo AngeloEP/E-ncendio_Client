@@ -184,7 +184,7 @@ const DatatableUsers = ({ users }) => {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-datatableUsers" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                     </Modal.Footer>

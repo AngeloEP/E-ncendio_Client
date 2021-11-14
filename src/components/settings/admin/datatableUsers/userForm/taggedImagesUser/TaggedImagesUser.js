@@ -14,7 +14,7 @@ const TaggedImagesUser = ({ usuario, imagenesEtiquetadas, funcionResetear, carga
                 <Button
                     variant="contained"
                     color="secondary"
-                    // style={{ width: "90%" }}
+                    className="btnResetTagContent"
                     startIcon={<DeleteIcon />}
                     onClick={() => funcionResetear(usuario._id)}
                     disabled={cargandoResetearEtiquetasImagenes || imagenesEtiquetadas.length === 0 ? true : false }
@@ -49,7 +49,7 @@ const TaggedImagesUser = ({ usuario, imagenesEtiquetadas, funcionResetear, carga
                     ?
                         imagenesEtiquetadas.map((imagenEtiquetada, index) =>
 
-                            <div key={index} className="col-sm-3 col-md-4" >
+                            <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                 
                                 <div className="card text-white tarjeta-tag-image" >
                                     <img className="card-img-top imagen-tarjeta-etiquetada" src={imagenEtiquetada.urlImagen} alt="" />

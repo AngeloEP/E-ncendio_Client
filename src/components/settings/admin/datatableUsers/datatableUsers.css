@@ -106,3 +106,13 @@
     overflow: auto;
     height: 100%;
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .email-user {
+        font-size: medium;
+    }
+
+    .closeButtonModal-datatableUsers {
+        font-size: small;
+    }
+}

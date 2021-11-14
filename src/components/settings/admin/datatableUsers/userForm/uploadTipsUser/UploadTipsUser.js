@@ -84,7 +84,7 @@ const UploadTipsUser = ({
                         ?
                             tips.map((tip, index) =>
 
-                                <div key={index} className="col-sm-3 col-md-4" >
+                                <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                     
                                     <div className="card text-white tarjeta-tips" >
                                         <img className="card-img-top imagen-tarjeta" src={tip.Imagen !== "" ? tip.Imagen : uploadImage} alt="" />
@@ -98,7 +98,7 @@ const UploadTipsUser = ({
                                                 type="submit"
                                                 variant="contained"
                                                 color="secondary"
-                                                style={{height: "15%", width: "45%", marginLeft: "2%" }}
+                                                className="btnDeleteUserForm"
                                                 disabled={cargandoEliminarTipPorAdmin}
                                                 onClick={() => funcionEliminar(tip._id)}
                                             >
@@ -129,13 +129,10 @@ const UploadTipsUser = ({
                                             <Button
                                                 type="submit"
                                                 variant="contained"
-                                                style={tip.Habilitada ?
-                                                        { backgroundColor: "#ffc107",
-                                                        borderColor: "#ffc107", height: "15%", width: "45%", marginLeft: "2%" }
-                                                        :
-                                                        { color: "#fff", backgroundColor: "#28a745", borderColor: "#28a745",
-                                                            height: "15%", width: "45%", marginLeft: "2%" }
-                                                    }
+                                                className={tip.Habilitada
+                                                    ? "btnHabInUserForm btnInhabilitar"
+                                                    : "btnHabInUserForm btnHabilitar"
+                                                }
                                                 disabled={cargandoHabilitarInhabilitarTip}
                                                 onClick={() => funcionHabilitarInhabilitar(tip._id, !tip.Habilitada)}
                                             >
@@ -164,11 +161,10 @@ const UploadTipsUser = ({
                                                 }
                                             </Button>
                                             <Button
-                                                className="mt-2"
                                                 type="submit"
                                                 variant="contained"
                                                 color="primary"
-                                                style={{ backgroundColor: "#1976d2", color: "#fff", height: "15%", width: "100%" }}
+                                                className="btnModifyUserForm"
                                                 onClick={() => handleShow(tip._id)}
                                             >
                                                 {
@@ -205,26 +201,25 @@ const UploadTipsUser = ({
                     style={{ backgroundColor: "black" }}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title> Modificar Tip  </Modal.Title>
+                        <Modal.Title className="titleModal-modifyAttributesTip" > Modificar Dificultad y Puntos  </Modal.Title>
                     </Modal.Header>
 
                                     <form  onSubmit={onSubmitUpdate}  >
                     <Modal.Body>
                         <Container className="div-uploadTip-update" >
-                            <Grid container component="main" >
-                                <Grid item xs={12} sm={8} md={12} elevation={6}>
+                            <Grid container component="main" className="justify-content-center" >
+                                <Grid item xs={12} sm={12} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                                     <Grid container spacing={5} >
-
-                                        <Grid item xs={4} >
-                                            <div className="div-image-update" >
-                                                <img className="img-fluid img-thumbnail image-upload-update" src={pathImageUpdate !== "" ? pathImageUpdate : uploadImage} alt="" />
+                                        <Grid item xs={6} >
+                                            <div className="div-image-modifyAttributesTip" >
+                                                <img className="img-fluid img-thumbnail image-upload-modifyAttributesTip" src={pathImageUpdate !== "" ? pathImageUpdate : uploadImage} alt="" />
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} >
-                                            <div className="div-tip-update-user" >                        
+                                        <Grid item xs={6} >
+                                            <div className="div-tip-modifyAttributesTip" >                        
                                                 <TextField
-                                                    style={{ width: "60%" }}
+                                                    className="tipModifyAttributesTip"
                                                     value={textUpdate}
                                                     disabled
                                                     name="textUpdate"
@@ -235,17 +230,17 @@ const UploadTipsUser = ({
                                             </div>
                                             <div className="col tip-modal-user" >
                                                 <Col>
-                                                    <Paper className="paper-tip" elevation={10} variant="outlined"  >
+                                                    <Paper className="paper-modifyAttributesTip" elevation={10} variant="outlined"  >
                                                         {textUpdate}
                                                     </Paper>
                                                 </Col>
                                             </div>
-                                            <div className="div-points-update" >
+                                            <div className="div-points-modifyAttributesTip" >
                                                 <TextField
-                                                    style={{ width: "60%" }}
+                                                    className="points-modifyAttributesTip"
                                                     variant="outlined"
                                                     id="points"
-                                                    label="Ingrese una cantidad de puntos asociada a este Tip"
+                                                    label="Points"
                                                     name='points'
                                                     type='number'
                                                     value={points}
@@ -262,13 +257,13 @@ const UploadTipsUser = ({
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ButtonBootstrap variant="secondary" onClick={handleClose}>
+                        <ButtonBootstrap className="closeButtonModal-modifyAttributesTip" variant="secondary" onClick={handleClose}>
                             Cerrar
                         </ButtonBootstrap>
                         <Button
                             type="submit"
                             variant="contained"
-                            style={{ backgroundColor: "yellow", height: "10%", width: "25%", marginLeft: "2%" }}
+                            className="submitButtonModal-modifyAttributesTip"
                             startIcon={<EditIcon />}
                             disabled={cargandoModificarDificultadPuntosTipPorAdmin}
                         >

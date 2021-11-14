@@ -5,6 +5,7 @@
 .tarjeta-words {
     background-color: rgb(228, 226, 226);
     border-radius: 15px;
+    margin-top: 5%;
 }
 
 .titulo-nombre-card-word {
@@ -62,4 +63,171 @@
 .palabra-tarjeta:hover {
     transition: 0.5s;
     border-color: blue !important;
+}
+
+.palabra-modifyAttributesWord {
+    position: relative;
+    margin-left: -5%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+.paper-modifyAttributesWord {
+    position: relative;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 7rem;
+    max-height: 7rem;
+
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid !important;
+    border-radius: 25 !important;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+    border-color: red !important;
+    color: rgb(75, 70, 70) !important;
+}
+
+.paper-modifyAttributesWord:hover {
+    transition: 0.5s;
+    border-color: blue !important;
+}
+
+.submitButtonModal-modifyAttributesWord {
+    background-color: yellow !important;
+    height: 10% !important;
+    width: 25% !important;
+    margin-left: 2% !important;
+}
+
+.div-filename-modifyAttributesWord {
+    min-width: fit-content !important;
+    margin-left: 1em;
+}
+
+.filenameModifyAttributesWord {
+    width: 100% !important;
+}
+
+.div-difficulty-modifyAttributesWord {
+    width: fit-content !important;
+    height: fit-content !important;
+    margin-top: 1em;
+    margin-left: 0em;
+}
+
+.difficulty-modifyAttributesWord {
+    width: 100% !important;
+}
+
+.div-points-modifyAttributesWord {
+    width: fit-content !important;
+    margin-top: 1em;
+    margin-left: 0em;
+}
+
+.points-modifyAttributesWord {
+    width: 100% !important;
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .tarjeta-words {
+        margin-bottom: 10%;
+    }
+
+    .titulo-nombre-card-word {
+        max-width: fit-content;
+    }
+    
+    .nombre-card-word {
+        max-width: fit-content;
+    }
+    
+    .titulo-fecha-card-word {
+        max-width: fit-content;
+        margin-top: 10%;
+    }
+    
+    .fecha-card-word {
+        max-width: fit-content;
+        margin-top: -5%;
+        margin-bottom: 10%;
+    }
+    
+    .palabra-tarjeta {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 5rem !important;
+        max-height: 5rem !important;
+        font-size: medium !important;
+        color: #000 !important;
+    }
+
+    .div-modifyAttributesWord {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        border-radius: 13px;
+    }
+
+    .palabra-modifyAttributesWord {
+        margin-left: 0%;
+        margin-top: 25%;
+    }
+
+    .paper-modifyAttributesWord {
+        font-size: medium !important;
+    }
+    
+    .image-upload-modifyAttributesWord {
+        position: relative;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 160px;
+        max-height: 160px;
+    }  
+    
+    .div-filename-modifyAttributesWord {
+        width: 100% !important;
+        overflow-x: auto;
+        margin-top: 0em;
+        margin-left: 1em;
+    }
+
+    .filenameModifyAttributesWord {
+        width: 100% !important;
+    }
+
+    .div-difficulty-modifyAttributesWord {
+        margin-left: 0em;
+    }
+
+    .difficulty-modifyAttributesWord {
+        font-size: small !important;
+    }
+
+    .div-points-modifyAttributesWord {
+        margin-left: 0em;
+    }
+
+    .points-modifyAttributesWord {
+    }
+
+    .titleModal-modifyAttributesWord {
+        font-size: large;
+    }
+
+    .closeButtonModal-modifyAttributesWord {
+        font-size: small;
+    }
+
+    .submitButtonModal-modifyAttributesWord {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: small !important;
+    }
 }

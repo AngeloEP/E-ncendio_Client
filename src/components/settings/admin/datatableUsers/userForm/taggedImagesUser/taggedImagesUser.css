@@ -51,3 +51,30 @@
     min-height: 15rem !important;
     max-height: 15rem !important;
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .tarjeta-tag-image {
+        margin-bottom: 10%;
+    }
+
+    .titulo-nombre-card-tag-image {
+        max-width: fit-content;
+    }
+    
+    .nombre-card-tag-image {
+        max-width: fit-content;
+    }
+    
+    .imagen-tarjeta-etiquetada {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 10rem !important;
+        max-height: 10rem !important;
+    }
+
+    .btnResetTagContent {
+        width: fit-content;
+        height: fit-content;
+        font-size: x-small !important;
+    }
+}

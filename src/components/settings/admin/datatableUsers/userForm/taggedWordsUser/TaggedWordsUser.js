@@ -21,7 +21,7 @@ const TaggedWordsUser = ({ usuario,
                 <Button
                     variant="contained"
                     color="secondary"
-                    // style={{ width: "90%" }}
+                    className="btnResetTagContent"
                     startIcon={<DeleteIcon />}
                     onClick={() => funcionResetear(usuario._id)}
                     disabled={cargandoResetearEtiquetasPalabras || palabrasEtiquetadas.length === 0 ? true : false }
@@ -59,7 +59,7 @@ const TaggedWordsUser = ({ usuario,
                             <>
                                 {palabrasEtiquetadas.map((palabraEtiquetada, index) =>
 
-                                    <div key={index} className="col-sm-3 col-md-4" >
+                                    <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                         
                                         <div className="card text-white tarjeta-tag-words" >
                                             <Paper className="card-img-top palabra-tarjeta-etiqueta" elevation={10} variant="outlined"  >
