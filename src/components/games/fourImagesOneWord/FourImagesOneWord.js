@@ -170,7 +170,7 @@ const FourImagesOneWord = ( props ) => {
     const generateButtons = () => {
         return "abcdefghijklmnopqrstuvwxyz".split("").map(letter => (
             <button
-                className='btn btn-lg btn-primary m-2'
+                className='btn btn-lg btn-primary m-2 btnCompleteHangman'
                 key={letter}
                 value={letter}
                 onClick={(e) => handleGuess(e)}
@@ -405,6 +405,10 @@ const FourImagesOneWord = ( props ) => {
                                 />
                             : null
                         }
+
+                        <div className="text-tagHangmans" >
+                            ¡Debes encontrar la palabra relacionada a las 4 imágenes antes de perder tus oportunidades!
+                        </div>
 
                         {
                             ahorcados.length !== 0 && answerRef.current !== ""

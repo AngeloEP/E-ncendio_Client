@@ -418,8 +418,8 @@
     }
 
     .Toastify__toast-container {
-        min-width: 260px !important;
-        max-width: 260px !important;
+        min-width: 265px !important;
+        max-width: 265px !important;
         min-height: 150px !important;
         max-height: 150px !important;
     }

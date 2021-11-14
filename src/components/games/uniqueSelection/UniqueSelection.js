@@ -319,19 +319,19 @@ const FourImagesOneWord = ( props ) => {
                                 ?
                                     <div className="UniqueSelection container">
                                         <Row className="three-images" >
-                                                <label className="mr-1" >
+                                                <label className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 labelAnotherImageUS" >
                                                     <input type="radio" name="imageSelectionRef" value="small"/>
-                                                    <img alt="" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_1 } onClick={ () => {setImageSelection("small")} } />
+                                                    <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_1 } onClick={ () => {setImageSelection("small")} } />
                                                 </label>
 
-                                                <label className="mr-1" >
+                                                <label className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 labelAnotherImageUS" >
                                                     <input type="radio" name="imageSelectionRef" value="big" />
-                                                    <img alt="" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_2 } onClick={ () => {setImageSelection("big")} } />
+                                                    <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_2 } onClick={ () => {setImageSelection("big")} } />
                                                 </label>
 
-                                                <label>
+                                                <label className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 labelOnlyImageUS" >
                                                     <input type="radio" name="imageSelectionRef" value="large" />
-                                                    <img alt="" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_3 } onClick={ () => {setImageSelection("large")} } />
+                                                    <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_3 } onClick={ () => {setImageSelection("large")} } />
                                                 </label>
                                         </Row>
                                         <Row className="div-keyWord mb-5" >

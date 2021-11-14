@@ -65,6 +65,14 @@
   -o-animation: animation .65s ease-in-out infinite alternate;
 }
 
+.labelAnotherImageUS {
+  text-align: -webkit-center;
+}
+
+.labelOnlyImageUS {
+  display: contents;
+}
+
 @keyframes animation
 {
 0% {text-shadow: 0 0 20px #fefcc9,
@@ -146,5 +154,47 @@
   [type=radio] + img {
     width: 250px;
     height: 250px;
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+  .three-images {
+    width: 100% !important;
+    margin-top: 5%;
+  }
+
+  .imagesUniqueSelectionGame {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 40vw;
+    max-height: 40vw;
+  }
+
+  [type=radio] + img {
+    width: 100% !important;
+    height: 200px !important;
+  }
+
+  .div-keyWord {
+  }
+  
+  .div-keyWord div p {
+    max-width: 70%;
+    font-size: large;
+  }
+  
+  .keyWord-game {
+    width: 70%;
+    font-size: large;
+  }
+  
+  .keyWord-game span {
+  }
+
+  .labelOnlyImageUS img {
+    min-width: 70%;
+    max-width: 70%;
+    min-height: 40vw;
+    max-height: 40vw;
   }
 }
