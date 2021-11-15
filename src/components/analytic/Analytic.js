@@ -159,9 +159,10 @@ const Analytic = () => {
             display: true,
             text: 'Uso de funcionalidades en porcentaje %'
         },
-        // radius: 200
-        // responsive: true,
-        // maintainAspectRatio: false,
+        
+        // radius: "40%",
+        responsive: true,
+        maintainAspectRatio: true,
     }
 
     const { cityImages,  } = queryImages
@@ -280,8 +281,8 @@ const Analytic = () => {
             <>
                 {/* IMÁGENES */}
                 <h3 className="title-images-distribution-analytics" > Distribución de categorías por imágenes </h3>
-                <Grid container direction="row" justify="center" alignItems="center" spacing={3} >
-                    <Grid item xs={3} container spacing={1} alignItems="flex-end">
+                <Grid container direction="row" spacing={0} className="divFiltersAnalytics" >
+                    <Grid item xs={6} container spacing={1} alignItems="flex-end" className="radioIsFireSES">
                         <Grid item>
                             <Typography variant="subtitle2" color="textPrimary" align="center" className="mt-1" >
                                 ¿Pertenece a FireSES?  <Whatshot />
@@ -307,8 +308,8 @@ const Analytic = () => {
                             </RadioGroup>
                         </Grid>
                     </Grid>
-                    <Grid item xs={2} >
-                        <FormControl variant="outlined" id="select-league" >
+                    <Grid item xs={6} >
+                        <FormControl variant="outlined" id="select-cityAnalytics" className="selectCity" >
                             <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label"
@@ -339,7 +340,7 @@ const Analytic = () => {
                         </FormControl>
                     </Grid>
                 </Grid>
-                <div className="container-fluid ml-2 mt-4 mr-2" >
+                <div className="container-fluid mt-4" >
                     <div className="row divCategories" >
                         { !cargandoDistribucionCategorias && distribucionCategoriasImagenes.length > 0
                         ?
@@ -397,19 +398,18 @@ const Analytic = () => {
                                         distribucionCategoriasImagenes.length !== 1
                                         ?
                                             distribucionCategoriasPorImagen.map((imagen, index) => 
-                                                <div key={index} className="col-3" >
+                                                <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                                     <div className="card text-white tarjeta-analytic-image" >
                                                         <img className="card-img-top imagen-tarjeta-analytic" src={imagen.image.imageUrl} alt="" />
                                                         <div className="card-body text-center">
                                                             <h5 className="card-title titulo-distribucion-card-analytic-image"> Distribución </h5>
                                                             <div className="card-text distribucion-card-analytic-image"> 
-                                                                <div className="row mb-2 justify-content-between" >
+                                                                <div className="row mb-2 divDistribucionCajasAnaliticas" >
                                                                     {imagen.categories.map((imagensita, indexImg) =>
                                                                         <Tooltip label={imagensita.name} key={indexImg} >
                                                                             <span className='boxDist blue'>    <span> {imagensita.count} </span> </span> 
                                                                         </Tooltip>
                                                                     )}
-                                                                    {/* classNames: green, red, orange, yellow, purple, aqua */}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -432,8 +432,8 @@ const Analytic = () => {
                 </div>
                 {/* PALABRAS */}
                 <h3 className="title-words-distribution-analytics" > Distribución de categorías por palabras </h3>
-                <Grid container direction="row" justify="center" alignItems="center" spacing={3} >
-                    <Grid item xs={3} container spacing={1} alignItems="flex-end">
+                <Grid container direction="row" spacing={0} className="divFiltersAnalytics" >
+                    <Grid item xs={6} container spacing={1} alignItems="flex-end" className="radioIsFireSES" >
                         <Grid item>
                             <Typography variant="subtitle2" color="textPrimary" align="center" className="mt-1" >
                                 ¿Pertenece a FireSES?  <Whatshot />
@@ -459,8 +459,8 @@ const Analytic = () => {
                             </RadioGroup>
                         </Grid>
                     </Grid>
-                    <Grid item xs={2} >
-                        <FormControl variant="outlined" id="select-league" >
+                    <Grid item xs={6} >
+                        <FormControl variant="outlined" id="select-cityAnalytics" className="selectCity" >
                             <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label"
@@ -491,7 +491,7 @@ const Analytic = () => {
                         </FormControl>
                     </Grid>
                 </Grid>
-                <div className="container-fluid ml-2 mt-5 mr-2" >
+                <div className="container-fluid mt-5" >
                     <div className="row divCategories" >
                         { !cargandoDistribucionCategoriasPalabras && distribucionCategoriasPalabras.length > 0
                         ?
@@ -549,7 +549,7 @@ const Analytic = () => {
                                         distribucionCategoriasPalabras.length !== 1
                                         ?
                                             distribucionCategoriasPorPalabra.map((palabra, index) => 
-                                                <div key={index} className="col-3" >
+                                                <div key={index} className="col-6 col-sm-6 col-md-6 col-lg-4" >
                                                     <div className="card text-white tarjeta-analytic-image" >
                                                         <Paper className="card-img-top palabra-tarjeta" elevation={10} variant="outlined"  >
                                                                 {palabra.word.name}
@@ -557,14 +557,13 @@ const Analytic = () => {
                                                         <div className="card-body text-center">
                                                             <h5 className="card-title titulo-distribucion-card-analytic-image"> Distribución </h5>
                                                             <div className="card-text distribucion-card-analytic-image"> 
-                                                                <div className="row mb-2 justify-content-between" >
+                                                                <div className="row mb-2 divDistribucionCajasAnaliticas" >
                                                                     {palabra.categories.map((palabrita, indexPal) =>
                                                                                
                                                                         <Tooltip label={palabrita.name} key={indexPal} >
                                                                             <span className='boxDist blue'>    <span> {palabrita.count} </span> </span> 
                                                                         </Tooltip>
                                                                     )}
-                                                                    {/* classNames: green, red, orange, yellow, purple, aqua */}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -587,8 +586,8 @@ const Analytic = () => {
                 
                 </div>
                 <h3 className="title-words-distribution-analytics" > Distribución de uso de las funcionalidades </h3>
-                <Grid container direction="row" justify="center" alignItems="center" spacing={3} >
-                    <Grid item xs={3} container spacing={1} alignItems="flex-end">
+                <Grid container direction="row" spacing={0} className="divFiltersAnalytics" >
+                    <Grid item xs={6} container spacing={1} alignItems="flex-end" className="radioIsFireSES">
                         <Grid item>
                             <Typography variant="subtitle2" color="textPrimary" align="center" className="mt-1" >
                                 ¿Pertenece a FireSES?  <Whatshot />
@@ -614,8 +613,8 @@ const Analytic = () => {
                             </RadioGroup>
                         </Grid>
                     </Grid>
-                    <Grid item xs={2} >
-                        <FormControl variant="outlined" id="select-league" >
+                    <Grid item xs={6} >
+                        <FormControl variant="outlined" id="select-cityAnalytics" className="selectCity" >
                             <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label"
@@ -651,8 +650,8 @@ const Analytic = () => {
                     ?
                         distribucionUsoFuncionalidades.length !== 0
                         ?
-                            <Grid item >
-                                <Doughnut data={dataDoughnut} options={optionsDoughnut} width={600} />
+                            <Grid className="graficoDistribucionFuncionalidades" >
+                                <Doughnut data={dataDoughnut} options={optionsDoughnut}  />
                             </Grid>
                         :
                                 <h3 className="withoutCategory mt-5" > ¡No se encontraron resultados!  </h3>

@@ -170,6 +170,18 @@
     margin-bottom: 2em;
 }
 
+.radioIsFireSES {
+    justify-content: end;
+}
+
+.selectCity {
+    min-width: 7em !important;
+}
+
+.divFiltersAnalytics {
+    text-align: center;
+}
+
 @media only screen and (max-width: 1376px){
     .analytics-title{ 
         font-size: 31px;
@@ -202,5 +214,66 @@
     
     .title-words-distribution-analytics{
         font-size: 22px;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px){
+    .title-images-distribution-analytics {
+        font-size: medium;
+    }
+
+    .title-images-distribution-analytics::after {
+        width: 35%;
+        height: 7%;
+    }
+
+    .divCategories {
+        width: 100%;
+        overflow: auto;
+    }
+
+    .divCategories .chakra-radio-group span {
+        font-size: x-small !important;
+    }
+
+    .title-words-distribution-analytics {
+        font-size: medium;
+    }
+
+    .title-words-distribution-analytics::after {
+        width: 35%;
+        height: 7%;
+    }
+
+    .withoutCategory {
+        font-size: medium;
+    }
+
+    .radioIsFireSES {
+        display: block !important;
+    }
+
+    .radioIsFireSES h6 {
+        font-size: 2vw;
+    }
+
+    .radioIsFireSES span {
+        font-size: x-small;
+    }
+
+    .divDistribucionCajasAnaliticas {
+        display: contents;
+        justify-content: center;
+    }
+
+    .boxDist {
+        width: 5vw;
+        height: 5vw !important;
+        font-weight: 700;
+        font-size: x-small !important;
+    }
+
+    .graficoDistribucionFuncionalidades canvas {
+        font-size: small !important;
     }
 }
