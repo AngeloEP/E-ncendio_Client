@@ -188,6 +188,10 @@
     font-size: 1.5vw;
 }
 
+.gridSelectCity {
+    text-align: left !important;
+}
+
 .selectCity {
     text-align: left !important;
     margin-left: 5vw !important;
@@ -263,6 +267,14 @@
 
     .withoutCategory {
         font-size: medium;
+    }
+
+    .gridSelectCity {
+        text-align: center !important;
+    }
+
+    .divFiltersAnalytics {
+        text-align: right !important;
     }
 
     .radioIsFireSES {

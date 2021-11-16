@@ -308,7 +308,7 @@ const Analytic = () => {
                             </RadioGroup>
                         </Grid>
                     </Grid>
-                    <Grid item xs={6} className="text-left" >
+                    <Grid item xs={6} className="gridSelectCity" >
                         <FormControl variant="outlined" id="select-cityAnalytics" className="selectCity" >
                             <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
                             <Select
@@ -464,7 +464,7 @@ const Analytic = () => {
                             </RadioGroup>
                         </Grid>
                     </Grid>
-                    <Grid item xs={6} className="text-left" >
+                    <Grid item xs={6} className="gridSelectCity" >
                         <FormControl variant="outlined" id="select-cityAnalytics" className="selectCity" >
                             <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
                             <Select
@@ -623,7 +623,7 @@ const Analytic = () => {
                             </RadioGroup>
                         </Grid>
                     </Grid>
-                    <Grid item xs={6} className="text-left" >
+                    <Grid item xs={6} className="gridSelectCity" >
                         <FormControl variant="outlined" id="select-cityAnalytics" className="selectCity" >
                             <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
                             <Select
