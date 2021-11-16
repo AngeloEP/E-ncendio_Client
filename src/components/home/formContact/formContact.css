@@ -1,26 +1,79 @@
 .emailContact {
-    left: 50%;
+    width: 25vw !important;
     position: relative;
 }
 
 .subjectContact {
-    left: 50%;
+    width: 25vw !important;
     position: relative;
 }
 
+.divGeneralMessageContact {
+    text-align: -webkit-center;
+}
+
 .messageContact {
-    margin-left: 50%;
-    position: relative;
-    min-width: 100%;
+    width: 25vw !important;
+}
+
+.messageContact .form-control {
+    display: initial !important;
+}
+
+.divGeneralButtonContact {
+    text-align: -webkit-center;
 }
 
 .buttonContact {
     position: relative;
-    margin-left: 50%;
+    width: 25vw !important;
 }
 
 .formularioContacto {
 
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .emailContact {
+        left: 0% !important;
+        width: fit-content !important;
+    }
+    
+    .emailContact label {
+        font-size: 1.2vw;
+    }
+
+    .subjectContact {
+        left: 0% !important;
+        width: fit-content !important;
+    }
+
+    .subjectContact label {
+        font-size: 1.2vw !important;
+    }
+
+    .messageContact {
+        margin-left: 0%;
+    }
+    
+    .messageContact .form-control {
+        display: initial;
+    }
+
+    .messageContact textarea {
+        width: fit-content !important;
+        font-size: 1.2vw;
+        text-align: left;
+    }
+    
+    .buttonContact {
+        margin-right: 0% !important;
+        margin-left: 0% !important;
+    }
+
+    .formularioContacto {
+        position: relative !important;
+    }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px){
@@ -44,17 +97,20 @@
     
     .messageContact {
         left: 0;
-        margin-left: 5% !important;
+        margin-left: 0% !important;
+    }
+
+    .messageContact .form-control{
+        display: initial;
     }
 
     .messageContact textarea {
-        width: 80% !important;
+        width: 30vw !important;
         font-size: smaller;
         text-align: left;
     }
     
     .buttonContact {
-        margin-left: 0% !important;
     }
 
     .formularioContacto {

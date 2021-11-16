@@ -232,63 +232,133 @@ h2.section-title::after {
     text-transform: uppercase;
 }
 
-
-@media only screen and (max-width: 1376px){
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .slides-carousel {
         width: 100%;
-        height: 550px;
-    }
-
-    .carousel-title {
-        font-size: larger;
-    }
-
-    .carousel-subtitle {
-        font-size: medium;
-    }
-
-    .card-icons {
-        width: 36px;
-        height: 36px;
+        height: 50vh;
     }
 
     .card-header {
-        font-size: larger;
+        font-size: 1.7vw;
     }
 
     .card-title {
-        font-size: large;
+        font-size: 1.4vw;
     }
 
     .card-text {
-        font-size: medium;
-    }
-
-    .card-first {
-        margin-top: 2.5em;
-        width: 14rem;
-        text-align: center;
-        margin-left: 40px;
+        font-size: 1.3vw;
     }
     
     .card-other {
         margin-top: 2.5em;
-        width: 14rem;
         text-align: center;
-        margin-left: 2.5em;
+        margin-left: 1em;
     }
 
-    .section-title {
-        font-size: x-large;
+    .cardBody {
+        min-height: fit-content !important;
     }
 
+    .section-title{
+        font-size: 2.4vw;
+        font-weight: 700;
+        top: 2% ;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+
+    .parrafo-home {
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: 1.45vw;
+        text-align: justify;
+    }
+
+    .ul-home {
+        margin-top: 4% !important;
+        padding-left: .5em;
+    }
+    .li-home {
+        padding-left: 0.2em;
+        margin-top: 1.2%;
+        grid-template-columns: 10px auto;
+        justify-content: flex-start !important;
+        font-size: 1.45vw;
+    }
+    
     .about-home-title {
-        font-size: x-large;
+        font-size: 2vw;
+    }
+    
+    h2.section-title::after {
+        width: 25%;
+        height: 5%;
+        left: 37.5%;
     }
 
     .home-title{
-        font-size: 31px;
+        font-size: 3.5vw;
         margin-bottom: 0%;
+    }
+
+    .text-about {
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+        text-align: justify;
+        font-size: 1.45vw !important;
+    }
+
+    .contactUsHome {
+        width: 100%;
+        height: 70%;
+    }
+
+    .formContact {
+        margin-top: 0%;
+    }
+
+    .profileImageCard {
+        width: 10vw !important;
+        height: 10vh !important;
+    }
+    
+    .rankImageCard {
+        width: 10vw !important;
+        height: 10vh !important;
+        transform: scale(1.4);
+        margin-left: 40%;
+    }
+    
+    .gamesImageCard {
+        width: 10vw !important;
+        height: 10vh !important;
+        transform: scale(1.5);
+    }
+    
+    .contentImageCard {
+        width: 10vw !important;
+        height: 10vh !important;
+    }
+    
+    .aboutImageCard {
+        width: 10vw !important;
+        height: 10vh !important;
+        transform: scale(1.15);
+    }
+    
+    .helpImageCard {
+        width: 10vw !important;
+        height: 10vh !important;
+        transform: scale(1.4);
+        margin-left: 35%;
+    }
+    
+    .buyImageCard {
+        width: 10vw !important;
+        height: 10vh !important;
+        transform: scale(1.6);
+        margin-left: 33%;
     }
 }
 
@@ -454,7 +524,7 @@ h2.section-title::after {
         width: 40% !important;
         height: 20% !important;
         transform: scale(1.4);
-        margin-left: 40%;
+        margin-left: 35%;
     }
     
     .buyImageCard {

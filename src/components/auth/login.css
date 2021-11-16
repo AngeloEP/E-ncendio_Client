@@ -147,15 +147,14 @@
     }
 }
 
-@media only screen and (min-width: 360px) and (max-width: 768px){
+@media only screen and (min-width: 360px) and (max-width: 768px) and (orientation: portrait){
     .div-divsito {
-        
         width: 90%;
         margin: auto;
-        margin-top: 20%;
+        margin-top: 9vh;
         padding: 15px 25px 5px 15px;
         border-radius: 15px;
-        min-height: 100% !important;
+        min-height: calc(100% - 6vh)  !important;
     }
     .avatar-title {
     }
@@ -176,7 +175,8 @@
     }
     
     .divlogin {
-        height: 100vh;
+        height: 100vh !important;
+        display: flow-root;
     }
     
     .img-login {

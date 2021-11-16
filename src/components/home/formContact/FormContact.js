@@ -69,8 +69,8 @@ const FormContact = () => {
     return (
         <form id="contact-form" onSubmit={handleSubmit} className="formularioContacto" >
             { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-            <div className="col-md-4 col-lg-5 col-xl-7">
-                <div className="form-group">
+            <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group text-center">
                     <TextField
                         className="emailContact"
                         id="email"
@@ -85,8 +85,8 @@ const FormContact = () => {
                 </div>
             </div>
 
-            <div className="col-md-4 col-lg-5 col-xl-7">
-                <div className="form-group">
+            <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group text-center">
                     <TextField
                         className="subjectContact"
                         id="subject"
@@ -101,8 +101,8 @@ const FormContact = () => {
                 </div>
             </div>
 
-            <div className="col-md-4 col-lg-5 col-xl-7" >
-                <div className="form-group messageContact">
+            <div className="col-12 col-md-12 col-lg-12 col-xl-12 divGeneralMessageContact" >
+                <div className="form-group text-center messageContact">
                     <TextareaAutosize 
                         id="message"
                         name="message"
@@ -115,7 +115,7 @@ const FormContact = () => {
                 </div>
             </div>
             
-            <div className="col-md-4 col-lg-5 col-xl-7" >
+            <div className="col-md-12 col-lg-12 col-xl-12 divGeneralButtonContact" >
 
                 <div className="container buttonContact" style={{
                     display: "flex",
