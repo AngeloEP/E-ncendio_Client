@@ -308,7 +308,7 @@ const Analytic = () => {
                             </RadioGroup>
                         </Grid>
                     </Grid>
-                    <Grid item xs={6} >
+                    <Grid item xs={6} className="text-left" >
                         <FormControl variant="outlined" id="select-cityAnalytics" className="selectCity" >
                             <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
                             <Select
@@ -407,7 +407,12 @@ const Analytic = () => {
                                                                 <div className="row mb-2 divDistribucionCajasAnaliticas" >
                                                                     {imagen.categories.map((imagensita, indexImg) =>
                                                                         <Tooltip label={imagensita.name} key={indexImg} >
-                                                                            <span className='boxDist blue'>    <span> {imagensita.count} </span> </span> 
+                                                                            <span className='boxDist blue'>
+                                                                                <span> {imagensita.count} </span>
+                                                                                <div className="nameBoxAnalytic" >
+                                                                                    {imagensita.name.substr(0,2)}    
+                                                                                </div>
+                                                                            </span> 
                                                                         </Tooltip>
                                                                     )}
                                                                 </div>
@@ -459,7 +464,7 @@ const Analytic = () => {
                             </RadioGroup>
                         </Grid>
                     </Grid>
-                    <Grid item xs={6} >
+                    <Grid item xs={6} className="text-left" >
                         <FormControl variant="outlined" id="select-cityAnalytics" className="selectCity" >
                             <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
                             <Select
@@ -561,7 +566,12 @@ const Analytic = () => {
                                                                     {palabra.categories.map((palabrita, indexPal) =>
                                                                                
                                                                         <Tooltip label={palabrita.name} key={indexPal} >
-                                                                            <span className='boxDist blue'>    <span> {palabrita.count} </span> </span> 
+                                                                            <span className='boxDist blue'>
+                                                                                <span> {palabrita.count} </span>
+                                                                                <div className="nameBoxAnalytic" >
+                                                                                    {palabrita.name.substr(0,2)}    
+                                                                                </div>
+                                                                            </span> 
                                                                         </Tooltip>
                                                                     )}
                                                                 </div>
@@ -613,7 +623,7 @@ const Analytic = () => {
                             </RadioGroup>
                         </Grid>
                     </Grid>
-                    <Grid item xs={6} >
+                    <Grid item xs={6} className="text-left" >
                         <FormControl variant="outlined" id="select-cityAnalytics" className="selectCity" >
                             <InputLabel id="demo-simple-select-outlined-label"> Ciudad </InputLabel>
                             <Select

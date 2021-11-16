@@ -48,6 +48,7 @@
 .tarjeta-analytic-image {
     background-color: rgb(228, 226, 226);
     border-radius: 15px;
+    margin-bottom: 7%;
 }
 
 .imagen-tarjeta-analytic {
@@ -73,6 +74,11 @@
     margin-right: auto;
 }
 
+.divDistribucionCajasAnaliticas {
+    display: contents;
+    justify-content: center;
+}
+
 .box {
     float: left;
     height: 17px;
@@ -83,7 +89,7 @@
 }
 
 .boxDist {
-    display: inline-block;
+    display: inline-table;
     width: 3em;
     height: 3em;
     border: 1px solid black !important;
@@ -95,6 +101,10 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 20%;
+}
+
+.nameBoxAnalytic {
+
 }
 
 .red {background-color: red; color: white; }
@@ -171,10 +181,16 @@
 }
 
 .radioIsFireSES {
-    justify-content: end;
+    justify-content: end !important;
+}
+
+.radioIsFireSES h6 {
+    font-size: 1.5vw;
 }
 
 .selectCity {
+    text-align: left !important;
+    margin-left: 5vw !important;
     min-width: 7em !important;
 }
 
@@ -259,6 +275,20 @@
 
     .radioIsFireSES span {
         font-size: x-small;
+    }
+
+    .imagen-tarjeta-analytic {
+        min-height: 12rem !important;
+        max-height: 12rem !important;
+    }
+    
+    .distribucion-card-analytic-image {
+        min-width: 100%;
+    }
+    
+    .titulo-distribucion-card-analytic-image {
+        font-size: 3vw;
+        max-width: fit-content;
     }
 
     .divDistribucionCajasAnaliticas {
