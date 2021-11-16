@@ -91,4 +91,15 @@
     .infoUserAndExitButton {
         justify-content: space-evenly;
     }
+
+    .button-tasks {
+        font-size: small !important;
+        height: 30px !important;
+    }
+    .triangle-left {
+        right: 123px;
+        border-top: 15px solid transparent;
+        border-right: 30px solid #319795;
+        border-bottom: 15px solid transparent;
+    }
 }
