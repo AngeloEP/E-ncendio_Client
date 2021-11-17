@@ -182,8 +182,7 @@
     background-color: #8BA1B1 !important;
     border-color: #8BA1B1 !important;
 }
-
-@media only screen and (max-width: 1376px){
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .title-store{
         font-size: 25px;
     }
@@ -225,6 +224,15 @@
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px){
+    .settings-title{
+        font-size: 4vw !important;
+        margin-bottom: 0%;
+    }
+
+    .date-settings {
+        font-size: 3vw !important;
+    }
+
     .title-frame-section-store {
         font-size: large;
         font-weight: 700;

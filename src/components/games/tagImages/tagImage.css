@@ -285,7 +285,7 @@
     background: rgba(0, 0, 0, 0.6);
 }
 
-@media only screen and (max-width: 1376px){
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .rowTitle {
         width: 100%;
     }
@@ -313,10 +313,10 @@
         margin-left: 18% !important;
     }
     
-    .bottomCenter {
-        
+    .text-tagImages {
+        font-size: 1.8vw;
     }
-    
+
     .backgroundGif {
         height: 85vh;
         padding-left: 0px;

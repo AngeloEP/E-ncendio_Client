@@ -106,7 +106,7 @@
     }
 }
 
-@media only screen and (max-width: 1376px){
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .title-div {
         width: 70%;
         height: 15vh;
@@ -127,6 +127,57 @@
         width: 100%;
         display: grid;
         align-items: center;
+    }
+
+    .filters-rank {
+        margin-top: 2em !important;
+    }
+
+    .nameFilter {
+        min-width: 60% !important;
+        justify-content: space-evenly;
+    }
+    
+    .accountIcon {
+        text-align: left ;
+    }
+
+    #starIcon {
+        margin-top: 0px;
+    }
+
+    #ageIcon {
+        position: relative;
+    }
+
+    .gridAgeFilter {
+        min-width: 50% !important;
+        justify-content: space-evenly;
+    }
+
+    #select-league {
+        position: relative;
+        margin-top: 0%;
+    }
+
+    .gridLeagueFilter {
+        min-width: 40% !important;
+    }
+
+    .gridPointsFilter {
+        justify-content: space-evenly;
+        min-width: 50% !important;
+    }
+
+    .table-rank {
+        margin-top: 1em;
+        margin-bottom: 5em;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .mainDivRank {
+        width: 90%;
     }
 }
 
@@ -180,9 +231,5 @@
         margin-bottom: 5em;
         border-radius: 5px;
         width: 100%;
-    }
-
-    .mainDivRank {
-        width: 90%;
     }
 }

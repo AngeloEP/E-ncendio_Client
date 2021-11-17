@@ -183,7 +183,7 @@
     margin-top: 1em;
 }
 
-@media only screen and (max-width: 1376px){
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .rowTitle {
         position: relative;
         width: 100%;
@@ -200,6 +200,10 @@
         width: 70%;
         height: 12%;
         background-color: #e6e8ed;
+    }
+
+    .text-tagWords {
+        font-size: 1.8vw;
     }
     
     .palabra {

@@ -202,7 +202,7 @@
     text-align: center;
 }
 
-@media only screen and (max-width: 1376px){
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .analytics-title{ 
         font-size: 31px;
         margin-bottom: 0%;
@@ -234,6 +234,11 @@
     
     .title-words-distribution-analytics{
         font-size: 22px;
+    }
+    
+    .divCategories {
+        width: 100%;
+        overflow: auto;
     }
 }
 

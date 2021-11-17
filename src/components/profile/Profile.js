@@ -159,10 +159,10 @@ const Profile = ( props ) => {
                                 }
                             >
                                 <div className="row">
-                                    <div className="col-sm-6 col-log-12 col-xl-8 textBtnProfile">
+                                    <div className="col-6 col-sm-6 col-log-6 col-xl-6 textBtnProfile">
                                             Editar Perfil
                                     </div>
-                                    <div className="col-sm-6 col-log-12 col-xl-4">
+                                    <div className="col-6 col-sm-6 col-log-6 col-xl-6">
                                         <FaEdit className="iconoEditar"/>
                                     </div>
                                 </div>

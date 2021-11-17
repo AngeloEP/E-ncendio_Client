@@ -432,8 +432,8 @@ const EditProfile = ( props ) => {
                                                 <MenuItem value="">
                                                     <em>Ninguno</em>
                                                 </MenuItem>
-                                                { allCities.map( (city) =>
-                                                    <MenuItem value={city}> {city} </MenuItem>
+                                                { allCities.map( (city, indexCity) =>
+                                                    <MenuItem key={indexCity} value={city}> {city} </MenuItem>
                                                 )}
                                                 </Select>
                                             </FormControl>

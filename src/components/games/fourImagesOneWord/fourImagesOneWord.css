@@ -115,7 +115,7 @@
 }
 
 
-@media only screen and (max-width: 1376px) {
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .rowTitle {
         width: 100%;
     }
@@ -129,6 +129,10 @@
         width: 70%;
         height: 12%;
         background-color: #e6e8ed;
+    }
+
+    .text-tagHangmans {
+        font-size: 1.8vw;
     }
 
     .backgroundGif {
@@ -147,10 +151,10 @@
     }
 
     .imagesToTag {
-        min-width: 250px;
-        max-width: 250px;
-        min-height: 250px;
-        max-height: 250px;
+        min-width: 18vw;
+        max-width: 18vw;
+        min-height: 18vh;
+        max-height: 18vh;
     }
 
     .final-text {

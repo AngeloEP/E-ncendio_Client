@@ -8,152 +8,33 @@ body {
 }
 
 .padding {
-    padding: 7rem !important
+    padding: 0rem !important
 }
 
-/* .user-card-full {
-    overflow: hidden
-} */
-
-/* .card {
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 15px 0 rgba(69, 90, 100, 0.08);
-    box-shadow: 0 1px 15px 0 rgba(69, 90, 100, 0.08);
-    border: none;
-    margin-bottom: 30px
-} */
-
-/* .m-r-0 {
-    margin-right: 0px
-}
-
-.m-l-0 {
-    margin-left: 0px
-}
-
-.user-card-full .user-profile {
-    border-radius: 5px 0 0 5px;
-    min-height: 100% !important;
-}
-
-.bg-c-lite-green {
-    background-color: #05e8ba;
-    background-image: linear-gradient(315deg, #05e8ba 0%, #087ee1 74%);
-}
-
-.user-profile {
-    padding: 20px 0
-}
-
-.card-block {
-    padding: 1.25rem;
+.divEditBtn {
+    position: relative;
     text-align: center;
 }
 
-.m-b-25 {
-    margin-bottom: 25px
-}
-
-.img-radius {
-    min-width: 300px;
-    max-width: 300px;
-    min-height: 180px;
-    max-height: 180px;
-    border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-h6 {
-    font-size: 14px
-}
-
-.card .card-block p {
-    line-height: 25px
-} */
-
-
-
-/* .card-block {
-    padding: 1.25rem
-}
-
-.b-b-default {
-    border-bottom: 1px solid #e0e0e0
-}
-
-.m-b-20 {
-    margin-bottom: 20px
-}
-
-.p-b-5 {
-    padding-bottom: 5px !important
-}
-
-.card .card-block p {
-    line-height: 25px
-}
-
-.m-b-10 {
-    margin-bottom: 10px
-}
-
-.text-muted {
-    color: #919aa3 !important
-}
-
-.b-b-default {
-    border-bottom: 1px solid #e0e0e0
-}
-
-.f-w-600 {
-    font-weight: 600
-}
-
-.m-b-20 {
-    margin-bottom: 20px
-}
-
-.m-t-40 {
-    margin-top: 20px
-}
-
-.p-b-5 {
-    padding-bottom: 5px !important
-}
-
-.m-b-10 {
-    margin-bottom: 10px
-}
-
-.m-t-40 {
-    margin-top: 20px
-}
-
-.user-card-full .social-link li {
-    display: inline-block
-}
-
-.user-card-full .social-link li a {
-    font-size: 20px;
-    margin: 0 10px 0 0;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out
-} */
-
 .iconoEditar {
     margin-left: 0em;
-    padding-bottom: 0.5em;
+    padding-bottom: 0.0em;
     width: 30px;
     height: 30px;
     color: #fff !important;
 }
 
+.divEditBtn {
+    margin-top: 2.9%;
+}
+
 .profile-edit-btn{
+    position: relative;
     border: 0;
-    border-radius: 0.7rem;
-    width: 50%;
-    padding: 1.5%;
+    font-size: 1vw;
+    border-radius: 0.4rem;
+    width: 70%;
+    height: fit-content;
     font-weight: 400;
     background-color: #378b29;
     color: #fff;
@@ -259,7 +140,44 @@ h6 {
     text-transform: uppercase;
 }
 
-@media only screen and (max-width: 1376px){
+.profile-work p{
+    font-size: 1.2vw;
+    font-weight: 600;
+    margin-top: 1%;
+}
+.profile-work div{
+    text-decoration: none;
+    font-weight: 600;
+    font-size: .85vw;
+}
+
+.profile-tab .tab-content{
+    text-align: center !important;
+}
+
+.profile-tab p{
+    font-size: 1.1vw;
+    font-weight: 600;
+    margin-bottom: 3%;
+    margin-top: -2%;
+    color: #0062cc;
+}
+
+.profile-head h5{
+    font-size: 1.4vw;
+    color: #333;
+}
+
+.profile-head h6{
+    font-size: 1.2vw;
+    color: #0062cc;
+}
+
+.profile-tab nav {
+    font-size: calc(1vw + .35vh);
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .user-card-full .user-profile {
         min-height: 100% !important;
     }
@@ -271,129 +189,117 @@ h6 {
         max-height: 150px;
     }
 
-    .iconoEditar {
-        margin-left: 0.5em;
-        width: 25px;
-        height: 25px;
-    }
-
-    .profile-edit-btn{
-        width: 55%;
-        padding: 2%;
-        font-weight: 500;
-    }
-
-    .disableBtn{
-        width: 70%;
-        font-weight: 700;
-    }
-
-    h6 {
-        font-size: 12px
-    }
-    p {
-            font-size: 12px
-    }
-
-    .div-imageUser-profile {
-        width: 32%;
-        min-height: 60px;
-    }
-
     .profile-title{ 
         font-size: 31px;
         margin-bottom: 0%;
     }
-}
 
-/* NEW */
-.emp-profile{
-    padding: 3%;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    border-radius: .5rem;
-    background: #fff;
-    box-shadow: 0 1px 15px 0 rgba(69, 90, 100, 0.08);
-}
-.profile-img {
-    text-align: center;
-}
-.profile-img img{
-    width: 70%;
-    height: 100%;
-}
-.profile-img .file {
-    position: relative;
-    overflow: hidden;
-    margin-top: -20%;
-    width: 70%;
-    border: none;
-    border-radius: 0;
-    font-size: 15px;
-    background: #212529b8;
-}
-.profile-img .file input {
-    position: absolute;
-    opacity: 0;
-    right: 0;
-    top: 0;
-}
-.profile-head h5{
-    font-size: x-large;
-    color: #333;
-}
-.profile-head h6{
-    font-size: large;
-    color: #0062cc;
-}
+    /* NEW */
+    .emp-profile{
+        padding: 1%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        border-radius: .5rem;
+    }
+    .profile-img {
+        text-align: center;
+    }
+    .profile-img img{
+        width: 100% ;
+        height: 100%;
+    }
+    .profile-img .file {
+        position: relative;
+        overflow: hidden;
+        margin-top: -20%;
+        width: 70%;
+        border: none;
+        border-radius: 0;
+        font-size: 15px;
+        background: #212529b8;
+    }
+    .profile-img .file input {
+        position: absolute;
+        opacity: 0;
+        right: 0;
+        top: 0;
+    }
+    .profile-head h5{
+        font-size: 1.6vw;
+        color: #333;
+    }
+    .profile-head h6{
+        font-size: 1.4vw;
+        color: #0062cc;
+    }
 
-.proile-rating{
-    font-size: 12px;
-    color: #818182;
-    margin-top: 5%;
-}
-.proile-rating span{
-    color: #495057;
-    font-size: 15px;
-    font-weight: 600;
-}
-.profile-head .nav-tabs{
-    margin-bottom:5%;
-}
-.profile-head .nav-tabs .nav-link{
-    font-weight:600;
-    border: none;
-}
-.profile-head .nav-tabs .nav-link.active{
-    border: none;
-    border-bottom:2px solid #0062cc;
-}
-.profile-work{
-    padding: 14%;
-    margin-top: -15%;
-}
-.profile-work p{
-    font-size: 18px;
-    color: #818182;
-    font-weight: 600;
-    margin-top: 10%;
-}
-.profile-work div{
-    text-decoration: none;
-    color: #495057;
-    font-weight: 600;
-    font-size: 14px;
-}
-.profile-work ul{
-    list-style: none;
-}
-.profile-tab label{
-    font-weight: 600;
-}
-.profile-tab p{
-    font-size: medium;
-    font-weight: 600;
-    color: #0062cc;
+    .divEditBtn {
+        position: relative;
+        text-align: center;
+    }
+
+    .profile-edit-btn{
+        font-size: 1.2vw;
+        width: 90%;
+        font-weight: 400;
+    }
+
+    .disableBtn {
+        font-size: 1.2vw;
+        width: 90%;
+        font-weight: 400;
+    }
+
+    .disableBtn:before {
+        transform: scale(1.7);
+        top: 2%;
+        left: 75%;
+        width: 50px !important;
+        height: 47px !important;
+        border-radius: 35px 35px 0 0;
+    }
+
+    .profile-work{
+        padding: 14%;
+        margin-top: -15%;
+    }
+    
+    .iconoEditar {
+        width: 20px;
+        height: 35px;
+        margin-top: -8%;
+    }
+    .profile-work p{
+        font-size: 1.6vw;
+        font-weight: 600;
+        margin-top: 10%;
+    }
+    .profile-work div{
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1vw;
+    }
+    
+    .profile-tab label{
+        font-size: 1.3vw;
+        font-weight: 600;
+    }
+
+    .profile-tab p{
+        font-size: 1.3vw;
+        font-weight: 600;
+        margin-bottom: 3%;
+        margin-top: -2%;
+        color: #0062cc;
+    }
+
+    .profile-tab .tab-content{
+        text-align: center !important;
+    }
+
+    .profile-tab nav {
+        font-size: calc(1vw + .45vh);
+    }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px){
@@ -470,17 +376,14 @@ h6 {
         font-size: calc(1vw + .7vh);
     }
 
-    #informacionPersonal {
-    }
-
     .div-imageUser-profile {
         display: inline-table;
     }
 
     .iconoEditar {
-        width: 35px;
-        height: 35px;
-        margin-top: -13%;
+        width: 2.5vw;
+        height: 2.5vh;
+        margin-top: -5%;
     }
 
     .divEditBtn {
@@ -488,15 +391,12 @@ h6 {
         text-align: center;
     }
     
-    .profile-edit-btn{
-        width: 50%;
+    .profile-edit-btn {
+        font-size: 1.7vw !important;
+        width: 40%;
         font-weight: 400;
         margin-top: 2%;
         margin-bottom: 2%;
-    }
-
-    .textBtnProfile {
-
     }
     
     .profile-edit-btn:active {
@@ -507,8 +407,9 @@ h6 {
     
     .disableBtn {
         border: 0;
+        font-size: 1.7vw;
         border-radius: 0.7rem;
-        width: 50%;
+        width: 40%;
         font-weight: 400;
         margin-top: 2%;
         margin-bottom: 2%;
@@ -516,7 +417,7 @@ h6 {
     
     .disableBtn:before {
         transform: scale(1.7);
-        top: 0px;
+        top: 25%;
         left: 58%;
         width: 50px !important;
         height: 47px !important;

@@ -319,17 +319,17 @@ const FourImagesOneWord = ( props ) => {
                                 ?
                                     <div className="UniqueSelection container">
                                         <Row className="three-images" >
-                                                <label className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 labelAnotherImageUS" >
+                                                <label className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 labelAnotherImageUS" >
                                                     <input type="radio" name="imageSelectionRef" value="small"/>
                                                     <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_1 } onClick={ () => {setImageSelection("small")} } />
                                                 </label>
 
-                                                <label className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 labelAnotherImageUS" >
+                                                <label className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 labelAnotherImageUS" >
                                                     <input type="radio" name="imageSelectionRef" value="big" />
                                                     <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_2 } onClick={ () => {setImageSelection("big")} } />
                                                 </label>
 
-                                                <label className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 labelOnlyImageUS" >
+                                                <label className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 labelOnlyImageUS" >
                                                     <input type="radio" name="imageSelectionRef" value="large" />
                                                     <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_3 } onClick={ () => {setImageSelection("large")} } />
                                                 </label>
