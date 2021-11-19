@@ -109,6 +109,17 @@
     color: rgb(75, 70, 70) !important;
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .tarjeta-tips {
+        margin-bottom: 10%;
+    }
+
+    .imagen-tarjeta {
+        min-height: 20vh !important;
+        max-height: 20vh !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .tarjeta-tips {
         margin-bottom: 10%;

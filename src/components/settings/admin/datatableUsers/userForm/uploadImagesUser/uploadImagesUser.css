@@ -115,6 +115,22 @@
     width: 100% !important;
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .btnDeleteUserForm {
+        font-size: small !important;
+    }
+
+    .btnHabInUserForm {
+        margin-top: 0% !important;
+        font-size: small !important;
+    }
+
+    .btnModifyUserForm {
+        margin-top: 5% !important;
+        font-size: small !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .tarjeta {
         margin-bottom: 10%;

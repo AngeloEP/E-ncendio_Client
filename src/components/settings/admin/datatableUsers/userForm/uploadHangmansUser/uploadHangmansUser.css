@@ -125,6 +125,14 @@
     width: 100% !important;
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .imagenes-tarjeta {
+        width: 100%;
+        min-height: 18vh !important;
+        max-height: 18vh !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .tarjeta-hangman {
         margin-bottom: 10%;

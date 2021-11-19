@@ -44,6 +44,17 @@
     color: rgb(21, 62, 117);
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .tarjeta-tag-uniqueSelection {
+        margin-bottom: 10%;
+    }
+
+    .imagenes-tarjeta-uniqueSelections {
+        min-height: 20vh !important;
+        max-height: 20vh !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .tarjeta-tag-uniqueSelection {
         margin-bottom: 10%;

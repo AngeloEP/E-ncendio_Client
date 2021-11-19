@@ -53,6 +53,18 @@
     border-color: blue !important;
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .tarjeta-tag-tips {
+        margin-bottom: 10%;
+    }
+
+    .palabra-tarjeta-vista {
+        padding: 2px;
+        min-height: fit-content !important;
+        font-size: small !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .tarjeta-tag-tips {
         margin-bottom: 10%;

@@ -69,6 +69,19 @@
     border-color: blue !important;
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .tarjeta-tag-words {
+        margin-bottom: 10%;
+    }
+
+    .palabra-tarjeta-etiqueta {
+        min-height: 15vh !important;
+        max-height: 15vh !important;
+        font-size: large !important;
+        color: #000 !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .tarjeta-tag-words {
         margin-bottom: 10%;
