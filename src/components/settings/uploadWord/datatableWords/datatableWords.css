@@ -122,6 +122,51 @@
     margin-left: 2% !important;
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .div-datatable-words div {
+        max-height: 500px !important;
+    }
+    
+    .div-uploadWord-update {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        border-radius: 13px;
+    } 
+
+    .paper-datatableUpdate {
+        min-width: 100px;
+        min-height: 100px;
+        font-size: medium !important;
+        color: black !important;
+    }
+    
+    .div-name-update {
+        width: 90% !important;
+        margin-top: 0em;
+        margin-left: 0em;
+        margin-right: 0em;
+    }
+
+    .nameWordUpdate {
+        width: 100% !important;
+    }
+
+    .titleModal-uploadWord {
+        font-size: large;
+    }
+
+    .closeButtonModal-uploadWord {
+        font-size: small;
+    }
+
+    .submitButtonModal-uploadWord {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: small !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .div-datatable-words div {
         max-height: 500px !important;

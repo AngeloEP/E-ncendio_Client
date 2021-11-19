@@ -65,6 +65,40 @@
     height: 50px;
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .label-holderDatatableModifyUniqueSelection {
+        width: 100% !important;
+        display: inline;
+        margin-top: 1em !important;
+    }
+    
+    .labelDatatableModifyUniqueSelection {
+        width: fit-content !important;
+        height: fit-content !important;
+    }
+
+    .labelDatatableModifyUniqueSelection i {
+        font-size: large;
+    }
+
+    .buttonResetImagesModifyUniqueSelection {
+        width: fit-content !important;
+        height: fit-content !important;
+        font-size: medium !important;
+    }
+
+    .buttonsModifyUniqueSelection {
+        display: inline-table;
+    }
+
+    .submitButtonModal-uploadUniqueSelection {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: medium !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .images-uniqueSelection {
         min-width: 120px;

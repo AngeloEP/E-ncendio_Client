@@ -250,7 +250,7 @@ const DatatableImages = ({ images, deleteFunction, loadingDelete }) => {
                             <Grid container component="main" className="justify-content-center" >
                                 <Grid item xs={12} sm={12} md={12} elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-                                    <Grid container xs={12} spacing={0} >
+                                    <Grid container spacing={0} >
 
                                         <Grid item xs={6} >
                                             <div className="div-image-update" >

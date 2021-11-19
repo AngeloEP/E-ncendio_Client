@@ -92,7 +92,7 @@ const FormContact = () => {
                         id="subject"
                         name="subject"
                         type="text"
-                        label="Ingresa el Asunto de tu observación*"
+                        label="Ingresa el Asunto*"
                         value={subject}
                         variant="outlined"
                         fullWidth
@@ -124,7 +124,7 @@ const FormContact = () => {
                 }} >
                     <Button  variant="contained" type="submit" color="primary" 
                         style={{ 
-                            width: "170px",
+                            width: "fit-content",
                             height: "40px",
                         }}
                     >

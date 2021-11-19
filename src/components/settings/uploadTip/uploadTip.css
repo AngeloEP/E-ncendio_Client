@@ -9,14 +9,14 @@
     border-radius: 16px;
 }
 
-.div-tip {
+.div-text {
     position: relative;
-    width: 10%;
+    width: 100%;
 }
 
 .tip {
     position: relative;
-    margin-left: 0.5em;
+    margin-left: 0em;
     margin-top: 5%;
     margin-bottom: 3%;
 }
@@ -24,7 +24,7 @@
 .paper-tip {
     position: relative !important;
     text-align: left !important;
-    max-width: 85%;
+    max-width: 100%;
     margin-top: 10%;
     overflow-wrap: break-word;
     min-height: fit-content;
@@ -60,14 +60,8 @@
     margin-bottom: 1em;
 }
 
-
-.div-text {
-    margin-top: 1em;
-    margin-left: -6em;
-}
-
 .textfield-text {
-    width: 70%;
+    width: 90%;
 }
 
 .submit-tip {
@@ -85,11 +79,15 @@
     border-radius: 12px;
 }
 
+.divHelpIconUploadTip {
+    text-align: left;
+}
+
 .tooltipUploadTip {
     font-size: medium;
 }
 
-@media only screen and (max-width: 1376px){
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .div-uploadTip {
         width: 85% !important;
         margin-left: 7.5% !important ;
@@ -97,24 +95,27 @@
         margin-bottom: 2em;
     }
 
-    .div-tip {
-        width: 15%;
-        height: 100%;
-        margin-left: 25%;
+    .div-text {
+        width: 100%;
+        margin-left: 0%;
     }
 
     .tip {
         position: relative;
-        margin-left: 15%;
+        margin-left: 0%;
         margin-top: 10%;
         margin-bottom: 5% !important;
     }
     
-    .paper {
-        min-width: 300px;
-        min-height: 150px;
-        border-radius: 25 !important;
-        font-size: 35px !important;
+    .paper-tip {
+        text-align: justify !important;
+        max-width: 100%;
+        margin-top: 10%;
+        min-height: fit-content;
+        display: flex;
+        padding: 2px;
+        border-radius: 5px !important;
+        font-size: medium !important;
     }
 
     .tip-upload {
@@ -130,8 +131,7 @@
 
     .div-text {
         margin-top: 1em;
-        margin-left: 15%;
-
+        margin-left: 0%;
     }
     
     .submit-tip {
@@ -140,6 +140,11 @@
 
     .textfield-text {
         width: 90%;
+    }
+
+    .divHelpIconUploadImage {
+        text-align: left;
+        padding-top: 3vh;
     }
 }
 
@@ -174,7 +179,7 @@
     
     
     .div-text {
-        margin-left: 2em;
+        margin-left: 1em;
         margin-top: 3em !important;
         min-height: fit-content !important;
     }
@@ -206,9 +211,10 @@
     }
     
     .submit-tip {
-        width: 100%;
-        height: fit-content !important;
-        margin-top: 35% !important;
+        width: 50%;
+        margin-left: 0% !important;
+        margin-top: auto;
+        margin-bottom: auto;
     }
     
     .div-datatable-tips {
@@ -230,8 +236,8 @@
     }
     
     .divHelpIconUploadTip {
-        margin-top: 10%;
-        text-align: center;
+        text-align: left;
+        padding-top: 2vh;
     }
     
     .tooltipUploadTip {

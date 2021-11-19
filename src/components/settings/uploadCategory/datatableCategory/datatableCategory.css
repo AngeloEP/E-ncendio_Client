@@ -9,7 +9,7 @@
 }
 
 .div-category-update {
-    width: 80%;
+    width: 100%;
 }
 
 .category-update {
@@ -18,13 +18,18 @@
     margin-right: auto;
 }
 
-.div-isVisible {
-    width: 67%;
-    margin-top: 1em;
-}
+.category-update .fire {
+    top: 0;
+    left: 0;
+} 
 
 .select-isVisible {
     width: 15em;
+}
+
+.div-isVisible {
+    width: 100%;
+    margin-top: 1em;
 }
 
 .div-datatable-categories div {
@@ -38,10 +43,42 @@
     margin-left: 2% !important;
 }
 
-@media only screen and (max-width: 1376px) {
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .category-update {
-        left: 15%;
-    }    
+        left: 0%;
+        margin-top: 0%;
+    }
+
+    .category-update .fire {
+        left: 0 !important;
+        right: 0 !important;
+        top: -2vw;
+    }
+    
+    .div-category-update {
+        width: 100%;
+    }
+
+    .categoryNameUpdate {
+        width: 100% !important;
+    }
+    
+    .div-isVisible {
+        width: 100%;
+        margin-top: 1em;
+    }
+    
+    .select-isVisible {
+        min-width: 85%;
+        max-width: 85%;
+    }
+
+    .submitButtonModal-uploadCategory {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: medium !important;
+    }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px){
@@ -77,7 +114,7 @@
     }
     
     .select-isVisible {
-        width: 10em;
+        width: 25vw;
     }
 
     .titleModal-uploadCategory {

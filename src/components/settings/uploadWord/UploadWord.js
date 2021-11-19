@@ -114,12 +114,12 @@ const UploadWord = () => {
 
             <Container className="div-uploadWord"  >
                 <Grid container component="main" className="justify-content-center" >
-                    <Grid item xs={12} sm={8} md={12} elevation={6}>
+                    <Grid item xs={12} sm={12} md={12} elevation={6}>
                         { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                         <form  onSubmit={onSubmit}  >
                         <Grid container spacing={0} >
 
-                            <Grid item xs={4} >
+                            <Grid item xs={6} >
                                 <div className="col palabra" >
                                     <Col>
                                         <Paper className="paper-word" elevation={10} variant="outlined"  >
@@ -128,7 +128,7 @@ const UploadWord = () => {
                                     </Col>
                                 </div>
                             </Grid>
-                            <Grid item xs={8} >
+                            <Grid item xs={6} >
                                 <div className="div-nameWord" >                        
                                     <TextField
                                         className="textfield-nameWord"
@@ -144,7 +144,7 @@ const UploadWord = () => {
                             </Grid>
                             <Grid item xs={12} style={{ marginBottom: "2%" }} >
                                 <div className="row w-100 mr-auto ml-auto" >
-                                    <Col >
+                                    <Col className="text-right mt-auto mb-auto">
                                         <Button
                                             type="submit"
                                             variant="contained"

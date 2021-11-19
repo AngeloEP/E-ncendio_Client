@@ -9,22 +9,21 @@
 }
 
 .div-imageTip-update {
-    width: 10%;
+    width: 100%;
 }
 
 .imageTip-upload-update {
-    min-width: 400px;
-    max-width: 200px;
-    min-height: 220px;
-    max-height: 280px;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    position: relative;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 25vh;
+        max-height: 25vh;
 }
 
 .label-upload-imageTip-update {
     width: 11em;
     height: 2em;
-    margin-left: 270%;
+    margin-left: 0%;
     margin-bottom: 1em;
 }
 
@@ -42,8 +41,8 @@
 }
 
 .tip-updateModal {
-    width: 70%;
-    margin-left: 15%;
+    width: 85%;
+    margin-left: 7.5%;
 }
 
 .paper-tip-update {
@@ -101,6 +100,75 @@
     margin-left: 2% !important;
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .div-uploadTip-update {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        border-radius: 13px;
+    }
+
+    .imageTip-upload-update {
+        position: relative;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 25vh;
+        max-height: 25vh;
+    }
+    
+    .div-imageTip-update {
+        width: 100% !important;
+        margin-top: 0em;
+        margin-left: 0em;
+    }
+
+    .label-upload-imageTip-update {
+        width: max-content;
+        height: fit-content;
+        margin-left: 0%;
+        margin-bottom: 0em;
+    }
+
+    .label-upload-imageTip-update span {
+        font-size: smaller !important;
+    }
+
+    .div-tip-update {
+        width: 100%;
+        margin-left: 1em;
+    }
+
+    .tipImageUpdate {
+        width: 100% !important;
+    }
+
+    .tip-updateModal {
+        width: 100%;
+        margin-left: 0%;
+    }
+
+    .paper-tip-update {
+        min-width: 100% !important;
+        font-size: medium !important;
+        margin-top: 5%;
+        padding: 3px;
+    }
+
+    .titleModal-uploadTip {
+        font-size: large;
+    }
+
+    .closeButtonModal-uploadTip {
+        font-size: small;
+    }
+
+    .submitButtonModal-uploadTip {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: small !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .div-uploadTip-update {
         margin-top: 0em;
@@ -134,7 +202,7 @@
     }
 
     .div-tip-update {
-        width: 90%;
+        width: 100%;
         margin-left: 1em;
     }
 
@@ -151,7 +219,7 @@
         min-width: 100% !important;
         font-size: small !important;
         margin-top: 15%;
-        padding: 2px;
+        padding: 3px;
         color: black !important;
     }
 

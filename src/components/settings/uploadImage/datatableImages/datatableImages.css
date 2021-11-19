@@ -82,6 +82,67 @@
     margin-left: 2% !important;
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .div-uploadImage-update {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        border-radius: 13px;
+    }
+    
+    .div-image-update {
+        width: 100%;
+    }
+    
+    .image-upload-update {
+        position: relative;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 20vh;
+        max-height: 25vh;
+    }
+    
+    .label-upload-image-update {
+        width: max-content;
+        height: fit-content;
+        margin-left: 0%;
+        margin-bottom: 0em;
+    }
+
+    .label-upload-image-update span {
+        font-size: smaller !important;
+    }    
+    
+    .div-filename-update {
+        width: 100% !important;
+        overflow-x: auto;
+        margin-top: 3em;
+        margin-left: 1em;
+    }
+
+    .filenameImageUpdate {
+        width: 100% !important;
+    }
+    
+    .submit-image-update {
+        width: max-content;
+    }
+
+    .titleModal-uploadImage {
+        font-size: large;
+    }
+
+    .closeButtonModal-uploadImage {
+        font-size: small;
+    }
+
+    .submitButtonModal-uploadImage {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: small !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .div-uploadImage-update {
         margin-top: 0em;

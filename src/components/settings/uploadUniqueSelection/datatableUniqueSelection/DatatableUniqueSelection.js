@@ -316,7 +316,7 @@ const DatatableUniqueSelection = ({ uniqueSelections, deleteFunction, loadingDel
                                                 <div className="result">{renderPhotos(pathImagesUpdate)}</div>
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} style={{ marginBottom: "2%" }} >
+                                        <Grid item xs={12} style={{ marginBottom: "2%" }} >
                                             <div className="div-keyWord" >                        
                                                 <TextField
                                                     className="textfield-keyWord"

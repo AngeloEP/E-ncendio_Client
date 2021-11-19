@@ -114,6 +114,40 @@
     height: 50px;
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1376px){
+    .label-holderDatatableModifyHangman {
+        width: 100% !important;
+        display: inline;
+        margin-top: 1em !important;
+    }
+    
+    .labelDatatableModifyHangman {
+        width: fit-content !important;
+        height: fit-content !important;
+    }
+
+    .labelDatatableModifyHangman i {
+        font-size: large;
+    }
+
+    .buttonResetImagesModifyHangman {
+        width: fit-content !important;
+        height: fit-content !important;
+        font-size: medium !important;
+    }
+
+    .buttonsModifyHangman {
+        display: inline-table;
+    }
+
+    .submitButtonModal-uploadHangman {
+        height: fit-content !important;
+        width: fit-content !important;
+        margin-left: auto !important;
+        font-size: medium !important;
+    }
+}
+
 @media only screen and (min-width: 360px) and (max-width: 768px){
     .images-hangman {
         min-width: 120px;
@@ -137,6 +171,7 @@
         font-size: small !important;
 
     }
+
     .labelDatatableModifyHangman {
         width: fit-content !important;
         height: fit-content !important;

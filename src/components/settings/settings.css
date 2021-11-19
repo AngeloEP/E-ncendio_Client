@@ -85,8 +85,7 @@
     text-transform: uppercase;
 }
 
-
-@media only screen and (max-width: 1376px){
+@media only screen and (min-width: 769px) and (max-width: 1376px){
     .title-div {
         width: 70%;
         height: 15vh;
@@ -112,6 +111,15 @@
     .settings-title{ 
         font-size: 31px;
     }
+
+    .availableContentText {
+        font-size: medium !important;
+
+    }
+
+    .buttonsNavigation span span {
+        font-size: 1.15vw !important;
+    }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px){
@@ -132,5 +140,9 @@
 
     .availableContentText {
         font-size: smaller;
+    }
+
+    .buttonsNavigation span span {
+        font-size: 1.7vw !important;
     }
 }

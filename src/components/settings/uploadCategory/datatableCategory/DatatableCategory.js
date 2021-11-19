@@ -232,7 +232,7 @@ const DatatableTips = ({ categorias }) => {
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
                                     <Grid container spacing={0} >
 
-                                        <Grid item xs={4} >
+                                        <Grid item xs={6} >
                                             <div className="col category-update" >
                                                 <Col>
                                                     <Fire
@@ -247,7 +247,7 @@ const DatatableTips = ({ categorias }) => {
                                                 </Col>
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} >
+                                        <Grid item xs={6} >
                                             <div className="div-category-update" >                        
                                                 <TextField
                                                     className="categoryNameUpdate"

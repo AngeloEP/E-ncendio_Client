@@ -298,7 +298,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
                             <Grid component="main" className="justify-content-center" >
                                 <Grid item elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-                                    <Grid  spacing={0} >
+                                    <Grid   >
 
                                         <Grid item xs={12} >
                                             <div className="buttonsModifyHangman" >
@@ -319,7 +319,7 @@ const DatatableFourImagesOneWord = ({ hangmans, deleteFunction, loadingDelete })
                                                 <div className="result">{renderPhotos(pathImagesUpdate)}</div>
                                             </div>
                                         </Grid>
-                                        <Grid item xs={8} style={{ marginBottom: "2%" }} >
+                                        <Grid item xs={12} style={{ marginBottom: "2%" }} >
                                             <div className="div-associateWord" >                        
                                                 <TextField
                                                     className="textfield-associateWord"
