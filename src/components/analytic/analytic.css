@@ -240,6 +240,10 @@
         width: 100%;
         overflow: auto;
     }
+
+    .btnExportAnalytics {
+        font-size: x-small !important;
+    }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px){
@@ -322,5 +326,10 @@
 
     .graficoDistribucionFuncionalidades canvas {
         font-size: small !important;
+    }
+
+    .btnExportAnalytics {
+        font-size: xx-small !important;
+        width: 40%;
     }
 }

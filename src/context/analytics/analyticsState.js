@@ -18,9 +18,12 @@ import {
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES,
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_CARGANDO,
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR,
-    OBTENER_CSV,
-    OBTENER_CSV_CARGANDO,
-    OBTENER_CSV_ERROR,
+    OBTENER_CSV_ETIQUETAS_IMAGENES,
+    OBTENER_CSV_ETIQUETAS_IMAGENES_CARGANDO,
+    OBTENER_CSV_ETIQUETAS_IMAGENES_ERROR,
+    OBTENER_CSV_ETIQUETAS_PALABRAS,
+    OBTENER_CSV_ETIQUETAS_PALABRAS_CARGANDO,
+    OBTENER_CSV_ETIQUETAS_PALABRAS_ERROR,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -31,13 +34,15 @@ const AnalyticsState = props => {
         distribucionCategoriasPorImagen: [],
         distribucionCategoriasPorPalabra: [],
         distribucionUsoFuncionalidades: [],
-        dataPrimerCSV: [],
+        dataCSVTagImages: [],
+        dataCSVTagWords: [],
         cargandoDistribucionCategorias: false,
         cargandoDistribucionCategoriasPalabras: false,
         cargandoDistribucionCategoriasPorImagen: false,
         cargandoDistribucionCategoriasPorPalabra: false,
         cargandoDistribucionUsoFuncionalidades: false,
-        cargandoPrimerCSV: false,
+        cargandoCSVImagenesEtiquetadas: false,
+        cargandoCSVPalabrasEtiquetadas: false,
         errores: [],
     }
 
@@ -170,15 +175,15 @@ const AnalyticsState = props => {
         }
     }
 
-    const obtenerCSV = async () => {
+    const obtenerCSVImagenesEtiquetadas = async () => {
         try {
             dispatch({
-                type: OBTENER_CSV_CARGANDO,
+                type: OBTENER_CSV_ETIQUETAS_IMAGENES_CARGANDO,
             })
 
-            const respuesta = await clienteAxios.get('/api/usuarios/getCSV')
+            const respuesta = await clienteAxios.get('/api/usuarios/getCSVTagImages')
             dispatch({
-                type: OBTENER_CSV,
+                type: OBTENER_CSV_ETIQUETAS_IMAGENES,
                 payload: respuesta.data
             })
             
@@ -189,7 +194,32 @@ const AnalyticsState = props => {
                 categoria: 'alerta-error'
             }
             dispatch({
-                type: OBTENER_CSV_ERROR,
+                type: OBTENER_CSV_ETIQUETAS_IMAGENES_ERROR,
+                payload: alerta
+            })
+        }
+    }
+
+    const obtenerCSVPalabrasEtiquetadas = async () => {
+        try {
+            dispatch({
+                type: OBTENER_CSV_ETIQUETAS_PALABRAS_CARGANDO,
+            })
+
+            const respuesta = await clienteAxios.get('/api/usuarios/getCSVTagWords')
+            dispatch({
+                type: OBTENER_CSV_ETIQUETAS_PALABRAS,
+                payload: respuesta.data
+            })
+            
+        } catch (error) {
+            console.log(error)
+            const alerta = {
+                msg: error.response.data.msg,
+                categoria: 'alerta-error'
+            }
+            dispatch({
+                type: OBTENER_CSV_ETIQUETAS_PALABRAS_ERROR,
                 payload: alerta
             })
         }
@@ -208,13 +238,15 @@ const AnalyticsState = props => {
                 cargandoDistribucionCategoriasPorPalabra: state.cargandoDistribucionCategoriasPorPalabra,
                 distribucionUsoFuncionalidades: state.distribucionUsoFuncionalidades,
                 cargandoDistribucionUsoFuncionalidades: state.cargandoDistribucionUsoFuncionalidades,
-                dataPrimerCSV: state.dataPrimerCSV,
+                dataCSVTagImages: state.dataCSVTagImages,
+                dataCSVTagWords: state.dataCSVTagWords,
                 traerDistribucionDeCategorias,
                 traerDistribucionDeCategoriasPorImagen,
                 traerDistribucionDeCategoriasPalabras,
                 traerDistribucionDeCategoriasPorPalabra,
                 traerDistribucionDeUsoDeFuncionalidades,
-                obtenerCSV,
+                obtenerCSVImagenesEtiquetadas,
+                obtenerCSVPalabrasEtiquetadas,
             }}
         >
             {props.children}

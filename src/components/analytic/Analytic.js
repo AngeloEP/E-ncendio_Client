@@ -17,6 +17,7 @@ import { Doughnut } from '@reactchartjs/react-chart.js';
 import Whatshot from '@material-ui/icons/Whatshot';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
 import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { Tooltip } from "@chakra-ui/react";
@@ -53,8 +54,10 @@ const Analytic = () => {
         cargandoDistribucionUsoFuncionalidades,
         traerDistribucionDeUsoDeFuncionalidades,
 
-        dataPrimerCSV,
-        obtenerCSV,
+        dataCSVTagImages,
+        dataCSVTagWords,
+        obtenerCSVImagenesEtiquetadas,
+        obtenerCSVPalabrasEtiquetadas,
     } = analyticsContext
 
     const [ queryImages, guardarQueryImages, queryImagesRef ] = useState({
@@ -78,7 +81,8 @@ const Analytic = () => {
         traerDistribucionDeCategorias(queryImagesRef.current)
         traerDistribucionDeCategoriasPalabras(queryWordsRef.current)
         traerDistribucionDeUsoDeFuncionalidades(queryDistributionFuncionalitiesRef.current)
-        obtenerCSV()
+        obtenerCSVImagenesEtiquetadas()
+        obtenerCSVPalabrasEtiquetadas()
         // eslint-disable-next-line
     }, [])
 
@@ -248,23 +252,47 @@ const Analytic = () => {
     //     const csvReport = {
     //         filename: 'Report.csv',
     //         headers: headers,
-    //         data: dataPrimerCSV
+    //         data: dataCSVTagImages
     //     };
     // }
     
     let headers = []
     let csvReport = []
-    if (dataPrimerCSV.length !== 0 ) {
+    if (dataCSVTagImages.length !== 0 ) {
         
         headers = [
-            {label: "Nombre", key: "name"},
-            {label: "Visible", key: "isVisible"}
+            {label: "Usuario", key: "Usuario"},
+            {label: "Relacionado a incendios", key: "Relacionado a incendios"},
+            {label: "Relacion", key: "Relacion"},
+            {label: "Imagen", key: "Imagen"},
+            {label: "Categoría", key: "Categoría"},
+            {label: "Ubicación", key: "Ubicación"},
         ];
         
         csvReport = {
-            filename: 'Report.csv',
+            filename: 'Report_Tag_Images.csv',
             headers: headers,
-            data: dataPrimerCSV.data
+            data: dataCSVTagImages.data
+        };
+    }
+
+    let headersWords = []
+    let csvReportWords = []
+    if (dataCSVTagWords.length !== 0 ) {
+        
+        headersWords = [
+            {label: "Usuario", key: "Usuario"},
+            {label: "Relacionado a incendios", key: "Relacionado a incendios"},
+            {label: "Relacion", key: "Relacion"},
+            {label: "Palabra", key: "Palabra"},
+            {label: "Categoría", key: "Categoría"},
+            {label: "Ubicación", key: "Ubicación"},
+        ];
+        
+        csvReportWords = {
+            filename: 'Report_Tag_Words.csv',
+            headers: headersWords,
+            data: dataCSVTagWords.data
         };
     }
 
@@ -677,12 +705,22 @@ const Analytic = () => {
                     }
                 </div>
 
-                <div className="text-center" >
-                    {/* <Button onClick={() => descargarPrimerCSV()} colorScheme="blue"> CSV </Button> */}
-                    {dataPrimerCSV.length !== 0
+                <h3 className="title-words-distribution-analytics" > Exportar contenido de E-ncendio </h3>
+                <div className="text-center mb-3" >
+                    {dataCSVTagImages.length !== 0 && dataCSVTagWords.length !== 0
                     ?
                         <>
-                            <CSVLink {...csvReport} > Exportar </CSVLink>
+                            <CSVLink {...csvReport} >
+                                <Button className="btnExportAnalytics" color="primary" variant="contained" >
+                                    Exportar Etiquetas Imágenes
+                                </Button>
+                            </CSVLink>
+
+                            <CSVLink {...csvReportWords} >
+                                <Button className="btnExportAnalytics ml-2" color="primary" variant="contained" >
+                                    Exportar Etiquetas Palabras
+                                </Button>
+                            </CSVLink>
                         </>
                         :   null
                     }

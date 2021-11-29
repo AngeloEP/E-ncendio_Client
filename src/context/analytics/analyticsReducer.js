@@ -14,14 +14,18 @@ import {
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES,
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_CARGANDO,
     OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR,
-    OBTENER_CSV,
-    OBTENER_CSV_CARGANDO,
-    OBTENER_CSV_ERROR,
+    OBTENER_CSV_ETIQUETAS_IMAGENES,
+    OBTENER_CSV_ETIQUETAS_IMAGENES_CARGANDO,
+    OBTENER_CSV_ETIQUETAS_IMAGENES_ERROR,
+    OBTENER_CSV_ETIQUETAS_PALABRAS,
+    OBTENER_CSV_ETIQUETAS_PALABRAS_CARGANDO,
+    OBTENER_CSV_ETIQUETAS_PALABRAS_ERROR,
 } from '../../types';
 
 const analyticsReducer = (state, action) => {
     switch (action.type) {
-        case OBTENER_CSV_ERROR:
+        case OBTENER_CSV_ETIQUETAS_PALABRAS_ERROR:
+        case OBTENER_CSV_ETIQUETAS_IMAGENES_ERROR:
         case OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR:
         case OBTENER_DISTRIBUCION_CATEGORIAS_PALABRAS_ERROR:
         case OBTENER_DISTRIBUCION_CATEGORIAS_POR_PALABRA_ERROR:
@@ -35,7 +39,8 @@ const analyticsReducer = (state, action) => {
                 cargandoDistribucionCategoriasPorImagen: false,
                 cargandoDistribucionCategoriasPorPalabra: false,
                 cargandoDistribucionUsoFuncionalidades: false,
-                cargandoPrimerCSV: false,
+                cargandoCSVImagenesEtiquetadas: false,
+                cargandoCSVPalabrasEtiquetadas: false,
             }
 
         case OBTENER_DISTRIBUCION_CATEGORIAS_IMAGENES:
@@ -103,16 +108,30 @@ const analyticsReducer = (state, action) => {
                 cargandoDistribucionUsoFuncionalidades: true
             }
 
-        case OBTENER_CSV_CARGANDO:
+        case OBTENER_CSV_ETIQUETAS_IMAGENES_CARGANDO:
             return {
                 ...state,
-                cargandoPrimerCSV: true
+                cargandoCSVImagenesEtiquetadas: true
             }
 
-        case OBTENER_CSV:
+        case OBTENER_CSV_ETIQUETAS_IMAGENES:
             return {
                 ...state,
-                dataPrimerCSV: action.payload
+                dataCSVTagImages: action.payload,
+                cargandoCSVImagenesEtiquetadas: false
+            }
+
+        case OBTENER_CSV_ETIQUETAS_PALABRAS_CARGANDO:
+            return {
+                ...state,
+                cargandoCSVPalabrasEtiquetadas: true
+            }
+
+        case OBTENER_CSV_ETIQUETAS_PALABRAS:
+            return {
+                ...state,
+                dataCSVTagWords: action.payload,
+                cargandoCSVPalabrasEtiquetadas: false
             }
 
         default:
