@@ -24,6 +24,9 @@ import {
     OBTENER_CSV_ETIQUETAS_PALABRAS,
     OBTENER_CSV_ETIQUETAS_PALABRAS_CARGANDO,
     OBTENER_CSV_ETIQUETAS_PALABRAS_ERROR,
+    OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS,
+    OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS_CARGANDO,
+    OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS_ERROR,
 } from '../../types';
 import clienteAxios from '../../config/axios';
 
@@ -36,6 +39,7 @@ const AnalyticsState = props => {
         distribucionUsoFuncionalidades: [],
         dataCSVTagImages: [],
         dataCSVTagWords: [],
+        dataCSVTagUniqueSelections: [],
         cargandoDistribucionCategorias: false,
         cargandoDistribucionCategoriasPalabras: false,
         cargandoDistribucionCategoriasPorImagen: false,
@@ -43,6 +47,7 @@ const AnalyticsState = props => {
         cargandoDistribucionUsoFuncionalidades: false,
         cargandoCSVImagenesEtiquetadas: false,
         cargandoCSVPalabrasEtiquetadas: false,
+        cargandoCSVSeleccionesUnicasEtiquetadas: false,
         errores: [],
     }
 
@@ -225,6 +230,32 @@ const AnalyticsState = props => {
         }
     }
 
+    const obtenerCSVSeleccionesUnicasEtiquetadas = async () => {
+        try {
+            dispatch({
+                type: OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS_CARGANDO,
+            })
+
+            const respuesta = await clienteAxios.get('/api/usuarios/getCSVTagUniqueSelections')
+            dispatch({
+                type: OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS,
+                payload: respuesta.data
+            })
+            
+        } catch (error) {
+            console.log(error)
+            const alerta = {
+                msg: error.response.data.msg,
+                categoria: 'alerta-error'
+            }
+            dispatch({
+                type: OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS_ERROR,
+                payload: alerta
+            })
+        }
+    }
+
+
     return (
         <analyticsContext.Provider
             value={{
@@ -240,6 +271,7 @@ const AnalyticsState = props => {
                 cargandoDistribucionUsoFuncionalidades: state.cargandoDistribucionUsoFuncionalidades,
                 dataCSVTagImages: state.dataCSVTagImages,
                 dataCSVTagWords: state.dataCSVTagWords,
+                dataCSVTagUniqueSelections: state.dataCSVTagUniqueSelections,
                 traerDistribucionDeCategorias,
                 traerDistribucionDeCategoriasPorImagen,
                 traerDistribucionDeCategoriasPalabras,
@@ -247,6 +279,7 @@ const AnalyticsState = props => {
                 traerDistribucionDeUsoDeFuncionalidades,
                 obtenerCSVImagenesEtiquetadas,
                 obtenerCSVPalabrasEtiquetadas,
+                obtenerCSVSeleccionesUnicasEtiquetadas,
             }}
         >
             {props.children}

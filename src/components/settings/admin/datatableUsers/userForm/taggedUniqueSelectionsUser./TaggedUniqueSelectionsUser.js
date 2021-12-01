@@ -65,6 +65,8 @@ const TaggedUniqueSelectionsUser = ({ usuario, seleccionesUnicasEtiquetadas, fun
                                     <div className="card-body text-center">
                                         <h5 className="card-title titulo-nombre-card-uniqueSelection"> Palabra </h5>
                                         <p className="card-text nombre-card-uniqueSelection"> {seleccionUnicaEtiquetada.uniqueSelection_id.keyWord} </p>
+                                        <h5 className="card-title titulo-nombre-card-uniqueSelection mt-4"> Escogida </h5>
+                                        <img className="imagenes-tarjeta-uniqueSelections" src={seleccionUnicaEtiquetada.imageSelected} alt="" />
                                         {/* <h5 className="card-title titulo-fecha-card-uniqueSelection"> Subido el </h5>
                                         <p className="card-text fecha-card-uniqueSelection"> {seleccionUnicaEtiquetada.uniqueSelection_id.createdAt} </p> */}
                                     </div>

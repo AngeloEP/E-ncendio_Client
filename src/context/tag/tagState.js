@@ -126,9 +126,9 @@ const TagState = props => {
         }
     }
 
-    const etiquetarSeleccionUnica = async ( uniqueSelection_id, keyWord ) => {
+    const etiquetarSeleccionUnica = async ( uniqueSelection_id, imageSelected ) => {
         try {
-            const respuesta = await clienteAxios.post(`/api/tag-uniqueSelections/${uniqueSelection_id}/word/${keyWord}`)
+            const respuesta = await clienteAxios.post(`/api/tag-uniqueSelections/${uniqueSelection_id}/image/${imageSelected}`)
             dispatch({
                 type: ETIQUETAR_SELECCION_UNICA,
                 payload: respuesta.data

@@ -56,8 +56,10 @@ const Analytic = () => {
 
         dataCSVTagImages,
         dataCSVTagWords,
+        dataCSVTagUniqueSelections,
         obtenerCSVImagenesEtiquetadas,
         obtenerCSVPalabrasEtiquetadas,
+        obtenerCSVSeleccionesUnicasEtiquetadas,
     } = analyticsContext
 
     const [ queryImages, guardarQueryImages, queryImagesRef ] = useState({
@@ -83,6 +85,7 @@ const Analytic = () => {
         traerDistribucionDeUsoDeFuncionalidades(queryDistributionFuncionalitiesRef.current)
         obtenerCSVImagenesEtiquetadas()
         obtenerCSVPalabrasEtiquetadas()
+        obtenerCSVSeleccionesUnicasEtiquetadas()
         // eslint-disable-next-line
     }, [])
 
@@ -293,6 +296,29 @@ const Analytic = () => {
             filename: 'Report_Tag_Words.csv',
             headers: headersWords,
             data: dataCSVTagWords.data
+        };
+    }
+
+    let headersUniqueSelections = []
+    let csvReportUniqueSelections = []
+    if (dataCSVTagUniqueSelections.length !== 0 ) {
+        
+        headersUniqueSelections = [
+            {label: "Usuario", key: "Usuario"},
+            {label: "Relacionado a incendios", key: "Relacionado a incendios"},
+            {label: "Relacion", key: "Relacion"},
+            {label: "Imagen 1", key: "Imagen 1"},
+            {label: "Imagen 2", key: "Imagen 2"},
+            {label: "Imagen 3", key: "Imagen 3"},
+            {label: "Palabra Clave", key: "Palabra Clave"},
+            {label: "Imagen Escogida", key: "Imagen Escogida"},
+            {label: "Ubicación", key: "Ubicación"},
+        ];
+        
+        csvReportUniqueSelections = {
+            filename: 'Report_Tag_UniqueSelections.csv',
+            headers: headersUniqueSelections,
+            data: dataCSVTagUniqueSelections.data
         };
     }
 
@@ -707,7 +733,7 @@ const Analytic = () => {
 
                 <h3 className="title-words-distribution-analytics" > Exportar contenido de E-ncendio </h3>
                 <div className="text-center mb-3" >
-                    {dataCSVTagImages.length !== 0 && dataCSVTagWords.length !== 0
+                    {dataCSVTagImages.length !== 0 && dataCSVTagWords.length !== 0 && dataCSVTagUniqueSelections.length !== 0
                     ?
                         <>
                             <CSVLink {...csvReport} >
@@ -719,6 +745,12 @@ const Analytic = () => {
                             <CSVLink {...csvReportWords} >
                                 <Button className="btnExportAnalytics ml-2" color="primary" variant="contained" >
                                     Exportar Etiquetas Palabras
+                                </Button>
+                            </CSVLink>
+
+                            <CSVLink {...csvReportUniqueSelections} >
+                                <Button className="btnExportAnalytics ml-2" color="primary" variant="contained" >
+                                    Exportar S. Únicas
                                 </Button>
                             </CSVLink>
                         </>

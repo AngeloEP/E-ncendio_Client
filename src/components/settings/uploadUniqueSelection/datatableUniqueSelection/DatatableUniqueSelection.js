@@ -295,7 +295,7 @@ const DatatableUniqueSelection = ({ uniqueSelections, deleteFunction, loadingDel
                             <Grid  component="main" className="justify-content-center" >
                                 <Grid item elevation={6}>
                                     { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> ) : null }
-                                    <Grid  spacing={0} >
+                                    <Grid   >
 
                                         <Grid item xs={12} >
                                             <div className="buttonsModifyUniqueSelection" >

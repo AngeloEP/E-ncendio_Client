@@ -20,10 +20,14 @@ import {
     OBTENER_CSV_ETIQUETAS_PALABRAS,
     OBTENER_CSV_ETIQUETAS_PALABRAS_CARGANDO,
     OBTENER_CSV_ETIQUETAS_PALABRAS_ERROR,
+    OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS,
+    OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS_CARGANDO,
+    OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS_ERROR,
 } from '../../types';
 
 const analyticsReducer = (state, action) => {
     switch (action.type) {
+        case OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS_ERROR:
         case OBTENER_CSV_ETIQUETAS_PALABRAS_ERROR:
         case OBTENER_CSV_ETIQUETAS_IMAGENES_ERROR:
         case OBTENER_DISTRIBUCION_USO_FUNCIONALIDADES_ERROR:
@@ -41,6 +45,7 @@ const analyticsReducer = (state, action) => {
                 cargandoDistribucionUsoFuncionalidades: false,
                 cargandoCSVImagenesEtiquetadas: false,
                 cargandoCSVPalabrasEtiquetadas: false,
+                cargandoCSVSeleccionesUnicasEtiquetadas: false,
             }
 
         case OBTENER_DISTRIBUCION_CATEGORIAS_IMAGENES:
@@ -132,6 +137,19 @@ const analyticsReducer = (state, action) => {
                 ...state,
                 dataCSVTagWords: action.payload,
                 cargandoCSVPalabrasEtiquetadas: false
+            }
+
+        case OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS_CARGANDO:
+            return {
+                ...state,
+                cargandoCSVSeleccionesUnicasEtiquetadas: true
+            }
+
+        case OBTENER_CSV_ETIQUETAS_SELECCIONES_UNICAS:
+            return {
+                ...state,
+                dataCSVTagUniqueSelections: action.payload,
+                cargandoCSVSeleccionesUnicasEtiquetadas: false
             }
 
         default:

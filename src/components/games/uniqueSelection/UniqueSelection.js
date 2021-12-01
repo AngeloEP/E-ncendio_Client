@@ -155,13 +155,12 @@ const FourImagesOneWord = ( props ) => {
             }, 1000);
         }, 1000);
     }
-
     const onRender = () => {
         if ( imageSelectionRef.current === "" ) {
             mostrarAlerta('Debes seleccionar una imagen', 'alerta-error')
             return
         }
-        etiquetarSeleccionUnica(seleccionesUnicas[seleccionUnicaActual]._id, seleccionesUnicas[seleccionUnicaActual].keyWord)
+        etiquetarSeleccionUnica(seleccionesUnicas[seleccionUnicaActual]._id, imageSelectionRef.current)
         setIsWinner(true)
 
         let addPoints = 15;
@@ -184,7 +183,6 @@ const FourImagesOneWord = ( props ) => {
         setNewContent(true);
         // Avanzar a la siguiente S. Única
         if ( seleccionUnicaActual < seleccionesUnicas.length - 1 ) {
-            // console.log("aun quedan SU")
             setTimeout(() => {
                 localStorage.setItem( 'seleccionUnicaActual', seleccionUnicaActual + 1 );
                 setTimeout(() => {
@@ -321,17 +319,17 @@ const FourImagesOneWord = ( props ) => {
                                         <Row className="three-images" >
                                                 <label className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 labelAnotherImageUS" >
                                                     <input type="radio" name="imageSelectionRef" value="small"/>
-                                                    <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_1 } onClick={ () => {setImageSelection("small")} } />
+                                                    <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_1 } onClick={ () => {setImageSelection(1)} } />
                                                 </label>
 
                                                 <label className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 labelAnotherImageUS" >
                                                     <input type="radio" name="imageSelectionRef" value="big" />
-                                                    <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_2 } onClick={ () => {setImageSelection("big")} } />
+                                                    <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_2 } onClick={ () => {setImageSelection(2)} } />
                                                 </label>
 
-                                                <label className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 labelOnlyImageUS" >
+                                                <label className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 labelAnotherImageUS" >
                                                     <input type="radio" name="imageSelectionRef" value="large" />
-                                                    <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_3 } onClick={ () => {setImageSelection("large")} } />
+                                                    <img alt="" className="imagesUniqueSelectionGame" src={ seleccionesUnicas[seleccionUnicaActual].imageUrl_3 } onClick={ () => {setImageSelection(3)} } />
                                                 </label>
                                         </Row>
                                         <Row className="div-keyWord mb-5" >
