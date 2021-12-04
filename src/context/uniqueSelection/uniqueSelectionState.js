@@ -123,7 +123,7 @@ const UniqueSelectionState = props => {
             })
 
             swalWithBootstrapButtons.fire({
-                title: '¡Eliminará este contenido!',
+                title: '¡Al eliminarlo, también eliminará sus asociaciones a este contenido!',
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Cancelar',

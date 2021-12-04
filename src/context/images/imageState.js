@@ -114,7 +114,7 @@ const ImageState = props => {
                 type: ELIMINAR_IMAGEN_CARGANDO,
             })
             Swal.fire({
-                title: 'Confirme su decisión',
+                title: 'Al eliminarla, también eliminará sus asociaciones a esa imagen',
                 showDenyButton: true,
                 confirmButtonText: `Eliminar`,
                 denyButtonText: `Cancelar`,

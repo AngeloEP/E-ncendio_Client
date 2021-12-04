@@ -114,7 +114,7 @@ const TipState = props => {
                 type: ELIMINAR_TIP_CARGANDO,
             })
             Swal.fire({
-                title: 'Confirme su decisión',
+                title: 'Al eliminarlo, también eliminará las vistas de este Tip',
                 showDenyButton: true,
                 confirmButtonText: `Eliminar`,
                 denyButtonText: `Cancelar`,

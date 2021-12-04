@@ -114,7 +114,7 @@ const WordState = props => {
                 type: ELIMINAR_PALABRA_CARGANDO,
             })
             Swal.fire({
-                title: 'Confirme su decisión',
+                title: 'Al eliminarla, también eliminará sus asociaciones a esa palabra',
                 showDenyButton: true,
                 confirmButtonText: `Eliminar`,
                 denyButtonText: `Cancelar`,
