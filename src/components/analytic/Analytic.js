@@ -266,7 +266,7 @@ const Analytic = () => {
         headers = [
             {label: "Usuario", key: "Usuario"},
             {label: "Relacionado a incendios", key: "Relacionado a incendios"},
-            {label: "Relacion", key: "Relacion"},
+            {label: "Relación", key: "Relación"},
             {label: "Imagen", key: "Imagen"},
             {label: "Categoría", key: "Categoría"},
             {label: "Ubicación", key: "Ubicación"},
@@ -286,7 +286,7 @@ const Analytic = () => {
         headersWords = [
             {label: "Usuario", key: "Usuario"},
             {label: "Relacionado a incendios", key: "Relacionado a incendios"},
-            {label: "Relacion", key: "Relacion"},
+            {label: "Relación", key: "Relación"},
             {label: "Palabra", key: "Palabra"},
             {label: "Categoría", key: "Categoría"},
             {label: "Ubicación", key: "Ubicación"},
@@ -306,7 +306,7 @@ const Analytic = () => {
         headersUniqueSelections = [
             {label: "Usuario", key: "Usuario"},
             {label: "Relacionado a incendios", key: "Relacionado a incendios"},
-            {label: "Relacion", key: "Relacion"},
+            {label: "Relación", key: "Relación"},
             {label: "Imagen 1", key: "Imagen 1"},
             {label: "Imagen 2", key: "Imagen 2"},
             {label: "Imagen 3", key: "Imagen 3"},
